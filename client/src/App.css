@@ -64,6 +64,32 @@ header li {
   margin: 0 1rem;
 }
 
+/* Main page Styles  */
+
+.carousel-container {
+  width: 230px;
+  height: 230px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-image {
+  opacity: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 600ms ease-in-out, opacity 700ms ease-in;
+}
+
+.carousel-image:not(:first-of-type) {
+  position: absolute;
+  left: 0;
+  top: 0;
+  /* z-index: -1; */
+}
+
 /* Cart Styles  */
 
 .cart-item,
