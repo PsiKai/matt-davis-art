@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Yellowtail&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: initial;
+}
+
+a:hover,
+a:active {
+  text-decoration: underline;
+}
+
+.page-content {
+  margin-top: 120px;
+  padding: 2rem;
+  max-width: 50rem;
+  margin: 120px auto 0 auto;
+}
+
+.page-header {
+  text-align: center;
+}
+
+/* Navbar header Styles  */
+
+header {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.7);
+}
+
+header h1 {
+  font-family: "Yellowtail", cursive;
+  font-weight: lighter;
+}
+
+header ul {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+
+header li {
+  margin: 0 1rem;
+}
+
+/* Cart Styles  */
+
+.cart-item,
+.print-item {
+  display: inline-block;
+  margin: 1rem;
+  padding: 0.5rem;
+  border: 1px dotted rgba(0, 0, 0, 0.7);
+  border-radius: 0.5rem;
+}
+
+.cart-item img,
+.print-item img {
+  height: 250px;
+  width: 250px;
+  object-fit: cover;
+}
+
+/* Prints Styles  */

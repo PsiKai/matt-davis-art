@@ -1,11 +1,11 @@
-import React, {Fragment} from 'react'
+import React from 'react'
 import Print from "../components/Print";
 import prints from "../prints"
 
 const Prints = () => {
     return (
-        <Fragment>
-            <h2>Prints</h2>
+        <div className="page-content">
+            <h1 className="page-header">Prints</h1>
             <h2>Pick out any art</h2>
             {prints.map((print, index) => {
                 return <Print
@@ -17,7 +17,7 @@ const Prints = () => {
                             name={print.name}
                         />
             })}
-        </Fragment>
+        </div>
     )
 }
 
