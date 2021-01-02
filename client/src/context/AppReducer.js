@@ -1,5 +1,6 @@
 import {
-    ADD_TO_CART
+    ADD_TO_CART,
+    GET_ART
 } from "./types";
 
 //eslint-disable-next-line
@@ -10,7 +11,7 @@ export default (state, action) => {
             var reducedCart = newCart.reduce((accumulator, cur) => {
                 var name = cur.name;
                 var found = accumulator.find((elem) => {
-                    return elem.name == name
+                    return elem.name === name
                 })
                 if (found) found.quantity += cur.quantity;
                 else accumulator.push(cur);
@@ -20,7 +21,13 @@ export default (state, action) => {
                 ...state,
                 cartItems: state.cartItems + 1,
                 cart: reducedCart,
-                total: state.total + action.payload.price
+                total: state.total + parseFloat(action.payload.price)
+            }
+        case GET_ART: 
+            return {
+                ...state,
+                prints: action.payload.prints,
+                gallery: action.payload.gallery
             }
         default: 
             return state;

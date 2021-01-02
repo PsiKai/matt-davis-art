@@ -4,9 +4,21 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
+}
+
+#root {
+  display: grid;
+  grid-template-rows: auto fit-content(3rem);
+  grid-template-areas: "body" "footer";
+  height: 100%;
 }
 
 a {
@@ -23,8 +35,10 @@ a:active {
 }
 
 .page-content {
+  grid-area: body;
   margin-top: 120px;
   padding: 2rem;
+  width: 100%;
   max-width: 50rem;
   margin: 120px auto 0 auto;
 }
@@ -36,9 +50,10 @@ a:active {
 /* Navbar header Styles  */
 
 header {
+  background-color: aliceblue;
   position: fixed;
-  top: 0;
   z-index: 1;
+  top: 0;
   width: 100%;
   padding: 1rem 2rem;
   display: flex;
@@ -67,8 +82,8 @@ header li {
 /* Main page Styles  */
 
 .carousel-container {
-  width: 230px;
-  height: 230px;
+  width: 500px;
+  height: 500px;
   margin: auto;
   overflow: hidden;
   position: relative;
@@ -92,7 +107,53 @@ header li {
 
 /* Cart Styles  */
 
-.cart-item,
+.cart-item {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.cart-item div {
+  width: 50%;
+  text-align: right;
+}
+
+.cart-item img {
+  height: 250px;
+  width: 250px;
+  object-fit: cover;
+}
+
+.cart-division {
+  overflow: visible;
+  padding: 0;
+  border: none;
+  border-top: medium double #333;
+  color: #333;
+  text-align: center;
+}
+
+.cart-total {
+  padding: 2rem 4rem;
+  text-align: right;
+}
+
+.cart-flexbox,
+.prints-flexbox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Prints Styles  */
+
+.print-item img {
+  height: 250px;
+  width: 250px;
+  object-fit: cover;
+}
+
 .print-item {
   display: inline-block;
   margin: 1rem;
@@ -101,11 +162,45 @@ header li {
   border-radius: 0.5rem;
 }
 
-.cart-item img,
-.print-item img {
-  height: 250px;
-  width: 250px;
-  object-fit: cover;
+/* Gallery Styles  */
+
+.gallery-piece {
+  width: 70%;
+  margin: 8rem auto;
+  padding: 2rem;
+  text-align: center;
 }
 
-/* Prints Styles  */
+.gallery-piece img {
+  width: 100%;
+  border: 5px outset burlywood;
+  box-shadow: 3px 3px 8px 0px rgba(0, 0, 0, 0.5);
+}
+
+.art-division {
+  overflow: visible;
+  padding: 0;
+  border: none;
+  border-top: medium double #333;
+  color: #333;
+  text-align: center;
+}
+
+.art-division:after {
+  content: "§";
+  display: inline-block;
+  position: relative;
+  top: -1.2rem;
+  font-size: 1.5rem;
+  padding: 0 0.25rem;
+  background: white;
+}
+
+/* Footer Styles  */
+
+footer {
+  grid-area: footer;
+  border-top: 2px solid;
+  padding: 2rem;
+  text-align: center;
+}
