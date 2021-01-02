@@ -1,6 +1,7 @@
 import {
     ADD_TO_CART,
-    GET_ART
+    GET_ART,
+    RELOAD_CART
 } from "./types";
 
 //eslint-disable-next-line
@@ -22,6 +23,10 @@ export default (state, action) => {
                 cartItems: state.cartItems + 1,
                 cart: reducedCart,
                 total: state.total + parseFloat(action.payload.price)
+            }
+        case RELOAD_CART:
+            return {
+                cart: action.payload
             }
         case GET_ART: 
             return {

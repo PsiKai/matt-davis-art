@@ -26,9 +26,7 @@ let cart = [];
 app.post("/cart/add", (req, res) => {
     var id = req.body.item
     var product = art.prints.filter(print => print.id === id)
-    console.log(product[0].price);
     cart.push(product[0])
-    console.log(cart);
     res.send(product[0]);
 })
 

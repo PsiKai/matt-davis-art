@@ -4,9 +4,10 @@ import AppContext from "../context/AppContext";
 
 const Header = () => {
   const appContext = useContext(AppContext);
-  const {cartItems, getArt} = appContext;
+  const {cartItems, getArt, reloadCart} = appContext;
 
   useEffect(() => {
+    reloadCart();
     getArt();
   }, [])
 

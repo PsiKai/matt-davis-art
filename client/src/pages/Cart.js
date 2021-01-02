@@ -17,7 +17,7 @@ const Cart = () => {
     //     return accumulator;
     // }, []);
 
-    // console.log(reducedCart);
+    console.log(cart);
 
     return (
         <div className="page-content">
