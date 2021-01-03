@@ -5,7 +5,6 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 const Carousel = () => {
-
     const art = useRef();
     const arrowL = useRef();
     const arrowR = useRef();
@@ -53,6 +52,7 @@ const Carousel = () => {
 
     useEffect(() => {
         setupCarousel();
+        //eslint-disable-next-line
     }, [])
     
     return (

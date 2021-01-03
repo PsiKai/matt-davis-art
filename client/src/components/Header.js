@@ -1,15 +1,10 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import {Link} from 'react-router-dom';
 import AppContext from "../context/AppContext";
 
 const Header = () => {
   const appContext = useContext(AppContext);
-  const {cartItems, getArt, reloadCart} = appContext;
-
-  useEffect(() => {
-    reloadCart();
-    getArt();
-  }, [])
+  const {cartItems} = appContext;
 
     return (
         <header>
@@ -23,7 +18,9 @@ const Header = () => {
               <li>
                 <Link to="/prints">Prints</Link>
               </li>
-              <li>TP Man Comics</li>
+              <li>
+                <Link to="/comics">TP Man Comics</Link>
+              </li>
               <li>
                 <Link to="/gallery">Gallery</Link>
               </li>

@@ -1,8 +1,13 @@
-import React from 'react'
+import React, {useEffect, useContext} from 'react'
 import Carousel from "../components/Carousel"
+import AppContext from "../context/AppContext"
 
 const Main = () => {    
-    
+    const appContext = useContext(AppContext)
+
+    useEffect(() => {
+        appContext.getArt();
+    }, [])
 
     return (
         <div className="page-content">

@@ -1,9 +1,13 @@
-import React from 'react'
+import React from 'react';
+import {Link} from 'react-router-dom';
 
 const Footer = () => {
     return (
         <footer>
-            <button>Login</button>
+            <Link to="/edit">
+                <button>Login</button>
+            </Link>
+            
         </footer>
     )
 }

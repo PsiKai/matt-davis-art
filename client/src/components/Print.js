@@ -3,7 +3,7 @@ import AppContext from "../context/AppContext";
 
 const Print = (props) => {
     const appContext = useContext(AppContext);
-    const {addItem, cartAdd} = appContext;
+    const {addItem} = appContext;
 
     const addToCart = (e) => {
         
@@ -18,7 +18,7 @@ const Print = (props) => {
     return (
         <div className="print-item">
             <h3>{props.name}</h3>
-            <img src={props.src} alt={props.name} name={props.id}></img>
+            <img src={props.src} alt={props.name} name={props.sku}></img>
             <p>{props.description}</p>
             <p>${props.price}</p>
             <button onClick={addToCart}>Add to Cart</button>

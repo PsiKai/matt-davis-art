@@ -1,4 +1,4 @@
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV !== 'production') {
     require("dotenv").config();
 }
 
@@ -21,12 +21,15 @@ app.get("/art", (req, res) => {
     // res.send("connected to backend")
 })
 
-let cart = [];
-
 app.post("/cart/add", (req, res) => {
     var id = req.body.item
     var product = art.prints.filter(print => print.id === id)
-    cart.push(product[0])
     res.send(product[0]);
+})
+
+
+app.post("/upload/gallery", (req, res) => {
+    console.log(req.body);
+    res.send("Item uploaded to gallery")
 })
 
