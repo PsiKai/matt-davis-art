@@ -1,7 +1,7 @@
 import React, {useReducer} from 'react';
 import AppContext from "./AppContext";
 import AppReducer from "./AppReducer";
-import { ADD_TO_CART, GET_ART, RELOAD_CART, CHECKOUT } from './types'
+import { ADD_TO_CART, GET_ART, RELOAD_CART, CHECKOUT, UPDATE_STOCK, GET_STOCK } from './types'
 import axios from "axios";
 
 const AppState = (props) => {
@@ -11,7 +11,8 @@ const AppState = (props) => {
         prints: [],
         cartItems: 0,
         cart: [],
-        total: 0
+        total: 0,
+        stock: []
     }
 
     const [state, dispatch] = useReducer(AppReducer, initialState);
@@ -67,6 +68,15 @@ const AppState = (props) => {
         })
     }
 
+    //update stock amounts
+    const updateStock = (item) => {
+        console.log(item, state.stock)
+        dispatch({
+            type: UPDATE_STOCK,
+            payload: item
+        })
+    }
+
     return (
         <AppContext.Provider
             value={{
@@ -74,6 +84,8 @@ const AppState = (props) => {
                 reloadCart,
                 getArt,
                 checkout,
+                updateStock,
+                stock: state.stock,
                 cartItems: state.cartItems,
                 cart: state.cart,
                 total: state.total,
