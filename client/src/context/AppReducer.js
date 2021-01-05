@@ -40,10 +40,9 @@ export default (state, action) => {
             }
         case GET_ART:
             var currStock = []
-            const printStock = action.payload.prints.forEach((print, i) => {
+            action.payload.prints.forEach((print, i) => {
                 currStock = [...currStock, {index: i, stock: parseFloat(print.stock)}]
             })
-            console.log(printStock); 
             return {
                 ...state,
                 prints: action.payload.prints,

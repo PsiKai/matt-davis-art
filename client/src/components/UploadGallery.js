@@ -1,12 +1,16 @@
-import React, {useState} from 'react'
-import axios from 'axios';
+import React, {useState, useContext} from 'react'
+import AppContext from "../context/AppContext"
 
 const UploadGallery = () => {
+    const appContext = useContext(AppContext);
+
     const [form, setForm] = useState({
         title: "",
-        img: "",
         description: ""
     })
+
+    const [file, setFile] = useState('');
+    // const [fileName, setFileName] = useState("Choose File")
 
     const {title, description} = form;
 
@@ -17,13 +21,23 @@ const UploadGallery = () => {
         })
     }
 
-
+    const imgUpdate = (e) => {
+        setFile(e.target.files[0]);
+        // setFileName(e.target.files[0].name)
+    }
 
     const upload = async (e) => {
-        e.preventDefault()
-        const res = await axios.post("/upload/gallery", {form: form})
-        window.alert(res.data);
-        setForm({title: "", img: "", description: ""})
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append("file", file)
+        formData.append('title', title)
+        formData.append('description', description)
+
+        appContext.uploadToGallery(formData)
+        setForm({title: "", description: ""})
+        setFile("");
+        setFile("Choose File")
     }
 
     return (
@@ -49,10 +63,10 @@ const UploadGallery = () => {
                     onChange={formUpdate}
                     value={description}>
                 </textarea>
+                {/* <label htmlFor="image">{fileName}</label> */}
+                <input id="image" type="file" onChange={imgUpdate} />
 
-                <input name="img" type="file" onChange={formUpdate}></input>
-
-                <button type="submit">Upload</button>
+                <input type="submit" value="Submit" />
             </form>
         </div>
     )

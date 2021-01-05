@@ -9,6 +9,7 @@ const Gallery = () => {
     useEffect(() => {
         getArt();
         //eslint-disable-next-line
+        // console.log(gallery);
     }, [])
 
     return (
@@ -16,10 +17,11 @@ const Gallery = () => {
             <h1 className="page-header">Gallery</h1>
             <h2>All of my artwork</h2>
             {gallery && gallery.map((piece, i) => {
+                {/* console.log(piece.img.data.toString('base64')) */}
                 return <Piece 
                     key={i} 
                     alt={piece.name} 
-                    src={piece.src}
+                    src={piece.img}
                     name={piece.name}
                     description={piece.description} />
                 })

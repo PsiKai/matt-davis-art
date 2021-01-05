@@ -1,7 +1,7 @@
 import React, {useReducer} from 'react';
 import AppContext from "./AppContext";
 import AppReducer from "./AppReducer";
-import { ADD_TO_CART, GET_ART, RELOAD_CART, CHECKOUT, UPDATE_STOCK, GET_STOCK } from './types'
+import { ADD_TO_CART, GET_ART, RELOAD_CART, CHECKOUT, UPDATE_STOCK } from './types'
 import axios from "axios";
 
 const AppState = (props) => {
@@ -55,9 +55,10 @@ const AppState = (props) => {
     //gets gallery arts and prints from backend server
     const getArt = async () => {
         const res = await axios.get("/art")
+        // console.log(res.data);
         dispatch({
             type: GET_ART,
-            payload: res.data.art
+            payload: res.data.arts
         })
     }
 
@@ -66,6 +67,28 @@ const AppState = (props) => {
         dispatch({
             type: CHECKOUT
         })
+    }
+
+    //upload image to gallery
+    const uploadToGallery = async (form) => {
+        console.log(form);
+        try {
+            const res= await axios.post('/upload/gallery', form, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            })
+
+            window.alert(res.data);
+        } catch (err) {
+            if(err.response.status === 500) {
+                console.log("There was a problem with the server");
+            } else {
+                window.alert(err.response.data.msg);
+            }
+        }
+
+        
     }
 
     //update stock amounts
@@ -85,6 +108,7 @@ const AppState = (props) => {
                 getArt,
                 checkout,
                 updateStock,
+                uploadToGallery,
                 stock: state.stock,
                 cartItems: state.cartItems,
                 cart: state.cart,
