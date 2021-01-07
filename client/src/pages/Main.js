@@ -4,9 +4,11 @@ import AppContext from "../context/AppContext"
 
 const Main = () => {    
     const appContext = useContext(AppContext)
+    const {getArt, prints, gallery} = appContext
 
     useEffect(() => {
-        appContext.getArt();
+        !gallery && getArt();
+        // !prints && getArt();
     }, [])
 
     return (

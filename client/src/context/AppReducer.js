@@ -10,33 +10,39 @@ import {
 export default (state, action) => {
     switch (action.type) {
         case ADD_TO_CART:
-            var newCart = state.cart ? [...state.cart, (action.payload)] : [(action.payload)]
-            var reducedCart = newCart.reduce((accumulator, cur) => {
-                var name = cur.name;
-                var found = accumulator.find((elem) => {
-                    return elem.name === name
-                })
-                if (found) found.quantity += cur.quantity;
-                else accumulator.push(cur);
-                return accumulator;
-            }, []);
+            
             return {
                 ...state,
-                cartItems: state.cartItems + parseFloat(action.payload.quantity),
-                cart: reducedCart,
-                total: state.total + parseFloat(action.payload.price)
+                // cartItems: state.cartItems + parseFloat(action.payload.quantity),
+                cart: action.payload,
+                // total: state.total + parseFloat(action.payload.price)
             }
         case RELOAD_CART:
-            var quantity = 0;
-            var total = 0;
+            var items = 0
+            var price = 0
             action.payload.forEach(item => {
-                quantity += item.quantity
-                total += item.price
+                var values = Object.entries(item.stock)
+                values.forEach(value => {
+                    if (value[0] === "fiveEight") {
+                        items = items + +value[1]
+                        price = price + (3 * +value[1])
+                    }
+                    if (value[0] === "eightEleven") {
+                        items = items + +value[1]
+                        price = price + (5 * +value[1])
+                    }
+                    if (value[0] === "oneeightTwofour") {
+                        items = items + +value[1]
+                        price = price + (10 * +value[1])
+                    }
+                })
             })
+            
             return {
+                ...state,
                 cart: action.payload,
-                cartItems: quantity,
-                total: total
+                cartItems: items,
+                total: price
             }
         case GET_ART:
             var currStock = []
@@ -53,8 +59,9 @@ export default (state, action) => {
             localStorage.removeItem("cart");
             return {
                 ...state,
-                cart: [],
-                cartItems: 0
+                cart: null,
+                cartItems: 0,
+                price: 0
             }
         case UPDATE_STOCK: 
             console.log(action.payload, state.stock);

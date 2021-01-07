@@ -7,46 +7,85 @@ import axios from "axios";
 const AppState = (props) => {
 
     const initialState = {
-        gallery: [],
-        prints: [],
+        gallery: null,
+        prints: null,
         cartItems: 0,
-        cart: [],
+        cart: null,
         total: 0,
-        stock: []
+        stock: null
     }
 
     const [state, dispatch] = useReducer(AppReducer, initialState);
 
     //adds item to cart
     const addItem = async (item) => {
-        const res = await axios.post("/cart/add", {item: item.id})
-        res.data.quantity = item.quantity
-        var currCart = JSON.parse(localStorage.getItem("cart")) || [];
-        currCart.push(res.data);
-        localStorage.setItem("cart", JSON.stringify(currCart))
+        var newCartItem = state.prints.filter(print => {
+            return print._id === item.id
+        })
+
+        newCartItem[0].stock = item.quantity;
+
+        if (localStorage.getItem("cart") !== null) {
+            console.log(JSON.parse(localStorage.getItem("cart")));
+            var newCart = [...JSON.parse(localStorage.getItem("cart")), ...newCartItem]
+        } else {
+            var newCart = [...newCartItem]
+        } 
+        console.log(newCart);
+        var reducedCart = newCart.reduce((accumulator, cur) => {
+            var name = cur._id;
+            var found = accumulator.find((elem) => {
+                // console.log(name, elem._id);
+                return elem._id === name
+                
+            })
+            
+            if (found) {
+                var values = Object.entries(found.stock)
+                values.forEach(value => {
+                    if (value[0] === "fiveEight") {
+                        found.stock.fiveEight = +cur.stock.fiveEight + +value[1]
+                    }
+                    if (value[0] === "eightEleven") {
+                        found.stock.eightEleven = +cur.stock.eightEleven + +value[1]
+                    }
+                    if (value[0] === "oneeightTwofour") {
+                        found.stock.oneeightTwofour = +cur.stock.oneeightTwofour + +value[1]
+                    }
+                })
+            }
+            else accumulator.push(cur);
+            return accumulator;
+        }, []);
+
+        console.log(reducedCart);
+        localStorage.setItem("cart", JSON.stringify(reducedCart))
+        
         dispatch({
             type: ADD_TO_CART,
-            payload: res.data
+            payload: reducedCart
         })
+        reloadCart();
     }
+
 
     //reloads cart items
     const reloadCart = () => {
         var storedCart = JSON.parse(localStorage.getItem("cart"))
         if (storedCart) {
-            var reducedCart = storedCart.reduce((accumulator, cur) => {
-            var name = cur.name;
-            var found = accumulator.find((elem) => {
-                return elem.name === name
-            })
-            if (found) found.quantity += cur.quantity;
-            else accumulator.push(cur);
-            return accumulator;
-        }, []);
-            reducedCart.forEach(item => item.price = parseFloat(item.price))
+        //     var reducedCart = storedCart.reduce((accumulator, cur) => {
+        //     var name = cur.name;
+        //     var found = accumulator.find((elem) => {
+        //         return elem.name === name
+        //     })
+        //     if (found) found.quantity += cur.quantity;
+        //     else accumulator.push(cur);
+        //     return accumulator;
+        // }, []);
+        //     reducedCart.forEach(item => item.price = parseFloat(item.price))
         dispatch({
             type: RELOAD_CART,
-            payload: reducedCart
+            payload: storedCart
         }) 
         }
         
@@ -87,8 +126,26 @@ const AppState = (props) => {
                 window.alert(err.response.data.msg);
             }
         }
+    }
 
-        
+    //upload image to prints
+    const uploadPrint = async (form) => {
+        // console.log(form.quantity);
+        try {
+            const res = await axios.post("/upload/prints", form, {
+                header: {
+                    "Content-Type": "multipart/form-data"
+                }
+            })
+
+            window.alert(res.data)
+        } catch (err) {
+            if(err.response.status === 500) {
+                console.log("There was a problem with the server");
+            } else {
+                window.alert(err.response.data.msg)
+            }
+        }
     }
 
     //update stock amounts
@@ -109,6 +166,7 @@ const AppState = (props) => {
                 checkout,
                 updateStock,
                 uploadToGallery,
+                uploadPrint,
                 stock: state.stock,
                 cartItems: state.cartItems,
                 cart: state.cart,

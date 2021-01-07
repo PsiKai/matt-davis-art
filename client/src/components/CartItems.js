@@ -1,19 +1,15 @@
-import React, {Fragment, useContext, useEffect} from 'react'
+import React, {Fragment, useContext} from 'react'
 import CartItem from './CartItem'
 import AppContext from "../context/AppContext";
 
 const CartItems = () => {
     const appContext = useContext(AppContext);
-    const {cartItems, cart, total, checkout, reloadCart} = appContext;
+    const {cartItems, cart, total, checkout} = appContext;
 
     const clear = () => {
         checkout();
     }
 
-    useEffect(() => {
-        reloadCart();
-        //eslint-disable-next-line
-    }, [])
 
     return (
             <Fragment>
@@ -21,10 +17,10 @@ const CartItems = () => {
                 {cart.map((item, i) => (
                     <CartItem 
                         key={i}
-                        img={item.src}
+                        src={item.img}
                         name={item.name}
                         price={item.price}
-                        quantity={item.quantity}
+                        quantity={item.stock}
                     />
                     ))
                 }

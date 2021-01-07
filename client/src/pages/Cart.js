@@ -25,7 +25,7 @@ const Cart = () => {
     return (
         <div className="page-content">
             <h1 className="page-header">Cart</h1>
-            {cart.length !== 0 ? <CartItems /> :
+            {cart ? <CartItems /> :
                 <h2>The cart is empty.  Please check for available prints on the   Prints page.</h2>
             }   
         </div>

@@ -1,28 +1,28 @@
-import React, {useContext} from 'react'
-import AppContext from "../context/AppContext";
+import React, {Fragment} from 'react'
 
 const Print = (props) => {
-    const appContext = useContext(AppContext);
-    const {addItem} = appContext;
+    
+    var bytes = Buffer.from(props.src.data)
 
-    const addToCart = (e) => {
-        
-        const info = e.target.parentNode.children
-        const item = {
-            quantity: 1,
-            id: info[1].name
-        }
-        addItem(item);
+    const open = (e) => {
+        props.open(e.target.parentNode.children)
+        // console.log(props);
     }
 
     return (
-        <div className="print-item">
-            <h3>{props.name}</h3>
-            <img src={props.src} alt={props.name} name={props.sku}></img>
-            <p>{props.description}</p>
-            <p>${props.price}</p>
-            <button onClick={addToCart}>Add to Cart</button>
-        </div>
+        <Fragment>
+           <div className="print-item">
+            <h3>{props.title}</h3>
+            <img src={`data:${props.src.contentType};base64, ${bytes.toString('base64')}`}
+                alt={props.name} 
+                name={props.sku}
+                id={props.id}></img>
+            <button onClick={open}>Select Prints</button>
+            </div> 
+            
+        </Fragment>
+        
+        
     )
 }
 

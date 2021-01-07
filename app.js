@@ -12,6 +12,7 @@ const path = require("path");
 const mongoose = require("mongoose")
 
 var galleryModel = require("./models/gallery")
+var printModel = require("./models/prints")
 
 const art = require('./art');
 
@@ -36,12 +37,23 @@ app.get("/art", (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            arts = {gallery: items, prints: art.prints}
+            arts.gallery = items
             // arts = [...arts, art.prints]
-            // console.log(arts);
             res.json({arts})
+            
+        }
+    }).then(
+    printModel.find({}, (err, items) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(JSON.parse(items[0].quantity).eightEleven);
+            arts.prints = items
+            // console.log(arts);
+            // res.json({arts})
         }
     })
+    )
     // res.json({art});
     // res.send("connected to backend")
 })
@@ -99,3 +111,39 @@ app.post("/upload/gallery", (req, res) => {
     })
 })
 
+app.post("/upload/prints", (req, res) => {
+    // console.log(req.body.quantity);
+    if (req.files === null) {
+        return res.status(400).json({msg: "No file was received"})
+    }
+
+    const file = req.files.file;
+
+    file.mv(`${__dirname}/uploads/${file.name.replace(/ /g, "-")}`, err => {
+        if(err) {
+            console.error(err);
+            return res.status(500).send(err);
+        }
+
+        setTimeout(() => {
+            var imgObj = {
+                title: req.body.title,
+                quantity: req.body.quantity,
+                img: {
+                    data: fs.readFileSync(path.join(__dirname + "/uploads/" + file.name.replace(/ /g, "-"))),
+                    contentType: 'image/png'
+                    }
+                }
+                printModel.create(imgObj, (err, item) => {
+                    if (err) {
+                        console.log(err);
+                        res.send("Error uploading image: ", err.message)
+                    } else {
+                        item.save();
+                        res.send("Item uploaded to prints")
+                        fs.unlinkSync(path.join(__dirname + "/uploads/" + file.name.replace(/ /g, "-")));
+                    }
+                })
+        }, 2000)
+    })
+})

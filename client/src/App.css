@@ -95,7 +95,7 @@ header li {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 600ms ease-in-out, opacity 700ms ease-in;
+  transition: transform 600ms ease-in-out, opacity 600ms ease-in;
 }
 
 .carousel-image:not(:first-of-type) {
@@ -148,18 +148,54 @@ header li {
 
 /* Prints Styles  */
 
+.progress {
+  text-align: center;
+  margin: 5rem auto;
+}
+
 .print-item img {
   height: 250px;
   width: 250px;
   object-fit: cover;
 }
 
+.print-item button {
+  display: block;
+  margin: auto;
+}
+
 .print-item {
   display: inline-block;
+  text-align: center;
   margin: 1rem;
   padding: 0.5rem;
   border: 1px dotted rgba(0, 0, 0, 0.7);
   border-radius: 0.5rem;
+}
+
+.print-modal {
+  margin: 30% auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: white;
+  width: 60%;
+}
+
+.print-modal img {
+  display: block;
+  margin: auto;
+}
+
+.backdrop {
+  display: none;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  transition: opacity 200ms ease;
 }
 
 /* Gallery Styles  */
@@ -207,6 +243,7 @@ header li {
 .upload-form textarea {
   display: block;
   width: 100%;
+  margin-bottom: 1rem;
 }
 
 .print-stock {
@@ -229,6 +266,12 @@ header li {
 
 .print-stock input {
   width: 100%;
+}
+
+.prints .quantity {
+  display: inline-block;
+  width: 15%;
+  text-align: right;
 }
 
 /* Footer Styles  */
