@@ -6,12 +6,12 @@ const Piece = (props) => {
         <Fragment>
             <hr className="art-division" />
            <div className="gallery-piece">
-                <h3>{props.name}</h3>
+                <h3>{props.title}</h3>
                 <img 
                     src={`data:${props.src.contentType};base64, ${bytes.toString('base64')}`} 
                     alt={props.name}>
                 </img>
-                <p>{props.description}</p>
+                <p className="description">{props.description}</p>
             </div> 
         </Fragment>
     )

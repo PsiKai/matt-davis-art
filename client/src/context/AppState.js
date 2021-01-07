@@ -82,7 +82,7 @@ const AppState = (props) => {
 
         dispatch({
             type: GET_ART,
-            payload: res.data.arts
+            payload: res.data
         })
     }
 
@@ -104,6 +104,7 @@ const AppState = (props) => {
             })
 
             window.alert(res.data);
+            getArt();
         } catch (err) {
             if(err.response.status === 500) {
                 console.log("There was a problem with the server");
@@ -122,7 +123,7 @@ const AppState = (props) => {
                 }
             })
             window.alert(res.data)
-
+            getArt();
         } catch (err) {
             if(err.response.status === 500) {
                 console.log("There was a problem with the server");

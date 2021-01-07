@@ -1,5 +1,6 @@
 import React, { Fragment, useContext, useState, useEffect} from 'react'
 import AppContext from "../context/AppContext"
+import CircularProgress from "@material-ui/core/CircularProgress"
 
 const UpdateStock = () => {
     const appContext = useContext(AppContext)
@@ -45,7 +46,7 @@ const UpdateStock = () => {
             <h2>Update Print Stock</h2>
             
             <div className="print-stock">
-                {prints && prints.map((art, i) => {
+                {prints ? prints.map((art, i) => {
                     var bytes = Buffer.from(art.img.data)
                     return (
                     <div className="print-stock-item" key={i}>
@@ -88,7 +89,10 @@ const UpdateStock = () => {
                         />
                     </div>
                     )
-                })
+                }) :
+                <div className="progress">
+                    <CircularProgress color="inherit" />
+                </div>
             }  
             </div>
         <button onClick={sendChanges}>Submit Changes</button>

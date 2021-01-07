@@ -23,7 +23,7 @@ const Gallery = () => {
                     key={i} 
                     alt={piece.name} 
                     src={piece.img}
-                    name={piece.name}
+                    title={piece.title}
                     description={piece.description} />
                 })
                 : 
