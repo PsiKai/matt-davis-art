@@ -10,18 +10,15 @@ import {
 export default (state, action) => {
     switch (action.type) {
         case ADD_TO_CART:
-            
             return {
                 ...state,
-                // cartItems: state.cartItems + parseFloat(action.payload.quantity),
-                cart: action.payload,
-                // total: state.total + parseFloat(action.payload.price)
+                cart: action.payload
             }
         case RELOAD_CART:
             var items = 0
             var price = 0
             action.payload.forEach(item => {
-                var values = Object.entries(item.stock)
+                var values = Object.entries(item.quantity)
                 values.forEach(value => {
                     if (value[0] === "fiveEight") {
                         items = items + +value[1]
@@ -53,7 +50,7 @@ export default (state, action) => {
                 ...state,
                 prints: action.payload.prints,
                 gallery: action.payload.gallery,
-                stock: currStock
+                // stock: currStock
             }
         case CHECKOUT:
             localStorage.removeItem("cart");
@@ -64,7 +61,6 @@ export default (state, action) => {
                 price: 0
             }
         case UPDATE_STOCK: 
-            console.log(action.payload, state.stock);
             const stockAm =  [...state.stock].map((item, i) => {
                 if(item.index === parseFloat(action.payload.id)) {
                     return item = {

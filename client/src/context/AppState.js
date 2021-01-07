@@ -23,34 +23,30 @@ const AppState = (props) => {
             return print._id === item.id
         })
 
-        newCartItem[0].stock = item.quantity;
-
+        newCartItem[0].quantity = item.quantity;
+        let newCart;
         if (localStorage.getItem("cart") !== null) {
-            console.log(JSON.parse(localStorage.getItem("cart")));
-            var newCart = [...JSON.parse(localStorage.getItem("cart")), ...newCartItem]
+            newCart = [...JSON.parse(localStorage.getItem("cart")), ...newCartItem]
         } else {
-            var newCart = [...newCartItem]
+            newCart = [...newCartItem]
         } 
-        console.log(newCart);
+
         var reducedCart = newCart.reduce((accumulator, cur) => {
             var name = cur._id;
             var found = accumulator.find((elem) => {
-                // console.log(name, elem._id);
                 return elem._id === name
-                
             })
-            
             if (found) {
-                var values = Object.entries(found.stock)
+                var values = Object.entries(found.quantity)
                 values.forEach(value => {
                     if (value[0] === "fiveEight") {
-                        found.stock.fiveEight = +cur.stock.fiveEight + +value[1]
+                        found.quantity.fiveEight = +cur.quantity.fiveEight + +value[1]
                     }
                     if (value[0] === "eightEleven") {
-                        found.stock.eightEleven = +cur.stock.eightEleven + +value[1]
+                        found.quantity.eightEleven = +cur.quantity.eightEleven + +value[1]
                     }
                     if (value[0] === "oneeightTwofour") {
-                        found.stock.oneeightTwofour = +cur.stock.oneeightTwofour + +value[1]
+                        found.quantity.oneeightTwofour = +cur.quantity.oneeightTwofour + +value[1]
                     }
                 })
             }
@@ -58,7 +54,6 @@ const AppState = (props) => {
             return accumulator;
         }, []);
 
-        console.log(reducedCart);
         localStorage.setItem("cart", JSON.stringify(reducedCart))
         
         dispatch({
@@ -73,23 +68,13 @@ const AppState = (props) => {
     const reloadCart = () => {
         var storedCart = JSON.parse(localStorage.getItem("cart"))
         if (storedCart) {
-        //     var reducedCart = storedCart.reduce((accumulator, cur) => {
-        //     var name = cur.name;
-        //     var found = accumulator.find((elem) => {
-        //         return elem.name === name
-        //     })
-        //     if (found) found.quantity += cur.quantity;
-        //     else accumulator.push(cur);
-        //     return accumulator;
-        // }, []);
-        //     reducedCart.forEach(item => item.price = parseFloat(item.price))
-        dispatch({
-            type: RELOAD_CART,
-            payload: storedCart
-        }) 
+            dispatch({
+                type: RELOAD_CART,
+                payload: storedCart
+            }) 
         }
-        
     }
+
 
     //gets gallery arts and prints from backend server
     const getArt = async () => {
@@ -149,12 +134,15 @@ const AppState = (props) => {
     }
 
     //update stock amounts
-    const updateStock = (item) => {
-        console.log(item, state.stock)
-        dispatch({
-            type: UPDATE_STOCK,
-            payload: item
-        })
+    const updateStock = async (item) => {
+        // console.log(item)
+        const res = await axios.post("/update/stock", item);
+        window.alert(res.data);
+        getArt();
+        // dispatch({
+        //     type: UPDATE_STOCK,
+        //     payload: item
+        // })
     }
 
     return (

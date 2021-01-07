@@ -1,32 +1,102 @@
-import React, { Fragment, useContext} from 'react'
+import React, { Fragment, useContext, useState, useEffect} from 'react'
 import AppContext from "../context/AppContext"
 
 const UpdateStock = () => {
     const appContext = useContext(AppContext)
-    const {prints, updateStock, stock} = appContext;
+    const {prints, updateStock} = appContext;
+
+    useEffect(() => {
+        prints && prints.forEach(print => {
+            setStock(stock => [
+                ...stock,
+                {title: print.title,
+                stock: print.stock}
+            ]) 
+        })
+    }, [prints])
+
+    const [stock, setStock] = useState([])
 
     const update = (e) => {
-        console.log(e.target.value, e.target.id);
-        updateStock({value: e.target.value, id: e.target.id})       
+        var newStock = [...stock]
+        var title = e.target.name
+        var stockItem = e.target.id
+        var newValue = e.target.value
+        
+        newStock.filter(item => {
+            if (item.title === title) {
+                return item.stock = {
+                    ...item.stock,
+                    [stockItem]: newValue
+                }
+            }
+        })
+        setStock(newStock)
+          
     }
 
-        return (
-            <Fragment>
-                <h2>Update Print Stock</h2>
+    const sendChanges = () => {
+        // console.log(stock);
+        updateStock(stock)
+    }        
+    
+
+    
+
+    return (
+        <Fragment>
+            <h2>Update Print Stock</h2>
             
             <div className="print-stock">
-                {prints.map((art, i) => {
+                {prints && prints.map((art, i) => {
+                    var bytes = Buffer.from(art.img.data)
                     return (
                     <div className="print-stock-item" key={i}>
-                        <img src={art.src} alt={art.name} />
-                        <input id={i} name={art.name} type="number" value={stock[i].stock} onChange={update}/>
+                        <img 
+                            src={`data:${art.img.contentType};base64, ${bytes.toString('base64')}`} 
+                            alt={art.name} 
+                        />
+
+                        <label htmlFor="fiveEight" className="quantity">5 x 8</label>
+                        <input 
+                            id="fiveEight" 
+                            type="number" 
+                            onChange={update} 
+                            name={art.title} 
+                            className="quantity" 
+                            value={stock.length && stock[i].stock.fiveEight}
+                            min="0"
+                        />
+
+                        <label htmlFor="eightEleven" className="quantity">8.5 x 11</label>
+                        <input 
+                            id="eightEleven" 
+                            type="number" 
+                            onChange={update} 
+                            name={art.title} 
+                            className="quantity" 
+                            value={stock.length && stock[i].stock.eightEleven}
+                            min="0"
+                        />
+
+                        <label htmlFor="oneeightTwofour" className="quantity">18 x 24</label>
+                        <input 
+                            id="oneeightTwofour"
+                            type="number" 
+                            onChange={update} 
+                            name={art.title}  
+                            className="quantity"  
+                            value={stock.length && stock[i].stock.oneeightTwofour}
+                            min="0"
+                        />
                     </div>
                     )
                 })
-                }
+            }  
             </div>
-            </Fragment>
-        )     
+        <button onClick={sendChanges}>Submit Changes</button>
+        </Fragment>
+    )     
     
 }
 

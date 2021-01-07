@@ -7,7 +7,7 @@ var printSchema = new mongoose.Schema({
         data: Buffer,
         contentType: String
     },
-    quantity: Object
+    stock: Object
 })
 
 module.exports = new mongoose.model('Print', printSchema);

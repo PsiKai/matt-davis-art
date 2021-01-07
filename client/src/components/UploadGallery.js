@@ -45,9 +45,9 @@ const UploadGallery = () => {
             <h2>Add Art to Gallery</h2>
             <form onSubmit={upload}>
 
-                <label htmlFor="title">Title</label>
+                <label htmlFor="gallery-title">Title</label>
                 <input 
-                    id="title" 
+                    id="gallery-title" 
                     type="text" 
                     name="title" 
                     onChange={formUpdate} 
@@ -64,7 +64,7 @@ const UploadGallery = () => {
                     value={description}>
                 </textarea>
                 {/* <label htmlFor="image">{fileName}</label> */}
-                <input id="image" type="file" onChange={imgUpdate} />
+                <input id="gallery-image" type="file" onChange={imgUpdate} />
 
                 <input type="submit" value="Submit" />
             </form>

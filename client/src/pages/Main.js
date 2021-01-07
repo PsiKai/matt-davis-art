@@ -4,11 +4,11 @@ import AppContext from "../context/AppContext"
 
 const Main = () => {    
     const appContext = useContext(AppContext)
-    const {getArt, prints, gallery} = appContext
+    const {getArt, gallery} = appContext
 
     useEffect(() => {
         !gallery && getArt();
-        // !prints && getArt();
+        // eslint-disable-next-line 
     }, [])
 
     return (

@@ -47,10 +47,10 @@ app.get("/art", (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            console.log(JSON.parse(items[0].quantity).eightEleven);
+            console.log(items);
             arts.prints = items
-            // console.log(arts);
             // res.json({arts})
+
         }
     })
     )
@@ -128,7 +128,7 @@ app.post("/upload/prints", (req, res) => {
         setTimeout(() => {
             var imgObj = {
                 title: req.body.title,
-                quantity: req.body.quantity,
+                stock: JSON.parse(req.body.stock),
                 img: {
                     data: fs.readFileSync(path.join(__dirname + "/uploads/" + file.name.replace(/ /g, "-"))),
                     contentType: 'image/png'
@@ -146,4 +146,19 @@ app.post("/upload/prints", (req, res) => {
                 })
         }, 2000)
     })
+})
+
+app.post("/update/stock", (req, res) => {
+    req.body.forEach(item => {
+        printModel.updateOne({"title": item.title}, {"$set": {"stock": item.stock}}, (err) => {
+            if (err) {
+                console.log(err);
+                res.send("Error: ", err.message)
+                
+            } else {
+                console.log("Item Updated")
+            }
+        })
+    })
+    res.send("Items Successfully Updated");
 })

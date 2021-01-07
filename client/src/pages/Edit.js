@@ -6,9 +6,10 @@ import UploadPrint from "../components/UploadPrint"
 
 const Edit = () => {
     const appContext = useContext(AppContext);
+    const {gallery, getArt} = appContext
 
     useEffect(() => {
-        appContext.getArt();
+        !gallery && getArt();
         // eslint-disable-next-line 
     }, [])
 

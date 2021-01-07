@@ -15,6 +15,7 @@ const Prints = () => {
     }
 
     const [style, setStyle] = useState({})
+    const [selection, setSelection] = useState('')
 
     useEffect(() => {
         !prints && getArt();
@@ -24,10 +25,11 @@ const Prints = () => {
 
     const openModal = (item) => {
         const child = modal.current.children
-        var stock = JSON.parse(prints[item[1].id].quantity)
+        var stock = prints[item[1].id].stock
 
         setStyle(modalStyle)
-        child[0].innerHTML = item[0].innerHTML
+        // child[0].innerHTML = item[0].innerHTML
+        setSelection(item[0].innerHTML)
         child[1].src = item[1].src
         child[1].name = item[1].name
         child[3].max = stock.fiveEight
@@ -73,7 +75,7 @@ const Prints = () => {
                             key={index}
                             id={index}
                             src={print.img}
-                            stock={JSON.parse(print.quantity)}
+                            stock={print.stock}
                             title={print.title}
                             sku={print._id}
                             open={openModal}
@@ -88,7 +90,7 @@ const Prints = () => {
             
             <div className="backdrop" onClick={hideModal} style={style}>
                 <div className="print-modal" ref={modal}>
-                    <h3></h3>
+                    <h3>{selection}</h3>
                     <img src=""
                         alt=""
                         name="">

@@ -5,14 +5,14 @@ const UploadPrint = () => {
     const appContext = useContext(AppContext);
     const {uploadPrint} = appContext;
 
-    const [quantity, setQuantity] = useState({
+    const [stock, setStock] = useState({
         "eightEleven": 0,
         "oneeightTwofour": 0,
         "fiveEight": 0
     })
     const [form, setForm] = useState({
         title: "",
-        quantity: quantity
+        stock: stock
     })
 
     const [file, setFile] = useState('');
@@ -32,8 +32,8 @@ const UploadPrint = () => {
     }
 
     const quantChange = (e) => {
-        setQuantity({
-            ...quantity,
+        setStock({
+            ...stock,
             [e.target.name]: e.target.value
         })
     }
@@ -44,22 +44,22 @@ const UploadPrint = () => {
         const formData = new FormData();
         formData.append("file", file)
         formData.append('title', title)
-        formData.append('quantity', JSON.stringify(quantity))
+        formData.append('stock', JSON.stringify(stock))
 
         uploadPrint(formData);
-        setQuantity({
+        setStock({
             "eightEleven": 0,
             "oneeightTwofour": 0,
             "fiveEight": 0
         })
-        setForm({title: "", quantity: quantity})
+        setForm({title: "", stock: stock})
         setFile("");
         e.target.children[2].value = null;
     }
 
     return (
         <div className="upload-form prints">
-            <h2>Add Art to Gallery</h2>
+            <h2>Add Art to Prints</h2>
             <form onSubmit={upload}>
 
                 <label htmlFor="title">Title</label>
@@ -73,14 +73,14 @@ const UploadPrint = () => {
 
                 <input id="image" type="file" onChange={imgUpdate} />
 
-                <label htmlFor="fiveEight" className="quantity">5 x 8</label>
-                <input id="fiveEight" type="number" onChange={quantChange} name="fiveEight" value={quantity.fiveEight} className="quantity" />
+                <label htmlFor="fiveEight" className="stock">5 x 8</label>
+                <input id="fiveEight" type="number" onChange={quantChange} name="fiveEight" value={stock.fiveEight} className="stock" />
 
-                <label htmlFor="eightEleven" className="quantity">8.5 x 11</label>
-                <input id="eightEleven" type="number" onChange={quantChange} name="eightEleven" value={quantity.eightEleven}  className="quantity"/>
+                <label htmlFor="eightEleven" className="stock">8.5 x 11</label>
+                <input id="eightEleven" type="number" onChange={quantChange} name="eightEleven" value={stock.eightEleven}  className="stock"/>
 
-                <label htmlFor="oneeightTwofour" className="quantity">18 x 24</label>
-                <input type="number" onChange={quantChange} name="oneeightTwofour" value={quantity.oneeightTwofour} className="quantity" />
+                <label htmlFor="oneeightTwofour" className="stock">18 x 24</label>
+                <input type="number" onChange={quantChange} name="oneeightTwofour" value={stock.oneeightTwofour} className="stock" />
 
                 <input type="submit" value="Submit" />
             </form>

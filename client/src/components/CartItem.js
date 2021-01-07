@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 
 const CartItem = (props) => {
-    const {quantity, name, price} = props
+    const {quantity, name} = props
     
     const {fiveEight, eightEleven, oneeightTwofour} = quantity;
 

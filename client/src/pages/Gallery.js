@@ -19,7 +19,6 @@ const Gallery = () => {
             <h2>All of my artwork</h2>
             
             {gallery ? gallery.map((piece, i) => {
-                {/* console.log(piece.img.data.toString('base64')) */}
                 return <Piece 
                     key={i} 
                     alt={piece.name} 

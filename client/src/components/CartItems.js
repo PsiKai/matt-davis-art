@@ -20,7 +20,7 @@ const CartItems = () => {
                         src={item.img}
                         name={item.name}
                         price={item.price}
-                        quantity={item.stock}
+                        quantity={item.quantity}
                     />
                     ))
                 }
