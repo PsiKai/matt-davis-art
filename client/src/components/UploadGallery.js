@@ -8,12 +8,11 @@ const UploadGallery = () => {
         title: "",
         description: ""
     })
-
     const [file, setFile] = useState('');
-    // const [fileName, setFileName] = useState("Choose File")
 
     const {title, description} = form;
 
+    // Sets state when form input changes
     const formUpdate = (e) => {
         setForm({
             ...form,
@@ -21,11 +20,12 @@ const UploadGallery = () => {
         })
     }
 
+    // Sets image file to state
     const imgUpdate = (e) => {
         setFile(e.target.files[0]);
-        // setFileName(e.target.files[0].name)
     }
 
+    // Uploads image to the database
     const upload = async (e) => {
         e.preventDefault();
 
@@ -63,7 +63,7 @@ const UploadGallery = () => {
                     onChange={formUpdate}
                     value={description}>
                 </textarea>
-                {/* <label htmlFor="image">{fileName}</label> */}
+
                 <input id="gallery-image" type="file" onChange={imgUpdate} />
 
                 <input type="submit" value="Submit" />

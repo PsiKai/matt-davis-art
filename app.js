@@ -11,11 +11,6 @@ const fs = require("fs");
 const path = require("path");
 const mongoose = require("mongoose")
 
-var galleryModel = require("./models/gallery")
-var printModel = require("./models/prints")
-
-const art = require('./art');
-
 const app = express();
 
 app.use(bodyParser.json());
@@ -30,15 +25,17 @@ mongoose.connect(process.env.MONGO_URL,
         console.log('MongoDB connected');
     });
 
+var galleryModel = require("./models/gallery")
+var printModel = require("./models/prints")
+
 app.get("/art", (req, res) => {
     var arts = {};
-    // console.log(art.prints);
+
     galleryModel.find({}, (err, items) => {
         if (err) {
             console.log(err);
         } else {
             arts.gallery = items
-            // arts = [...arts, art.prints]
             res.json({arts})
             
         }
@@ -47,16 +44,12 @@ app.get("/art", (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            console.log(items);
             arts.prints = items
-            // res.json({arts})
-
         }
     })
     )
-    // res.json({art});
-    // res.send("connected to backend")
 })
+
 
 app.post("/cart/add", (req, res) => {
     var id = req.body.item
@@ -64,16 +57,6 @@ app.post("/cart/add", (req, res) => {
     res.send(product[0]);
 })
 
-// var storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, 'uploads')
-//     },
-//     filename: (req, file, cb) => {
-//         cb(null, file.fieldname + "-" + file.originalname.replace(/ /g, "-"))
-//     }
-// });
-
-// var upload = multer({storage: storage});
 
 app.post("/upload/gallery", (req, res) => {
     if (req.files === null) {
@@ -87,7 +70,6 @@ app.post("/upload/gallery", (req, res) => {
             console.error(err);
             return res.status(500).send(err);
         }
-    
         setTimeout(() => {
             var imgObj = {
                 title: req.body.title,
@@ -112,7 +94,6 @@ app.post("/upload/gallery", (req, res) => {
 })
 
 app.post("/upload/prints", (req, res) => {
-    // console.log(req.body.quantity);
     if (req.files === null) {
         return res.status(400).json({msg: "No file was received"})
     }
@@ -124,7 +105,6 @@ app.post("/upload/prints", (req, res) => {
             console.error(err);
             return res.status(500).send(err);
         }
-
         setTimeout(() => {
             var imgObj = {
                 title: req.body.title,

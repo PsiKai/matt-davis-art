@@ -14,11 +14,11 @@ const UploadPrint = () => {
         title: "",
         stock: stock
     })
-
     const [file, setFile] = useState('');
 
     const {title} = form;
 
+    // Sets state when form inputs change
     const formUpdate = (e) => {
         setForm({
             ...form,
@@ -26,11 +26,12 @@ const UploadPrint = () => {
         })
     }
 
+    // Sets image file to state
     const imgUpdate = (e) => {
         setFile(e.target.files[0]);
-        // setFileName(e.target.files[0].name)
     }
 
+    // Sets the number of prints to state
     const quantChange = (e) => {
         setStock({
             ...stock,
@@ -38,6 +39,7 @@ const UploadPrint = () => {
         })
     }
 
+    // Uploads new print to database
     const upload = async (e) => {
         e.preventDefault();
 
@@ -74,13 +76,33 @@ const UploadPrint = () => {
                 <input id="image" type="file" onChange={imgUpdate} />
 
                 <label htmlFor="fiveEight" className="stock">5 x 8</label>
-                <input id="fiveEight" type="number" onChange={quantChange} name="fiveEight" value={stock.fiveEight} className="stock" />
+                <input 
+                    id="fiveEight" 
+                    type="number" 
+                    onChange={quantChange} 
+                    name="fiveEight" 
+                    value={stock.fiveEight} 
+                    className="stock" 
+                />
 
                 <label htmlFor="eightEleven" className="stock">8.5 x 11</label>
-                <input id="eightEleven" type="number" onChange={quantChange} name="eightEleven" value={stock.eightEleven}  className="stock"/>
+                <input 
+                    id="eightEleven" 
+                    type="number" 
+                    onChange={quantChange} 
+                    name="eightEleven" 
+                    value={stock.eightEleven}  
+                    className="stock"
+                />
 
                 <label htmlFor="oneeightTwofour" className="stock">18 x 24</label>
-                <input type="number" onChange={quantChange} name="oneeightTwofour" value={stock.oneeightTwofour} className="stock" />
+                <input 
+                    type="number" 
+                    onChange={quantChange} 
+                    name="oneeightTwofour" 
+                    value={stock.oneeightTwofour} 
+                    className="stock" 
+                />
 
                 <input type="submit" value="Submit" />
             </form>

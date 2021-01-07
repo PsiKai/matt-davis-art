@@ -7,28 +7,26 @@ const Prints = () => {
     const appContext = useContext(AppContext)
     const {prints, getArt, addItem} = appContext
 
-    const modal = useRef();
-
-    const modalStyle = {
-        'display': "block",
-        'opacity': "1"
-    }
-
     const [style, setStyle] = useState({})
     const [selection, setSelection] = useState('')
+
+    const modal = useRef();
 
     useEffect(() => {
         !prints && getArt();
         //eslint-disable-next-line
     }, [])
 
+    const modalStyle = {
+        'display': "block",
+        'opacity': "1"
+    }
 
     const openModal = (item) => {
         const child = modal.current.children
         var stock = prints[item[1].id].stock
 
         setStyle(modalStyle)
-        // child[0].innerHTML = item[0].innerHTML
         setSelection(item[0].innerHTML)
         child[1].src = item[1].src
         child[1].name = item[1].name
@@ -40,12 +38,6 @@ const Prints = () => {
     const hideModal = (e) => {
         e.target.classList.contains("backdrop") &&
         setStyle({})
-    }
-
-    const checkStock = (e) => {
-        // if (e.target.value === e.target.max) {
-        //     window.alert("That is the total number of prints I have in stock for that particular piece");
-        // }
     }
 
     const addToCart = (e) => {
@@ -70,7 +62,6 @@ const Prints = () => {
             <h2>Pick out any art</h2>
             <div className="prints-flexbox">
             {prints ? prints.map((print, index) => {
-
                 return <Print
                             key={index}
                             id={index}
@@ -97,13 +88,31 @@ const Prints = () => {
                     </img>
 
                     <label htmlFor="fiveEight" className="quantity">5 x 8</label>
-                    <input id="fiveEight" type="number" name="fiveEight" className="quantity" min="0" onChange={checkStock}/>
+                    <input 
+                        id="fiveEight" 
+                        type="number" 
+                        name="fiveEight" 
+                        className="quantity" 
+                        min="0"
+                    />
 
                     <label htmlFor="eightEleven" className="quantity">8.5 x 11</label>
-                    <input id="eightEleven" type="number" name="eightEleven"   className="quantity" min="0" onChange={checkStock}/>
+                    <input 
+                        id="eightEleven" 
+                        type="number" 
+                        name="eightEleven"   
+                        className="quantity" 
+                        min="0"
+                    />
 
                     <label htmlFor="oneeightTwofour" className="quantity">18 x 24</label>
-                    <input id="oneeightTwofour" type="number" name="oneeightTwofour" className="quantity" min="0" onChange={checkStock}/>
+                    <input 
+                        id="oneeightTwofour" 
+                        type="number" 
+                        name="oneeightTwofour" 
+                        className="quantity" 
+                        min="0"
+                    />
 
                     <button onClick={addToCart}>Add To Cart</button>
                 </div>

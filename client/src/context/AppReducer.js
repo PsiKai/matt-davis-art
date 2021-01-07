@@ -2,8 +2,7 @@ import {
     ADD_TO_CART,
     GET_ART,
     RELOAD_CART,
-    CHECKOUT,
-    UPDATE_STOCK
+    CHECKOUT
 } from "./types";
 
 //eslint-disable-next-line
@@ -34,7 +33,6 @@ export default (state, action) => {
                     }
                 })
             })
-            
             return {
                 ...state,
                 cart: action.payload,
@@ -42,15 +40,10 @@ export default (state, action) => {
                 total: price
             }
         case GET_ART:
-            var currStock = []
-            action.payload.prints.forEach((print, i) => {
-                currStock = [...currStock, {index: i, stock: parseFloat(print.stock)}]
-            })
             return {
                 ...state,
                 prints: action.payload.prints,
                 gallery: action.payload.gallery,
-                // stock: currStock
             }
         case CHECKOUT:
             localStorage.removeItem("cart");
@@ -60,20 +53,6 @@ export default (state, action) => {
                 cartItems: 0,
                 price: 0
             }
-        case UPDATE_STOCK: 
-            const stockAm =  [...state.stock].map((item, i) => {
-                if(item.index === parseFloat(action.payload.id)) {
-                    return item = {
-                        index: parseFloat(action.payload.id),
-                        stock: action.payload.value
-                    }
-                } else return item
-            })
-            return {
-                ...state,
-                stock: stockAm
-            }
-            
         default: 
             return state;
     }

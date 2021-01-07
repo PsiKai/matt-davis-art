@@ -4,10 +4,11 @@ import AppContext from "../context/AppContext"
 
 const Main = () => {    
     const appContext = useContext(AppContext)
-    const {getArt, gallery} = appContext
+    const {getArt, gallery, reloadCart} = appContext
 
     useEffect(() => {
         !gallery && getArt();
+        localStorage.cart && reloadCart();
         // eslint-disable-next-line 
     }, [])
 

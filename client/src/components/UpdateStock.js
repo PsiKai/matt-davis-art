@@ -5,6 +5,8 @@ const UpdateStock = () => {
     const appContext = useContext(AppContext)
     const {prints, updateStock} = appContext;
 
+    const [stock, setStock] = useState([])
+
     useEffect(() => {
         prints && prints.forEach(print => {
             setStock(stock => [
@@ -15,8 +17,7 @@ const UpdateStock = () => {
         })
     }, [prints])
 
-    const [stock, setStock] = useState([])
-
+    //changes state of stock on input change
     const update = (e) => {
         var newStock = [...stock]
         var title = e.target.name
@@ -29,20 +30,16 @@ const UpdateStock = () => {
                     ...item.stock,
                     [stockItem]: newValue
                 }
-            }
+            } return item
         })
-        setStock(newStock)
-          
+        setStock(newStock)  
     }
 
+    //sends stock changes to database
     const sendChanges = () => {
-        // console.log(stock);
         updateStock(stock)
     }        
     
-
-    
-
     return (
         <Fragment>
             <h2>Update Print Stock</h2>

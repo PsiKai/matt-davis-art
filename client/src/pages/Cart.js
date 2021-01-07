@@ -7,16 +7,6 @@ const Cart = () => {
     const appContext = useContext(AppContext);
     const {cart, reloadCart} = appContext;
 
-    // var reducedCart = cart.reduce((accumulator, cur) => {
-    //     var name = cur.name;
-    //     var found = accumulator.find((elem) => {
-    //         return elem.name == name
-    //     })
-    //     if (found) found.quantity += cur.quantity;
-    //     else accumulator.push(cur);
-    //     return accumulator;
-    // }, []);
-
     useEffect(() => {
         reloadCart()
         //eslint-disable-next-line
@@ -28,12 +18,7 @@ const Cart = () => {
             {cart ? <CartItems /> :
                 <h2>The cart is empty.  Please check for available prints on the   Prints page.</h2>
             }   
-        </div>
-            
-           
-            
-            
-        
+        </div>        
     )
 }
 

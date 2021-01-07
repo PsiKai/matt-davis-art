@@ -6,10 +6,11 @@ const CartItems = () => {
     const appContext = useContext(AppContext);
     const {cartItems, cart, total, checkout} = appContext;
 
+
+    //submit payment TODO
     const clear = () => {
         checkout();
     }
-
 
     return (
             <Fragment>
@@ -29,7 +30,7 @@ const CartItems = () => {
                 <div className="cart-total">
                     <p>Items in cart = {cartItems}</p>        
                     <h3>Total: ${total}</h3>  
-                    <button onClick={clear}>Buy my shite!</button>
+                    <button onClick={clear}>Checkout</button>
                 </div>
             </Fragment> 
     )

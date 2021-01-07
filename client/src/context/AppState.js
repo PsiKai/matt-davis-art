@@ -1,7 +1,7 @@
 import React, {useReducer} from 'react';
 import AppContext from "./AppContext";
 import AppReducer from "./AppReducer";
-import { ADD_TO_CART, GET_ART, RELOAD_CART, CHECKOUT, UPDATE_STOCK } from './types'
+import { ADD_TO_CART, GET_ART, RELOAD_CART, CHECKOUT } from './types'
 import axios from "axios";
 
 const AppState = (props) => {
@@ -79,7 +79,7 @@ const AppState = (props) => {
     //gets gallery arts and prints from backend server
     const getArt = async () => {
         const res = await axios.get("/art")
-        // console.log(res.data);
+
         dispatch({
             type: GET_ART,
             payload: res.data.arts
@@ -115,15 +115,14 @@ const AppState = (props) => {
 
     //upload image to prints
     const uploadPrint = async (form) => {
-        // console.log(form.quantity);
         try {
             const res = await axios.post("/upload/prints", form, {
                 header: {
                     "Content-Type": "multipart/form-data"
                 }
             })
-
             window.alert(res.data)
+
         } catch (err) {
             if(err.response.status === 500) {
                 console.log("There was a problem with the server");
@@ -135,14 +134,9 @@ const AppState = (props) => {
 
     //update stock amounts
     const updateStock = async (item) => {
-        // console.log(item)
         const res = await axios.post("/update/stock", item);
         window.alert(res.data);
         getArt();
-        // dispatch({
-        //     type: UPDATE_STOCK,
-        //     payload: item
-        // })
     }
 
     return (
