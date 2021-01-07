@@ -82,28 +82,40 @@ header li {
 /* Main page Styles  */
 
 .carousel-container {
-  width: 500px;
-  height: 500px;
+  width: 600px;
+  height: 500px !important;
   margin: auto;
   overflow: hidden;
   position: relative;
 }
 
+.alice-carousel,
+.alice-carousel div {
+  height: 400px;
+}
+
+.alice-carousel__prev-btn,
+.alice-carousel__next-btn,
+.alice-carousel__prev-btn *,
+.alice-carousel__next-btn * {
+  height: 50px !important;
+}
+
 .carousel-image {
-  opacity: 0;
-  position: relative;
+  /* opacity: 0; */
+  /* position: relative; */
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 600ms ease-in-out, opacity 600ms ease-in;
+  /* transition: transform 600ms ease-in-out, opacity 600ms ease-in; */
 }
 
-.carousel-image:not(:first-of-type) {
+/* .carousel-image:not(:first-of-type) {
   position: absolute;
   left: 0;
-  top: 0;
-  /* z-index: -1; */
-}
+  top: 0; */
+/* z-index: -1; */
+/* } */
 
 /* Cart Styles  */
 
