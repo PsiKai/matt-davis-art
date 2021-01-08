@@ -1,6 +1,7 @@
 import React, {Fragment, useContext, useEffect, useState} from 'react'
 import CartItem from './CartItem'
 import Modal from "../components/Modal"
+import ShippingForm from "./ShippingForm.js"
 import AppContext from "../context/AppContext";
 
 
@@ -9,6 +10,9 @@ const CartItems = () => {
     const {cartItems, cart, total, checkout, prints, getArt} = appContext;
 
     const [modalStyle, setModalStyle] = useState({})
+    const [address, setAddress] = useState(null)
+    
+        
 
     useEffect(() => {
         !prints && getArt();
@@ -22,6 +26,11 @@ const CartItems = () => {
             display: "block"
         })
     }
+
+    const shipForm = (form) => {
+        setAddress(form)
+    }
+    
 
     return (
             <Fragment>
@@ -50,11 +59,18 @@ const CartItems = () => {
                     <h3>Total: ${total}</h3>  
                     <button onClick={clear}>Checkout</button>
                 </div>
-                <Modal 
-                    style={modalStyle}
-                    total={total}
-                    setModalStyle={setModalStyle}
+                <ShippingForm
+                    shipForm={shipForm}
                 />
+                {address &&
+                    <Modal 
+                        style={modalStyle}
+                        total={total}
+                        shipData={address}
+                        setModalStyle={setModalStyle}
+                    />
+                }
+                
             </Fragment> 
     )
 }

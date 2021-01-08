@@ -1,7 +1,7 @@
 import React, {useReducer} from 'react';
 import AppContext from "./AppContext";
 import AppReducer from "./AppReducer";
-import { ADD_TO_CART, GET_ART, RELOAD_CART, CHECKOUT } from './types'
+import { ADD_TO_CART, GET_ART, RELOAD_CART, CHECKOUT, PURCHASED } from './types'
 import axios from "axios";
 
 const AppState = (props) => {
@@ -108,6 +108,17 @@ const AppState = (props) => {
         })
     }
 
+    //completes the purchase
+    const completePurchase = async (shipData) => {
+        console.log(shipData);
+        const res = await axios.post("/cart/purchase", shipData)
+
+        console.log(res.data);
+        dispatch({
+            type: PURCHASED
+        })
+    }
+
     //upload image to gallery
     const uploadToGallery = async (form) => {
         console.log(form);
@@ -165,6 +176,7 @@ const AppState = (props) => {
                 updateStock,
                 uploadToGallery,
                 uploadPrint,
+                completePurchase,
                 stock: state.stock,
                 cartItems: state.cartItems,
                 cart: state.cart,

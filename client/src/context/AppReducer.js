@@ -2,7 +2,8 @@ import {
     ADD_TO_CART,
     GET_ART,
     RELOAD_CART,
-    CHECKOUT
+    CHECKOUT,
+    PURCHASED
 } from "./types";
 
 //eslint-disable-next-line
@@ -46,12 +47,16 @@ export default (state, action) => {
                 gallery: action.payload.gallery,
             }
         case CHECKOUT:
-            // localStorage.removeItem("cart");
             return {
                 ...state,
-                // cart: null,
-                // cartItems: 0,
                 price: action.payload
+            }
+        case PURCHASED:
+            localStorage.removeItem("cart");
+            return {
+                ...state,
+                cart: null,
+                cartItems: 0,
             }
         default: 
             return state;

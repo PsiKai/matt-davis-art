@@ -1,7 +1,12 @@
-import React, {useRef, useEffect} from 'react'
+import React, {useRef, useEffect, useContext} from 'react'
+import AppContext from "../context/AppContext"
 
 
-const Modal = (props) => {
+const Modal = ({style, setModalStyle, total, shipData}) => {
+    const appContext = useContext(AppContext)
+
+    const {add1, add2, city, state, zip, email} = shipData;
+
     const paypal = useRef()
 
     useEffect(() => {
@@ -14,7 +19,7 @@ const Modal = (props) => {
                             description: "Art from Matt Davis",
                             amount: {
                                 currency_code: "USD",
-                                value: `${props.total}`
+                                value: `${total}`
                             }
                         }
                     ]
@@ -22,41 +27,45 @@ const Modal = (props) => {
             },
             onApprove: async (data, actions) => {
                 const order = await actions.order.capture()
-                console.log(order)
-                window.alert("Payment Received");
+                const amount = order.purchase_units[0].amount.value
+                sendShipping(amount);
             },
             onError: (err) => {
                 console.log(err);
             }
         }).render(paypal.current)
-    }, [])
+    }, [shipData])
 
     const hide = (e) => {
-        e.target.classList.contains("backdrop") && props.setModalStyle({})
+        e.target.classList.contains("backdrop") && setModalStyle({})
+    }
+
+
+    const sendShipping = (amount) => {
+        console.log(shipData);
+        appContext.completePurchase(shipData)
+        setModalStyle({})
+        window.alert("Payment Received for $" + amount);
     }
 
     return (
         <div>
-            <div className="backdrop" style={props.style} onClick={hide}>
+            <div className="backdrop" style={style} onClick={hide}>
                     <div className="cart-modal">
                         <h2>Complete your purchase</h2>
+                        <div className="shipping-div">
+                            <h4>Shipping Address:</h4>
+                            <p>{add1}</p>
+                            <p>{add2}</p>
+                            <span>{city},</span>
+                            <span> {state}</span>
+                            <span> {zip}</span>
+                            <p>{email}</p>
+                        </div>
+                        
 
-                        <h4>Shipping Address:</h4>
-                        <label htmlFor="add1">Line 1</label>
-                        <input id="add1" type="text"></input>
-                        <label htmlFor="add2">Line 2</label>
-                        <input id="add2" type="text"></input>
-                        <label htmlFor="city">City</label>
-                        <input id="city" type="text"></input>
-                        <label htmlFor="state">State</label>
-                        <input id="state" type="text" maxLength="2"></input>
-                        <label htmlFor="zip">Postal Code</label>
-                        <input id="zip" type="text"></input>
 
-                        <h4>Email Address:</h4>
-                        <input type='email'></input>
-
-                        <h4>Total: ${props.total}</h4>
+                        <h4>Total: ${total}</h4>
 
                         <div className="paypal" ref={paypal}></div>
                     </div>

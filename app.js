@@ -64,6 +64,11 @@ app.post("/cart/checkout", (req, res) => {
     res.json(total)
 })
 
+app.post("/cart/purchase", (req, res) => {
+    console.log(req.body);
+    res.send("Purchase Completed")
+})
+
 
 app.post("/upload/gallery", (req, res) => {
     if (req.files === null) {
