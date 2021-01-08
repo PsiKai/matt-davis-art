@@ -17,14 +17,16 @@ const AppState = (props) => {
 
     const [state, dispatch] = useReducer(AppReducer, initialState);
 
+
     //adds item to cart
     const addItem = async (item) => {
+        let newCart
         var newCartItem = state.prints.filter(print => {
-            return print._id === item.id
+           return print._id === item.id
         })
 
-        newCartItem[0].quantity = item.quantity;
-        let newCart;
+        newCartItem[0].quantity = item.quantity;            
+        
         if (localStorage.getItem("cart") !== null) {
             newCart = [...JSON.parse(localStorage.getItem("cart")), ...newCartItem]
         } else {
@@ -53,8 +55,17 @@ const AppState = (props) => {
             else accumulator.push(cur);
             return accumulator;
         }, []);
+        var newNew = [];
+        reducedCart.forEach(item => {
+            var obj = {}
+            obj.quantity = item.quantity
+            obj.stock = item.stock
+            obj.title = item.title
+            obj._id = item._id
+            newNew.push(obj)
+        })
 
-        localStorage.setItem("cart", JSON.stringify(reducedCart))
+        localStorage.setItem("cart", JSON.stringify(newNew))
         
         dispatch({
             type: ADD_TO_CART,
@@ -87,9 +98,13 @@ const AppState = (props) => {
     }
 
     //checkout items 
-    const checkout = () => {
+    const checkout = async (items) => {
+        const res = await axios.post("/cart/checkout", items)
+
+        console.log(res.data);
         dispatch({
-            type: CHECKOUT
+            type: CHECKOUT,
+            payload: res.data
         })
     }
 

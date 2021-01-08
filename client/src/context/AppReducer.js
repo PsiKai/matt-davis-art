@@ -46,12 +46,12 @@ export default (state, action) => {
                 gallery: action.payload.gallery,
             }
         case CHECKOUT:
-            localStorage.removeItem("cart");
+            // localStorage.removeItem("cart");
             return {
                 ...state,
-                cart: null,
-                cartItems: 0,
-                price: 0
+                // cart: null,
+                // cartItems: 0,
+                price: action.payload
             }
         default: 
             return state;

@@ -158,6 +158,23 @@ header li {
   justify-content: center;
 }
 
+.cart-modal {
+  background: white;
+  width: 40rem;
+  margin: 30% auto 0;
+  padding: 1rem;
+  text-align: center;
+}
+
+.paypal {
+  width: 40%;
+  margin: auto;
+}
+
+.paypal-button-number-1 {
+  display: none !important;
+}
+
 /* Prints Styles  */
 
 .progress {
@@ -190,12 +207,13 @@ header li {
   padding: 2rem;
   text-align: center;
   background-color: white;
-  width: 60%;
+  width: 30rem;
 }
 
 .print-modal img {
+  width: 100%;
   display: block;
-  margin: auto;
+  margin: 1rem auto;
 }
 
 .backdrop {

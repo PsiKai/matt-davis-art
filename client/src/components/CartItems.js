@@ -1,29 +1,47 @@
-import React, {Fragment, useContext} from 'react'
+import React, {Fragment, useContext, useEffect, useState} from 'react'
 import CartItem from './CartItem'
+import Modal from "../components/Modal"
 import AppContext from "../context/AppContext";
+
 
 const CartItems = () => {
     const appContext = useContext(AppContext);
-    const {cartItems, cart, total, checkout} = appContext;
+    const {cartItems, cart, total, checkout, prints, getArt} = appContext;
 
+    const [modalStyle, setModalStyle] = useState({})
+
+    useEffect(() => {
+        !prints && getArt();
+    }, [])
 
     //submit payment TODO
     const clear = () => {
-        checkout();
+        checkout(cart);
+        setModalStyle({
+            opacity: "1",
+            display: "block"
+        })
     }
 
     return (
             <Fragment>
                 <div className="cart-flexbox">
-                {cart.map((item, i) => (
+                {prints && cart.map((item, i) => {
+                    var id = item._id
+                    var newSrc = prints.filter(print => {
+                        if (print._id === id) {
+                            return print
+                        }
+                    })
+                    return (
                     <CartItem 
                         key={i}
-                        src={item.img}
-                        name={item.name}
+                        src={newSrc[0].img}
+                        title={item.title}
                         price={item.price}
                         quantity={item.quantity}
-                    />
-                    ))
+                    />)
+                })
                 }
                 </div>
                 <hr className="cart-division" />
@@ -32,6 +50,11 @@ const CartItems = () => {
                     <h3>Total: ${total}</h3>  
                     <button onClick={clear}>Checkout</button>
                 </div>
+                <Modal 
+                    style={modalStyle}
+                    total={total}
+                    setModalStyle={setModalStyle}
+                />
             </Fragment> 
     )
 }

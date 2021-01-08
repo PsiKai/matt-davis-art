@@ -21,8 +21,6 @@ const Print = (props) => {
             <button onClick={open}>Select Prints</button>
             </div> 
         </Fragment>
-        
-        
     )
 }
 

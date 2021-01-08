@@ -50,6 +50,20 @@ app.post("/cart/add", (req, res) => {
     res.send(product[0]);
 })
 
+app.post("/cart/checkout", (req, res) => {
+    var _5x8 = 0
+    var _8x11 = 0
+    var _18x24 = 0
+    req.body.forEach(item => {
+        _5x8 += +item.quantity.fiveEight
+        _8x11 += +item.quantity.eightEleven
+        _18x24 += +item.quantity.oneeightTwofour
+    })
+    var total = (_5x8 * 3) + (_8x11 * 5) + (_18x24 * 10)
+
+    res.json(total)
+})
+
 
 app.post("/upload/gallery", (req, res) => {
     if (req.files === null) {

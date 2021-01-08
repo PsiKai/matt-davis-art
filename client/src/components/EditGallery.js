@@ -103,7 +103,7 @@ const EditGallery = () => {
                 id="update-title" 
                 name="title"
                 type="text" 
-                value={newTitle.title}
+                value={newTitle.title || ""}
                 onChange={setUpdate} />
 
             <label htmlFor="update-description">New Description</label>
@@ -111,7 +111,7 @@ const EditGallery = () => {
                 id="update-description"
                 name="description" 
                 rows="3" 
-                value={newTitle.description} 
+                value={newTitle.description || ""} 
                 onChange={setUpdate}
                 />
 

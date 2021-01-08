@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 
 const CartItem = (props) => {
-    const {quantity, name} = props
+    const {quantity, title} = props
     
     const {fiveEight, eightEleven, oneeightTwofour} = quantity;
 
@@ -10,9 +10,9 @@ const CartItem = (props) => {
         <Fragment>
            <div className="cart-item">
                 <img src={`data:${props.src.contentType};base64, ${bytes.toString('base64')}`} 
-                    alt={name} />
+                    alt={title} />
                 <div>
-                    <h2>{name}</h2>
+                    <h2>{title}</h2>
                     {/* <p>${(price * quantity).toFixed(2)}</p> */}
                     <p>Quantity: </p>
                     {fiveEight > 0 && <p>5 x 8: {fiveEight}</p>}
