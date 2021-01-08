@@ -101,7 +101,6 @@ const AppState = (props) => {
     const checkout = async (items) => {
         const res = await axios.post("/cart/checkout", items)
 
-        console.log(res.data);
         dispatch({
             type: CHECKOUT,
             payload: res.data
@@ -109,11 +108,10 @@ const AppState = (props) => {
     }
 
     //completes the purchase
-    const completePurchase = async (shipData) => {
-        console.log(shipData);
-        const res = await axios.post("/cart/purchase", shipData)
+    const completePurchase = async (order) => {
+        const res = await axios.post("/cart/purchase", order)
 
-        console.log(res.data);
+        window.alert(res.data);
         dispatch({
             type: PURCHASED
         })

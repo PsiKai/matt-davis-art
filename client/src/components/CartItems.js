@@ -68,6 +68,7 @@ const CartItems = () => {
                         total={total}
                         shipData={address}
                         setModalStyle={setModalStyle}
+                        cart={cart}
                     />
                 }
                 

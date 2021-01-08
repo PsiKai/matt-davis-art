@@ -2,7 +2,7 @@ import React, {useRef, useEffect, useContext} from 'react'
 import AppContext from "../context/AppContext"
 
 
-const Modal = ({style, setModalStyle, total, shipData}) => {
+const Modal = ({style, setModalStyle, total, shipData, cart}) => {
     const appContext = useContext(AppContext)
 
     const {add1, add2, city, state, zip, email} = shipData;
@@ -28,7 +28,8 @@ const Modal = ({style, setModalStyle, total, shipData}) => {
             onApprove: async (data, actions) => {
                 const order = await actions.order.capture()
                 const amount = order.purchase_units[0].amount.value
-                sendShipping(amount);
+                const purchaseOrder = {ship: shipData, items: cart, total: amount}
+                sendShipping(purchaseOrder);
             },
             onError: (err) => {
                 console.log(err);
@@ -41,11 +42,11 @@ const Modal = ({style, setModalStyle, total, shipData}) => {
     }
 
 
-    const sendShipping = (amount) => {
-        console.log(shipData);
-        appContext.completePurchase(shipData)
+    const sendShipping = (order) => {
+        // console.log();
+        appContext.completePurchase(order)
         setModalStyle({})
-        window.alert("Payment Received for $" + amount);
+        // window.alert("Payment Received for $" + order.total);
     }
 
     return (
@@ -63,8 +64,6 @@ const Modal = ({style, setModalStyle, total, shipData}) => {
                             <p>{email}</p>
                         </div>
                         
-
-
                         <h4>Total: ${total}</h4>
 
                         <div className="paypal" ref={paypal}></div>
