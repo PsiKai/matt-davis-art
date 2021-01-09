@@ -16,6 +16,7 @@ const CartItems = () => {
 
     useEffect(() => {
         !prints && getArt();
+        //eslint-disable-next-line
     }, [])
 
     //submit payment TODO
@@ -40,6 +41,8 @@ const CartItems = () => {
                     var newSrc = prints.filter(print => {
                         if (print._id === id) {
                             return print
+                        } else {
+                            return null
                         }
                     })
                     return (

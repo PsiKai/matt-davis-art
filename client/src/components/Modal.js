@@ -35,6 +35,7 @@ const Modal = ({style, setModalStyle, total, shipData, cart}) => {
                 console.log(err);
             }
         }).render(paypal.current)
+        //eslint-disable-next-line
     }, [shipData])
 
     const hide = (e) => {
