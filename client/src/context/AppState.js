@@ -1,7 +1,14 @@
 import React, {useReducer} from 'react';
 import AppContext from "./AppContext";
 import AppReducer from "./AppReducer";
-import { ADD_TO_CART, GET_ART, RELOAD_CART, CHECKOUT, PURCHASED } from './types'
+import { 
+    ADD_TO_CART, 
+    GET_ART, 
+    RELOAD_CART, 
+    CHECKOUT, 
+    PURCHASED, 
+    DELETE_CART 
+} from './types'
 import axios from "axios";
 
 const AppState = (props) => {
@@ -83,6 +90,10 @@ const AppState = (props) => {
                 type: RELOAD_CART,
                 payload: storedCart
             }) 
+        } else {
+            dispatch({
+                type: DELETE_CART
+            })
         }
     }
 

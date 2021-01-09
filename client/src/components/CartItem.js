@@ -1,9 +1,7 @@
 import React, { Fragment, useState, useContext} from 'react'
 import AppContext from '../context/AppContext'
 
-const CartItem = (props) => {
-    const {quantity, title} = props
-    // const {fiveEight, eightEleven, oneeightTwofour} = quantity;
+const CartItem = ({quantity, title, src}) => {
     const appContext = useContext(AppContext)
 
     const [edit, setEdit] = useState(false)
@@ -24,9 +22,7 @@ const CartItem = (props) => {
             } else {
                 updatedQuan = [...updatedQuan, item]
             }
-                
         })
-        console.log(updatedQuan);
         if (updatedQuan.length > 0) {
             localStorage.setItem("cart", JSON.stringify(updatedQuan))
         } else {
@@ -47,11 +43,11 @@ const CartItem = (props) => {
         setEdit(true)
     }
 
-    var bytes = Buffer.from(props.src.data)
+    var bytes = Buffer.from(src.data)
     return (
         <Fragment>
            <div className="cart-item">
-                <img src={`data:${props.src.contentType};base64, ${bytes.toString('base64')}`} 
+                <img src={`data:${src.contentType};base64, ${bytes.toString('base64')}`} 
                     alt={title} />
                 <div>
                     {edit === true ? 

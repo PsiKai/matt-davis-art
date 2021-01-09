@@ -2,6 +2,7 @@ import {
     ADD_TO_CART,
     GET_ART,
     RELOAD_CART,
+    DELETE_CART,
     CHECKOUT,
     PURCHASED
 } from "./types";
@@ -40,6 +41,13 @@ export default (state, action) => {
                 cartItems: items,
                 total: price
             }
+        case DELETE_CART:
+            return {
+                ...state,
+                cartItems: 0,
+                total: 0,
+                cart: null
+            }
         case GET_ART:
             return {
                 ...state,
@@ -49,7 +57,7 @@ export default (state, action) => {
         case CHECKOUT:
             return {
                 ...state,
-                price: action.payload
+                total: action.payload
             }
         case PURCHASED:
             localStorage.removeItem("cart");
@@ -57,6 +65,7 @@ export default (state, action) => {
                 ...state,
                 cart: null,
                 cartItems: 0,
+                total: 0
             }
         default: 
             return state;

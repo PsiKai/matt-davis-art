@@ -106,11 +106,40 @@ app.post("/cart/purchase", (req, res) => {
     </div>
     <h3>Amount charged: $${total}</h3>`
 
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
+    // var transporter = nodemailer.createTransport({
+    //     service: 'gmail',
+    //     auth: {
+    //         user: 'davidirvin47@gmail.com',
+    //         pass: process.env.EMAIL_PASSWORD
+    //     }
+    // });
+
+    // var mailOptions = {
+    //     from: 'davidirvin47@gmail.com',
+    //     to: req.body.ship.email,
+    //     subject: "New order from " + req.body.ship.email,
+    //     html: emailFormat
+    // }
+
+    // transporter.sendMail(mailOptions, (err, info) => {
+    //     if (err) {
+    //         console.log(err);
+    //     } else {
+    //         console.log("Email sent: " + info.response);
+    //     }
+    // })
+
+    let transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
         auth: {
+            type: 'OAuth2',
             user: 'davidirvin47@gmail.com',
-            pass: process.env.EMAIL_PASSWORD
+            clientId: process.env.CLIENT_ID,
+            clientSecret: process.env.CLIENT_SECRET,
+            refreshToken: process.env.REFRESH_TOKEN,
+            accessToken: process.env.TOKEN,
         }
     });
 
@@ -122,12 +151,12 @@ app.post("/cart/purchase", (req, res) => {
     }
 
     transporter.sendMail(mailOptions, (err, info) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log("Email sent: " + info.response);
-        }
-    })
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("Email sent: " + info.response);
+            }
+        })
 
     res.send("Purchase Completed. Payment received for $" + total)
 })
