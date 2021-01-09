@@ -52,6 +52,7 @@ const CartItems = () => {
                         title={item.title}
                         price={item.price}
                         quantity={item.quantity}
+                        stock={item.stock}
                     />)
                 })
                 }

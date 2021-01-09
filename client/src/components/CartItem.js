@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useContext} from 'react'
 import AppContext from '../context/AppContext'
 
-const CartItem = ({quantity, title, src}) => {
+const CartItem = ({quantity, title, src, stock}) => {
     const appContext = useContext(AppContext)
 
     const [edit, setEdit] = useState(false)
@@ -22,6 +22,7 @@ const CartItem = ({quantity, title, src}) => {
             } else {
                 updatedQuan = [...updatedQuan, item]
             }
+            return null
         })
         if (updatedQuan.length > 0) {
             localStorage.setItem("cart", JSON.stringify(updatedQuan))
@@ -33,9 +34,11 @@ const CartItem = ({quantity, title, src}) => {
     }
 
     const updateQuantity = (e) => {
+        var value = e.target.value
+        if (value < 0) value = 0
         setQuan({
             ...quan,
-            [e.target.name]: e.target.value
+            [e.target.name]: value
         })
     }
 
@@ -57,7 +60,9 @@ const CartItem = ({quantity, title, src}) => {
                         <p>5 x 8: 
                             <input 
                                 name="fiveEight"
-                                type="number" 
+                                type="number"
+                                min="0"
+                                max={stock.fiveEight} 
                                 value={fiveEight} 
                                 onChange={updateQuantity} />
                         </p>
@@ -65,6 +70,8 @@ const CartItem = ({quantity, title, src}) => {
                             <input 
                                 name="eightEleven"
                                 type="number" 
+                                min="0"
+                                max={stock.eightEleven}
                                 value={eightEleven} 
                                 onChange={updateQuantity} />
                         </p>
@@ -72,6 +79,8 @@ const CartItem = ({quantity, title, src}) => {
                             <input 
                                 name="oneeightTwofour"
                                 type="number" 
+                                min="0"
+                                max={stock.oneeightTwofour}
                                 value={oneeightTwofour} 
                                 onChange={updateQuantity} />
                         </p>
@@ -86,12 +95,9 @@ const CartItem = ({quantity, title, src}) => {
                         <button onClick={adjustQuan}>Edit</button>
                         </Fragment>
                     }
-                    
                 </div>
             </div> 
-            
         </Fragment>
-        
     )
 }
 
