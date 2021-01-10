@@ -46,9 +46,9 @@ const Prints = () => {
         const info = e.target.parentNode.children
         const item = {
             quantity: {
-                fiveEight: info[3].value > 0 && info[3].value,
-                eightEleven: info[5].value > 0 && info[5].value,
-                oneeightTwofour: info[7].value > 0 && info[7].value
+                fiveEight: info[3].value > 0 ? info[3].value : 0,
+                eightEleven: info[5].value > 0 ? info[5].value : 0,
+                oneeightTwofour: info[7].value > 0 ? info[7].value : 0
             },
             id: info[1].name
         }

@@ -26,9 +26,9 @@ router.post("/purchase", (req, res) => {
         var _5x8 = item.quantity.fiveEight;
         var _8x11 = item.quantity.eightEleven;
         var _18x24 = item.quantity.oneeightTwofour
-        if (_5x8.length === 0) _5x8 = 0;
-        if (_8x11.length === 0) _8x11 = 0;
-        if (_18x24.length === 0) _18x24 = 0;
+        if (_5x8.length < 1) _5x8 = 0;
+        if (_8x11.length < 1) _8x11 = 0;
+        if (_18x24.length < 1) _18x24 = 0;
         var string = 
         `<div style='margin: 1rem; border: 1px solid black; padding: 1rem; border-radius: 0.5rem; background: lightgrey; min-width: 150px; display: inline-block;'>
             <h4>Print: ${item.title}</h4>

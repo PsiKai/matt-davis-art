@@ -1,5 +1,7 @@
 import React, {useRef, useEffect, useContext} from 'react'
+import ReactDOM from "react-dom"
 import AppContext from "../context/AppContext"
+
 
 
 const Modal = ({style, setModalStyle, total, shipData, cart}) => {
@@ -7,36 +9,60 @@ const Modal = ({style, setModalStyle, total, shipData, cart}) => {
 
     const {add1, add2, city, state, zip, email} = shipData;
 
-    const paypal = useRef()
+    const PayPalButton = window.paypal.Buttons.driver("react", {React, ReactDOM})
 
-    useEffect(() => {
-        window.paypal.Buttons({
-            createOrder: (data, actions, err) => {
-                return actions.order.create({
-                    intent: "CAPTURE",
-                    purchase_units: [
-                        {
-                            description: "Art from Matt Davis",
-                            amount: {
-                                currency_code: "USD",
-                                value: `${total}`
-                            }
-                        }
-                    ]
-                })
-            },
-            onApprove: async (data, actions) => {
-                const order = await actions.order.capture()
-                const amount = order.purchase_units[0].amount.value
-                const purchaseOrder = {ship: shipData, items: cart, total: amount}
-                sendShipping(purchaseOrder);
-            },
-            onError: (err) => {
-                console.log(err);
-            }
-        }).render(paypal.current)
-        //eslint-disable-next-line
-    }, [shipData])
+    const createOrder = (data, actions) => {
+        return actions.order.create({
+            purchase_units: [
+                {
+                    description: "Art from Matt Davis",
+                    amount: {
+                        currency_code: "USD",
+                        value: `${total}`
+                    }
+                }
+            ]
+        })
+    }
+
+    const onApprove = async (data, actions) => {
+        const order = await actions.order.capture()
+        const amount = order.purchase_units[0].amount.value
+        const purchaseOrder = {ship: shipData, items: cart, total: amount}
+        sendShipping(purchaseOrder);
+    
+    }
+
+    // const paypal = useRef()
+
+    // useEffect(() => {
+    //     window.paypal.Buttons({
+    //         createOrder: (data, actions, err) => {
+    //             return actions.order.create({
+    //                 intent: "CAPTURE",
+    //                 purchase_units: [
+    //                     {
+    //                         description: "Art from Matt Davis",
+    //                         amount: {
+    //                             currency_code: "USD",
+    //                             value: `${total}`
+    //                         }
+    //                     }
+    //                 ]
+    //             })
+    //         },
+    //         onApprove: async (data, actions) => {
+    //             const order = await actions.order.capture()
+    //             const amount = order.purchase_units[0].amount.value
+    //             const purchaseOrder = {ship: shipData, items: cart, total: amount}
+    //             sendShipping(purchaseOrder);
+    //         },
+    //         onError: (err) => {
+    //             console.log(err);
+    //         }
+    //     }).render(paypal.current)
+    //     //eslint-disable-next-line
+    // }, [shipData])
 
     const hide = (e) => {
         e.target.classList.contains("backdrop") && setModalStyle({})
@@ -66,8 +92,11 @@ const Modal = ({style, setModalStyle, total, shipData, cart}) => {
                         </div>
                         
                         <h4>Total: ${total}</h4>
-
-                        <div className="paypal" ref={paypal}></div>
+                        <PayPalButton
+                            createOrder={(data, actions) => createOrder(data, actions)}
+                            onApprove={(data, actions) => onApprove(data, actions)}
+                        />
+                        {/* <div className="paypal" ref={paypal}></div> */}
                     </div>
                 </div>
         </div>
