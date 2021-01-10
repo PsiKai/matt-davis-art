@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
-// import {Link} from 'react-router-dom';
-import LoginToast from "./LoginToast"
+import React from 'react';
+import {Link} from 'react-router-dom';
+import LoginToast from "./Login"
 
-const Footer = (props) => {
-    const [open, setOpen] = useState(false)
-
-    const openLogin = () => {
-        setOpen(!open)
-    }
+const Footer = () => {
 
     return (
         <footer>
-
-            <button onClick={openLogin}>Login</button>
-            <LoginToast open={open && "slide-up"} close={openLogin}/>  
+            <Link to="/login">
+                Login
+            </Link>
+            
         </footer>
     )
 }

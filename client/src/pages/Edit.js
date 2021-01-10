@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 import AppContext from "../context/AppContext"
+import AuthContext from "../context/authContext"
 import UploadGallery from '../components/UploadGallery'
 import UpdateStock from '../components/UpdateStock'
 import UploadPrint from "../components/UploadPrint"
 import EditGallery from "../components/EditGallery"
 
 const Edit = () => {
+    const authContext = useContext(AuthContext)
     const appContext = useContext(AppContext);
     const {gallery, getArt} = appContext
 
@@ -18,6 +20,10 @@ const Edit = () => {
 
     const changePage = (e) => {
         setPage(e.target.name)
+    }
+
+    const signOut = () => {
+        authContext.logout()
     }
 
     return (
@@ -33,6 +39,7 @@ const Edit = () => {
             {page === "stock" && <UpdateStock />}
             {page === "print" && <UploadPrint />}
             {page === "edit" && <EditGallery />}
+            <button className="logout" type="submit" onClick={signOut}>Logout</button>
         </div>
     )
 }

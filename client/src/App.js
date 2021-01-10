@@ -16,6 +16,7 @@ import Gallery from './pages/Gallery'
 import Comics from './pages/Comics'
 import Edit from './pages/Edit'
 import Footer from "./components/Footer"
+import Login from "./components/Login"
 
 if(localStorage.token) {
   setAuthToken(localStorage.token)
@@ -35,7 +36,8 @@ function App() {
           <Route exact path="/gallery" component={Gallery} />
           <Route exact path="/comics" component={Comics} />
           <Route exact path="/cart" component={Cart} />
-          <PrivateRoute exact path="/" component={Edit} />         
+          <PrivateRoute exact path="/" component={Edit} />
+          <Route exact path="/login" component={Login} />        
         </Switch>
         <Footer />
       </Router>
