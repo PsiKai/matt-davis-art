@@ -24,7 +24,7 @@ router.post("/gallery", (req, res) => {
     
     var old = req.body.old.title
     var newTit = req.body.new.title
-    var newDesc = req.body.new.description 
+    var newDesc = req.body.new.description
 
     galleryModel.updateOne({title: old}, {title: newTit, description: newDesc}, err => {
         if (err) {

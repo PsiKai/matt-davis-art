@@ -8,6 +8,7 @@ const {body, validationResult} = require("express-validator");
 
 const User = require("../models/user")
 
+
 router.get("/", auth, async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select("-password");
@@ -18,6 +19,7 @@ router.get("/", auth, async (req, res) => {
         
     }
 })
+
 
 router.post("/", [
     body("password", "password is required").exists()

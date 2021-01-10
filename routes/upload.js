@@ -10,10 +10,10 @@ router.post("/gallery", (req, res) => {
     if (req.files === null) {
         return res.status(400).json({msg: "No file was received"})
     }
+    const file = req.files.file
+    const {name} = file;
 
-    const file = req.files.file;
-
-    file.mv(`${__dirname}/uploads/${file.name.replace(/ /g, "-")}`, err => {
+    file.mv(`${__dirname}/uploads/${name.replace(/ /g, "-")}`, err => {
         if(err) {
             console.error(err);
             return res.status(500).send(err);
@@ -22,7 +22,7 @@ router.post("/gallery", (req, res) => {
             title: req.body.title,
             description: req.body.description,
             img: {
-                data: fs.readFileSync(path.join(__dirname + "/uploads/" + file.name.replace(/ /g, "-"))),
+                data: fs.readFileSync(path.join(__dirname + "/uploads/" + name.replace(/ /g, "-"))),
                 contentType: 'image/png'
                 }
         }
@@ -33,7 +33,7 @@ router.post("/gallery", (req, res) => {
             } else {
                 item.save();
                 res.send("Item uploaded to gallery")
-                fs.unlinkSync(path.join(__dirname + "/uploads/" + file.name.replace(/ /g, "-")));
+                fs.unlinkSync(path.join(__dirname + "/uploads/" + name.replace(/ /g, "-")));
             }
         })
     })
@@ -45,9 +45,10 @@ router.post("/prints", (req, res) => {
         return res.status(400).json({msg: "No file was received"})
     }
 
-    const file = req.files.file;
+    const file = req.files.file
+    const {name} = file;
 
-    file.mv(`${__dirname}/uploads/${file.name.replace(/ /g, "-")}`, err => {
+    file.mv(`${__dirname}/uploads/${name.replace(/ /g, "-")}`, err => {
         if(err) {
             console.error(err);
             return res.status(500).send(err);
@@ -56,7 +57,7 @@ router.post("/prints", (req, res) => {
             title: req.body.title,
             stock: JSON.parse(req.body.stock),
             img: {
-                data: fs.readFileSync(path.join(__dirname + "/uploads/" + file.name.replace(/ /g, "-"))),
+                data: fs.readFileSync(path.join(__dirname + "/uploads/" + name.replace(/ /g, "-"))),
                 contentType: 'image/png'
                     }
             }
@@ -67,7 +68,7 @@ router.post("/prints", (req, res) => {
             } else {
                 item.save();
                 res.send("Item uploaded to prints")
-                fs.unlinkSync(path.join(__dirname + "/uploads/" + file.name.replace(/ /g, "-")));
+                fs.unlinkSync(path.join(__dirname + "/uploads/" + name.replace(/ /g, "-")));
             }
         })
     })
