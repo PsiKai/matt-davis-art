@@ -7,7 +7,7 @@ const PrivateRoute = ({component: Component, ...rest}) => {
     const {isAuthenticated} = authContext;
 
     return (
-        <Route {...rest} render={props => !isAuthenticated ? (
+        <Route {...rest} render={props => !isAuthenticated && !localStorage.token ? (
             <Redirect to="/main" />
         ) : (
             <Component {...props} />

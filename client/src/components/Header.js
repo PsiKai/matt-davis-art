@@ -1,13 +1,17 @@
 import React, {useContext, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import AppContext from "../context/AppContext";
+import AuthContext from "../context/authContext";
 
 const Header = () => {
   const appContext = useContext(AppContext);
   const {cartItems, reloadCart} = appContext;
+  const authContext = useContext(AuthContext);
+  const {isAuthenticated, loadUser} = authContext;
 
   useEffect(() => {
     reloadCart();
+    loadUser();
     // eslint-disable-next-line 
   }, [])
 
@@ -31,6 +35,11 @@ const Header = () => {
               </li>
               <li>
                 <Link to="/cart">Cart ({cartItems})</Link>
+              </li>
+              <li>
+                <Link to="/login">
+                  {isAuthenticated ? "Edit" : "Login"}
+                </Link>
               </li>
             </ul>
             

@@ -36,8 +36,8 @@ function App() {
           <Route exact path="/gallery" component={Gallery} />
           <Route exact path="/comics" component={Comics} />
           <Route exact path="/cart" component={Cart} />
-          <PrivateRoute exact path="/" component={Edit} />
-          <Route exact path="/login" component={Login} />        
+          <Route exact path="/login" component={Login} />
+          <PrivateRoute exact path="/" component={Edit} />        
         </Switch>
         <Footer />
       </Router>

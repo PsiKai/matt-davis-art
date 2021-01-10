@@ -11,6 +11,7 @@ const EditGallery = () => {
     const [newTitle, setNewTitle] = useState({})
 
     const editArtwork = (e) => {
+        console.log(e.target.name);
         var pic = e.target
         setNewTitle({})
         setArtEdit({
@@ -52,8 +53,7 @@ const EditGallery = () => {
     }
 
     const remove = () => {
-        console.log(artEdit.name);
-        const res = axios.post("/delete/gallery", {name: artEdit.name})
+        const res = axios.post("/delete/gallery", {name: artEdit.title})
         console.log(res.data);
         setArtEdit(null);
         getArt();

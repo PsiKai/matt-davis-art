@@ -3,7 +3,7 @@ import AuthContext from "../context/authContext"
 
 const Login = (props) => {
     const authContext = useContext(AuthContext)
-    const {isAuthenticated, logout, login, register} = authContext;
+    const {isAuthenticated, login} = authContext;
     const [password, setPassword] = useState("")
 
     useEffect(() => {
