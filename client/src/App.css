@@ -159,7 +159,48 @@ header li {
 }
 
 .shipping-form {
-  width: 40%;
+  text-align: right;
+  padding: 2rem 4rem;
+  height: 270px;
+  position: relative;
+}
+
+.shipping-form button {
+  position: absolute;
+  bottom: 2rem;
+  right: 4rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.info-grid p {
+  margin: 0.7rem 0;
+}
+
+.shipping-grid,
+.email-grid {
+  text-align: left;
+  padding: 0 1rem;
+}
+
+.shipping-grid input,
+.email-grid input {
+  display: block;
+  width: 100%;
+  margin: 0.2rem 0;
+}
+
+.city-state {
+  display: grid;
+  grid-template-columns: auto 12% 19%;
+}
+
+.city-state input {
+  display: inline-block;
+  margin: 0.2rem 0;
 }
 
 .shipping-div {
@@ -246,7 +287,7 @@ header li {
 
 .gallery-piece {
   width: 70%;
-  margin: 8rem auto;
+  margin: 5rem auto;
   padding: 2rem;
   text-align: center;
 }
@@ -376,8 +417,24 @@ header li {
 /* Footer Styles  */
 
 footer {
+  background: white;
   grid-area: footer;
   border-top: 2px solid;
   padding: 2rem;
   text-align: center;
+  position: relative;
+}
+
+.login-toast {
+  position: absolute;
+  z-index: -1;
+  margin: auto;
+  left: 34%;
+  transform: translateY(-76%);
+  transition: transform 200ms ease, z-index 100ms linear;
+}
+
+.slide-up {
+  transform: translateY(-200%);
+  z-index: 1;
 }

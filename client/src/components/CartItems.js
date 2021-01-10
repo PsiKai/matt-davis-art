@@ -58,14 +58,20 @@ const CartItems = () => {
                 }
                 </div>
                 <hr className="cart-division" />
-                <div className="cart-total">
-                    <p>Items in cart = {cartItems}</p>        
-                    <h3>Total: ${total}</h3>  
-                    <button onClick={clear}>Checkout</button>
-                </div>
+                
                 <ShippingForm
                     shipForm={shipForm}
                 />
+
+                <div className="cart-total">
+                    <p>Items in cart: <b>{cartItems}</b></p>
+                    <p>Subtotal: <b>${total}</b></p>
+                    <p>Shipping: <b>$5</b></p>
+                    <hr className="underline"></hr>        
+                    <h3>Total: ${total + 5}</h3>  
+                    <button onClick={clear}>Checkout</button>
+                </div> 
+                
                 {address &&
                     <Modal 
                         style={modalStyle}

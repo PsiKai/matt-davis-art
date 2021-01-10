@@ -36,23 +36,28 @@ const Prints = () => {
     }
 
     const hideModal = (e) => {
-        e.target.classList.contains("backdrop") &&
-        setStyle({})
+        if (e.target.classList.contains("backdrop")) {
+            setStyle({})
+            setSelection("")
+        }
     }
 
     const addToCart = (e) => {
-        
         const info = e.target.parentNode.children
-        // console.log(info);
         const item = {
             quantity: {
-                fiveEight: info[3].value,
-                eightEleven: info[5].value,
-                oneeightTwofour: info[7].value
+                fiveEight: info[3].value > 0 && info[3].value,
+                eightEleven: info[5].value > 0 && info[5].value,
+                oneeightTwofour: info[7].value > 0 && info[7].value
             },
             id: info[1].name
         }
-        addItem(item);
+        if (item.quantity.fiveEight > 0 || 
+            item.quantity.eightEleven > 0 || 
+            item.quantity.oneeightTwofour > 0) {
+                addItem(item);
+        }
+        
         setStyle({})
     }
 

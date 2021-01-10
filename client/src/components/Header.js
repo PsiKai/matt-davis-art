@@ -1,14 +1,19 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import AppContext from "../context/AppContext";
 
 const Header = () => {
   const appContext = useContext(AppContext);
-  const {cartItems} = appContext;
+  const {cartItems, reloadCart} = appContext;
+
+  useEffect(() => {
+    reloadCart();
+    // eslint-disable-next-line 
+  }, [])
 
     return (
         <header>
-            <Link to="/">
+            <Link to="/main">
                 <h1>Artist Matt Davis</h1>
             </Link>
             <ul className="header-links">
