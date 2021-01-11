@@ -30,14 +30,15 @@ function App() {
       <Router>
         <Header />
         <Switch>
-          <Route exact path="/main" component={Main} />
+          
           <Route exact path="/about" component={About} />          
           <Route exact path="/prints" component={Prints} />
           <Route exact path="/gallery" component={Gallery} />
           <Route exact path="/comics" component={Comics} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/login" component={Login} />
-          <PrivateRoute exact path="/" component={Edit} />        
+          <PrivateRoute exact path="/edit" component={Edit} />  
+          <Route exact path="/" component={Main} />      
         </Switch>
         <Footer />
       </Router>
