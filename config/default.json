@@ -1,8 +1,0 @@
-{
-    "mongoURL": "mongodb+srv://admin-david:test123@cluster0-6ghui.mongodb.net/matt-d-art?retryWrites=true&w=majority",
-    "clientId": "699924098671-fpr6is8mnrlpahs61bc1ee5oes43espr.apps.googleusercontent.com",
-    "clientSecret": "8pmPpziWfNFMeea3Vv1u7ggs",
-    "token": "ya29.a0AfH6SMAFjhx_BlMXw6gtbqFv7hgdr4Nb_LaoVUvUpqX4XcScL0d_7j8q4jh1aNWvchWZmhs_Etv8KkVj1XIdtkmUQg4LWti_7zEmFLJC0LlE2YkFtr8MfbrziYKV0d4jztt89XIYxXd4xx1-AyUkktZOzWYMQTYMGNEKTc1Ho-8",
-    "refreshToken": "1//04DhMBhz1RvnkCgYIARAAGAQSNwF-L9Ir_QSLKCtb-1yrcCnC76p-ZM44VbirA64SFImg_KDvo9xcRwaTVjIuMOPsReXAWIWk3Xc",
-    "jwtSecret": "selfmademanmattdavis"
-}
