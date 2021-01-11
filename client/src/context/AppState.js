@@ -111,7 +111,7 @@ const AppState = (props) => {
     //checkout items 
     const checkout = async (items) => {
         const res = await axios.post("/cart/checkout", items)
-
+        
         dispatch({
             type: CHECKOUT,
             payload: res.data

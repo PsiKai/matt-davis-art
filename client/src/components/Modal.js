@@ -18,7 +18,12 @@ const Modal = ({style, setModalStyle, total, shipData, cart}) => {
                     description: "Art from Matt Davis",
                     amount: {
                         currency_code: "USD",
-                        value: `${total}`
+                        value: `${total}`,
+                        details: {
+                            subtotal: `${total}`,
+                            tax: 0,
+                            shipping: 5
+                        }
                     }
                 }
             ]

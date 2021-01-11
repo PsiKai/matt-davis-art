@@ -57,7 +57,7 @@ export default (state, action) => {
         case CHECKOUT:
             return {
                 ...state,
-                total: action.payload
+                total: action.payload + 5
             }
         case PURCHASED:
             localStorage.removeItem("cart");
