@@ -17,7 +17,7 @@ const Header = () => {
 
     return (
         <header>
-            <Link to="/main">
+            <Link to="/">
                 <h1>Artist Matt Davis</h1>
             </Link>
             <ul className="header-links">

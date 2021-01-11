@@ -8,7 +8,7 @@ const Login = (props) => {
 
     useEffect(() => {
         if(isAuthenticated) {
-            props.history.push("/")
+            props.history.push("/edit")
         }
     }, [isAuthenticated, props.history])
     
@@ -23,7 +23,6 @@ const Login = (props) => {
     }
 
     const typing = (e) => {
-        console.log(e.target);
         setPassword(e.target.value)
     }
 
