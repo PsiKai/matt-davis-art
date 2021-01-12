@@ -1,8 +1,13 @@
 import React, {useState, useContext} from 'react'
 import AppContext from "../context/AppContext"
+import AlertContext from "../context/alertContext"
+import axios from 'axios'
 
 const UploadGallery = () => {
     const appContext = useContext(AppContext);
+    const alertContext = useContext(AlertContext)
+    const {getArt} = appContext
+    const {setAlert} = alertContext;
 
     const [form, setForm] = useState({
         title: "",
@@ -34,7 +39,22 @@ const UploadGallery = () => {
         formData.append('title', title)
         formData.append('description', description)
 
-        appContext.uploadToGallery(formData)
+        try {
+            const res = await axios.post('/upload/gallery', formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            })
+
+            setAlert(res.data.msg, "lightgrey")
+            getArt();
+        } catch (err) {
+            // if(err.response.status === 500) {
+                setAlert("There was a problem with the server", "lightred");
+            // } else {
+            //     setAlert(res.data.msg, "lightred");
+            // }
+        }
         setForm({title: "", description: ""})
         setFile("");
         setFile("Choose File")

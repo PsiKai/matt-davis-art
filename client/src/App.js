@@ -4,6 +4,7 @@ import './App.css';
 
 import AppState from "./context/AppState"
 import AuthState from "./context/AuthState"
+import AlertState from "./context/AlertState"
 import setAuthToken from './components/utils/setAuthToken'
 
 import PrivateRoute from "./routing/PrivateRoute"
@@ -27,6 +28,7 @@ function App() {
   return (
     <AuthState>
     <AppState>
+    <AlertState>
       <Router>
         <Header />
         <Switch>
@@ -42,6 +44,7 @@ function App() {
         </Switch>
         <Footer />
       </Router>
+    </AlertState>
     </AppState>
     </AuthState>
     

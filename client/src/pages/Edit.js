@@ -5,6 +5,7 @@ import UploadGallery from '../components/UploadGallery'
 import UpdateStock from '../components/UpdateStock'
 import UploadPrint from "../components/UploadPrint"
 import EditGallery from "../components/EditGallery"
+import Alerts from "../components/Alerts"
 
 const Edit = () => {
     const authContext = useContext(AuthContext)
@@ -28,6 +29,7 @@ const Edit = () => {
 
     return (
         <div className="page-content">
+            <Alerts />
             <h1 className="page-header">Update Stock, Add Artwork</h1>
             <div className="nav-buttons">
                 <button name="gallery" onClick={changePage}>Upload to Gallery</button>

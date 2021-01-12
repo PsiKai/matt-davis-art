@@ -1,9 +1,13 @@
 import React, {useState, useContext} from 'react'
 import AppContext from '../context/AppContext'
+import AlertContext from "../context/alertContext"
+import axios from 'axios'
 
 const UploadPrint = () => {
+    const alertContext = useContext(AlertContext)
     const appContext = useContext(AppContext);
-    const {uploadPrint} = appContext;
+    const { getArt} = appContext;
+    const {setAlert} = alertContext;
 
     const [stock, setStock] = useState({
         "eightEleven": 0,
@@ -48,7 +52,17 @@ const UploadPrint = () => {
         formData.append('title', title)
         formData.append('stock', JSON.stringify(stock))
 
-        uploadPrint(formData);
+        try {
+            const res = await axios.post("/upload/prints", formData, {
+                header: {
+                    "Content-Type": "multipart/form-data"
+                }
+            })
+            setAlert(res.data.msg, "lightblue")
+            getArt();
+        } catch (err) {
+            setAlert(err.response.data.msg, "lightred")
+        }
         setStock({
             "eightEleven": 0,
             "oneeightTwofour": 0,

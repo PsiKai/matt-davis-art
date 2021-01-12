@@ -1,10 +1,14 @@
 import React, { Fragment, useContext, useState, useEffect} from 'react'
 import AppContext from "../context/AppContext"
+import AlertContext from "../context/alertContext"
 import CircularProgress from "@material-ui/core/CircularProgress"
+import axios from "axios"
 
 const UpdateStock = () => {
     const appContext = useContext(AppContext)
-    const {prints, updateStock} = appContext;
+    const alertContext = useContext(AlertContext)
+    const {prints, getArt} = appContext;
+    const {setAlert} = alertContext;
 
     const [stock, setStock] = useState([])
 
@@ -37,8 +41,10 @@ const UpdateStock = () => {
     }
 
     //sends stock changes to database
-    const sendChanges = () => {
-        updateStock(stock)
+    const sendChanges = async () => {
+        const res = await axios.post("/update/stock", stock);
+        setAlert(res.data.msg, "lightgreen")
+        getArt();
     }        
     
     return (

@@ -29,10 +29,10 @@ router.post("/gallery", (req, res) => {
         galleryModel.create(imgObj, (err, item) => {
             if (err) {
                 console.log(err);
-                res.send("Error uploading image")
+                res.json({msg: "Error uploading image"})
             } else {
                 item.save();
-                res.send("Item uploaded to gallery")
+                res.json({msg: `${imgObj.title} was uploaded to gallery`})
                 fs.unlinkSync(path.join(__dirname + "/uploads/" + name.replace(/ /g, "-").toLowerCase()));
             }
         })
@@ -64,10 +64,10 @@ router.post("/prints", (req, res) => {
         printModel.create(imgObj, (err, item) => {
             if (err) {
                 console.log(err);
-                res.send("Error uploading image: ", err.message)
+                res.json({msg: "Error uploading image"})
             } else {
                 item.save();
-                res.send("Item uploaded to prints")
+                res.json({msg: `${imgObj.title} was uploaded to prints`})
                 fs.unlinkSync(path.join(__dirname + "/uploads/" + name.replace(/ /g, "-").toLowerCase()));
             }
         })

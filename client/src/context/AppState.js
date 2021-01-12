@@ -129,51 +129,51 @@ const AppState = (props) => {
     }
 
     //upload image to gallery
-    const uploadToGallery = async (form) => {
-        console.log(form);
-        try {
-            const res= await axios.post('/upload/gallery', form, {
-                headers: {
-                    "Content-Type": "multipart/form-data"
-                }
-            })
+    // const uploadToGallery = async (form) => {
+    //     console.log(form);
+    //     try {
+    //         const res= await axios.post('/upload/gallery', form, {
+    //             headers: {
+    //                 "Content-Type": "multipart/form-data"
+    //             }
+    //         })
 
-            window.alert(res.data);
-            getArt();
-        } catch (err) {
-            if(err.response.status === 500) {
-                console.log("There was a problem with the server");
-            } else {
-                window.alert(err.response.data.msg);
-            }
-        }
-    }
+    //         window.alert(res.data);
+    //         getArt();
+    //     } catch (err) {
+    //         if(err.response.status === 500) {
+    //             console.log("There was a problem with the server");
+    //         } else {
+    //             window.alert(err.response.data.msg);
+    //         }
+    //     }
+    // }
 
     //upload image to prints
-    const uploadPrint = async (form) => {
-        try {
-            const res = await axios.post("/upload/prints", form, {
-                header: {
-                    "Content-Type": "multipart/form-data"
-                }
-            })
-            window.alert(res.data)
-            getArt();
-        } catch (err) {
-            if(err.response.status === 500) {
-                console.log("There was a problem with the server");
-            } else {
-                window.alert(err.response.data.msg)
-            }
-        }
-    }
+    // const uploadPrint = async (form) => {
+    //     try {
+    //         const res = await axios.post("/upload/prints", form, {
+    //             header: {
+    //                 "Content-Type": "multipart/form-data"
+    //             }
+    //         })
+    //         window.alert(res.data)
+    //         getArt();
+    //     } catch (err) {
+    //         if(err.response.status === 500) {
+    //             console.log("There was a problem with the server");
+    //         } else {
+    //             window.alert(err.response.data.msg)
+    //         }
+    //     }
+    // }
 
     //update stock amounts
-    const updateStock = async (item) => {
-        const res = await axios.post("/update/stock", item);
-        window.alert(res.data);
-        getArt();
-    }
+    // const updateStock = async (item) => {
+    //     const res = await axios.post("/update/stock", item);
+    //     window.alert(res.data);
+    //     getArt();
+    // }
 
     return (
         <AppContext.Provider
@@ -182,9 +182,9 @@ const AppState = (props) => {
                 reloadCart,
                 getArt,
                 checkout,
-                updateStock,
-                uploadToGallery,
-                uploadPrint,
+                // updateStock,
+                // uploadToGallery,
+                // uploadPrint,
                 completePurchase,
                 stock: state.stock,
                 cartItems: state.cartItems,

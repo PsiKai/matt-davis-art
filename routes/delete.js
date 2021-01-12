@@ -10,10 +10,10 @@ router.post("/gallery", (req, res) => {
     galleryModel.deleteOne({title: req.body.name}, (err) => {
         if (err) {
             console.log(err);
-            res.status(500).send("Error deleting artwork")
+            res.status(500).json({msg: "Error deleting artwork"})
         } else {
             console.log("Artwork deleted");
-           res.send("Artwork deleted")
+           res.json({msg: `${req.body.name} was deleted`})
         }
     })
 })

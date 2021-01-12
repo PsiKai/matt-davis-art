@@ -9,14 +9,16 @@ router.post("/stock", (req, res) => {
         printModel.updateOne({"title": item.title}, {"$set": {"stock": item.stock}}, (err) => {
             if (err) {
                 console.log(err);
-                res.send("Error: ", err.message)
+                res.json({msg: "Error updating stock"})
                 
             } else {
                 console.log("Item Updated")
+                
             }
         })
     })
-    res.send("Items Successfully Updated");
+    // res.send("Items Successfully Updated");
+    res.json({msg: `Updated stock amounts`})
 })
 
 
@@ -28,11 +30,11 @@ router.post("/gallery", (req, res) => {
 
     galleryModel.updateOne({title: old}, {title: newTit, description: newDesc}, err => {
         if (err) {
-            res.status(500).send("Error updating item")
-            console.log(err);
+            res.status(500).send("Error updating item ", old)
+            console.log("Error updating item ", old, err);
         } else {
-            res.send("Updated")
-            console.log("Item", old, "was updated");
+            res.json({msg: `${old} was updated to ${newTit} ${newDesc}`})
+            console.log(old, "was updated to ", newTit, newDesc);
         }
     })
 })

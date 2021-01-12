@@ -1,11 +1,15 @@
 import React, {Fragment, useContext, useState} from 'react'
 import AppContext from "../context/AppContext"
+import AlertContext from "../context/alertContext"
 import axios from "axios";
 import CircularProgress from "@material-ui/core/CircularProgress"
 
 const EditGallery = () => {
     const appContext = useContext(AppContext)
+    const alertContext = useContext(AlertContext)
     const {gallery, getArt} = appContext
+    const {setAlert} = alertContext
+
 
     const [artEdit, setArtEdit] = useState({})
     const [newTitle, setNewTitle] = useState({})
@@ -37,7 +41,7 @@ const EditGallery = () => {
         })
     }
 
-    const submitChanges = () => {
+    const submitChanges = async () => {
         const data = {
             old: {
                 title: artEdit.title,
@@ -47,15 +51,18 @@ const EditGallery = () => {
                 description: newTitle.description
             }
         }
-        const res = axios.post("update/gallery", data)
-        console.log(res.data);
+        const res = await axios.post("update/gallery", data)
+        // console.log(res);
+        setAlert(res.data.msg, "lightgrey")
         setNewTitle({})
+        setArtEdit({})   
     }
 
-    const remove = () => {
-        const res = axios.post("/delete/gallery", {name: artEdit.title})
-        console.log(res.data);
-        setArtEdit(null);
+    const remove = async () => {
+        const res = await axios.post("/delete/gallery", {name: artEdit.title})
+        // console.log(res);
+        setAlert(res.data.msg, "lightblue")
+        setArtEdit({});
         getArt();
     }
 
