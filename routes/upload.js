@@ -13,16 +13,16 @@ router.post("/gallery", (req, res) => {
     const file = req.files.file
     const {name} = file;
 
-    file.mv(path.join(__dirname + `/uploads/${name.replace(/ /g, "-")}`), err => {
+    file.mv(path.join(__dirname + `/uploads/${name.replace(/ /g, "-").toLowerCase()}`), err => {
         if(err) {
             console.error(err);
-            return res.status(500).send("Error moving file: ", err);
+            return res.status(500).json({msg: "Error moving file", error: err});
         }
         var imgObj = {
             title: req.body.title,
             description: req.body.description,
             img: {
-                data: fs.readFileSync(path.join(__dirname + "/uploads/" + name.replace(/ /g, "-"))),
+                data: fs.readFileSync(path.join(__dirname + "/uploads/" + name.replace(/ /g, "-").toLowerCase())),
                 contentType: 'image/png'
                 }
         }
@@ -48,16 +48,16 @@ router.post("/prints", (req, res) => {
     const file = req.files.file
     const {name} = file;
 
-    file.mv(`${__dirname}/uploads/${name.replace(/ /g, "-")}`, err => {
+    file.mv(`${__dirname}/uploads/${name.replace(/ /g, "-").toLowerCase()}`, err => {
         if(err) {
             console.error(err);
-            return res.status(500).send(err);
+            return res.status(500).json({msg: "Error moving file", error: err});
         }
         var imgObj = {
             title: req.body.title,
             stock: JSON.parse(req.body.stock),
             img: {
-                data: fs.readFileSync(path.join(__dirname + "/uploads/" + name.replace(/ /g, "-"))),
+                data: fs.readFileSync(path.join(__dirname + "/uploads/" + name.replace(/ /g, "-").toLowerCase())),
                 contentType: 'image/png'
                     }
             }
