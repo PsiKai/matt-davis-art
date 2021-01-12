@@ -4,7 +4,8 @@ import {
     RELOAD_CART,
     DELETE_CART,
     CHECKOUT,
-    PURCHASED
+    PURCHASED,
+    CLEAR_PURCHASE
 } from "./types";
 
 //eslint-disable-next-line
@@ -65,7 +66,15 @@ export default (state, action) => {
                 ...state,
                 cart: null,
                 cartItems: 0,
-                total: 0
+                total: 0,
+                purchased: true,
+                modal: action.payload
+            }
+        case CLEAR_PURCHASE:
+            return {
+                ...state,
+                purchased: false,
+                modal: ""
             }
         default: 
             return state;

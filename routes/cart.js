@@ -136,7 +136,7 @@ router.post("/purchase", (req, res) => {
             })
         })
 
-    res.send("Purchase Completed. Payment received for $" + total)
+    res.send(`Purchase Completed. Payment received for $${total}. Please contact me if you don't receive a confirmation email`)
 })
 
 

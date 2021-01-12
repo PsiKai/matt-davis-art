@@ -240,6 +240,15 @@ header li {
   display: none !important;
 }
 
+.purchase-modal {
+  background: white;
+  width: 30rem;
+  margin: 10rem auto 0;
+  padding: 1rem;
+  text-align: center;
+  /* position: fixed; */
+}
+
 /* Prints Styles  */
 
 .progress {

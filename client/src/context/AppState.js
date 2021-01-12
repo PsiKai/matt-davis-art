@@ -7,7 +7,8 @@ import {
     RELOAD_CART, 
     CHECKOUT, 
     PURCHASED, 
-    DELETE_CART 
+    DELETE_CART,
+    CLEAR_PURCHASE 
 } from './types'
 import axios from "axios";
 
@@ -19,7 +20,9 @@ const AppState = (props) => {
         cartItems: 0,
         cart: null,
         total: 0,
-        stock: null
+        stock: null,
+        purchased: false,
+        modal: ""
     }
 
     const [state, dispatch] = useReducer(AppReducer, initialState);
@@ -122,58 +125,15 @@ const AppState = (props) => {
     const completePurchase = async (order) => {
         const res = await axios.post("/cart/purchase", order)
 
-        window.alert(res.data);
+        // window.alert(res.data);
         dispatch({
-            type: PURCHASED
+            type: PURCHASED,
+            payload: res.data
         })
     }
 
-    //upload image to gallery
-    // const uploadToGallery = async (form) => {
-    //     console.log(form);
-    //     try {
-    //         const res= await axios.post('/upload/gallery', form, {
-    //             headers: {
-    //                 "Content-Type": "multipart/form-data"
-    //             }
-    //         })
-
-    //         window.alert(res.data);
-    //         getArt();
-    //     } catch (err) {
-    //         if(err.response.status === 500) {
-    //             console.log("There was a problem with the server");
-    //         } else {
-    //             window.alert(err.response.data.msg);
-    //         }
-    //     }
-    // }
-
-    //upload image to prints
-    // const uploadPrint = async (form) => {
-    //     try {
-    //         const res = await axios.post("/upload/prints", form, {
-    //             header: {
-    //                 "Content-Type": "multipart/form-data"
-    //             }
-    //         })
-    //         window.alert(res.data)
-    //         getArt();
-    //     } catch (err) {
-    //         if(err.response.status === 500) {
-    //             console.log("There was a problem with the server");
-    //         } else {
-    //             window.alert(err.response.data.msg)
-    //         }
-    //     }
-    // }
-
-    //update stock amounts
-    // const updateStock = async (item) => {
-    //     const res = await axios.post("/update/stock", item);
-    //     window.alert(res.data);
-    //     getArt();
-    // }
+    //clears purchase modal
+    const clearPurchase = () => dispatch({type: CLEAR_PURCHASE})
 
     return (
         <AppContext.Provider
@@ -182,16 +142,16 @@ const AppState = (props) => {
                 reloadCart,
                 getArt,
                 checkout,
-                // updateStock,
-                // uploadToGallery,
-                // uploadPrint,
                 completePurchase,
+                clearPurchase,
                 stock: state.stock,
                 cartItems: state.cartItems,
                 cart: state.cart,
                 total: state.total,
                 prints: state.prints,
-                gallery: state.gallery
+                gallery: state.gallery,
+                purchased: state.purchased,
+                modal: state.modal
             }}>
                 {props.children}
         </AppContext.Provider>
