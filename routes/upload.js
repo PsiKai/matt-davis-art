@@ -33,7 +33,7 @@ router.post("/gallery", (req, res) => {
             } else {
                 item.save();
                 res.send("Item uploaded to gallery")
-                fs.unlinkSync(path.join(__dirname + "/uploads/" + name.replace(/ /g, "-")));
+                fs.unlinkSync(path.join(__dirname + "/uploads/" + name.replace(/ /g, "-").toLowerCase()));
             }
         })
     })
@@ -68,7 +68,7 @@ router.post("/prints", (req, res) => {
             } else {
                 item.save();
                 res.send("Item uploaded to prints")
-                fs.unlinkSync(path.join(__dirname + "/uploads/" + name.replace(/ /g, "-")));
+                fs.unlinkSync(path.join(__dirname + "/uploads/" + name.replace(/ /g, "-").toLowerCase()));
             }
         })
     })
