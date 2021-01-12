@@ -11,12 +11,13 @@ router.post("/gallery", (req, res) => {
         return res.status(400).json({msg: "No file was received"})
     }
     const file = req.files.file
+    console.log(file);
     const {name} = file;
 
     file.mv(`${__dirname}/uploads/${name.replace(/ /g, "-")}`, err => {
         if(err) {
             console.error(err);
-            return res.status(500).send(err);
+            return res.status(500).send("Error moving file: ", err);
         }
         var imgObj = {
             title: req.body.title,

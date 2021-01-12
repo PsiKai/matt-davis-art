@@ -12,7 +12,7 @@ router.post("/checkout", (req, res) => {
         _8x11 += +item.quantity.eightEleven
         _18x24 += +item.quantity.oneeightTwofour
     })
-    var total = (_5x8 * 3) + (_8x11 * 5) + (_18x24 * 10)
+    var total = (_5x8 * 1) + (_8x11 * 1) + (_18x24 * 1)
 
     res.json(total)
 })
