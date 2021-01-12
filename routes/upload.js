@@ -11,10 +11,9 @@ router.post("/gallery", (req, res) => {
         return res.status(400).json({msg: "No file was received"})
     }
     const file = req.files.file
-    console.log(file);
     const {name} = file;
 
-    file.mv(`${__dirname}/uploads/${name.replace(/ /g, "-")}`, err => {
+    file.mv(path.join(__dirname + `/uploads/${name.replace(/ /g, "-")}`), err => {
         if(err) {
             console.error(err);
             return res.status(500).send("Error moving file: ", err);
@@ -30,7 +29,7 @@ router.post("/gallery", (req, res) => {
         galleryModel.create(imgObj, (err, item) => {
             if (err) {
                 console.log(err);
-                res.send("Error uploading image: ", err.message)
+                res.send("Error uploading image")
             } else {
                 item.save();
                 res.send("Item uploaded to gallery")
