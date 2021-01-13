@@ -1,18 +1,26 @@
 import React, {useContext} from 'react'
 import AlertContext from "../context/alertContext"
+import {CSSTransition, TransitionGroup} from "react-transition-group"
 
 const Alerts = () => {
     const alertContext = useContext(AlertContext)
     const {alerts} = alertContext
 
     return (
-        alerts.length > 0 &&
+        <TransitionGroup>
+        {alerts.length > 0 &&
         alerts.map((alert) => (
-            <div className="alert" style={{background: alert.color}}>
-                <h1>{alert.msg}</h1>
-            </div>
-        ))
-        
+            
+            <CSSTransition key={alert.id} timeout={500} classNames="fade">
+            {/* {( */}
+                <div className="alert" style={{background: alert.color}}>
+                    <h2>{alert.msg}</h2>
+                </div>
+            {/* )} */}
+            </CSSTransition>
+            
+        ))}
+        </TransitionGroup>
     )
 }
 

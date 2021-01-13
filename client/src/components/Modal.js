@@ -3,7 +3,6 @@ import ReactDOM from "react-dom"
 import AppContext from "../context/AppContext"
 
 
-
 const Modal = ({style, setModalStyle, total, shipData, cart}) => {
 
 
@@ -24,7 +23,7 @@ const Modal = ({style, setModalStyle, total, shipData, cart}) => {
                         details: {
                             subtotal: `${total}`,
                             tax: 0,
-                            shipping: 5
+                            shipping: 0
                         }
                     }
                 }
@@ -53,6 +52,7 @@ const Modal = ({style, setModalStyle, total, shipData, cart}) => {
     }
 
     return (
+        
         <div>
             <div className="backdrop" style={style} onClick={hide}>
                     <div className="cart-modal">
@@ -75,6 +75,7 @@ const Modal = ({style, setModalStyle, total, shipData, cart}) => {
                     </div>
                 </div>
         </div>
+      
     )
 }
 

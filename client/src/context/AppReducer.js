@@ -24,15 +24,15 @@ export default (state, action) => {
                 values.forEach(value => {
                     if (value[0] === "fiveEight") {
                         items = items + +value[1]
-                        price = price + (3 * +value[1])
+                        price = price + (1 * +value[1])
                     }
                     if (value[0] === "eightEleven") {
                         items = items + +value[1]
-                        price = price + (5 * +value[1])
+                        price = price + (1 * +value[1])
                     }
                     if (value[0] === "oneeightTwofour") {
                         items = items + +value[1]
-                        price = price + (10 * +value[1])
+                        price = price + (1 * +value[1])
                     }
                 })
             })
@@ -58,7 +58,7 @@ export default (state, action) => {
         case CHECKOUT:
             return {
                 ...state,
-                total: action.payload + 5
+                total: action.payload + 0
             }
         case PURCHASED:
             localStorage.removeItem("cart");

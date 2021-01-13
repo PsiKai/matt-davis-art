@@ -35,12 +35,12 @@ a:active {
 }
 
 .alert {
-  /* position: absolute; */
+  height: 5rem;
+  opacity: 1;
+  overflow: hidden;
   display: block;
-  padding: 1rem;
-  /* top: 5rem;
-  left: 5rem;
-  z-index: 100; */
+  padding: 0.5rem;
+  text-align: center;
 }
 
 .page-content {
@@ -130,6 +130,7 @@ header li {
 /* Cart Styles  */
 
 .cart-item {
+  opacity: 1;
   display: flex;
   width: 100%;
   justify-content: center;
@@ -462,4 +463,48 @@ footer {
 .slide-up {
   transform: translateY(-200%);
   z-index: 1;
+}
+
+/* fade in transitions */
+
+/* .fadein-appear {
+  opacity: 0;
+}
+
+.fadein-appear.fade-appear-active {
+  opacity: 1;
+  transition: opacity 500ms ease;
+} */
+
+.fadein-enter {
+  opacity: 0;
+  /* height: 0; */
+}
+
+.fadein-enter.fadein-enter-active {
+  opacity: 1;
+  /* height: 250px; */
+  transition: all 500ms ease;
+}
+
+.fade-enter {
+  opacity: 0;
+  height: 0rem;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  height: 5rem;
+  transition: opacity 500ms ease, height 500ms ease;
+}
+
+.fade-exit {
+  opacity: 1;
+  height: 5rem;
+}
+
+.fade-exit.fade-exit-active {
+  opacity: 0;
+  height: 0;
+  transition: opacity 500ms ease, height 500ms ease;
 }

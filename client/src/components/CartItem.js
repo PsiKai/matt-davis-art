@@ -1,13 +1,19 @@
-import React, { Fragment, useState, useContext} from 'react'
+import React, { Fragment, useState, useContext, useEffect} from 'react'
 import AppContext from '../context/AppContext'
+import {CSSTransition} from "react-transition-group"
 
-const CartItem = ({quantity, title, src, stock}) => {
+const CartItem = ({quantity, title, src, stock, id}) => {
     const appContext = useContext(AppContext)
 
     const [edit, setEdit] = useState(false)
     const [quan, setQuan] = useState(quantity)
+    const [fade, setFade] = useState(false)
 
     const {fiveEight, eightEleven, oneeightTwofour} = quan
+
+    useEffect(() => {
+        setFade(true)
+    }, [])
 
     const makeChanges = (e) => {
         e.preventDefault()
@@ -48,7 +54,7 @@ const CartItem = ({quantity, title, src, stock}) => {
 
     var bytes = Buffer.from(src.data)
     return (
-        <Fragment>
+        <CSSTransition key={id} in={fade} classNames="fadein" timeout={500} >
            <div className="cart-item">
                 <img src={`data:${src.contentType};base64, ${bytes.toString('base64')}`} 
                     alt={title} />
@@ -97,7 +103,7 @@ const CartItem = ({quantity, title, src, stock}) => {
                     }
                 </div>
             </div> 
-        </Fragment>
+        </CSSTransition>
     )
 }
 

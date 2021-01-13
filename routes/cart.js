@@ -48,7 +48,7 @@ router.post("/purchase", (req, res) => {
             <p>${name}</p>
             <p>${email}</p>
             <h3>Shipping Address:</h3>
-            <p>${name}
+            <p>${name}</p>
             <p>${add1}</p>
             <p>${add2}</p>
             <span>${city}</span>
@@ -68,7 +68,7 @@ router.post("/purchase", (req, res) => {
         <h2>Order Details:</h2>
         <div style="padding: 1rem 2rem;">
             <h3>Shipping Address:</h3>
-            <p>${name}
+            <p>${name}</p>
             <p>${add1}</p>
             <p>${add2}</p>
             <span>${city}</span>
