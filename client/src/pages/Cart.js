@@ -1,10 +1,10 @@
-import React, {Fragment, useContext, useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import AppContext from "../context/AppContext";
 import CartItems from "../components/CartItems";
 import { CircularProgress } from '@material-ui/core';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-const Cart = () => {
+const Cart = (props) => {
     const appContext = useContext(AppContext);
     const {cart, reloadCart, prints, purchased, modal, clearPurchase} = appContext;
 
@@ -15,6 +15,7 @@ const Cart = () => {
 
     const orderComplete = () => {
         clearPurchase()
+        props.history.push("/")
     }
 
     return (

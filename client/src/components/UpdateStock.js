@@ -1,8 +1,9 @@
-import React, { Fragment, useContext, useState, useEffect} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import AppContext from "../context/AppContext"
 import AlertContext from "../context/alertContext"
 import CircularProgress from "@material-ui/core/CircularProgress"
 import axios from "axios"
+import { CSSTransition} from 'react-transition-group';
 
 const UpdateStock = () => {
     const appContext = useContext(AppContext)
@@ -11,6 +12,12 @@ const UpdateStock = () => {
     const {setAlert} = alertContext;
 
     const [stock, setStock] = useState([])
+    const [modalOpen, setModalOpen] = useState(false)
+
+    useEffect(() => {
+        setModalOpen(true)
+        // eslint-disable-next-line 
+    }, [])
 
     useEffect(() => {
         prints && prints.forEach(print => {
@@ -48,7 +55,13 @@ const UpdateStock = () => {
     }        
     
     return (
-        <Fragment>
+        <CSSTransition
+            in={modalOpen} 
+            classNames="fadein" 
+            timeout={400}
+            unmountOnExit={true}
+        >
+        <div>
             <h2>Update Print Stock</h2>
             
             <div className="print-stock">
@@ -102,7 +115,8 @@ const UpdateStock = () => {
             }  
             </div>
         <button onClick={sendChanges}>Submit Changes</button>
-        </Fragment>
+        </div>
+        </CSSTransition>
     )     
     
 }

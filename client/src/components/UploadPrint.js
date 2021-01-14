@@ -1,7 +1,8 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import AppContext from '../context/AppContext'
 import AlertContext from "../context/alertContext"
 import axios from 'axios'
+import { CSSTransition} from 'react-transition-group';
 
 const UploadPrint = () => {
     const alertContext = useContext(AlertContext)
@@ -21,6 +22,12 @@ const UploadPrint = () => {
     const [file, setFile] = useState('');
 
     const {title} = form;
+
+    const [modalOpen, setModalOpen] = useState(false)
+
+    useEffect(() => {
+        setModalOpen(true)
+    }, [])
 
     // Sets state when form inputs change
     const formUpdate = (e) => {
@@ -74,6 +81,12 @@ const UploadPrint = () => {
     }
 
     return (
+        <CSSTransition
+            in={modalOpen} 
+            classNames="fadein" 
+            timeout={400}
+            unmountOnExit={true}
+        >
         <div className="upload-form prints">
             <h2>Add Art to Prints</h2>
             <form onSubmit={upload}>
@@ -121,6 +134,7 @@ const UploadPrint = () => {
                 <input type="submit" value="Submit" />
             </form>
         </div>
+        </CSSTransition>
     )
 }
 

@@ -1,6 +1,16 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useState, useEffect} from 'react'
 
 const ShippingForm = ({shipForm}) => {
+    useEffect(() => {
+        const ship = localStorage.getItem("shipInfo")
+        if (ship) {
+        setShipData(JSON.parse(ship))
+        setAddy(true)
+        shipForm(JSON.parse(ship))
+        }
+        // eslint-disable-next-line 
+    }, [])
+
     const [shipData, setShipData] = useState({
         add1: '',
         add2: '',
@@ -25,6 +35,7 @@ const ShippingForm = ({shipForm}) => {
 
     const ship = (e) => {
         e.preventDefault();
+        localStorage.setItem("shipInfo", JSON.stringify(shipData))
         shipForm(shipData)
         addy ? setAddy(false) : setAddy(true)
     }
@@ -60,10 +71,10 @@ const ShippingForm = ({shipForm}) => {
 
                 <input 
                     type='text'
-                    name='name'
+                    name='name2'
                     placeholder="Your name"
                     onChange={onChange}
-                    value={name}
+                    value={name2}
                     required>
                 </input>
                 <input 
@@ -79,10 +90,10 @@ const ShippingForm = ({shipForm}) => {
                 <h4>Shipping info:</h4>
                 <input 
                     type='text'
-                    name='name2'
+                    name='name'
                     placeholder="Receiver's name"
                     onChange={onChange}
-                    value={name2}
+                    value={name}
                     required>
                 </input>
                 <input 

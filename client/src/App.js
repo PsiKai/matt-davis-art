@@ -17,13 +17,14 @@ import Gallery from './pages/Gallery'
 import Comics from './pages/Comics'
 import Edit from './pages/Edit'
 import Footer from "./components/Footer"
-import Login from "./components/Login"
+import Login from "./pages/Login"
 
 if(localStorage.token) {
   setAuthToken(localStorage.token)
 }
 
 function App() {
+  
 
   return (
     <AuthState>

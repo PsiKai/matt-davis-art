@@ -1,7 +1,8 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import AppContext from "../context/AppContext"
 import AlertContext from "../context/alertContext"
 import axios from 'axios'
+import { CSSTransition} from 'react-transition-group';
 
 const UploadGallery = () => {
     const appContext = useContext(AppContext);
@@ -14,8 +15,13 @@ const UploadGallery = () => {
         description: ""
     })
     const [file, setFile] = useState('');
+    const [modalOpen, setModalOpen] = useState(false)
 
     const {title, description} = form;
+
+    useEffect(() => {
+        setModalOpen(true)
+    }, [])
 
     // Sets state when form input changes
     const formUpdate = (e) => {
@@ -61,6 +67,13 @@ const UploadGallery = () => {
     }
 
     return (
+        <CSSTransition
+            in={modalOpen} 
+            classNames="fadein" 
+            timeout={400}
+            unmountOnExit={true}
+        >
+         
         <div className="upload-form">
             <h2>Add Art to Gallery</h2>
             <form onSubmit={upload}>
@@ -89,6 +102,8 @@ const UploadGallery = () => {
                 <input type="submit" value="Submit" />
             </form>
         </div>
+        </CSSTransition>
+
     )
 }
 

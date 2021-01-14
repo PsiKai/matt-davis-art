@@ -1,8 +1,9 @@
-import React, {Fragment, useContext, useState} from 'react'
+import React, {Fragment, useContext, useState, useEffect} from 'react'
 import AppContext from "../context/AppContext"
 import AlertContext from "../context/alertContext"
 import axios from "axios";
 import CircularProgress from "@material-ui/core/CircularProgress"
+import { CSSTransition} from 'react-transition-group';
 
 const EditGallery = () => {
     const appContext = useContext(AppContext)
@@ -13,9 +14,14 @@ const EditGallery = () => {
 
     const [artEdit, setArtEdit] = useState({})
     const [newTitle, setNewTitle] = useState({})
+    const [modalOpen, setModalOpen] = useState(false)
+
+    useEffect(() => {
+        setModalOpen(true)
+    }, [])
 
     const editArtwork = (e) => {
-        console.log(e.target.name);
+        // console.log(e.target.name);
         var pic = e.target
         setNewTitle({})
         setArtEdit({
@@ -67,6 +73,12 @@ const EditGallery = () => {
     }
 
     return (
+        <CSSTransition
+            in={modalOpen} 
+            classNames="fadein" 
+            timeout={400}
+            unmountOnExit={true}
+        >
         <Fragment>
         <h2>Edit or Delete Artwork from Gallery</h2>
         <div className="update-gallery">
@@ -82,8 +94,7 @@ const EditGallery = () => {
                     src={`data:${item.img.contentType};base64, ${bytes.toString('base64')}`}
                     onClick={editArtwork}
                     data-description={item.description}
-                ></img>
-                )
+                ></img>)
                 
             }) : 
                 <div className="progress">
@@ -125,6 +136,7 @@ const EditGallery = () => {
             <button onClick={submitChanges}>Submit Changes</button>
         </div>
         </Fragment>
+        </CSSTransition>
     )
 }
 

@@ -49,7 +49,6 @@ a:active {
   grid-area: body;
   padding: 2rem;
   width: 100%;
-  min-width: 100%;
   max-width: 50rem;
   margin: 120px auto 0 auto;
 }
@@ -391,11 +390,11 @@ header li {
 .print-stock {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 .print-stock-item {
-  margin: 2rem 0;
+  margin: 2rem;
   width: 100px;
   /* height: 150px; */
 }
@@ -513,6 +512,10 @@ footer {
   transition: opacity 500ms ease;
 }
 
+.fadein-enter-done {
+  opacity: 1;
+}
+
 .fadein-exit {
   opacity: 1;
 }
@@ -520,6 +523,10 @@ footer {
 .fadein-exit.fadein-exit-active {
   opacity: 0;
   transition: opacity 500ms ease;
+}
+
+.fadein-exit-done {
+  opacity: 0;
 }
 
 .fade-enter {
@@ -542,4 +549,9 @@ footer {
   opacity: 0;
   height: 0;
   transition: opacity 500ms ease, height 500ms ease;
+}
+
+.fade-exit-done {
+  opacity: 0;
+  length: 0;
 }
