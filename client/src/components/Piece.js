@@ -1,9 +1,20 @@
-import React, {Fragment} from 'react'
+import React, {useState, useEffect, Fragment} from 'react'
+import {CSSTransition} from 'react-transition-group'
 
 const Piece = (props) => {
+    const [fade, setFade] = useState(false)
+
+    useEffect(() => {
+        setFade(true)
+    }, [])
+
+
     var bytes = Buffer.from(props.src.data)
     return (
-        <Fragment>
+        <CSSTransition unmountOnExit={true} in={fade} classNames="fadein" timeout={400}>
+        <div>
+        
+            
             <hr className="art-division" />
            <div className="gallery-piece">
                 <h3>{props.title}</h3>
@@ -13,7 +24,10 @@ const Piece = (props) => {
                 </img>
                 <p className="description">{props.description}</p>
             </div> 
-        </Fragment>
+            
+        </div>
+        </CSSTransition>
+        
     )
 }
 

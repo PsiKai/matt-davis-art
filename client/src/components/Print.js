@@ -1,6 +1,12 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
+import {CSSTransition} from "react-transition-group"
 
 const Print = (props) => {
+    const [fade, setFade] = useState(false)
+
+    useEffect(() => {
+        setFade(true)
+    }, [])
     
     var bytes = Buffer.from(props.src.data)
 
@@ -9,7 +15,12 @@ const Print = (props) => {
     }
 
     return (
-        <Fragment>
+        <CSSTransition 
+            in={fade} 
+            classNames="fadein" 
+            timeout={400}
+            unmountOnExit={true}
+            >
            <div className="print-item">
             <h3>{props.title}</h3>
             <img 
@@ -20,7 +31,7 @@ const Print = (props) => {
             </img>
             <button onClick={open}>Select Prints</button>
             </div> 
-        </Fragment>
+        </CSSTransition>
     )
 }
 

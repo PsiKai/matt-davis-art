@@ -4,6 +4,7 @@ import 'react-alice-carousel/lib/alice-carousel.css';
 import prints from '../prints'
 import Art from './Art'
 
+
 const Carousel = () => {
 
     return (
@@ -19,7 +20,9 @@ const Carousel = () => {
              >
                 {
                     prints.map((print, i) => {
-                        return (<Art key={i} src={print.src} alt={print.name} />)
+                        return (
+                            <Art key={i} src={print.src} alt={print.name} id={i}/>
+                        )
                     })
                 }
              </AliceCarousel>
