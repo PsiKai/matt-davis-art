@@ -246,9 +246,12 @@ header li {
 }
 
 .cart-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: white;
   width: 40rem;
-  margin: 20% auto 0;
   padding: 1rem;
   text-align: center;
 }
@@ -263,12 +266,14 @@ header li {
 }
 
 .purchase-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: white;
   width: 30rem;
-  margin: 10rem auto 0;
   padding: 1rem;
   text-align: center;
-  /* position: fixed; */
 }
 
 /* Prints Styles  */
@@ -300,7 +305,11 @@ header li {
 }
 
 .print-modal {
-  margin: 30% auto;
+  opacity: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   padding: 2rem;
   text-align: center;
   background-color: white;
@@ -314,15 +323,12 @@ header li {
 }
 
 .backdrop {
-  display: none;
-  opacity: 0;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
-  transition: opacity 200ms ease;
 }
 
 /* Gallery Styles  */
@@ -504,16 +510,16 @@ footer {
 
 .fadein-enter.fadein-enter-active {
   opacity: 1;
-  transition: all 500ms ease;
+  transition: opacity 500ms ease;
 }
 
-.fade-exit {
+.fadein-exit {
   opacity: 1;
 }
 
-.fade-exit.fade-exit-active {
+.fadein-exit.fadein-exit-active {
   opacity: 0;
-  transition: all 500ms ease;
+  transition: opacity 500ms ease;
 }
 
 .fade-enter {

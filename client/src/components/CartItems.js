@@ -5,7 +5,7 @@ import ShippingForm from "./ShippingForm.js"
 import AppContext from "../context/AppContext";
 import AlertContext from "../context/alertContext";
 import Alerts  from "../components/Alerts"
-
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 const CartItems = () => {
     const appContext = useContext(AppContext);
@@ -13,24 +13,18 @@ const CartItems = () => {
     const {cartItems, cart, total, checkout, prints, getArt} = appContext;
     const {setAlert} = alertContext;
 
-    const [modalStyle, setModalStyle] = useState({})
+    const [modalOpen, setModalOpen] = useState(false)
     const [address, setAddress] = useState(null)
         
-
     useEffect(() => {
         !prints && getArt();
         //eslint-disable-next-line
     }, [])
 
-
-    //submit payment TODO
     const clear = () => {
         if (address !== null) {
+            setModalOpen(true)
             checkout(cart);
-            setModalStyle({
-            opacity: "1",
-            display: "block"
-            })
         } else {
             setAlert("Please confirm buyer and shipping info", "lightpink")
         }
@@ -40,7 +34,6 @@ const CartItems = () => {
         setAddress(form)
     }
     
-
     return (
             <Fragment>
                 <div className="cart-flexbox">
@@ -54,17 +47,15 @@ const CartItems = () => {
                         }
                     })
                     return (
-                    
-                    <CartItem 
-                        key={i}
-                        id={i}
-                        src={newSrc[0].img}
-                        title={item.title}
-                        price={item.price}
-                        quantity={item.quantity}
-                        stock={item.stock}
-                    />
-                
+                        <CartItem 
+                            key={i}
+                            id={i}
+                            src={newSrc[0].img}
+                            title={item.title}
+                            price={item.price}
+                            quantity={item.quantity}
+                            stock={item.stock}
+                        />
                     )
                 })
                 }
@@ -86,17 +77,23 @@ const CartItems = () => {
 
                 <Alerts />
                 
-                {address &&
-                    
-                    <Modal 
-                        style={modalStyle}
-                        total={total}
-                        shipData={address}
-                        setModalStyle={setModalStyle}
-                        cart={cart}
-                    />
-
+                <TransitionGroup>
+                {modalOpen &&
+                    <CSSTransition
+                        in={modalOpen} 
+                        classNames="fadein" 
+                        timeout={500}
+                        unmountOnExit={true}
+                    >
+                        <Modal 
+                            total={total}
+                            shipData={address}
+                            setModalOpen={setModalOpen}
+                            cart={cart}
+                        />
+                    </CSSTransition>
                 }
+                </TransitionGroup>
                 
             </Fragment> 
     )

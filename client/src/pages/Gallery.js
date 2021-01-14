@@ -21,6 +21,7 @@ const Gallery = () => {
             {gallery ? gallery.map((piece, i) => {
                 return <Piece 
                     key={i} 
+                    id={i}
                     alt={piece.name} 
                     src={piece.img}
                     title={piece.title}

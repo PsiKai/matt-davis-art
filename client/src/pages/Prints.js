@@ -1,49 +1,45 @@
-import React, {useContext, useEffect, useRef, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import Print from "../components/Print";
 import AppContext from "../context/AppContext"
 import CircularProgress from "@material-ui/core/CircularProgress"
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 const Prints = () => {
     const appContext = useContext(AppContext)
     const {prints, getArt, addItem} = appContext
 
-    const [style, setStyle] = useState({})
-    const [selection, setSelection] = useState('')
-
-    const modal = useRef();
+    const [img, setImg] = useState({})
+    const [modalOpen, setModalOpen] = useState(false)
 
     useEffect(() => {
         !prints && getArt();
         //eslint-disable-next-line
     }, [])
 
-    const modalStyle = {
-        'display': "block",
-        'opacity': "1"
-    }
-
     const openModal = (item) => {
-        const child = modal.current.children
+        setModalOpen(true)
         var stock = prints[item[1].id].stock
 
-        setStyle(modalStyle)
-        setSelection(item[0].innerHTML)
-        child[1].src = item[1].src
-        child[1].name = item[1].name
-        child[3].max = stock.fiveEight
-        child[5].max = stock.eightEleven
-        child[7].max = stock.oneeightTwofour
+        setImg({
+            src: item[1].src,
+            title: item[0].innerText,
+            _5x8: stock.fiveEight,
+            _8x11: stock.eightEleven,
+            _18x24: stock.oneeightTwofour,
+            name: item[1].name
+        })
     }
 
     const hideModal = (e) => {
         if (e.target.classList.contains("backdrop")) {
-            setStyle({})
-            setSelection("")
+            setModalOpen(false)
+            setImg({})
         }
     }
 
     const addToCart = (e) => {
         const info = e.target.parentNode.children
+
         const item = {
             quantity: {
                 fiveEight: info[3].value > 0 ? info[3].value : 0,
@@ -58,7 +54,7 @@ const Prints = () => {
                 addItem(item);
         }
         
-        setStyle({})
+        setModalOpen(false)
     }
 
     return (
@@ -83,13 +79,20 @@ const Prints = () => {
                 </div>
             }
             </div>
-            
-            <div className="backdrop" onClick={hideModal} style={style}>
-                <div className="print-modal" ref={modal}>
-                    <h3>{selection}</h3>
-                    <img src=""
-                        alt=""
-                        name="">
+            <TransitionGroup>
+            {modalOpen && 
+            <CSSTransition
+                in={modalOpen} 
+                classNames="fadein" 
+                timeout={500}
+                unmountOnExit={true}
+            >
+            <div className="backdrop" onClick={hideModal}>
+                <div className="print-modal">
+                    <h3>{img.title}</h3>
+                    <img src={img.src}
+                        alt={img.title}
+                        name={img.name}>
                     </img>
 
                     <label htmlFor="fiveEight" className="quantity">5 x 8</label>
@@ -99,6 +102,7 @@ const Prints = () => {
                         name="fiveEight" 
                         className="quantity" 
                         min="0"
+                        max={img._5x8}
                     />
 
                     <label htmlFor="eightEleven" className="quantity">8.5 x 11</label>
@@ -108,6 +112,7 @@ const Prints = () => {
                         name="eightEleven"   
                         className="quantity" 
                         min="0"
+                        max={img._8x11}
                     />
 
                     <label htmlFor="oneeightTwofour" className="quantity">18 x 24</label>
@@ -117,11 +122,15 @@ const Prints = () => {
                         name="oneeightTwofour" 
                         className="quantity" 
                         min="0"
+                        max={img._18x24}
                     />
 
                     <button onClick={addToCart}>Add To Cart</button>
                 </div>
             </div>
+            </CSSTransition>
+            }
+            </TransitionGroup>
         </div>
     )
 }

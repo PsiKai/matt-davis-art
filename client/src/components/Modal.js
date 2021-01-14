@@ -3,9 +3,7 @@ import ReactDOM from "react-dom"
 import AppContext from "../context/AppContext"
 
 
-const Modal = ({style, setModalStyle, total, shipData, cart}) => {
-
-
+const Modal = ({setModalOpen, total, shipData, cart}) => {
     const appContext = useContext(AppContext)
 
     const {add1, add2, city, state, zip, email} = shipData;
@@ -36,46 +34,41 @@ const Modal = ({style, setModalStyle, total, shipData, cart}) => {
         const amount = order.purchase_units[0].amount.value
         const purchaseOrder = {ship: shipData, items: cart, total: amount}
         sendShipping(purchaseOrder);
-    
     }
 
     const hide = (e) => {
-        e.target.classList.contains("backdrop") && setModalStyle({})
+        e.target.classList.contains("backdrop") && setModalOpen(false)
     }
 
 
     const sendShipping = (order) => {
-        // console.log();
         appContext.completePurchase(order)
-        setModalStyle({})
-        // window.alert("Payment Received for $" + order.total);
+        setModalOpen(false)
     }
 
     return (
-        
         <div>
-            <div className="backdrop" style={style} onClick={hide}>
-                    <div className="cart-modal">
-                        <h2>Complete your purchase</h2>
-                        <div className="shipping-div">
-                            <h4>Shipping Address:</h4>
-                            <p>{add1}</p>
-                            <p>{add2}</p>
-                            <span>{city},</span>
-                            <span> {state}</span>
-                            <span> {zip}</span>
-                            <p>{email}</p>
-                        </div>
-                        
-                        <h4>Total: ${total}</h4>
-                        <PayPalButton
-                            createOrder={(data, actions) => createOrder(data, actions)}
-                            onApprove={(data, actions) => onApprove(data, actions)}
-                        />
-                    </div>
+        <div className="backdrop" onClick={hide}>
+            <div className="cart-modal">
+                <h2>Complete your purchase</h2>
+                <div className="shipping-div">
+                    <h4>Shipping Address:</h4>
+                    <p>{add1}</p>
+                    <p>{add2}</p>
+                    <span>{city},</span>
+                    <span> {state}</span>
+                    <span> {zip}</span>
+                    <p>{email}</p>
                 </div>
+                
+                <h4>Total: ${total}</h4>
+                <PayPalButton
+                    createOrder={(data, actions) => createOrder(data, actions)}
+                    onApprove={(data, actions) => onApprove(data, actions)}
+                />
+            </div>
         </div>
-      
+        </div>
     )
 }
 

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Fragment} from 'react'
+import React, {useState, useEffect} from 'react'
 import {CSSTransition} from 'react-transition-group'
 
 const Piece = (props) => {
@@ -12,7 +12,7 @@ const Piece = (props) => {
     var bytes = Buffer.from(props.src.data)
     return (
         <CSSTransition unmountOnExit={true} in={fade} classNames="fadein" timeout={400}>
-        <div>
+        <div style={{transitionDelay: `${props.id * 100}ms`}}>
         
             
             <hr className="art-division" />
