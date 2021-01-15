@@ -115,35 +115,37 @@ header li {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* transform: translate(0, 0) scale(1); */
 }
 
-.ken-appear {
+/* .ken-appear {
   transform: translate(0, 0) scale(1);
 }
 
 .ken-appear.ken-appear-active {
   transform: translate(30px, -40px) scale(1.2);
   transition: all 7000ms ease;
+} */
+
+.alice-carousel__stage-item.__active:nth-child(2) > .carousel-image,
+.alice-carousel__stage-item.__active:nth-child(4) > .carousel-image,
+.alice-carousel__stage-item.__active:nth-child(6) > .carousel-image {
+  animation: ken-burns 10000ms linear normal !important;
 }
 
-.alice-carousel__stage-item__active > .carousel-image {
-  animation: ken-burns 7000ms ease forwards !important;
+.alice-carousel__stage-item.__active:nth-child(3) > .carousel-image,
+.alice-carousel__stage-item.__active:nth-child(5) > .carousel-image {
+  animation: ken-burns 10000ms linear reverse !important;
 }
-
-/* .carousel-image:not(:first-of-type) {
-  position: absolute;
-  left: 0;
-  top: 0; */
-/* z-index: -1; */
-/* } */
 
 @keyframes ken-burns {
   0% {
     transform: translate(0, 0) scale(1);
   }
+  50% {
+    transform: translate(20px, -30px) scale(1.2);
+  }
   100% {
-    transform: translate(30px, -40px) scale(1.2);
+    transform: translate(35px, -60px) scale(1.5);
   }
 }
 
