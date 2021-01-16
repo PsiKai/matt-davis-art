@@ -17,12 +17,15 @@ const Piece = (props) => {
             
             <hr className="art-division" />
            <div className="gallery-piece">
-                <h3>{props.title}</h3>
+                
                 <img 
                     src={`data:${props.src.contentType};base64, ${bytes.toString('base64')}`} 
                     alt={props.name}>
                 </img>
-                <p className="description">{props.description}</p>
+                <div className="plaque">
+                    <h3>{props.title}</h3>
+                    <p className="description">{props.description}</p>
+                </div>
             </div> 
             
         </div>

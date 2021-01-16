@@ -1,10 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Yellowtail&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&display=swap");
 
 :root {
   --white: #f2f2f0;
   --light: #ff5e3a;
   --medium: #2c365d;
   --dark: #272e4f;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--medium);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--white);
 }
 
 * {
@@ -14,6 +28,9 @@
 html {
   height: 100%;
   overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-color: var(--medium) var(--white);
+  scrollbar-width: thin;
 }
 
 body {
@@ -22,6 +39,8 @@ body {
   height: 100%;
   background-color: var(--white);
   color: var(--dark);
+  background-image: url(./images/brushed-alum.png);
+  font-family: "Noto Sans SC", sans-serif;
 }
 
 #root {
@@ -103,20 +122,23 @@ header li {
 .menu {
   position: absolute;
   z-index: -1;
-  top: 120px;
+  top: 119px;
   right: 0;
   background-color: aliceblue;
   transform: translateX(101%);
   transition: transform 200ms ease;
-  border-radius: 5px;
+  border: 1px solid black;
+  border-right: none;
+  border-radius: 0 0 0 8px;
 }
 
 .menu__burger-icon {
   width: 33px;
   position: fixed;
   top: 3rem;
-  right: 4rem;
+  right: 2rem;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .menu__burger-icon span {
@@ -150,6 +172,7 @@ header li {
   .menu {
     transform: none !important;
     position: static;
+    border: none;
   }
 }
 
@@ -169,6 +192,8 @@ header li {
   margin: auto;
   overflow: hidden;
   position: relative;
+  box-shadow: 30px 0 30px 0 rgba(0, 0, 0, 0.1),
+    -30px 0 30px 0 rgba(0, 0, 0, 0.1);
 }
 
 .alice-carousel,
@@ -218,17 +243,27 @@ header li {
 /* About Me Style  */
 
 .about-img {
-  width: 100%;
+  position: relative;
+  left: -2rem;
+  top: -2rem;
+  width: calc(100% + 4rem);
+  min-height: 40vh;
+  object-fit: cover;
+  filter: brightness(0.7) contrast(200%);
 }
 
 /* Cart Styles  */
 
 .cart-item {
+  background: var(--white);
+  padding: 1rem;
   opacity: 1;
   display: flex;
-  width: 100%;
+  width: 80%;
   justify-content: center;
-  margin: 2rem 0;
+  margin: 1rem 0;
+  border-radius: 8px;
+  box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3);
 }
 
 .cart-item div {
@@ -261,6 +296,7 @@ header li {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: 2rem;
 }
 
 .shipping-form {
@@ -368,13 +404,15 @@ header li {
 }
 
 .print-item {
+  background: var(--white);
   display: inline-block;
   text-align: center;
   margin: 1rem;
-  padding: 0.5rem;
-  border: 1px dotted rgba(0, 0, 0, 0.7);
+  padding: 1rem;
+  /* border: 1px dotted rgba(0, 0, 0, 0.7); */
   border-radius: 0.5rem;
   opacity: 1;
+  box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3);
 }
 
 .print-modal {
@@ -407,16 +445,30 @@ header li {
 /* Gallery Styles  */
 
 .gallery-piece {
-  width: 70%;
+  width: 80%;
+  /* max-height: 80vh; */
   margin: 5rem auto;
-  padding: 2rem;
   text-align: center;
 }
 
 .gallery-piece img {
   width: 100%;
   border: 5px outset burlywood;
-  box-shadow: 3px 3px 8px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 10px 0 15px 2px rgba(0, 0, 0, 0.2),
+    -10px 0 15px 2px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 3px 3px 8px 0px rgba(0, 0, 0, 0.5); */
+}
+
+.plaque {
+  background: whitesmoke;
+  color: var(--dark);
+  padding: 0 1rem;
+  text-align: left;
+  margin: 1rem 3% 0 50%;
+  border: 3px outset white;
+  border-radius: 4px;
+  font-family: sans-serif;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3);
 }
 
 .art-division {
@@ -435,7 +487,7 @@ header li {
   top: -1.2rem;
   font-size: 1.5rem;
   padding: 0 0.23rem 0 0.28rem;
-  background: var(--white);
+  background: url(./images/brushed-alum.png) var(--white);
 }
 
 .description {

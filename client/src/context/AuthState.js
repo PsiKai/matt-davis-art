@@ -25,19 +25,21 @@ const AuthState = (props) => {
         if(localStorage.token) {
             setAuthToken(localStorage.token)
         }
-        try {
-            const res = await axios.get("/login")
-            dispatch({
-                type: USER_LOADED,
-                payload: res.data
-            })
-            
-        } catch (error) {
-            console.log(error.msg);
+
+        const res = await axios.get("/login")
+
+        if (res.data.status === 401) {
+            console.log(res.data.msg);
             dispatch({
                 type: LOGOUT
             })
-        }
+        } else {
+            console.log(res.data.name, "is logged in.");
+        dispatch({
+            type: USER_LOADED,
+            payload: res.data
+        })
+    }
     }
 
     ///register user

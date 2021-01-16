@@ -17,7 +17,7 @@ app.use(fileUpload())
 connectDB();
 
 
-app.use("/login", require("./routes/auth"))
+app.use("/login", require("./routes/login"))
 app.use("/register", require("./routes/users"))
 app.use("/art", require("./routes/art"))
 app.use("/cart", require("./routes/cart"))
