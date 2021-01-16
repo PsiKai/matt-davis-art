@@ -13,10 +13,10 @@ const Main = () => {
     }, [])
 
     return (
-        <div className="page-content">
-            <h1 className="page-header">Home</h1>
+        <div className="page-content" style={{padding: "1rem 0"}}>
+            {/* <h1 className="page-header">Home</h1>
             <h2>Test test test</h2>
-            <p>Main page test.</p>
+            <p>Main page test.</p> */}
             <Carousel />
         </div>
     )

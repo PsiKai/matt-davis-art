@@ -1,5 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Yellowtail&display=swap");
 
+:root {
+  --white: #f2f2f0;
+  --light: #ff5e3a;
+  --medium: #2c365d;
+  --dark: #272e4f;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -13,6 +20,8 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  background-color: var(--white);
+  color: var(--dark);
 }
 
 #root {
@@ -48,8 +57,8 @@ a:active {
   position: relative;
   grid-area: body;
   padding: 2rem;
-  width: 100%;
-  max-width: 50rem;
+  width: 97vw;
+  max-width: 70rem;
   margin: 120px auto 0 auto;
 }
 
@@ -61,6 +70,7 @@ a:active {
 
 header {
   background-color: aliceblue;
+  color: inherit;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -82,18 +92,80 @@ header ul {
   padding: 0;
   list-style: none;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 header li {
   margin: 0 1rem;
+  padding: 1rem;
+}
+
+.menu {
+  position: absolute;
+  z-index: -1;
+  top: 120px;
+  right: 0;
+  background-color: aliceblue;
+  transform: translateX(101%);
+  transition: transform 200ms ease;
+  border-radius: 5px;
+}
+
+.menu__burger-icon {
+  width: 33px;
+  position: fixed;
+  top: 3rem;
+  right: 4rem;
+  cursor: pointer;
+}
+
+.menu__burger-icon span {
+  position: relative;
+  display: block;
+  background-color: var(--dark);
+  height: 4px;
+  margin-bottom: 5px;
+  border-radius: 3px;
+  transform-origin: 6px 5px;
+  transition: all 200ms ease;
+}
+
+.menu__burger-icon span:first-child {
+  transform-origin: 0;
+}
+
+@media (min-width: 800px) {
+  header ul {
+    flex-direction: row;
+  }
+
+  header li {
+    padding: 0;
+  }
+
+  .menu__burger-icon {
+    display: none;
+  }
+
+  .menu {
+    transform: none !important;
+    position: static;
+  }
 }
 
 /* Main page Styles  */
 
+.landing-page {
+  position: relative;
+  grid-area: body;
+  width: 100%;
+  height: 100%;
+  margin-top: 120px;
+}
+
 .carousel-container {
-  width: 600px;
-  height: 500px !important;
+  width: 100%;
+  height: 100%;
   margin: auto;
   overflow: hidden;
   position: relative;
@@ -101,7 +173,8 @@ header li {
 
 .alice-carousel,
 .alice-carousel div {
-  height: 400px;
+  height: 100%;
+  width: 100%;
 }
 
 .alice-carousel__prev-btn,
@@ -114,17 +187,10 @@ header li {
 .carousel-image {
   width: 100%;
   height: 100%;
+  max-height: 80vh;
   object-fit: cover;
+  object-position: top center;
 }
-
-/* .ken-appear {
-  transform: translate(0, 0) scale(1);
-}
-
-.ken-appear.ken-appear-active {
-  transform: translate(30px, -40px) scale(1.2);
-  transition: all 7000ms ease;
-} */
 
 .alice-carousel__stage-item.__active:nth-child(2) > .carousel-image,
 .alice-carousel__stage-item.__active:nth-child(4) > .carousel-image,
@@ -147,6 +213,12 @@ header li {
   100% {
     transform: translate(35px, -60px) scale(1.5);
   }
+}
+
+/* About Me Style  */
+
+.about-img {
+  width: 100%;
 }
 
 /* Cart Styles  */
@@ -362,8 +434,8 @@ header li {
   position: relative;
   top: -1.2rem;
   font-size: 1.5rem;
-  padding: 0 0.25rem;
-  background: white;
+  padding: 0 0.23rem 0 0.28rem;
+  background: var(--white);
 }
 
 .description {

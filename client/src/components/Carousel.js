@@ -17,6 +17,9 @@ const Carousel = () => {
                 animationDuration="600"
                 autoPlayInterval="7000"
                 disableDotsControls="true"
+                disableButtonsControls="true"
+                autoPlayStrategy="none"
+                
              >
                 {imgs.map((img, i) => {
                     return (
