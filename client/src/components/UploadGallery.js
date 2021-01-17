@@ -99,7 +99,7 @@ const UploadGallery = () => {
 
                 <input id="gallery-image" type="file" onChange={imgUpdate} />
 
-                <input type="submit" value="Submit" />
+                <button type="submit">Submit</button>
             </form>
         </div>
         </CSSTransition>
