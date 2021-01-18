@@ -95,6 +95,11 @@ router.post("/purchase", (req, res) => {
     </a>`
 
     let transporter = nodemailer.createTransport({
+        // service: 'gmail',
+        // auth: {
+        //     user: 'davidirvin47@gmail.com',
+        //     pass: "12345"
+        // }
         host: 'smtp.gmail.com',
         port: 465,
         secure: true,
@@ -107,6 +112,7 @@ router.post("/purchase", (req, res) => {
             accessToken: process.env.TOKEN,
         }
     });
+
 
     var mailOptions = {
         from: 'davidirvin47@gmail.com',
@@ -126,17 +132,24 @@ router.post("/purchase", (req, res) => {
 
     var orderConfirm = transporter.sendMail(mailOptions2)
 
+
     Promise.all([orderReq, orderConfirm])
         .then(([result1, result2]) => {
-            console.log("Emails sent");
-        })
-        .catch(err => {
-            return res.status(400).json({
-                error: "Something went wrong with the order confirmation"
+            console.log("Emails sent", result1, result2);
+            res.json({
+                code: 200,
+                heading: "Thank you for your purchase", 
+                msg: `Purchase Completed. Payment received for $${total}. Please contact me if you don't receive a confirmation email`
             })
         })
-
-    res.send(`Purchase Completed. Payment received for $${total}. Please contact me if you don't receive a confirmation email`)
+        .catch(err => {
+            console.log(err);
+            return res.json({
+                code: 400,
+                heading: "I'm sorry, the order was not received",
+                msg: "Please check with paypal or your bank that the payment was made, then send me an email and I will make sure you get your order!"
+            })
+        })
 })
 
 

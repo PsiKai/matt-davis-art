@@ -14,7 +14,7 @@ import Prints from './pages/Prints';
 import Header from './components/Header';
 import Cart from "./pages/Cart";
 import Gallery from './pages/Gallery'
-import Comics from './pages/Comics'
+import Contact from './pages/Contact'
 import Edit from './pages/Edit'
 import Footer from "./components/Footer"
 import Login from "./pages/Login"
@@ -37,7 +37,7 @@ function App() {
           <Route exact path="/about" component={About} />          
           <Route exact path="/prints" component={Prints} />
           <Route exact path="/gallery" component={Gallery} />
-          <Route exact path="/comics" component={Comics} />
+          <Route exact path="/contact" component={Contact} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/login" component={Login} />
           <PrivateRoute exact path="/edit" component={Edit} />  

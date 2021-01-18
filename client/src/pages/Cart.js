@@ -15,7 +15,12 @@ const Cart = (props) => {
 
     const orderComplete = () => {
         clearPurchase()
-        props.history.push("/")
+        if (modal.code !== 200) {
+            props.history.push("/contact")
+        } else {
+            props.history.push("/")
+        }
+        
     }
 
     return (
@@ -41,9 +46,9 @@ const Cart = (props) => {
         >
             <div className="backdrop" onClick={orderComplete}>
                 <div className="purchase-modal">
-                    <h1>Thank you for your purchase!</h1>
-                    <p>{modal}</p>
-                    <button onClick={orderComplete}>Continue Browsing</button>
+                    <h1>{modal.heading}</h1>
+                    <p>{modal.msg}</p>
+                    <button onClick={orderComplete}>{modal.code === 200 ? "Continue Browsing" : "Contact Me"}</button>
                 </div>
             </div>
         </CSSTransition>

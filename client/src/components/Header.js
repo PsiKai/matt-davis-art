@@ -14,7 +14,6 @@ const Header = () => {
   useEffect(() => {
     reloadCart();
     loadUser();
-    console.log(getComputedStyle(document.querySelector("html")).width);
     // eslint-disable-next-line 
   }, [])
 
@@ -47,7 +46,7 @@ const Header = () => {
                 <Link to="/prints">Prints</Link>
               </li>
               <li onClick={() => setOpen(false)}>
-                <Link to="/comics">TP Man Comics</Link>
+                <Link to="/contact">Contact</Link>
               </li>
               <li onClick={() => setOpen(false)}>
                 <Link to="/gallery">Gallery</Link>

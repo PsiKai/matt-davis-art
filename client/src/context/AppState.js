@@ -104,7 +104,6 @@ const AppState = (props) => {
     //gets gallery arts and prints from backend server
     const getArt = async () => {
         const res = await axios.get("/art")
-
         dispatch({
             type: GET_ART,
             payload: res.data
@@ -125,7 +124,12 @@ const AppState = (props) => {
     const completePurchase = async (order) => {
         const res = await axios.post("/cart/purchase", order)
 
-        // window.alert(res.data);
+        // if (res.status !== 200) {
+        //     dispatch({
+        //         type: PURCHASED,
+        //         payload: res.data
+        //     })
+        // }
         dispatch({
             type: PURCHASED,
             payload: res.data

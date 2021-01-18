@@ -11,7 +11,6 @@ const path = require("path")
 const app = express();
 
 app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({extended: true}))
 app.use(fileUpload())
 
 connectDB();
@@ -24,6 +23,7 @@ app.use("/cart", require("./routes/cart"))
 app.use("/upload", require("./routes/upload"))
 app.use("/update", require("./routes/update"))
 app.use("/delete", require("./routes/delete"))
+app.use("/contact", require("./routes/contact"))
 
 
 if(process.env.NODE_ENV === 'production') {
