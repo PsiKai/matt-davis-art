@@ -1,6 +1,8 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory'
 import './App.css';
+import {CSSTransition, TransitionGroup} from "react-transition-group";
 
 import AppState from "./context/AppState"
 import AuthState from "./context/AuthState"
@@ -22,28 +24,40 @@ import Login from "./pages/Login"
 if(localStorage.token) {
   setAuthToken(localStorage.token)
 }
+const history = createHistory();
 
 function App() {
-  
 
   return (
     <AuthState>
     <AppState>
     <AlertState>
-      <Router>
-        <Header />
-        <Switch>
-          
-          <Route exact path="/about" component={About} />          
-          <Route exact path="/prints" component={Prints} />
-          <Route exact path="/gallery" component={Gallery} />
-          <Route exact path="/contact" component={Contact} />
-          <Route exact path="/cart" component={Cart} />
-          <Route exact path="/login" component={Login} />
-          <PrivateRoute exact path="/edit" component={Edit} />  
-          <Route exact path="/" component={Main} />      
-        </Switch>
-        <Footer />
+      <Router history={history}>
+        <Route render={({location}) => (
+          <Fragment>
+            <Header />
+            <TransitionGroup>
+              <CSSTransition 
+                key={location.key} 
+                classNames="fadein" 
+                timeout={300}>
+                <Fragment>
+                  <Switch location={location}>
+                    <Route exact path="/about" component={About} />          
+                    <Route exact path="/prints" component={Prints} />
+                    <Route exact path="/gallery" component={Gallery} />
+                    <Route exact path="/contact" component={Contact} />
+                    <Route exact path="/cart" component={Cart} />
+                    <Route exact path="/login" component={Login} />
+                    <PrivateRoute exact path="/edit" component={Edit} />  
+                    <Route exact path="/" component={Main} />      
+                  </Switch>
+                  <Footer />
+                </Fragment>
+              </CSSTransition>
+            </TransitionGroup>
+          </Fragment>
+        )} />
       </Router>
     </AlertState>
     </AppState>

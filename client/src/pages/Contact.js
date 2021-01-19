@@ -20,11 +20,15 @@ const Contact = () => {
         e.preventDefault();
         const res = await axios.post("/contact", email)
         setAlert(res.data.msg, res.data.color)
+        setEmail({})
     }
 
     return (
         <div className="page-content">
+            <div className="contact-img"></div>
             <h1 className="page-header">Contact Me</h1>
+            <h2>I'd love to hear from you.</h2>
+            <p>Drop me a line on my socials, or just send me an email directly</p>
 
             <a href="https://www.instagram.com/mattdavisart5280/"><i className="fab fa-instagram fa-2x"></i></a>
             <a href="https://www.facebook.com/matthew.davis.5437"><i className="fab fa-facebook-f fa-2x"></i></a>
