@@ -39,7 +39,7 @@ function App() {
             <TransitionGroup>
               <CSSTransition 
                 key={location.key} 
-                classNames="fadein" 
+                classNames="slide" 
                 timeout={300}>
                 <Fragment>
                   <Switch location={location}>
@@ -54,8 +54,10 @@ function App() {
                   </Switch>
                   <Footer />
                 </Fragment>
+                
               </CSSTransition>
             </TransitionGroup>
+            
           </Fragment>
         )} />
       </Router>

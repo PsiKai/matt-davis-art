@@ -44,10 +44,17 @@ body {
 }
 
 #root {
+  /* display: grid;
+  grid-template-rows: auto fit-content(3rem);
+  grid-template-areas: "body" "footer"; */
+  height: 100%;
+}
+
+#root > div:first-of-type {
   display: grid;
   grid-template-rows: auto fit-content(3rem);
   grid-template-areas: "body" "footer";
-  /* height: 100%; */
+  height: 100%;
 }
 
 a {
@@ -80,11 +87,11 @@ a:active {
 
 .page-content {
   position: relative;
-  grid-area: body;
+  /* grid-area: body; */
   padding: 2rem;
   width: 97vw;
   max-width: 70rem;
-  margin: 120px auto 0 auto;
+  margin: 88px auto 0 auto;
 }
 
 .page-header {
@@ -111,6 +118,7 @@ header {
 header h1 {
   font-family: "Yellowtail", cursive;
   font-weight: lighter;
+  margin: 0;
 }
 
 header ul {
@@ -403,8 +411,8 @@ header li {
   height: 300px;
   min-height: 40vh;
   object-fit: cover;
-  filter: brightness(1) contrast(100%);
-  box-shadow: 0 0 32px 16px var(--white) inset;
+  filter: brightness(0.89) contrast(103%);
+  box-shadow: 0 0 16px 16px white inset;
 }
 
 .email-form {
@@ -659,7 +667,7 @@ header li {
 
 .logout {
   position: absolute;
-  bottom: 2rem;
+  bottom: 6rem;
   right: 2rem;
 }
 
@@ -743,4 +751,65 @@ footer {
 .fade-exit-done {
   opacity: 0;
   height: 0;
+}
+
+/* page swipe transition  */
+
+.slide-enter {
+  /* perspective: 1000px;
+  transform: rotateY(90deg);
+  transform-style: preserve-3d; */
+  position: absolute;
+  opacity: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.slide-enter.slide-enter-active {
+  opacity: 1;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  /* transform: rotateY(0);
+  transform-style: preserve-3d; */
+  transition: opacity 150ms ease-out 150ms;
+}
+
+.slide-enter-done {
+  position: static;
+  /* transform: rotateY(0); */
+  /* height: 100%; */
+  opacity: 1;
+}
+
+.slide-exit {
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
+  /* perspective: 1000px;
+  transform: rotateY(0);
+  transform-style: preserve-3d; */
+  opacity: 1;
+}
+
+.slide-exit.slide-exit-active {
+  opacity: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  /* transform: rotateY(-90deg);
+  transform-style: preserve-3d;
+  backface-visibility: hidden; */
+  transition: opacity 150ms ease-in;
+}
+
+.slide-exit-done {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  /* transform: rotateY(-90deg);
+  transform-style: preserve-3d;
+  backface-visibility: hidden; */
+  opacity: 0;
 }
