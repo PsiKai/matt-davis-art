@@ -110,6 +110,15 @@ const AppState = (props) => {
         })
     }
 
+    //refreshes art works after changing content
+    const refreshArt = async () => {
+        const res = await axios.get("/art/refresh")
+        dispatch({
+            type: GET_ART,
+            payload: res.data
+        })
+    }
+
     //checkout items 
     const checkout = async (items) => {
         const res = await axios.post("/cart/checkout", items)
@@ -145,6 +154,7 @@ const AppState = (props) => {
                 addItem,
                 reloadCart,
                 getArt,
+                refreshArt,
                 checkout,
                 completePurchase,
                 clearPurchase,

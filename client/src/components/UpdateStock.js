@@ -8,7 +8,7 @@ import { CSSTransition} from 'react-transition-group';
 const UpdateStock = () => {
     const appContext = useContext(AppContext)
     const alertContext = useContext(AlertContext)
-    const {prints, getArt} = appContext;
+    const {prints, refreshArt} = appContext;
     const {setAlert} = alertContext;
 
     const [stock, setStock] = useState([])
@@ -52,7 +52,7 @@ const UpdateStock = () => {
     const sendChanges = async () => {
         const res = await axios.post("/update/stock", stock);
         setAlert(res.data.msg, "lightgreen")
-        getArt();
+        refreshArt();
     }   
     
     // saves checked prints in state 
@@ -77,7 +77,7 @@ const UpdateStock = () => {
             if (box.checked) {box.checked = false}
         })
         setChecked([])
-        getArt();
+        refreshArt();
     }
     
     return (

@@ -7,7 +7,7 @@ import { CSSTransition, TransitionGroup} from 'react-transition-group';
 const UploadPrint = () => {
     const alertContext = useContext(AlertContext)
     const appContext = useContext(AppContext);
-    const { getArt} = appContext;
+    const {refreshArt} = appContext;
     const {setAlert} = alertContext;
 
     const [stock, setStock] = useState({
@@ -73,7 +73,7 @@ const UploadPrint = () => {
                 }
             })
             setAlert(res.data.msg, "lightblue")
-            getArt();
+            refreshArt();
         } catch (err) {
             setAlert(err.response.data.msg, "lightred")
         }

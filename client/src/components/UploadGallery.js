@@ -7,7 +7,7 @@ import { CSSTransition, TransitionGroup} from 'react-transition-group';
 const UploadGallery = () => {
     const appContext = useContext(AppContext);
     const alertContext = useContext(AlertContext)
-    const {getArt} = appContext
+    const {refreshArt} = appContext
     const {setAlert} = alertContext;
 
     const [form, setForm] = useState({
@@ -60,7 +60,7 @@ const UploadGallery = () => {
             })
 
             setAlert(res.data.msg, "lightgrey")
-            getArt();
+            refreshArt();
         } catch (err) {
             // if(err.response.status === 500) {
                 setAlert("There was a problem with the server", "lightred");

@@ -8,7 +8,7 @@ import { CSSTransition, TransitionGroup} from 'react-transition-group';
 const EditGallery = () => {
     const appContext = useContext(AppContext)
     const alertContext = useContext(AlertContext)
-    const {gallery, getArt} = appContext
+    const {gallery, refreshArt} = appContext
     const {setAlert} = alertContext
 
 
@@ -58,14 +58,15 @@ const EditGallery = () => {
         setAlert(res.data.msg, "lightgrey")
         setNewTitle({})
         setArtEdit({})
-        setEdit(false)   
+        setEdit(false)
+        refreshArt()   
     }
 
     const remove = async () => {
         const res = await axios.post("/delete/gallery", {name: artEdit.title})
         setAlert(res.data.msg, "lightblue")
         setArtEdit({});
-        getArt();
+        refreshArt();
     }
 
     return (
