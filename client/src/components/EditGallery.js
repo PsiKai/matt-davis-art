@@ -22,9 +22,7 @@ const EditGallery = () => {
     }, [])
 
     const editArtwork = (e) => {
-        setEdit(false)
         var pic = e.target
-        setNewTitle({})
         setArtEdit({
             key: pic.id,
             src: pic.src,
@@ -32,12 +30,12 @@ const EditGallery = () => {
             alt: pic.name,
             description: pic.dataset.description
         })
-    }
-    
-    const change = () => {
-        setNewTitle(artEdit)
         setEdit(true)
     }
+
+    useEffect(() => {
+        setNewTitle(artEdit)
+    }, [artEdit])
 
     const setUpdate = (e) => {
         setNewTitle( {
@@ -77,7 +75,7 @@ const EditGallery = () => {
             timeout={400}
             unmountOnExit={true}
         >
-        <div>
+        <div className="edit-gallery">
             <h2>Edit or Delete Artwork from Gallery</h2>
             <div className="update-gallery">
                 {
@@ -103,52 +101,54 @@ const EditGallery = () => {
                 
             </div>
             <div className="update-gallery--grid">
-            <TransitionGroup className="update-gallery--wrapper">
-                <CSSTransition
-                    key={artEdit.key}
-                    timeout={300}
-                    classNames="fadein"
-                >
-                    <div className="update-gallery--form">
-                        <img 
-                            className="edit-image"
-                            name={artEdit && artEdit.name}
-                            alt={artEdit && artEdit.alt}
-                            src={artEdit && artEdit.src}
-                        ></img>
-                        <button onClick={change}>Update</button>
-                        <button onClick={remove}>Delete</button>
-                    </div>
-                </CSSTransition>
-            </TransitionGroup>
+                <TransitionGroup className="update-gallery--wrapper">
+                    <CSSTransition
+                        key={artEdit.key}
+                        timeout={300}
+                        classNames="fadein"
+                    >
+                    
+                        <div className="update-gallery--form">
+                            <img 
+                                className="edit-image"
+                                name={artEdit && artEdit.name}
+                                alt={artEdit && artEdit.alt}
+                                src={artEdit && artEdit.src}>
+                            </img>
+                        </div>
+                    </CSSTransition>
+                </TransitionGroup>
             
-            <CSSTransition
-                in={edit}
-                classNames="fadein"
-                timeout={300}
-                unmountOnExit={true}
-            >
-                <div className="update-gallery--update">
-                    <label htmlFor="update-title">New Title</label>
-                    <input 
-                        id="update-title" 
-                        name="title"
-                        type="text" 
-                        value={newTitle.title || ""}
-                        onChange={setUpdate} />
+                <CSSTransition
+                    in={edit}
+                    classNames="fadein"
+                    timeout={300}
+                    unmountOnExit={true}
+                >
+                        <div className="update-gallery--update">
+                                
+                            <label htmlFor="update-title">New Title</label>
+                            <input 
+                                id="update-title" 
+                                name="title"
+                                type="text" 
+                                value={newTitle.title || ""}
+                                onChange={setUpdate} />
 
-                    <label htmlFor="update-description">New Description</label>
-                    <textarea 
-                        id="update-description"
-                        name="description" 
-                        rows="3" 
-                        value={newTitle.description || ""} 
-                        onChange={setUpdate}
-                        />
+                            <label htmlFor="update-description">New Description</label>
+                            <textarea 
+                                id="update-description"
+                                name="description" 
+                                rows="5" 
+                                value={newTitle.description || ""} 
+                                onChange={setUpdate}
+                                />
 
-                    <button onClick={submitChanges}>Submit Changes</button>
-                </div>
-            </CSSTransition>
+                            <button onClick={submitChanges}>Submit Changes</button>
+                            <p style={{textAlign: "center"}}>--OR--</p>
+                            <button onClick={remove}>Delete</button>
+                        </div>
+                </CSSTransition>
             </div>
         </div>
         </CSSTransition>

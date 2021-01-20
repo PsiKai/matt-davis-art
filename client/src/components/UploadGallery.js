@@ -70,8 +70,9 @@ const UploadGallery = () => {
         }
         setForm({title: "", description: ""})
         setFile("");
-        setFile("Choose File")
+        // setFile("Choose File")
         setPreview("")
+        e.target.children[4].value = null
     }
 
     return (

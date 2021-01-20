@@ -87,7 +87,7 @@ const UpdateStock = () => {
             timeout={400}
             unmountOnExit={true}
         >
-        <div>
+        <div className="update-stock">
             <h2>Update Print Stock</h2>
             
             <div className="print-stock">
@@ -95,6 +95,7 @@ const UpdateStock = () => {
                     var bytes = Buffer.from(art.img.data)
                     return (
                     <div className="print-stock-item" key={i}>
+                        <h5>{art.title}</h5>
                         <img 
                             src={`data:${art.img.contentType};base64, ${bytes.toString('base64')}`} 
                             alt={art.name} 
@@ -150,8 +151,10 @@ const UpdateStock = () => {
                 </div>
             }  
             </div>
-        <button onClick={sendChanges}>Submit Changes</button>
-        <button onClick={deletePrints}>Delete Items</button>
+        <div className="print-stock--buttons">
+            <button onClick={sendChanges}>Submit Changes</button>
+            <button onClick={deletePrints}>Delete Items</button>
+        </div>
         </div>
         </CSSTransition>
     )     

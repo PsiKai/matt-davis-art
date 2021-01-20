@@ -2,7 +2,7 @@ import React, {useState, useContext, useEffect} from 'react'
 import AppContext from '../context/AppContext'
 import AlertContext from "../context/alertContext"
 import axios from 'axios'
-import { CSSTransition} from 'react-transition-group';
+import { CSSTransition, TransitionGroup} from 'react-transition-group';
 
 const UploadPrint = () => {
     const alertContext = useContext(AlertContext)
@@ -20,6 +20,7 @@ const UploadPrint = () => {
         stock: stock
     })
     const [file, setFile] = useState('');
+    const [preview, setPreview] = useState('')
 
     const {title} = form;
 
@@ -39,7 +40,13 @@ const UploadPrint = () => {
 
     // Sets image file to state
     const imgUpdate = (e) => {
-        setFile(e.target.files[0]);
+        if (e.target.files[0]) {
+            setFile(e.target.files[0])
+            setPreview(URL.createObjectURL(e.target.files[0]))
+        } else {
+            setPreview("")
+            setFile("")
+        }
     }
 
     // Sets the number of prints to state
@@ -53,7 +60,7 @@ const UploadPrint = () => {
     // Uploads new print to database
     const upload = async (e) => {
         e.preventDefault();
-
+        console.log(e.target.children);
         const formData = new FormData();
         formData.append("file", file)
         formData.append('title', title)
@@ -77,7 +84,9 @@ const UploadPrint = () => {
         })
         setForm({title: "", stock: stock})
         setFile("");
-        e.target.children[2].value = null;
+        // setFile("Choose File")
+        setPreview("")
+        e.target.children[4].value = null;
     }
 
     return (
@@ -87,8 +96,10 @@ const UploadPrint = () => {
             timeout={400}
             unmountOnExit={true}
         >
+        <div className="upload-prints">
+        <h2>Add Art to Prints</h2>
         <div className="upload-form prints">
-            <h2>Add Art to Prints</h2>
+            
             <form onSubmit={upload}>
 
                 <label htmlFor="title">Title</label>
@@ -97,42 +108,65 @@ const UploadPrint = () => {
                     type="text" 
                     name="title" 
                     onChange={formUpdate} 
-                    value={title}>
+                    value={title}
+                    required>
                 </input>
 
-                <input id="image" type="file" onChange={imgUpdate} />
-
-                <label htmlFor="fiveEight" className="stock">5 x 8</label>
-                <input 
-                    id="fiveEight" 
-                    type="number" 
-                    onChange={quantChange} 
-                    name="fiveEight" 
-                    value={stock.fiveEight} 
-                    className="stock" 
-                />
-
-                <label htmlFor="eightEleven" className="stock">8.5 x 11</label>
-                <input 
-                    id="eightEleven" 
-                    type="number" 
-                    onChange={quantChange} 
-                    name="eightEleven" 
-                    value={stock.eightEleven}  
-                    className="stock"
-                />
-
-                <label htmlFor="oneeightTwofour" className="stock">18 x 24</label>
-                <input 
-                    type="number" 
-                    onChange={quantChange} 
-                    name="oneeightTwofour" 
-                    value={stock.oneeightTwofour} 
-                    className="stock" 
-                />
-
-                <input type="submit" value="Submit" />
+                
+                {/* <ul>
+                    <li> */}
+                    <label htmlFor="prints-stock">Number of Prints</label>
+                    <div id="prints-stock" className="upload-prints--stock">
+                        <label htmlFor="fiveEight" className="stock">5 x 8:</label>
+                        <input 
+                            id="fiveEight" 
+                            type="number" 
+                            onChange={quantChange} 
+                            name="fiveEight" 
+                            value={stock.fiveEight} 
+                            className="stock" 
+                            min="0" 
+                        />
+                    {/* </li>
+                    <li> */}
+                        <label htmlFor="eightEleven" className="stock">8.5 x 11:</label>
+                        <input 
+                            id="eightEleven" 
+                            type="number" 
+                            onChange={quantChange} 
+                            name="eightEleven" 
+                            value={stock.eightEleven}  
+                            className="stock"
+                            min="0" 
+                        />
+                    {/* </li>
+                    <li> */}
+                        <label htmlFor="oneeightTwofour" className="stock">18 x 24:</label>
+                        <input 
+                            type="number" 
+                            onChange={quantChange} 
+                            name="oneeightTwofour" 
+                            value={stock.oneeightTwofour} 
+                            className="stock"
+                            min="0" 
+                        />
+                        </div>
+                        <input id="image" type="file" onChange={imgUpdate} required/>
+                    {/* </li>
+                </ul> */}
+                <button type="submit">Submit</button>
             </form>
+            <TransitionGroup className="img-preview">
+                <CSSTransition
+                    key={file.size}
+                    // in={preview.in}
+                    timeout={300}
+                    classNames="fadein"
+                >
+                    <img src={preview} alt={form.title} />
+                </CSSTransition>
+            </TransitionGroup>
+        </div>
         </div>
         </CSSTransition>
     )

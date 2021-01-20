@@ -32,7 +32,7 @@ const Edit = () => {
 
     return (
         <div className="page-content">
-            <Alerts />
+            
             <h1 className="page-header">Make Changes To Your Content</h1>
             <div className="nav-buttons">
                 <button 
@@ -41,14 +41,14 @@ const Edit = () => {
                     onClick={changePage}>Upload to Gallery
                 </button>
                 <button 
-                    style={page === "stock" ? style : null}
-                    name="stock" 
-                    onClick={changePage}>Update Print Stock
-                </button>
-                <button 
                     style={page === "print" ? style : null}
                     name="print" 
                     onClick={changePage}>Upload New Print
+                </button>
+                <button 
+                    style={page === "stock" ? style : null}
+                    name="stock" 
+                    onClick={changePage}>Update Print Stock
                 </button>
                 <button 
                     style={page === "edit" ? style : null}
@@ -58,16 +58,17 @@ const Edit = () => {
             </div>
             <hr />            
                 {page === "gallery" && <UploadGallery />}
-        
-                {page === "stock" && <UpdateStock />}
 
                 {page === "print" && <UploadPrint />}
+        
+                {page === "stock" && <UpdateStock />}
       
                 {page === "edit" && <EditGallery />}
            
                 
             
             <button className="logout" type="submit" onClick={signOut}>Logout</button>
+            <Alerts />
         </div>
     )
 }
