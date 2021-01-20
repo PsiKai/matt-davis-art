@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import createHistory from 'history/createBrowserHistory'
+import {Router, Switch, Route} from 'react-router-dom';
+import {createBrowserHistory} from 'history'
 import './App.css';
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 
@@ -24,7 +24,7 @@ import Login from "./pages/Login"
 if(localStorage.token) {
   setAuthToken(localStorage.token)
 }
-const history = createHistory();
+const history = createBrowserHistory();
 
 function App() {
 

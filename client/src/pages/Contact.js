@@ -7,7 +7,7 @@ const Contact = () => {
     const alertContext = useContext(AlertContext);
     const {setAlert} = alertContext;
 
-    const [email, setEmail] = useState({})
+    const [email, setEmail] = useState({address: "", name: "", subject: "", body: ""})
 
     const onChange = (e) => {
         setEmail({
@@ -20,7 +20,7 @@ const Contact = () => {
         e.preventDefault();
         const res = await axios.post("/contact", email)
         setAlert(res.data.msg, res.data.color)
-        setEmail({})
+        setEmail({address: "", name: "", subject: "", body: ""})
     }
 
     return (

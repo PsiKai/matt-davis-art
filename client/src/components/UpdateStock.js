@@ -12,6 +12,7 @@ const UpdateStock = () => {
     const {setAlert} = alertContext;
 
     const [stock, setStock] = useState([])
+    const [checked, setChecked] = useState([])
     const [modalOpen, setModalOpen] = useState(false)
 
     useEffect(() => {
@@ -52,7 +53,32 @@ const UpdateStock = () => {
         const res = await axios.post("/update/stock", stock);
         setAlert(res.data.msg, "lightgreen")
         getArt();
-    }        
+    }   
+    
+    // saves checked prints in state 
+    const stageDelete = (e) => {
+        if (e.target.checked) {
+            setChecked([...checked, e.target.value])
+        } else {
+            var items = [...checked]
+            const newArray = items.filter(item => {
+                return item !== e.target.value
+            })
+            setChecked(newArray)
+        }
+    }
+    
+    // deletes selected prints from database 
+    const deletePrints = async () => {
+        const res = await axios.post("/delete/prints", checked)
+        setAlert(res.data.msg, res.data.color)
+        var checkboxes = document.querySelectorAll("input[type='checkbox']");
+        checkboxes.forEach(box => {
+            if (box.checked) {box.checked = false}
+        })
+        setChecked([])
+        getArt();
+    }
     
     return (
         <CSSTransition
@@ -73,39 +99,49 @@ const UpdateStock = () => {
                             src={`data:${art.img.contentType};base64, ${bytes.toString('base64')}`} 
                             alt={art.name} 
                         />
-
-                        <label htmlFor="fiveEight" className="quantity">5 x 8</label>
-                        <input 
-                            id="fiveEight" 
-                            type="number" 
-                            onChange={update} 
-                            name={art.title} 
-                            className="quantity" 
-                            value={stock.length && stock[i].stock.fiveEight}
-                            min="0"
-                        />
-
-                        <label htmlFor="eightEleven" className="quantity">8.5 x 11</label>
-                        <input 
-                            id="eightEleven" 
-                            type="number" 
-                            onChange={update} 
-                            name={art.title} 
-                            className="quantity" 
-                            value={stock.length && stock[i].stock.eightEleven}
-                            min="0"
-                        />
-
-                        <label htmlFor="oneeightTwofour" className="quantity">18 x 24</label>
-                        <input 
-                            id="oneeightTwofour"
-                            type="number" 
-                            onChange={update} 
-                            name={art.title}  
-                            className="quantity"  
-                            value={stock.length && stock[i].stock.oneeightTwofour}
-                            min="0"
-                        />
+                        <ul>
+                            <li>
+                                <label htmlFor="fiveEight" className="quantity">5 x 8</label>
+                                <input 
+                                    id="fiveEight" 
+                                    type="number" 
+                                    onChange={update} 
+                                    name={art.title} 
+                                    className="quantity" 
+                                    value={stock.length && stock[i].stock.fiveEight}
+                                    min="0"
+                                />
+                            </li>
+                            <li>
+                                <label htmlFor="eightEleven" className="quantity">8.5 x 11</label>
+                                <input 
+                                    id="eightEleven" 
+                                    type="number" 
+                                    onChange={update} 
+                                    name={art.title} 
+                                    className="quantity" 
+                                    value={stock.length && stock[i].stock.eightEleven}
+                                    min="0"
+                                />
+                            </li>
+                            <li>
+                                <label htmlFor="oneeightTwofour" className="quantity">18 x 24</label>
+                                <input 
+                                    id="oneeightTwofour"
+                                    type="number" 
+                                    onChange={update} 
+                                    name={art.title}  
+                                    className="quantity"  
+                                    value={stock.length && stock[i].stock.oneeightTwofour}
+                                    min="0"
+                                />
+                            </li>
+                            <hr/>
+                            <li>
+                                <label htmlFor="delete-box">Delete?</label>
+                                <input value={art.title} type='checkbox' id="delete-box" onChange={stageDelete}/>
+                            </li>
+                        </ul>
                     </div>
                     )
                 }) :
@@ -115,6 +151,7 @@ const UpdateStock = () => {
             }  
             </div>
         <button onClick={sendChanges}>Submit Changes</button>
+        <button onClick={deletePrints}>Delete Items</button>
         </div>
         </CSSTransition>
     )     

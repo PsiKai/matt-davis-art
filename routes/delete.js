@@ -1,5 +1,4 @@
 const express = require("express");
-const multer = require("multer");
 const router = express.Router();
 
 var galleryModel = require("../models/gallery")
@@ -14,6 +13,17 @@ router.post("/gallery", (req, res) => {
         } else {
             console.log("Artwork deleted");
            res.json({msg: `${req.body.name} was deleted`})
+        }
+    })
+})
+
+router.post("/prints", (req, res) => {
+    printModel.deleteMany({title: [...req.body]}, (err) => {
+        if (err) {
+            console.log(err);
+            res.json({msg: `There was a problem deleting the prints`, color: "lightpink"})
+        } else {
+            res.json({msg: `Prints ${req.body.toString()} were successfully deleted`, color: "aliceblue"})
         }
     })
 })

@@ -56,7 +56,7 @@ const EditGallery = () => {
                 description: newTitle.description
             }
         }
-        const res = await axios.post("update/gallery", data)
+        const res = await axios.post("/update/gallery", data)
         setAlert(res.data.msg, "lightgrey")
         setNewTitle({})
         setArtEdit({})

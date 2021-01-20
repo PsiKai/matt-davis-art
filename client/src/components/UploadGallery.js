@@ -2,7 +2,7 @@ import React, {useState, useContext, useEffect} from 'react'
 import AppContext from "../context/AppContext"
 import AlertContext from "../context/alertContext"
 import axios from 'axios'
-import { CSSTransition} from 'react-transition-group';
+import { CSSTransition, TransitionGroup} from 'react-transition-group';
 
 const UploadGallery = () => {
     const appContext = useContext(AppContext);
@@ -14,8 +14,9 @@ const UploadGallery = () => {
         title: "",
         description: ""
     })
-    const [file, setFile] = useState('');
+    const [preview, setPreview] = useState("");
     const [modalOpen, setModalOpen] = useState(false)
+    const [file, setFile] = useState("")
 
     const {title, description} = form;
 
@@ -33,7 +34,13 @@ const UploadGallery = () => {
 
     // Sets image file to state
     const imgUpdate = (e) => {
-        setFile(e.target.files[0]);
+        if (e.target.files[0]) {
+            setFile(e.target.files[0])
+            setPreview(URL.createObjectURL(e.target.files[0]))
+        } else {
+            setPreview("")
+            setFile("")
+        }
     }
 
     // Uploads image to the database
@@ -64,6 +71,7 @@ const UploadGallery = () => {
         setForm({title: "", description: ""})
         setFile("");
         setFile("Choose File")
+        setPreview("")
     }
 
     return (
@@ -73,9 +81,10 @@ const UploadGallery = () => {
             timeout={400}
             unmountOnExit={true}
         >
-         
-        <div className="upload-form">
+        <div className="upload-gallery">
             <h2>Add Art to Gallery</h2>
+            <div className="upload-form">
+            
             <form onSubmit={upload}>
 
                 <label htmlFor="gallery-title">Title</label>
@@ -84,7 +93,9 @@ const UploadGallery = () => {
                     type="text" 
                     name="title" 
                     onChange={formUpdate} 
-                    value={title}>
+                    value={title}
+                    required>
+                    
                 </input>
 
                 <label htmlFor="title">Description</label>
@@ -92,15 +103,32 @@ const UploadGallery = () => {
                     id="description" 
                     type="text" 
                     name="description" 
-                    rows="3"
+                    rows="9"
                     onChange={formUpdate}
-                    value={description}>
+                    value={description}
+                    required>
                 </textarea>
-
-                <input id="gallery-image" type="file" onChange={imgUpdate} />
-
+                
+                <input 
+                    id="gallery-image" 
+                    type="file" 
+                    onChange={imgUpdate}
+                    required />
+            
                 <button type="submit">Submit</button>
+                
             </form>
+            <TransitionGroup className="img-preview">
+                <CSSTransition
+                    key={file.size}
+                    // in={preview.in}
+                    timeout={300}
+                    classNames="fadein"
+                >
+                    <img src={preview} alt={form.title} />
+                </CSSTransition>
+            </TransitionGroup>
+        </div>
         </div>
         </CSSTransition>
 

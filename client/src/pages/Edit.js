@@ -13,19 +13,17 @@ const Edit = () => {
     const appContext = useContext(AppContext);
     const {gallery, getArt} = appContext
 
-    const [page, setPage] = useState('')
+    const [page, setPage] = useState('gallery')
 
     useEffect(() => {
         !gallery && getArt();
         // eslint-disable-next-line 
     }, [])
 
+    const style = {outline: "-webkit-focus-ring-color auto 1px"}
+
     const changePage = (e) => {
-        // setModalOpen(false)
         setPage(e.target.name)
-        // setTimeout(() => {
-        //     setModalOpen(true)
-        // }, 500)
     }
 
     const signOut = () => {
@@ -35,14 +33,30 @@ const Edit = () => {
     return (
         <div className="page-content">
             <Alerts />
-            <h1 className="page-header">Update Stock, Add Artwork</h1>
+            <h1 className="page-header">Make Changes To Your Content</h1>
             <div className="nav-buttons">
-                <button name="gallery" onClick={changePage}>Upload to Gallery</button>
-                <button name="stock" onClick={changePage}>Update Print Stock</button>
-                <button name="print" onClick={changePage}>Upload New Print</button>
-                <button name="edit" onClick={changePage}>Edit/Delete</button>
+                <button 
+                    style={page === "gallery" ? style : null}
+                    name="gallery" 
+                    onClick={changePage}>Upload to Gallery
+                </button>
+                <button 
+                    style={page === "stock" ? style : null}
+                    name="stock" 
+                    onClick={changePage}>Update Print Stock
+                </button>
+                <button 
+                    style={page === "print" ? style : null}
+                    name="print" 
+                    onClick={changePage}>Upload New Print
+                </button>
+                <button 
+                    style={page === "edit" ? style : null}
+                    name="edit" 
+                    onClick={changePage}>Edit/Delete
+                </button>
             </div>
-            
+            <hr />            
                 {page === "gallery" && <UploadGallery />}
         
                 {page === "stock" && <UpdateStock />}
