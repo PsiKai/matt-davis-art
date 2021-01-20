@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 var galleryImageSchema = new mongoose.Schema({
     title: String,
+    medium: String,
     description: String,
     img: 
     {

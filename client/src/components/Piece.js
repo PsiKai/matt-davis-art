@@ -24,6 +24,7 @@ const Piece = (props) => {
                 </img>
                 <div className="plaque">
                     <h3>{props.title}</h3>
+                    <h6>{props.medium}</h6>
                     <p className="description">{props.description}</p>
                 </div>
             </div> 

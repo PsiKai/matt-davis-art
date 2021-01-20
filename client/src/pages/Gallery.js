@@ -25,6 +25,7 @@ const Gallery = () => {
                     alt={piece.name} 
                     src={piece.img}
                     title={piece.title}
+                    medium={piece.medium}
                     description={piece.description} />
                 })
                 : 

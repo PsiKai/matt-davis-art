@@ -7,6 +7,7 @@ var galleryModel = require("../models/gallery")
 var printModel = require("../models/prints")
 
 router.post("/gallery", (req, res) => {
+    console.log(req.body);
     if (req.files === null) {
         return res.status(400).json({msg: "No file was received"})
     }
@@ -20,6 +21,7 @@ router.post("/gallery", (req, res) => {
         }
         var imgObj = {
             title: req.body.title,
+            medium: req.body.medium,
             description: req.body.description,
             img: {
                 data: fs.readFileSync(path.join(__dirname + "/uploads/" + name.replace(/ /g, "-").toLowerCase())),

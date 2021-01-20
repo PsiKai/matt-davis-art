@@ -27,8 +27,9 @@ router.post("/gallery", (req, res) => {
     var old = req.body.old.title
     var newTit = req.body.new.title
     var newDesc = req.body.new.description
+    var newMed = req.body.new.medium
 
-    galleryModel.updateOne({title: old}, {title: newTit, description: newDesc}, err => {
+    galleryModel.updateOne({title: old}, {title: newTit, medium: newMed, description: newDesc}, err => {
         if (err) {
             res.status(500).send("Error updating item ", old)
             console.log("Error updating item ", old, err);

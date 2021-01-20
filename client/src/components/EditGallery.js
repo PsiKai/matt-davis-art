@@ -28,6 +28,7 @@ const EditGallery = () => {
             src: pic.src,
             title: pic.name,
             alt: pic.name,
+            medium: pic.medium,
             description: pic.dataset.description
         })
         setEdit(true)
@@ -51,6 +52,7 @@ const EditGallery = () => {
             },
             new: {
                 title: newTitle.title,
+                medium: newTitle.medium,
                 description: newTitle.description
             }
         }
@@ -134,6 +136,14 @@ const EditGallery = () => {
                                 name="title"
                                 type="text" 
                                 value={newTitle.title || ""}
+                                onChange={setUpdate} />
+
+                            <label htmlFor="update-medium">New Medium</label>
+                            <input 
+                                id="update-medium" 
+                                name="medium"
+                                type="text" 
+                                value={newTitle.medium || ""}
                                 onChange={setUpdate} />
 
                             <label htmlFor="update-description">New Description</label>

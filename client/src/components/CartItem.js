@@ -54,8 +54,14 @@ const CartItem = ({quantity, title, src, stock, id}) => {
 
     var bytes = Buffer.from(src.data)
     return (
-        <CSSTransition unmountOnExit={true} key={id} in={fade} classNames="fadein" timeout={500} >
-           <div className="cart-item" style={{transitionDelay: `${id * 100}ms`}}>
+        <CSSTransition 
+            unmountOnExit={true} 
+            // key={id} 
+            in={fade} 
+            classNames="fadein" 
+            timeout={500} 
+        >
+           <div className="cart-item" style={{transitionDelay: `${(id + 1) * 100}ms`}}>
                 <img src={`data:${src.contentType};base64, ${bytes.toString('base64')}`} 
                     alt={title} />
                 <div>

@@ -7,6 +7,12 @@
   --medium: #2c365d;
   --dark: #272e4f;
 }
+/* :root {
+  --white: #f2f2f0;
+  --light: #ff5e3a;
+  --medium: #2c365d;
+  --dark: #272e4f;
+} */
 
 ::-webkit-scrollbar {
   width: 5px;
@@ -546,6 +552,14 @@ header li {
   border-radius: 4px;
   font-family: sans-serif;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+.plaque h3 {
+  margin-bottom: 0.5rem;
+}
+
+.plaque h6 {
+  margin-top: 0;
 }
 
 .art-division {

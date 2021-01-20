@@ -12,13 +12,14 @@ const UploadGallery = () => {
 
     const [form, setForm] = useState({
         title: "",
+        medium: "",
         description: ""
     })
     const [preview, setPreview] = useState("");
     const [modalOpen, setModalOpen] = useState(false)
     const [file, setFile] = useState("")
 
-    const {title, description} = form;
+    const {title, medium, description} = form;
 
     useEffect(() => {
         setModalOpen(true)
@@ -68,7 +69,7 @@ const UploadGallery = () => {
             //     setAlert(res.data.msg, "lightred");
             // }
         }
-        setForm({title: "", description: ""})
+        setForm({title: "", medium: "", description: ""})
         setFile("");
         // setFile("Choose File")
         setPreview("")
@@ -96,7 +97,16 @@ const UploadGallery = () => {
                     onChange={formUpdate} 
                     value={title}
                     required>
-                    
+                </input>
+
+                <label htmlFor="gallery-medium">Medium</label>
+                <input 
+                    id="gallery-medium" 
+                    type="text" 
+                    name="medium" 
+                    onChange={formUpdate} 
+                    value={medium}
+                    required>
                 </input>
 
                 <label htmlFor="title">Description</label>
