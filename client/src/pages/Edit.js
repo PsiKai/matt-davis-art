@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, Fragment } from 'react'
 import AppContext from "../context/AppContext"
 import AuthContext from "../context/authContext"
 import UploadGallery from '../components/UploadGallery'
@@ -7,13 +7,19 @@ import UploadPrint from "../components/UploadPrint"
 import EditGallery from "../components/EditGallery"
 import Alerts from "../components/Alerts"
 
+import {CSSTransition, TransitionGroup} from "react-transition-group";
+import {Router, Switch, Route, Link} from 'react-router-dom';
+import {createBrowserHistory} from 'history'
+
+const history = createBrowserHistory();
+
 
 const Edit = () => {
     const authContext = useContext(AuthContext)
     const appContext = useContext(AppContext);
     const {gallery, getArt} = appContext
 
-    const [page, setPage] = useState('gallery')
+    const [page, setPage] = useState(history.location.pathname)
 
     useEffect(() => {
         !gallery && getArt();
@@ -31,45 +37,65 @@ const Edit = () => {
     }
 
     return (
-        <div className="page-content">
-            
-            <h1 className="page-header">Make Changes To Your Content</h1>
-            <div className="nav-buttons">
-                <button 
-                    style={page === "gallery" ? style : null}
-                    name="gallery" 
-                    onClick={changePage}>Upload to Gallery
-                </button>
-                <button 
-                    style={page === "print" ? style : null}
-                    name="print" 
-                    onClick={changePage}>Upload New Print
-                </button>
-                <button 
-                    style={page === "stock" ? style : null}
-                    name="stock" 
-                    onClick={changePage}>Update Print Stock
-                </button>
-                <button 
-                    style={page === "edit" ? style : null}
-                    name="edit" 
-                    onClick={changePage}>Edit/Delete
-                </button>
-            </div>
-            <hr />            
-                {page === "gallery" && <UploadGallery />}
+        <Router history={history}>
+            <Route render={({location}) => (
+                <div className="page-content">
 
-                {page === "print" && <UploadPrint />}
-        
-                {page === "stock" && <UpdateStock />}
-      
-                {page === "edit" && <EditGallery />}
-           
-                
-            
-            <button className="logout" type="submit" onClick={signOut}>Logout</button>
-            <Alerts />
-        </div>
+                    <h1 className="page-header">Make Changes To Your Content</h1>
+                    <div className="nav-buttons">
+                        <Link to="/uploadgallery">
+                            <button 
+                                style={page === "/uploadgallery" ? style : null}
+                                name="/uploadgallery" 
+                                onClick={changePage}>Upload to Gallery
+                            </button>
+                        </Link>
+                        <Link to="/uploadprint">
+                            <button 
+                                style={page === "/uploadprint" ? style : null}
+                                name="/uploadprint" 
+                                onClick={changePage}>Upload New Print
+                            </button>
+                        </Link>
+                        <Link to="/updatestock">
+                            <button 
+                                style={page === "/updatestock" ? style : null}
+                                name="/updatestock" 
+                                onClick={changePage}>Update Print Stock
+                            </button>
+                        </Link>
+                        <Link to="/editgallery">
+                            <button 
+                                style={page === "/editgallery" ? style : null}
+                                name="/editgallery" 
+                                onClick={changePage}>Edit/Delete
+                            </button>
+                        </Link>
+                    </div>
+                    <hr />
+                    <TransitionGroup>
+                        <CSSTransition 
+                            key={location.key} 
+                            classNames="slide" 
+                            timeout={200}
+                        >
+                            <Switch location={location}>
+                                <Route exact path="/uploadgallery" component={UploadGallery}/>
+                                <Route exact path="/uploadprint" component={UploadPrint}/>
+                                <Route exact path="/updatestock" component={UpdateStock}/>
+                                <Route exact path="/editgallery" component={EditGallery}/>
+                            </Switch>
+                        </CSSTransition>
+                    </TransitionGroup>     
+                        
+                    <button className="logout" type="submit" onClick={signOut}>
+                        Logout
+                    </button>
+                    
+                    <Alerts />
+                </div>
+            )} />
+      </Router>
     )
 }
 

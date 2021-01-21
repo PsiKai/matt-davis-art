@@ -16,7 +16,7 @@ const Gallery = () => {
     return (
         <div className="page-content">
             <h1 className="page-header">Gallery</h1>
-            <h2>All of my artwork</h2>
+            {/* <h2>All of my artwork</h2> */}
             
             {gallery ? gallery.map((piece, i) => {
                 return <Piece 
@@ -29,12 +29,12 @@ const Gallery = () => {
                     description={piece.description} />
                 })
                 : 
-                <Fragment>
+                <div>
                     <hr className="art-division" />
                     <div className="progress">
                         <CircularProgress color="inherit" />
                     </div>
-                </Fragment>
+                </div>
                 
             }
         </div>

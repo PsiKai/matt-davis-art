@@ -6,7 +6,7 @@ import AppContext from "../context/AppContext"
 const Modal = ({setModalOpen, total, shipData, cart}) => {
     const appContext = useContext(AppContext)
 
-    const {add1, add2, city, state, zip, email} = shipData;
+    const {add1, add2, city, state, zip, email, name, name2} = shipData;
 
     const PayPalButton = window.paypal.Buttons.driver("react", {React, ReactDOM})
 
@@ -51,17 +51,26 @@ const Modal = ({setModalOpen, total, shipData, cart}) => {
         <div className="backdrop" onClick={hide}>
             <div className="cart-modal">
                 <h2>Complete your purchase</h2>
-                <div className="shipping-div">
-                    <h4>Shipping Address:</h4>
-                    <p>{add1}</p>
-                    <p>{add2}</p>
-                    <span>{city},</span>
-                    <span> {state}</span>
-                    <span> {zip}</span>
-                    <p>{email}</p>
+                <div className="cart-modal__grid">
+                <div className="cart-modal--buyer">
+                    <h4>Send Confirmation To:</h4>
+                    <p>{name2} <br/>
+                    {email}</p>
                 </div>
-                
-                <h4>Total: ${total}</h4>
+                <div className="cart-modal--shipping">
+                    <h4>Shipping Address:</h4>
+                    <p>
+                        {name} <br/>
+                        {add1} <br/>
+                        {add2}
+                        {add2 !== "" && <br/>}
+                        <span>{city},</span>
+                        <span> {state}</span>
+                        <span> {zip}</span>
+                    </p>
+                </div>
+                </div>
+                <h2>Total: ${total}</h2>
                 <PayPalButton
                     createOrder={(data, actions) => createOrder(data, actions)}
                     onApprove={(data, actions) => onApprove(data, actions)}

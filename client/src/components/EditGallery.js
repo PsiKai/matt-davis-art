@@ -14,12 +14,7 @@ const EditGallery = () => {
 
     const [artEdit, setArtEdit] = useState({})
     const [newTitle, setNewTitle] = useState({})
-    const [modalOpen, setModalOpen] = useState(false)
     const [edit, setEdit] = useState(false)
-
-    useEffect(() => {
-        setModalOpen(true)
-    }, [])
 
     const editArtwork = (e) => {
         var pic = e.target
@@ -28,7 +23,7 @@ const EditGallery = () => {
             src: pic.src,
             title: pic.name,
             alt: pic.name,
-            medium: pic.medium,
+            medium: pic.dataset.medium,
             description: pic.dataset.description
         })
         setEdit(true)
@@ -72,12 +67,6 @@ const EditGallery = () => {
     }
 
     return (
-        <CSSTransition
-            in={modalOpen}
-            classNames="fadein" 
-            timeout={400}
-            unmountOnExit={true}
-        >
         <div className="edit-gallery">
             <h2>Edit or Delete Artwork from Gallery</h2>
             <div className="update-gallery">
@@ -93,7 +82,8 @@ const EditGallery = () => {
                         alt={item.title}
                         src={`data:${item.img.contentType};base64, ${bytes.toString('base64')}`}
                         onClick={editArtwork}
-                        data-description={item.description}>
+                        data-description={item.description}
+                        data-medium={item.medium}>
                     </img>)
                     
                 }) : 
@@ -107,7 +97,7 @@ const EditGallery = () => {
                 <TransitionGroup className="update-gallery--wrapper">
                     <CSSTransition
                         key={artEdit.key}
-                        timeout={300}
+                        timeout={400}
                         classNames="fadein"
                     >
                     
@@ -125,7 +115,7 @@ const EditGallery = () => {
                 <CSSTransition
                     in={edit}
                     classNames="fadein"
-                    timeout={300}
+                    timeout={200}
                     unmountOnExit={true}
                 >
                         <div className="update-gallery--update">
@@ -162,7 +152,6 @@ const EditGallery = () => {
                 </CSSTransition>
             </div>
         </div>
-        </CSSTransition>
     )
 }
 

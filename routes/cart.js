@@ -138,8 +138,8 @@ router.post("/purchase", (req, res) => {
             console.log("Emails sent", result1, result2);
             res.json({
                 code: 200,
-                heading: "Thank you for your purchase", 
-                msg: `Purchase Completed. Payment received for $${total}. Please contact me if you don't receive a confirmation email`
+                heading: "Thank you for your purchase!", 
+                msg: `Payment was received for $${total}. Please contact me if you don't receive a confirmation email.`
             })
         })
         .catch(err => {

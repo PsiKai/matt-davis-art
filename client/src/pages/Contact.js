@@ -26,8 +26,8 @@ const Contact = () => {
     return (
         <div className="page-content">
             <div className="contact-img"></div>
-            <h1 className="page-header">Contact Me</h1>
-            <h2>I'd love to hear from you.</h2>
+            <h1 className="page-header">I'd love to hear from you!</h1>
+            {/* <h2>I'd love to hear from you.</h2> */}
             <p>Drop me a line on my socials, or just send me an email directly</p>
 
             <a href="https://www.instagram.com/mattdavisart5280/"><i className="fab fa-instagram fa-2x"></i></a>

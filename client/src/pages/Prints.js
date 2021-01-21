@@ -31,22 +31,22 @@ const Prints = () => {
     }
 
     const hideModal = (e) => {
-        if (e.target.classList.contains("backdrop")) {
+        var name = e.target.classList
+        if (name.contains("backdrop") || name.contains("close-modal") || name.contains("fas")) {
             setModalOpen(false)
             setImg({})
         }
     }
 
     const addToCart = (e) => {
-        const info = e.target.parentNode.children
-
+        const info = e.target.parentNode.children[3].children
         const item = {
             quantity: {
-                fiveEight: info[3].value > 0 ? info[3].value : 0,
-                eightEleven: info[5].value > 0 ? info[5].value : 0,
-                oneeightTwofour: info[7].value > 0 ? info[7].value : 0
+                fiveEight: info[0].children[1].value > 0 ? info[0].children[1].value : 0,
+                eightEleven: info[1].children[1].value > 0 ? info[1].children[1].value : 0,
+                oneeightTwofour: info[2].children[1].value > 0 ? info[2].children[1].value : 0
             },
-            id: info[1].name
+            id: e.target.parentNode.children[2].name
         }
         if (item.quantity.fiveEight > 0 || 
             item.quantity.eightEleven > 0 || 
@@ -60,7 +60,7 @@ const Prints = () => {
     return (
         <div className="page-content">
             <h1 className="page-header">Prints</h1>
-            <h2>Pick out any art</h2>
+            {/* <h2>Pick out any art</h2> */}
             <div className="prints-flexbox">
             {prints ? prints.map((print, index) => {
                 return <Print
@@ -84,46 +84,53 @@ const Prints = () => {
             <CSSTransition
                 in={modalOpen} 
                 classNames="fadein" 
-                timeout={500}
+                timeout={200}
                 unmountOnExit={true}
             >
             <div className="backdrop" onClick={hideModal}>
                 <div className="print-modal">
-                    <h3>{img.title}</h3>
+                    <div className="close-modal" onClick={hideModal}><i className="fas fa-times fa-2x"></i></div>
+                   
+                    <h2>{img.title}</h2>
                     <img src={img.src}
                         alt={img.title}
                         name={img.name}>
                     </img>
-
-                    <label htmlFor="fiveEight" className="quantity">5 x 8</label>
-                    <input 
-                        id="fiveEight" 
-                        type="number" 
-                        name="fiveEight" 
-                        className="quantity" 
-                        min="0"
-                        max={img._5x8}
-                    />
-
-                    <label htmlFor="eightEleven" className="quantity">8.5 x 11</label>
-                    <input 
-                        id="eightEleven" 
-                        type="number" 
-                        name="eightEleven"   
-                        className="quantity" 
-                        min="0"
-                        max={img._8x11}
-                    />
-
-                    <label htmlFor="oneeightTwofour" className="quantity">18 x 24</label>
-                    <input 
-                        id="oneeightTwofour" 
-                        type="number" 
-                        name="oneeightTwofour" 
-                        className="quantity" 
-                        min="0"
-                        max={img._18x24}
-                    />
+                    <div className="print-modal__flex">
+                        <div>
+                            <label htmlFor="fiveEight" className="quantity">5 x 8:</label>
+                            <input 
+                                id="fiveEight" 
+                                type="number" 
+                                name="fiveEight" 
+                                className="quantity" 
+                                min="0"
+                                max={img._5x8}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="eightEleven" className="quantity">8.5 x 11:</label>
+                            <input 
+                                id="eightEleven" 
+                                type="number" 
+                                name="eightEleven"   
+                                className="quantity" 
+                                min="0"
+                                max={img._8x11}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="oneeightTwofour" className="quantity">18 x 24:</label>
+                            <input 
+                                id="oneeightTwofour" 
+                                type="number" 
+                                name="oneeightTwofour" 
+                                className="quantity" 
+                                min="0"
+                                max={img._18x24}
+                            />
+                        </div>
+                    </div>
 
                     <button onClick={addToCart}>Add To Cart</button>
                 </div>

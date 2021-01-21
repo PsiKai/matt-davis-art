@@ -3,7 +3,6 @@ import AppContext from "../context/AppContext"
 import AlertContext from "../context/alertContext"
 import CircularProgress from "@material-ui/core/CircularProgress"
 import axios from "axios"
-import { CSSTransition} from 'react-transition-group';
 
 const UpdateStock = () => {
     const appContext = useContext(AppContext)
@@ -13,12 +12,8 @@ const UpdateStock = () => {
 
     const [stock, setStock] = useState([])
     const [checked, setChecked] = useState([])
-    const [modalOpen, setModalOpen] = useState(false)
 
-    useEffect(() => {
-        setModalOpen(true)
-        // eslint-disable-next-line 
-    }, [])
+
 
     useEffect(() => {
         prints && prints.forEach(print => {
@@ -81,12 +76,6 @@ const UpdateStock = () => {
     }
     
     return (
-        <CSSTransition
-            in={modalOpen} 
-            classNames="fadein" 
-            timeout={400}
-            unmountOnExit={true}
-        >
         <div className="update-stock">
             <h2>Update Print Stock</h2>
             
@@ -156,7 +145,6 @@ const UpdateStock = () => {
             <button onClick={deletePrints}>Delete Items</button>
         </div>
         </div>
-        </CSSTransition>
     )     
     
 }

@@ -40,7 +40,7 @@ function App() {
               <CSSTransition 
                 key={location.key} 
                 classNames="slide" 
-                timeout={300}>
+                timeout={200}>
                 <Fragment>
                   <Switch location={location}>
                     <Route exact path="/about" component={About} />          
