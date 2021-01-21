@@ -17,6 +17,7 @@ const CartItem = ({quantity, title, src, stock, id}) => {
 
     const makeChanges = (e) => {
         e.preventDefault()
+        
         var savedCart = JSON.parse(localStorage.getItem("cart"));
         let updatedQuan = []
         savedCart.find((item) => {
@@ -25,7 +26,8 @@ const CartItem = ({quantity, title, src, stock, id}) => {
                 if (item.quantity.fiveEight > 0 || item.quantity.eightEleven > 0 || item.quantity.oneeightTwofour > 0) {
                     updatedQuan = [...updatedQuan, item]
                 }
-            } else {
+            } 
+            else {
                 updatedQuan = [...updatedQuan, item]
             }
             return null
@@ -35,8 +37,9 @@ const CartItem = ({quantity, title, src, stock, id}) => {
         } else {
             localStorage.removeItem("cart")
         }
-        appContext.reloadCart()
+        
         setEdit(false)
+        appContext.reloadCart()
     }
 
     const updateQuantity = (e) => {

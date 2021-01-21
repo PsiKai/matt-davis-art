@@ -37,7 +37,8 @@ const Modal = ({setModalOpen, total, shipData, cart}) => {
     }
 
     const hide = (e) => {
-        e.target.classList.contains("backdrop") && setModalOpen(false)
+        var el = e.target.classList
+        if (el.contains("backdrop") || el.contains("close-modal") || el.contains("fas")) setModalOpen(false)
     }
 
 
@@ -50,6 +51,7 @@ const Modal = ({setModalOpen, total, shipData, cart}) => {
         <div>
         <div className="backdrop" onClick={hide}>
             <div className="cart-modal">
+            <div className="close-modal" onClick={hide}><i className="fas fa-times fa-2x"></i></div>
                 <h2>Complete your purchase</h2>
                 <div className="cart-modal__grid">
                 <div className="cart-modal--buyer">

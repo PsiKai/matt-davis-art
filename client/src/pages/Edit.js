@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, Fragment } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import AppContext from "../context/AppContext"
 import AuthContext from "../context/authContext"
 import UploadGallery from '../components/UploadGallery'

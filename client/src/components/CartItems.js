@@ -48,7 +48,7 @@ const CartItems = () => {
                     })
                     return (
                         <CartItem 
-                            key={i}
+                            key={id}
                             id={i}
                             src={newSrc[0].img}
                             title={item.title}

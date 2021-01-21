@@ -288,11 +288,12 @@ header li {
 
 .cart-item {
   background: var(--white);
+  height: 300px;
   padding: 1rem;
   opacity: 1;
   display: flex;
-  width: 80%;
-  justify-content: center;
+  width: 60%;
+  justify-content: space-evenly;
   margin: 1rem 0;
   border-radius: 8px;
   box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3);
@@ -303,10 +304,19 @@ header li {
   text-align: right;
 }
 
+.cart-item h2 {
+  text-align: center;
+}
+
+.cart-item p {
+  margin: 0.5rem;
+}
+
 .cart-item img {
   height: 250px;
   width: 250px;
   object-fit: cover;
+  align-self: center;
 }
 
 .cart-division {
@@ -400,7 +410,7 @@ header li {
   padding: 2rem;
   text-align: center;
   border-radius: 8px;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
 .paypal {
@@ -641,9 +651,10 @@ header li {
 .plaque {
   background: whitesmoke;
   color: var(--dark);
-  padding: 0 1rem;
+  padding: 0 0.5rem;
   text-align: left;
   margin: 1rem 3% 0 50%;
+  width: 300px;
   border: 3px outset white;
   border-radius: 4px;
   font-family: sans-serif;
@@ -651,11 +662,18 @@ header li {
 }
 
 .plaque h3 {
-  margin-bottom: 0.5rem;
+  margin: 0.5rem 0 0.25rem;
 }
 
-.plaque h6 {
+.plaque-medium {
   margin-top: 0;
+  font-size: 0.9rem;
+}
+
+.plaque-description {
+  white-space: pre-line;
+  font-size: 00.8rem;
+  margin-bottom: 0.5rem;
 }
 
 .art-division {
@@ -675,10 +693,6 @@ header li {
   font-size: 1.5rem;
   padding: 0 0.23rem 0 0.28rem;
   background: url(./images/brushed-alum.png) var(--white);
-}
-
-.description {
-  white-space: pre-line;
 }
 
 /* Edit Page Styles  */
@@ -1120,8 +1134,8 @@ footer {
 }
 
 .slide-enter.slide-enter-active ~ footer {
-  opacity: 1;
-  transition: opacity 100ms ease-out 200ms;
+  opacity: 0;
+  /* transition: opacity 100ms ease-out 200ms; */
 }
 
 .slide-enter-done {
@@ -1131,7 +1145,7 @@ footer {
 
 .slide-enter-done ~ footer {
   opacity: 1;
-  /* transition: opacity 400ms ease 400; */
+  transition: opacity 400ms ease;
 }
 
 .slide-exit {
@@ -1142,7 +1156,7 @@ footer {
 }
 
 .slide-exit ~ footer {
-  opacity: 1;
+  opacity: 0;
   /* transition: opacity 100ms ease; */
 }
 
@@ -1156,7 +1170,7 @@ footer {
 
 .slide-exit.slide-exit-active ~ footer {
   opacity: 0;
-  transition: opacity 100ms ease-in;
+  /* transition: opacity 100ms ease-in; */
 }
 
 .slide-exit-done {
@@ -1168,27 +1182,4 @@ footer {
 
 .slide-exit-done ~ footer {
   opacity: 0;
-}
-
-/* basic transition in  */
-/* .fadeup-appear {
-  opacity: 0;
-}
-
-.fadeup-appear.fadeup-appear-active {
-  opacity: 1;
-  transition: opacity 300ms ease;
-} */
-
-.fadeup-enter {
-  opacity: 0;
-}
-
-.fadeup-enter.fadeup-enter-active {
-  opacity: 1;
-  transition: opacity 300ms ease;
-}
-
-.fadeup-enter-done {
-  opacity: 1;
 }

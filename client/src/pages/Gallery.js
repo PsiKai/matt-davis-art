@@ -1,7 +1,8 @@
-import React, {useContext, useEffect, Fragment} from 'react';
+import React, {useContext, useEffect} from 'react';
 import AppContext from '../context/AppContext'
 import Piece from "../components/Piece";
 import CircularProgress from "@material-ui/core/CircularProgress"
+// import Print from "../components/Print"
 
 
 const Gallery = () => {
@@ -10,7 +11,7 @@ const Gallery = () => {
 
     useEffect(() => {
         !gallery && getArt();
-        //eslint-disable-next-line
+        // eslint-disable-next-line
     }, [])
 
     return (
@@ -20,7 +21,7 @@ const Gallery = () => {
             
             {gallery ? gallery.map((piece, i) => {
                 return <Piece 
-                    key={i} 
+                    key={piece._id} 
                     id={i}
                     alt={piece.name} 
                     src={piece.img}
@@ -37,6 +38,22 @@ const Gallery = () => {
                 </div>
                 
             }
+            {/* {prints ? prints.map((print, index) => {
+                return <Piece
+                            key={index}
+                            id={index}
+                            src={print.img}
+                            stock={print.stock}
+                            title={print.title}
+                            sku={print._id}
+                            // open={openModal}
+                        />
+                })
+                : 
+                <div className="progress">
+                    <CircularProgress color="inherit"/>
+                </div>
+            } */}
         </div>
     )
 }

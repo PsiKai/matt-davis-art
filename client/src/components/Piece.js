@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {CSSTransition} from 'react-transition-group'
 
-const Piece = (props) => {
+const Piece = ({src, name, title, medium, description, id}) => {
     const [fade, setFade] = useState(false)
 
     useEffect(() => {
@@ -9,27 +9,28 @@ const Piece = (props) => {
     }, [])
 
 
-    var bytes = Buffer.from(props.src.data)
+    var bytes = Buffer.from(src.data)
     return (
         <CSSTransition 
             in={fade} 
-            classNames="fadeup" 
-            timeout={300}
+            classNames="fadein" 
+            timeout={400}
+            unmountOnExit={true}
         >
-        <div style={{transitionDelay: `${props.id * 100}ms`}}>
+        <div style={{transitionDelay: `${id * 50}ms`}}>
         
             
             <hr className="art-division" />
            <div className="gallery-piece">
                 
                 <img 
-                    src={`data:${props.src.contentType};base64, ${bytes.toString('base64')}`} 
-                    alt={props.name}>
+                    src={`data:${src.contentType};base64, ${bytes.toString('base64')}`} 
+                    alt={name}>
                 </img>
                 <div className="plaque">
-                    <h3>{props.title}</h3>
-                    <h6>{props.medium}</h6>
-                    <p className="description">{props.description}</p>
+                    <h3><em>{title}</em></h3>
+                    <p className="plaque-medium">{medium}</p>
+                    <p className="plaque-description">{description}</p>
                 </div>
             </div> 
             
