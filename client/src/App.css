@@ -301,35 +301,35 @@ header li {
 /* Main page Styles  */
 
 .carousel-container {
-  width: 100%;
   height: 100%;
-  max-width: 90vh;
-  margin: auto;
-  overflow: hidden;
+  grid-area: body;
+  margin: 6rem auto 1rem;
   position: relative;
-  box-shadow: 30px 0 30px 0 rgba(0, 0, 0, 0.1),
-    -30px 0 30px 0 rgba(0, 0, 0, 0.1);
+  width: 1080px;
+  max-width: 100%;
+  object-fit: contain;
 }
 
-.alice-carousel,
-.alice-carousel div {
-  height: 100%;
-  width: 100%;
+.alice-carousel {
 }
 
-/* .alice-carousel__prev-btn,
-.alice-carousel__next-btn,
-.alice-carousel__prev-btn *,
-.alice-carousel__next-btn * {
-  height: 50px !important;
-} */
+.alice-carousel > div {
+  box-shadow: 2px 2px 25px 0 rgba(0, 0, 0, 0.3);
+  width: auto !important;
+}
+
+.alice-carousel__wrapper {
+  /* width: fit-content !important; */
+}
+
+.alice-carousel__stage-item.__active {
+  max-width: 100vw !important;
+  max-height: 80vh !important;
+}
 
 .carousel-image {
-  width: 100%;
-  height: 100%;
-  max-height: 80vh;
-  object-fit: cover;
-  object-position: top center;
+  max-width: 100vw !important;
+  max-height: 80vh !important;
 }
 
 .alice-carousel__stage-item.__active:nth-child(2) > .carousel-image,
@@ -339,7 +339,8 @@ header li {
 }
 
 .alice-carousel__stage-item.__active:nth-child(3) > .carousel-image,
-.alice-carousel__stage-item.__active:nth-child(5) > .carousel-image {
+.alice-carousel__stage-item.__active:nth-child(5) > .carousel-image,
+.alice-carousel__stage-item.__active:nth-child(7) > .carousel-image {
   animation: ken-burns 10000ms linear reverse !important;
 }
 

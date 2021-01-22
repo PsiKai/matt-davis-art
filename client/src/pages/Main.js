@@ -13,9 +13,9 @@ const Main = () => {
     }, [])
 
     return (
-        <div className="page-content" style={{padding: "1rem 0"}}>
+        // <div className="page-content" style={{padding: "1rem 0"}}>
             <Carousel />
-        </div>
+        // </div>
     )
 }
 

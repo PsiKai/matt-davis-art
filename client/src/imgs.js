@@ -1,33 +1,27 @@
 const prints = [
     {
-        name: "John Wick",
-        src: "../images/john-wick.jpg",
-        description: "A handsome person",
-        price: "999.99"
+        name: "Walken",
+        src: "../images/walken.jpg"
     },
     {
         name: "X-23",
-        src: "../images/x-23.jpg",
-        description: "Why not Zoidberg?",
-        price: "0.99"
+        src: "../images/x-23.jpg"
     },
     {
         name: "RPG Girl",
-        src: "../images/rpg-girl.jpg",
-        description: "We are tan!",
-        price: "10.99"
+        src: "../images/rpg-girl.jpg"
     },
     {
-        name: "Warrior",
-        src: "../images/warrior.jpg",
-        description: "Minecraft is has the kewl",
-        price: "9.99"
+        name: "Joker",
+        src: "../images/joker.jpg"
     },
     {
-        name: "Storm",
-        src: "../images/storm.jpg",
-        description: "The ultimate showdown",
-        price: "12.99"
+        name: "Gun",
+        src: "../images/smoking-gun.jpg"
+    },
+    {
+        name: "Guitar",
+        src: "../images/guitar-man.jpg"
     }
 ]
 
