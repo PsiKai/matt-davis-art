@@ -31,8 +31,13 @@ const UploadGallery = () => {
     // Sets image file to state
     const imgUpdate = (e) => {
         if (e.target.files[0]) {
+            if (e.target.files[0].size / 1024 / 1024 > 16) {
+                setAlert("File is larger than the 16mb max size", "lightpink")
+                e.target.value = null;
+            } else {
             setFile(e.target.files[0])
             setPreview(URL.createObjectURL(e.target.files[0]))
+            }
         } else {
             setPreview("")
             setFile("")

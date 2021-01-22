@@ -35,8 +35,13 @@ const UploadPrint = () => {
     // Sets image file to state
     const imgUpdate = (e) => {
         if (e.target.files[0]) {
+            if (e.target.files[0].size / 1024 / 1024 > 16) {
+                setAlert("File is larger than the 16mb max size", "lightpink")
+                e.target.value = null;
+            } else {
             setFile(e.target.files[0])
             setPreview(URL.createObjectURL(e.target.files[0]))
+            }
         } else {
             setPreview("")
             setFile("")
@@ -105,7 +110,8 @@ const UploadPrint = () => {
                     <li> */}
                     <label htmlFor="prints-stock">Number of Prints</label>
                     <div id="prints-stock" className="upload-prints--stock">
-                        <label htmlFor="fiveEight" className="stock">5 x 8:</label>
+                        <div>
+                        <label htmlFor="fiveEight" className="stock">5 x 8: </label>
                         <input 
                             id="fiveEight" 
                             type="number" 
@@ -115,9 +121,11 @@ const UploadPrint = () => {
                             className="stock" 
                             min="0" 
                         />
+                        </div>
                     {/* </li>
                     <li> */}
-                        <label htmlFor="eightEleven" className="stock">8.5 x 11:</label>
+                        <div>
+                        <label htmlFor="eightEleven" className="stock">8.5 x 11: </label>
                         <input 
                             id="eightEleven" 
                             type="number" 
@@ -127,9 +135,11 @@ const UploadPrint = () => {
                             className="stock"
                             min="0" 
                         />
+                        </div>
                     {/* </li>
                     <li> */}
-                        <label htmlFor="oneeightTwofour" className="stock">18 x 24:</label>
+                        <div>
+                        <label htmlFor="oneeightTwofour" className="stock">18 x 24: </label>
                         <input 
                             type="number" 
                             onChange={quantChange} 
@@ -138,6 +148,7 @@ const UploadPrint = () => {
                             className="stock"
                             min="0" 
                         />
+                        </div>
                         </div>
                         <input id="image" type="file" onChange={imgUpdate} required/>
                     {/* </li>

@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from 'react';
 import AppContext from '../context/AppContext'
 import Piece from "../components/Piece";
 import CircularProgress from "@material-ui/core/CircularProgress"
-// import Print from "../components/Print"
+import Print from "../components/Print"
 
 
 const Gallery = () => {
@@ -17,7 +17,6 @@ const Gallery = () => {
     return (
         <div className="page-content">
             <h1 className="page-header">Gallery</h1>
-            {/* <h2>All of my artwork</h2> */}
             
             {gallery ? gallery.map((piece, i) => {
                 return <Piece 
@@ -38,22 +37,6 @@ const Gallery = () => {
                 </div>
                 
             }
-            {/* {prints ? prints.map((print, index) => {
-                return <Piece
-                            key={index}
-                            id={index}
-                            src={print.img}
-                            stock={print.stock}
-                            title={print.title}
-                            sku={print._id}
-                            // open={openModal}
-                        />
-                })
-                : 
-                <div className="progress">
-                    <CircularProgress color="inherit"/>
-                </div>
-            } */}
         </div>
     )
 }

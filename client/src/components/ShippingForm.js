@@ -61,7 +61,7 @@ const ShippingForm = ({shipForm}) => {
                         <span> {zip}</span>
                     </div>
                 </div>
-                <button type="submit">Edit Info</button>
+                <button type="submit"><i class="far fa-edit fa-lg"></i></button>
             </form>
             :
         <form className="shipping-form" onSubmit={ship}>
@@ -150,7 +150,7 @@ const ShippingForm = ({shipForm}) => {
             </div>
             
             </div>
-            <button type="submit">Confirm Info</button>   
+            <button type="submit"><i class="far fa-check-square fa-lg"></i></button>   
         </form>
         
         }

@@ -73,7 +73,7 @@ const Edit = () => {
                         </Link>
                     </div>
                     <hr />
-                    <TransitionGroup>
+                    <TransitionGroup className="edit-transition">
                         <CSSTransition 
                             key={location.key} 
                             classNames="slide" 

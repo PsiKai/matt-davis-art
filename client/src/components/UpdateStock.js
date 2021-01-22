@@ -91,7 +91,7 @@ const UpdateStock = () => {
                         />
                         <ul>
                             <li>
-                                <label htmlFor="fiveEight" className="quantity">5 x 8</label>
+                                <label htmlFor="fiveEight" className="quantity">5 x 8:</label>
                                 <input 
                                     id="fiveEight" 
                                     type="number" 
@@ -103,7 +103,7 @@ const UpdateStock = () => {
                                 />
                             </li>
                             <li>
-                                <label htmlFor="eightEleven" className="quantity">8.5 x 11</label>
+                                <label htmlFor="eightEleven" className="quantity">8.5 x 11:</label>
                                 <input 
                                     id="eightEleven" 
                                     type="number" 
@@ -115,7 +115,7 @@ const UpdateStock = () => {
                                 />
                             </li>
                             <li>
-                                <label htmlFor="oneeightTwofour" className="quantity">18 x 24</label>
+                                <label htmlFor="oneeightTwofour" className="quantity">18 x 24:</label>
                                 <input 
                                     id="oneeightTwofour"
                                     type="number" 

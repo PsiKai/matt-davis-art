@@ -14,6 +14,7 @@ const Print = ({src, open, id, title, name, sku, stock}) => {
     }, [])
     
     var bytes = Buffer.from(src.data)
+    console.log();
 
     const openUp = (e) => {
         !isZero && open(e.target.parentNode.children)
