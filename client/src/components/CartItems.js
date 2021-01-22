@@ -71,7 +71,7 @@ const CartItems = () => {
                     <p>Subtotal: <b>${total}</b></p>
                     <p>Shipping: <b>Free!</b></p>
                     <hr className="underline"></hr>        
-                    <h3>Total: <h1>${total + 0}</h1></h3>  
+                    <h3>Total: <span>${total + 0}</span></h3>  
                     <button onClick={clear}>Checkout</button>
                 </div> 
 

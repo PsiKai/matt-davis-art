@@ -26,7 +26,7 @@ const Edit = () => {
         // eslint-disable-next-line 
     }, [])
 
-    const style = {outline: "-webkit-focus-ring-color auto 1px"}
+    const style = {boxShadow: "0 0 8px 0 rgba(0, 0, 0, 0.3)"}
 
     const changePage = (e) => {
         setPage(e.target.name)

@@ -145,7 +145,7 @@ const EditGallery = () => {
                                 onChange={setUpdate}
                                 />
 
-                            <button onClick={submitChanges}>Submit Changes</button>
+                            <button onClick={submitChanges}>Submit</button>
                             <p style={{textAlign: "center"}}>--OR--</p>
                             <button onClick={remove}>Delete</button>
                         </div>

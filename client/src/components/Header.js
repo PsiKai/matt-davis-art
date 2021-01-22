@@ -52,7 +52,7 @@ const Header = () => {
                 <Link to="/gallery">Gallery</Link>
               </li>
               <li onClick={() => setOpen(false)}>
-                <Link to="/cart">Cart ({cartItems})</Link>
+                <Link to="/cart"><i className="fas fa-shopping-cart fa-lg"></i> ({cartItems})</Link>
               </li>
               <li onClick={() => setOpen(false)}>
                 <Link to="/login">

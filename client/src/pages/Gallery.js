@@ -2,8 +2,6 @@ import React, {useContext, useEffect} from 'react';
 import AppContext from '../context/AppContext'
 import Piece from "../components/Piece";
 import CircularProgress from "@material-ui/core/CircularProgress"
-import Print from "../components/Print"
-
 
 const Gallery = () => {
     const appContext = useContext(AppContext);

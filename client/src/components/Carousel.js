@@ -14,13 +14,11 @@ const Carousel = () => {
             <AliceCarousel 
                 infinite="true"
                 autoPlay="true"
-                // animationDuration="600"
+                animationDuration="600"
                 autoPlayInterval="7000"
                 disableDotsControls="true"
                 disableButtonsControls="true"
                 autoPlayStrategy="none"
-                
-                
              >
                 {imgs.map((img, i) => {
                     return (

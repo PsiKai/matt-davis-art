@@ -99,15 +99,15 @@ const CartItem = ({quantity, title, src, stock, id}) => {
                                 value={oneeightTwofour} 
                                 onChange={updateQuantity} />
                         </p>
-                        <button><i class="far fa-check-square fa-lg"></i></button>
+                        <button><i className="far fa-check-square fa-lg"></i></button>
                         </form> :
                         <Fragment>
                         <h2>{title}</h2>
                         <p>Quantity: </p>
-                        {fiveEight > 0 && <p>5 x 8: <h3>{fiveEight}</h3></p>}
-                        {eightEleven > 0 && <p>8.5 x 11: <h3>{eightEleven}</h3></p>}
-                        {oneeightTwofour > 0 && <p>18 x 24: <h3>{oneeightTwofour}</h3></p>}
-                        <button onClick={adjustQuan}><i class="far fa-edit fa-lg"></i></button>
+                        {fiveEight > 0 && <p>5 x 8: <span>{fiveEight}</span></p>}
+                        {eightEleven > 0 && <p>8.5 x 11: <span>{eightEleven}</span></p>}
+                        {oneeightTwofour > 0 && <p>18 x 24: <span>{oneeightTwofour}</span></p>}
+                        <button onClick={adjustQuan}><i className="far fa-edit fa-lg"></i></button>
                         </Fragment>
                     }
                 </div>
