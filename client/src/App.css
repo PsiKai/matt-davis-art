@@ -214,11 +214,19 @@ h2 {
 }
 
 .alert {
+  display: flex;
+  position: fixed;
+  bottom: 5rem;
+  border-radius: 8px;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.3);
+  align-items: center;
+  justify-content: center;
   height: 5rem;
   opacity: 1;
   overflow: hidden;
-  display: block;
-  padding: 0.5rem;
+  /* display: block; */
+  padding: 1rem 2rem;
+  border: 1px solid var(--dark);
   text-align: center;
 }
 
@@ -288,7 +296,7 @@ h2 {
 
 .widen-enter.widen-enter-active {
   width: 600px;
-  transition: width 600ms cubic-bezier(0.425, -0.405, 0.655, 1.505) 200ms;
+  transition: width 600ms cubic-bezier(0.71, -0.415, 0.415, 1.65) 200ms;
 }
 
 .widen-enter-done {
@@ -685,6 +693,23 @@ header span {
   box-shadow: 0 0 16px 16px white inset;
 }
 
+.contact__grid {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  text-align: center;
+}
+
+.contact__grid > .contact--info {
+  padding: 4rem;
+}
+
+.contact--social__flex {
+  display: flex;
+  justify-content: space-evenly;
+  justify-items: start;
+  margin-bottom: 4rem;
+}
+
 .email-form {
   width: 500px;
   margin: 2rem auto;
@@ -730,16 +755,16 @@ header span {
   width: 100%;
   top: 0;
   left: 0;
-  color: var(--white);
+  color: var(--medium);
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 0.5rem;
 }
 
 .sold-out h2 {
-  background: var(--medium);
+  background: var(--dark);
   transform: translateY(250px);
-  border-top: 2px outset var(--dark);
-  border-bottom: 2px outset var(--dark);
+  border-top: 2px outset var(--white);
+  border-bottom: 2px outset var(--white);
 }
 
 .print-item.zero-stock:hover {

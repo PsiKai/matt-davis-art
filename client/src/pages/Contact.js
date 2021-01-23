@@ -28,12 +28,15 @@ const Contact = () => {
         <div className="page-content">
             <div className="contact-img"></div>
             <PageHeader heading="I'd love to hear from you!" />
-            {/* <h2>I'd love to hear from you.</h2> */}
-            <p>Drop me a line on my socials, or just send me an email directly</p>
-
-            <a href="https://www.instagram.com/mattdavisart5280/"><i className="fab fa-instagram fa-2x"></i></a>
-            <a href="https://www.facebook.com/matthew.davis.5437"><i className="fab fa-facebook-f fa-2x"></i></a>
-
+            <div className="contact__grid">
+                <div className="contact--info">
+                    <h3>Drop me a line on my socials:</h3> 
+                    <div className="contact--social__flex">
+                        <a href="https://www.instagram.com/mattdavisart5280/"><i className="fab fa-instagram fa-2x"></i></a>
+                        <a href="https://www.facebook.com/matthew.davis.5437"><i className="fab fa-facebook-f fa-2x"></i></a>
+                    </div>
+                    <h3>Or just send me an email directly:</h3>
+                </div>
             <form className="email-form" onSubmit={submitEmail}>
                 <label htmlFor="sender">Your email</label>
                 <input
@@ -71,6 +74,7 @@ const Contact = () => {
                 </textarea>
                 <button>Send</button>
             </form>
+            </div>
             <Alerts />
         </div>
     )

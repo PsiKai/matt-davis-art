@@ -62,19 +62,7 @@ const Prints = () => {
 
     return (
         <div className="page-content">
-            <PageHeader heading="Prints" />
-            {/* <div className="page-header__wrapper">
-                <CSSTransition
-                    in={wide}
-                    appear={true}
-                    classNames="widen"
-                    timeout={800}
-                >
-                    <h1 className="page-header">Prints</h1>
-                </CSSTransition>
-                <div className="page-header__arrow"></div>
-            </div> */}
-            {/* <h2>Pick out any art</h2> */}
+            <PageHeader heading="Prints" prints={prints}/>
             <div className="prints-flexbox">
             {prints ? prints.map((print, index) => {
                 return <Print
