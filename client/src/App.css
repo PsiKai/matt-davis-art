@@ -471,17 +471,17 @@ header .cart-link:active > span {
   object-fit: contain;
 }
 
-.alice-carousel {
-}
+/* .alice-carousel {
+} */
 
 .alice-carousel > div {
   box-shadow: 2px 2px 25px 0 rgba(0, 0, 0, 0.3);
   width: auto !important;
 }
 
-.alice-carousel__wrapper {
-  /* width: fit-content !important; */
-}
+/* .alice-carousel__wrapper {
+  width: fit-content !important;
+} */
 
 .alice-carousel__stage-item.__active {
   max-width: 100vw !important;
@@ -655,7 +655,6 @@ header .cart-link:active > span {
 .shipping-form button:active {
   animation: none;
 }
-]
 
 .shipping-form i {
   margin: 0;
