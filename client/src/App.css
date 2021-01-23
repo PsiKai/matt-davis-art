@@ -6,6 +6,11 @@
   --light: #ded5c4;
   --medium: #ef7e56;
   --dark: #305973;
+
+  --white-two: #f1f6f9;
+  --light-two: #9ba4b4;
+  --medium-two: #394867;
+  --dark-two: #14274e;
 }
 /* :root {
   --white: #f2f2f0;
@@ -61,7 +66,8 @@ body {
 
 a {
   text-decoration: none;
-  color: var(--light);
+  /* color: var(--light); */
+  color: var(--white-two);
 }
 
 i {
@@ -73,7 +79,8 @@ i {
 }
 
 a:visited {
-  color: var(--light);
+  color: var(--white-two);
+  /* color: var(--light); */
 }
 
 label {
@@ -290,7 +297,8 @@ h2 {
 
 header {
   background-color: var(--dark);
-  color: inherit;
+  /* color: inherit; */
+  color: var(--white-two);
   position: fixed;
   z-index: 200;
   top: 0;
@@ -326,7 +334,7 @@ header li {
 
 header li:last-of-type::before {
   content: "";
-  border-left: 3px double var(--light);
+  border-left: 3px double var(--white-two);
   padding: 1rem;
 }
 
@@ -337,7 +345,7 @@ header a {
 
 header a:hover {
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
-  border-bottom: 4px inset var(--light);
+  border-bottom: 4px inset var(--white-two);
 }
 
 header a:active {
@@ -358,6 +366,12 @@ header a.header--main-link:active {
   animation: press-text 150ms linear forwards;
 }
 
+.MuiBadge-badge {
+  background-color: var(--medium);
+  color: var(--dark);
+  padding: 0 3px;
+}
+
 @keyframes press-text {
   0% {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
@@ -373,15 +387,17 @@ header a.header--main-link:active {
   }
 }
 
+header .cart-link:visited,
 header .cart-link {
   padding: 0.5rem 1rem;
   border-radius: 8px;
   transition: box-shadow 200ms ease;
+  color: var(--white-two);
 }
 
 header .cart-link:hover {
   border-bottom: none;
-  box-shadow: 0 0 0 1px inset var(--light), 0 0 8px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0 1px inset var(--white-two), 0 0 8px 0 rgba(0, 0, 0, 0.3);
 }
 
 header .cart-link:active > span {

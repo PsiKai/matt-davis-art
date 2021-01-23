@@ -59,8 +59,8 @@ const Header = () => {
               </li>
               <li onClick={() => setOpen(false)}>
                 <Link to="/cart" className="cart-link">
-                  <Badge badgeContent={cartItems} style={{color: "var(--medium)"}}>
-                    <ShoppingCartOutlinedIcon style={{color: "var(--light)"}}/>
+                  <Badge badgeContent={cartItems} style={{color: "var(--medium)", backgroundColor: "var(--medium", }}>
+                    <ShoppingCartOutlinedIcon style={{color: "var(--white-two)", backgroundColor: "var(--dark"}}/>
                   </Badge>
                 </Link>
               </li>
