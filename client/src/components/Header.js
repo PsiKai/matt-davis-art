@@ -28,8 +28,8 @@ const Header = () => {
     return (
         <header>
           
-            <Link to="/">
-                <h1>Artist Matt Davis</h1>
+            <Link to="/" className="header--main-link">
+                <h1>Matt Davis</h1>
             </Link>
             <div className="menu__burger-icon" onClick={() => setOpen(!open)}>
                   <span style={open ? 
@@ -58,11 +58,10 @@ const Header = () => {
                 <Link to="/gallery">Gallery</Link>
               </li>
               <li onClick={() => setOpen(false)}>
-                <Link to="/cart">
-                <Badge badgeContent={cartItems} color="inherit">
-                  <ShoppingCartOutlinedIcon />
-                </Badge>
-                {/* <i className="fas fa-shopping-cart fa-3x"><span>({cartItems})</span></i> */}
+                <Link to="/cart" className="cart-link">
+                  <Badge badgeContent={cartItems} style={{color: "var(--medium)"}}>
+                    <ShoppingCartOutlinedIcon style={{color: "var(--light)"}}/>
+                  </Badge>
                 </Link>
               </li>
               <li onClick={() => setOpen(false)}>

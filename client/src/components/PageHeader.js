@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {CSSTransition} from "react-transition-group"
 
-const PageHeader = ({prints, heading}) => {
+const PageHeader = ({heading}) => {
     const [widen, setWiden] = useState(false)
 
     useEffect(() => {
@@ -16,12 +16,21 @@ const PageHeader = ({prints, heading}) => {
                 in={widen}
                 appear={true}
                 classNames="widen"
-                timeout={{prints} && 800}
-            >
+                timeout={800}
+            >   
+            
                 <h1 className="page-header">{heading}</h1>
+                </CSSTransition>
+                <CSSTransition
+                in={widen}
+                appear={true}
+                classNames="widen"
+                timeout={800}
+            >   
+                <div className="page-header__arrow">{heading}</div>
             </CSSTransition>
             
-            <div className="page-header__arrow"></div>
+            
         </div>
         
     )

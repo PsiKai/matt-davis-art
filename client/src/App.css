@@ -68,19 +68,17 @@ i {
   color: var(--dark);
 }
 
-a:visited {
-  color: var(--light);
+.fa-edit {
+  transform: translate(1px, -1px);
 }
 
-a:hover,
-a:active {
-  text-decoration: underline;
+a:visited {
+  color: var(--light);
 }
 
 label {
   font-family: inherit;
   color: var(--dark);
-  /* color: var(--medium); */
   font-size: 1rem;
   opacity: 0.6;
 }
@@ -91,12 +89,9 @@ input {
   display: block;
   width: 100%;
   margin-bottom: 1rem;
-  /* border-radius: 4px; */
   font-family: inherit;
-  /* border-width: 1px; */
   border: none;
   border-bottom: 1px solid var(--dark);
-  /* border-width: 0; */
   background-color: inherit;
   transition: box-shadow 200ms ease;
 }
@@ -118,12 +113,6 @@ textarea:focus {
 input[type="checkbox"]:focus {
   box-shadow: none;
 }
-
-/* input:focus {
-  transform: scale(0.9);
-  opacity: 0.7;
-  transition: all 200ms ease;
-} */
 
 input[type="file"] {
   margin-bottom: 2rem;
@@ -150,11 +139,9 @@ textarea {
   width: 100%;
   font-size: 1.2rem;
   margin: 0.5rem 0 1rem;
-  /* border-radius: 4px; */
   border: none;
   border-bottom: 1px solid var(--dark);
   border-top: 1px solid var(--dark);
-
   background-color: inherit;
   resize: none;
   transition: all 200ms ease;
@@ -164,7 +151,6 @@ button {
   width: 160px;
   margin: 1rem auto 0;
   padding: 0.25rem 0;
-  /* border-radius: 8px; */
   cursor: pointer;
   color: inherit;
   background-color: var(--white);
@@ -177,32 +163,10 @@ button {
 }
 
 button:hover {
-  /* button:focus { */
   background-color: white !important;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
   width: 200px;
 }
-
-/* button::after {
-}
-
-button:hover::after {
-  box-sizing: border-box;
-  content: "Send";
-  background-color: var(--light);
-  color: var(--medium);
-  height: 0;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 0.25rem 0;
-  transition: height 200ms ease;
-} */
-
-/* button:hover::after:hover {
-  height: 50px;
-} */
 
 button:focus {
   outline: none;
@@ -224,7 +188,6 @@ h2 {
   height: 5rem;
   opacity: 1;
   overflow: hidden;
-  /* display: block; */
   padding: 1rem 2rem;
   border: 1px solid var(--dark);
   text-align: center;
@@ -246,7 +209,6 @@ h2 {
   white-space: nowrap;
   display: inline-block;
   text-align: center;
-  width: 200px;
   margin-bottom: 3rem;
   background-color: var(--medium);
   padding: 2rem;
@@ -257,38 +219,36 @@ h2 {
 }
 
 .page-header__wrapper {
-  margin: 0 auto;
-}
-
-.page-header__arrow,
-.page-header__left {
   position: relative;
-  /* z-index: -1; */
+  margin: 0 auto;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  perspective-origin: -6% 100%;
 }
 
-/* .page-header__arrow {
-  display: inline-block;
-  border: 33px solid transparent;
-  border-left: 29px solid var(--dark);
-  transform: translate(0px, -48px);
-  height: 116px;
-} */
+.page-header__arrow {
+  white-space: nowrap;
+  height: 200px;
+  padding: 2rem;
+  position: absolute;
+  top: -63px;
+  transform: rotateX(90deg);
+  transform-origin: bottom;
+  background: var(--dark);
+}
 
 .page-header__left {
-  display: inline-block;
-  border: 33px solid transparent;
-  border-right: 29px solid var(--dark);
-  transform: translate(0px, -48px);
+  border: 1px solid var(--dark);
   height: 116px;
-}
-
-.widen-appear-enter {
   width: 200px;
+  position: absolute;
+  top: 21px;
+  transform: rotateY(90deg);
+  transform-origin: left;
+  background: var(--dark);
 }
 
-.widen-appear-active {
-  width: 600px;
-}
+/* Page heading animation  */
 
 .widen-enter {
   width: 200px;
@@ -303,17 +263,10 @@ h2 {
   width: 600px;
 }
 
-/* .page-header__wrapper:after {
-  border-right: 100px solid var(--medium);
-  content: "";
-} */
-
 /* Navbar header Styles  */
 
 header {
   background-color: var(--dark);
-  /* background-color: aliceblue; */
-  /* color: var(--light); */
   color: inherit;
   position: fixed;
   z-index: 200;
@@ -325,6 +278,7 @@ header {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.3);
 }
 
 header h1 {
@@ -353,23 +307,76 @@ header li:last-of-type::before {
   padding: 1rem;
 }
 
-/* header a {
-  display: flex;
-} */
-
-/* header a i {
-  position: relative !important;
-  color: var(--light);
+header a {
+  box-shadow: none;
+  transition: all 150ms linear;
 }
 
-header span {
-  position: absolute;
-  left: 19px;
-  top: 10px;
-  color: var(--dark);
-  font-size: 1rem;
-  font-family: "Noto Sans SC", sans-serif;
-} */
+header a:hover {
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+  border-bottom: 4px inset var(--light);
+}
+
+header a:active {
+  animation: press-text 100ms ease;
+}
+
+header a.header--main-link {
+  transition: text-shadow 150ms ease;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+header a.header--main-link:hover {
+  border-bottom: none;
+  text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7);
+}
+
+header a.header--main-link:active {
+  animation: press-text 150ms linear forwards;
+}
+
+@keyframes press-text {
+  0% {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    transform: scale(1);
+  }
+  75% {
+    text-shadow: none;
+    transform: scale(0.95);
+  }
+  100% {
+    text-shadow: none;
+    transform: scale(1);
+  }
+}
+
+header .cart-link {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: box-shadow 200ms ease;
+}
+
+header .cart-link:hover {
+  border-bottom: none;
+  box-shadow: 0 0 0 1px inset var(--light), 0 0 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+header .cart-link:active > span {
+  border: none;
+  animation: press-cart 150ms ease forwards;
+}
+
+@keyframes press-cart {
+  0% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
 .menu {
   position: absolute;
@@ -516,6 +523,7 @@ header span {
 .cart-item div {
   width: 50%;
   text-align: right;
+  position: relative;
 }
 
 .cart-item h2 {
@@ -540,6 +548,9 @@ header span {
 }
 
 .cart-item button {
+  position: absolute;
+  bottom: 2rem;
+  right: 1rem;
   display: inline-block;
   width: auto;
   margin: 0;
@@ -696,11 +707,11 @@ header span {
 .contact__grid {
   display: grid;
   grid-template-columns: 50% 50%;
-  text-align: center;
 }
 
 .contact__grid > .contact--info {
   padding: 4rem;
+  text-align: center;
 }
 
 .contact--social__flex {
@@ -708,6 +719,35 @@ header span {
   justify-content: space-evenly;
   justify-items: start;
   margin-bottom: 4rem;
+}
+
+.contact--social__flex a {
+  padding: 1rem 1.25rem;
+  border-radius: 25%;
+  transition: all 150ms ease-in-out;
+}
+
+.contact--social__flex a:hover {
+  box-shadow: 0 0 0 1px inset var(--dark), 0 0 15px 0 rgba(0, 0, 0, 0.2);
+}
+
+.contact--social__flex a:focus {
+  animation: press 150ms ease forwards;
+}
+
+@keyframes press {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 1px inset var(--dark), 0 0 15px 0 rgba(0, 0, 0, 0.2);
+  }
+  75% {
+    box-shadow: 0 0 0 1px inset var(--dark), 0 0 10px 0 rgba(0, 0, 0, 0.3);
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 1px inset var(--dark), 0 0 15px 0 rgba(0, 0, 0, 0.2);
+  }
 }
 
 .email-form {
@@ -783,7 +823,7 @@ header span {
   transform: translate(-50%, -50%);
   padding: 2rem;
   text-align: center;
-  width: 30rem;
+  width: 35rem;
   box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.5);
 }
 
@@ -979,14 +1019,6 @@ header span {
   position: absolute;
 }
 
-.upload-form button {
-  /* width: 70%; */
-  /* margin: 0 auto; */
-  /* padding: 0.25rem 0; */
-  /* border-radius: 8px; */
-  /* cursor: pointer; */
-}
-
 .update-stock h2 {
   text-align: center;
 }
@@ -1041,9 +1073,6 @@ header span {
 .print-stock--buttons button {
   display: inline-block;
   margin: 1rem;
-  /* width: 160px; */
-  /* width: 20%; */
-  /* padding: 0.25rem 0; */
 }
 
 .update-gallery {
@@ -1099,11 +1128,6 @@ header span {
   position: absolute;
   bottom: -3.5rem;
   right: 2rem;
-  /* width: 200px; */
-  /* font-family: inherit; */
-  /* border-radius: 8px; */
-  /* padding: 0.25rem 0; */
-  /* cursor: pointer; */
   z-index: 2;
 }
 
@@ -1116,6 +1140,7 @@ footer {
   padding: 2rem;
   text-align: center;
   position: relative;
+  box-shadow: 0 0 15px 0 inset rgba(0, 0, 0, 0.3);
 }
 
 .login-toast {
@@ -1219,7 +1244,6 @@ footer {
 
 .slide-enter.slide-enter-active ~ footer {
   opacity: 0;
-  /* transition: opacity 100ms ease-out 200ms; */
 }
 
 .slide-enter-done {
@@ -1241,7 +1265,6 @@ footer {
 
 .slide-exit ~ footer {
   opacity: 0;
-  /* transition: opacity 100ms ease; */
 }
 
 .slide-exit.slide-exit-active {
@@ -1254,7 +1277,6 @@ footer {
 
 .slide-exit.slide-exit-active ~ footer {
   opacity: 0;
-  /* transition: opacity 100ms ease-in; */
 }
 
 .slide-exit-done {
