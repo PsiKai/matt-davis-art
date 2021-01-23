@@ -72,7 +72,7 @@ const CartItems = () => {
                     <p>Shipping: <b>Free!</b></p>
                     <hr className="underline"></hr>        
                     <h3>Total: <span>${total + 0}</span></h3>  
-                    <button onClick={clear}>Checkout</button>
+                    <button data-text="Checkout" onClick={clear}>Checkout</button>
                 </div> 
 
                 <Alerts />

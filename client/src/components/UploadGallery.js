@@ -121,7 +121,7 @@ const UploadGallery = () => {
                     onChange={imgUpdate}
                     required />
             
-                <button type="submit">Submit</button>
+                <button data-text="Submit" type="submit">Submit</button>
                 
             </form>
             <TransitionGroup className="img-preview">

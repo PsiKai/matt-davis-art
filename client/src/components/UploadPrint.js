@@ -153,7 +153,7 @@ const UploadPrint = () => {
                         <input id="image" type="file" onChange={imgUpdate} required/>
                     {/* </li>
                 </ul> */}
-                <button type="submit">Submit</button>
+                <button data-text="Submit" type="submit">Submit</button>
             </form>
             <TransitionGroup className="img-preview">
                 <CSSTransition

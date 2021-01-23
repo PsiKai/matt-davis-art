@@ -72,7 +72,7 @@ const Contact = () => {
                     rows="8"
                     required>
                 </textarea>
-                <button>Send</button>
+                <button data-text="Send">Send</button>
             </form>
             </div>
             <Alerts />

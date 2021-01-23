@@ -141,8 +141,8 @@ const UpdateStock = () => {
             }  
             </div>
         <div className="print-stock--buttons">
-            <button onClick={sendChanges}>Submit Changes</button>
-            <button onClick={deletePrints}>Delete Items</button>
+            <button data-text="Submit Changes" onClick={sendChanges}>Submit Changes</button>
+            <button data-text="Delete Items" onClick={deletePrints}>Delete Items</button>
         </div>
         </div>
     )     

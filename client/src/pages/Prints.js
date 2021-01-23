@@ -11,11 +11,11 @@ const Prints = () => {
 
     const [img, setImg] = useState({})
     const [modalOpen, setModalOpen] = useState(false)
-    const [wide, setWide] = useState(false)
+    // const [wide, setWide] = useState(false)
 
     useEffect(() => {
         !prints && getArt();
-        setWide(true)
+        // setWide(true)
         //eslint-disable-next-line
     }, [])
 
@@ -134,7 +134,7 @@ const Prints = () => {
                         </div>
                     </div>
 
-                    <button onClick={addToCart}>Add To Cart</button>
+                    <button data-text="Add To Cart" onClick={addToCart}>Add To Cart</button>
                 </div>
             </div>
             </CSSTransition>

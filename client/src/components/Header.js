@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import AppContext from "../context/AppContext";
 import AuthContext from "../context/authContext";
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+// import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Badge from '@material-ui/core/Badge';
 

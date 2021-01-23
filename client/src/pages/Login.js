@@ -31,7 +31,7 @@ const Login = (props) => {
             <form onSubmit={startLogin}>
                 <p>Login:</p>
                 <input type="password" onChange={typing} value={password}></input>
-                <button type="submit">Login</button>
+                <button data-text="Login" type="submit">Login</button>
                 
             </form>
             

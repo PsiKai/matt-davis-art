@@ -89,7 +89,7 @@ const Edit = () => {
                         </CSSTransition>
                     </TransitionGroup>     
                         
-                    <button className="logout" type="submit" onClick={signOut}>
+                    <button data-text="Logout" className="logout" type="submit" onClick={signOut}>
                         Logout
                     </button>
                     
