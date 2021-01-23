@@ -2,11 +2,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&display=swap");
 
 :root {
+  --white: #f9f9f9;
+  --light: #ded5c4;
+  --medium: #ef7e56;
+  --dark: #305973;
+}
+/* :root {
   --white: #f2f2f0;
   --light: #ff5e3a;
   --medium: #2c365d;
   --dark: #272e4f;
-}
+} */
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -55,7 +61,7 @@ body {
 
 a {
   text-decoration: none;
-  color: var(--dark);
+  color: var(--light);
 }
 
 i {
@@ -63,7 +69,7 @@ i {
 }
 
 a:visited {
-  color: initial;
+  color: var(--light);
 }
 
 a:hover,
@@ -73,7 +79,8 @@ a:active {
 
 label {
   font-family: inherit;
-  color: var(--medium);
+  color: var(--dark);
+  /* color: var(--medium); */
   font-size: 1rem;
   opacity: 0.6;
 }
@@ -106,6 +113,10 @@ input:focus,
 textarea:focus {
   outline: none;
   box-shadow: 0 -1px 0 0 inset var(--dark), 0 1px 0 0 var(--dark);
+}
+
+input[type="checkbox"]:focus {
+  box-shadow: none;
 }
 
 /* input:focus {
@@ -162,14 +173,36 @@ button {
   display: block;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
   transition: all 200ms ease;
+  position: relative;
 }
 
-button:hover,
-button:focus {
+button:hover {
+  /* button:focus { */
   background-color: white !important;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
   width: 200px;
 }
+
+/* button::after {
+}
+
+button:hover::after {
+  box-sizing: border-box;
+  content: "Send";
+  background-color: var(--light);
+  color: var(--medium);
+  height: 0;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.25rem 0;
+  transition: height 200ms ease;
+} */
+
+/* button:hover::after:hover {
+  height: 50px;
+} */
 
 button:focus {
   outline: none;
@@ -202,14 +235,77 @@ h2 {
 }
 
 .page-header {
+  white-space: nowrap;
+  display: inline-block;
   text-align: center;
+  width: 200px;
   margin-bottom: 3rem;
+  background-color: var(--medium);
+  padding: 2rem;
+  transition: width 400ms ease-in;
+  overflow: hidden;
+  text-transform: uppercase;
+  border: 3px solid var(--dark);
 }
+
+.page-header__wrapper {
+  margin: 0 auto;
+}
+
+.page-header__arrow,
+.page-header__left {
+  position: relative;
+  /* z-index: -1; */
+}
+
+/* .page-header__arrow {
+  display: inline-block;
+  border: 33px solid transparent;
+  border-left: 29px solid var(--dark);
+  transform: translate(0px, -48px);
+  height: 116px;
+} */
+
+.page-header__left {
+  display: inline-block;
+  border: 33px solid transparent;
+  border-right: 29px solid var(--dark);
+  transform: translate(0px, -48px);
+  height: 116px;
+}
+
+.widen-appear-enter {
+  width: 200px;
+}
+
+.widen-appear-active {
+  width: 600px;
+}
+
+.widen-enter {
+  width: 200px;
+}
+
+.widen-enter.widen-enter-active {
+  width: 600px;
+  transition: width 600ms cubic-bezier(0.425, -0.405, 0.655, 1.505) 200ms;
+}
+
+.widen-enter-done {
+  width: 600px;
+}
+
+/* .page-header__wrapper:after {
+  border-right: 100px solid var(--medium);
+  content: "";
+} */
 
 /* Navbar header Styles  */
 
 header {
-  background-color: aliceblue;
+  background-color: var(--dark);
+  /* background-color: aliceblue; */
+  /* color: var(--light); */
   color: inherit;
   position: fixed;
   z-index: 200;
@@ -230,10 +326,12 @@ header h1 {
 }
 
 header ul {
+  margin: 0;
   padding: 0;
   list-style: none;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 header li {
@@ -241,12 +339,37 @@ header li {
   padding: 1rem;
 }
 
+header li:last-of-type::before {
+  content: "";
+  border-left: 3px double var(--light);
+  padding: 1rem;
+}
+
+/* header a {
+  display: flex;
+} */
+
+/* header a i {
+  position: relative !important;
+  color: var(--light);
+}
+
+header span {
+  position: absolute;
+  left: 19px;
+  top: 10px;
+  color: var(--dark);
+  font-size: 1rem;
+  font-family: "Noto Sans SC", sans-serif;
+} */
+
 .menu {
   position: absolute;
   z-index: -1;
   top: 119px;
   right: 0;
-  background-color: aliceblue;
+  background-color: var(--dark);
+  /* background-color: aliceblue; */
   transform: translateX(101%);
   transition: transform 200ms ease;
   border: 1px solid black;
@@ -301,7 +424,7 @@ header li {
 /* Main page Styles  */
 
 .carousel-container {
-  height: 100%;
+  /* height: 100%; */
   grid-area: body;
   margin: 6rem auto 1rem;
   position: relative;
@@ -615,8 +738,8 @@ header li {
 .sold-out h2 {
   background: var(--medium);
   transform: translateY(250px);
-  border-top: 2px outset var(--light);
-  border-bottom: 2px outset var(--light);
+  border-top: 2px outset var(--dark);
+  border-bottom: 2px outset var(--dark);
 }
 
 .print-item.zero-stock:hover {
@@ -757,6 +880,7 @@ header li {
   border-top: none;
   border-bottom: none;
   background-color: inherit;
+  color: var(--dark);
   box-shadow: none;
 }
 
@@ -961,7 +1085,7 @@ header li {
 /* Footer Styles  */
 
 footer {
-  background: var(--white);
+  background: url(./images/brushed-alum.png) var(--light);
   grid-area: footer;
   border-top: 2px solid;
   padding: 2rem;

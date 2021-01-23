@@ -2,6 +2,10 @@ import React, { useContext, useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import AppContext from "../context/AppContext";
 import AuthContext from "../context/authContext";
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+import Badge from '@material-ui/core/Badge';
+
 
 const Header = () => {
   const appContext = useContext(AppContext);
@@ -16,6 +20,8 @@ const Header = () => {
     loadUser();
     // eslint-disable-next-line 
   }, [])
+
+
 
 
 
@@ -52,7 +58,12 @@ const Header = () => {
                 <Link to="/gallery">Gallery</Link>
               </li>
               <li onClick={() => setOpen(false)}>
-                <Link to="/cart"><i className="fas fa-shopping-cart fa-lg"></i> ({cartItems})</Link>
+                <Link to="/cart">
+                <Badge badgeContent={cartItems} color="inherit">
+                  <ShoppingCartOutlinedIcon />
+                </Badge>
+                {/* <i className="fas fa-shopping-cart fa-3x"><span>({cartItems})</span></i> */}
+                </Link>
               </li>
               <li onClick={() => setOpen(false)}>
                 <Link to="/login">

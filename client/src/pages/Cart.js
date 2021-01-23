@@ -3,6 +3,7 @@ import AppContext from "../context/AppContext";
 import CartItems from "../components/CartItems";
 import { CircularProgress } from '@material-ui/core';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import PageHeader from '../components/PageHeader';
 
 const Cart = (props) => {
     const appContext = useContext(AppContext);
@@ -25,7 +26,7 @@ const Cart = (props) => {
 
     return (
     <div className="page-content">
-        <h1 className="page-header">Cart</h1>
+        <PageHeader heading="Your Shopping Cart" />
     
         {(Boolean(localStorage.getItem("cart")) && !prints) &&
             <div className="progress">

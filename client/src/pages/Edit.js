@@ -10,6 +10,7 @@ import Alerts from "../components/Alerts"
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 import {Router, Switch, Route, Link} from 'react-router-dom';
 import {createBrowserHistory} from 'history'
+import PageHeader from '../components/PageHeader'
 
 const history = createBrowserHistory();
 
@@ -41,7 +42,7 @@ const Edit = () => {
             <Route render={({location}) => (
                 <div className="page-content">
 
-                    <h1 className="page-header">Make Changes To Your Content</h1>
+                    <PageHeader heading="Make Changes To Your Content" />
                     <div className="nav-buttons">
                         <Link to="/uploadgallery">
                             <button 

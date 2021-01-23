@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react'
 import AlertContext from "../context/alertContext";
 import axios from "axios"
 import Alerts from "../components/Alerts"
+import PageHeader from "../components/PageHeader"
 
 const Contact = () => {
     const alertContext = useContext(AlertContext);
@@ -26,7 +27,7 @@ const Contact = () => {
     return (
         <div className="page-content">
             <div className="contact-img"></div>
-            <h1 className="page-header">I'd love to hear from you!</h1>
+            <PageHeader heading="I'd love to hear from you!" />
             {/* <h2>I'd love to hear from you.</h2> */}
             <p>Drop me a line on my socials, or just send me an email directly</p>
 

@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react'
 import Print from "../components/Print";
+import PageHeader from "../components/PageHeader"
 import AppContext from "../context/AppContext"
 import CircularProgress from "@material-ui/core/CircularProgress"
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
@@ -10,9 +11,11 @@ const Prints = () => {
 
     const [img, setImg] = useState({})
     const [modalOpen, setModalOpen] = useState(false)
+    const [wide, setWide] = useState(false)
 
     useEffect(() => {
         !prints && getArt();
+        setWide(true)
         //eslint-disable-next-line
     }, [])
 
@@ -59,7 +62,18 @@ const Prints = () => {
 
     return (
         <div className="page-content">
-            <h1 className="page-header">Prints</h1>
+            <PageHeader heading="Prints" />
+            {/* <div className="page-header__wrapper">
+                <CSSTransition
+                    in={wide}
+                    appear={true}
+                    classNames="widen"
+                    timeout={800}
+                >
+                    <h1 className="page-header">Prints</h1>
+                </CSSTransition>
+                <div className="page-header__arrow"></div>
+            </div> */}
             {/* <h2>Pick out any art</h2> */}
             <div className="prints-flexbox">
             {prints ? prints.map((print, index) => {

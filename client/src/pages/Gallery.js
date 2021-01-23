@@ -2,6 +2,7 @@ import React, {useContext, useEffect} from 'react';
 import AppContext from '../context/AppContext'
 import Piece from "../components/Piece";
 import CircularProgress from "@material-ui/core/CircularProgress"
+import PageHeader from '../components/PageHeader';
 
 const Gallery = () => {
     const appContext = useContext(AppContext);
@@ -14,7 +15,7 @@ const Gallery = () => {
 
     return (
         <div className="page-content">
-            <h1 className="page-header">Gallery</h1>
+            <PageHeader heading="My Gallery of Works" />
             
             {gallery ? gallery.map((piece, i) => {
                 return <Piece 
