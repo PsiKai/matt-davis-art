@@ -1,4 +1,5 @@
 import React, {Fragment, useState, useEffect} from 'react'
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 const ShippingForm = ({shipForm}) => {
     useEffect(() => {
@@ -43,7 +44,13 @@ const ShippingForm = ({shipForm}) => {
 
     return (
         <Fragment>
+        <TransitionGroup className="shipping-form__wrapper">
         {addy ?
+            <CSSTransition
+                key={1}
+                classNames="switch"
+                timeout={100}
+            >
             <form className="shipping-form" onSubmit={ship}>
                 <div className="info-grid">
                     <div className="email-grid">
@@ -63,7 +70,13 @@ const ShippingForm = ({shipForm}) => {
                 </div>
                 <button type="submit"><i className="far fa-edit fa-lg"></i></button>
             </form>
+            </CSSTransition>
             :
+            <CSSTransition
+                key={2}
+                classNames="switch"
+                timeout={100}
+            >
         <form className="shipping-form" onSubmit={ship}>
             <div className="info-grid">
             <div className="email-grid">
@@ -152,9 +165,11 @@ const ShippingForm = ({shipForm}) => {
             </div>
             <button type="submit"><i className="far fa-check-square fa-lg"></i></button>   
         </form>
-        
+        </CSSTransition>
         }
+        </TransitionGroup>
         </Fragment>
+        
     )
 }
 

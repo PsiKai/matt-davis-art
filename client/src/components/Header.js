@@ -4,7 +4,9 @@ import AppContext from "../context/AppContext";
 import AuthContext from "../context/authContext";
 // import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Badge from '@material-ui/core/Badge';
+import EditIcon from '@material-ui/icons/Edit';
 
 
 const Header = () => {
@@ -21,13 +23,8 @@ const Header = () => {
     // eslint-disable-next-line 
   }, [])
 
-
-
-
-
     return (
         <header>
-          
             <Link to="/" className="header--main-link">
                 <h1>Matt Davis</h1>
             </Link>
@@ -59,14 +56,35 @@ const Header = () => {
               </li>
               <li onClick={() => setOpen(false)}>
                 <Link to="/cart" className="cart-link">
-                  <Badge badgeContent={cartItems} style={{color: "var(--medium)", backgroundColor: "var(--medium", }}>
-                    <ShoppingCartOutlinedIcon style={{color: "var(--white-two)", backgroundColor: "var(--dark"}}/>
+                  <Badge 
+                    badgeContent={cartItems} 
+                    style={{
+                      color: "var(--medium)", 
+                      backgroundColor: "var(--medium", 
+                      }}
+                  >
+                    <ShoppingCartOutlinedIcon 
+                      style={{
+                        color: "var(--white-two)", 
+                        backgroundColor: "var(--dark"
+                        }}    
+                    />
                   </Badge>
                 </Link>
               </li>
               <li onClick={() => setOpen(false)}>
-                <Link to="/login">
-                  {isAuthenticated ? "Edit" : "Login"}
+                <Link to="/login" className="login-edit">
+                  {isAuthenticated ? 
+                    <EditIcon 
+                      style={{position: "relative", top: "4px"}}  
+                    /> : 
+                    <ExitToAppIcon 
+                      style={{
+                        color: "var(--light-two)", 
+                        position: "relative", 
+                        top: "5px"
+                        }}
+                    />}
                 </Link>
               </li>
             </ul>

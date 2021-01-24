@@ -7,14 +7,17 @@ import {
     LOGIN,
     REGISTER,
     LOGOUT,
-    USER_LOADED
+    USER_LOADED,
+    AUTH_ERROR
 } from './types'
 
 const AuthState = (props) => {
+
     const initialState = {
         token: localStorage.getItem("token"),
         isAuthenticated: null,
-        user: null
+        user: null,
+        errors: []
     }
 
     const [state, dispatch] = useReducer(authReducer, initialState);
@@ -28,10 +31,11 @@ const AuthState = (props) => {
 
         const res = await axios.get("/login")
 
-        if (res.data.status === 401) {
+        if (res.data.status === 400 || res.data.status === 401) {
             console.log(res.data.msg);
             dispatch({
-                type: LOGOUT
+                type: LOGOUT,
+                payload: ""
             })
         } else {
             console.log(res.data.name, "is logged in.");
@@ -67,17 +71,25 @@ const AuthState = (props) => {
                 "Content-Type": "application/json"
             }
         }
-        const res = await axios.post("/login", formData, config)
 
-        dispatch({
-            type: LOGIN,
-            payload: res.data
-        })
-        loadUser();
+        try {
+            const res = await axios.post("/login", formData, config)
+            dispatch({
+                type: LOGIN,
+                payload: res.data
+            })
+            loadUser();
+        } catch (err) {
+            // window.alert(err.response.data.msg);
+            dispatch({
+                type: AUTH_ERROR,
+                payload: err.response.data.msg
+            })
+        }
     }
 
     //logout
-    const logout = () => dispatch({type: LOGOUT})
+    const logout = () => dispatch({type: LOGOUT, payload: "Logged out"})
 
 
     return (
@@ -86,6 +98,7 @@ const AuthState = (props) => {
                 token: state.token,
                 isAuthenticated: state.isAuthenticated,
                 user: state.user, 
+                errors: state.errors,
                 register,
                 login,
                 loadUser,

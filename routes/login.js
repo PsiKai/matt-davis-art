@@ -36,10 +36,14 @@ async (req, res) => {
             return res.status(400).json({msg: "invalid credentials"})
         }
 
+        if (password === "12345") {
+            return res.status(400).json({msg: "I told you it wasn't 12345, silly"})
+        }
+
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
-            return res.status(400).json({msg: "invalid credentials"})
+            return res.status(400).json({msg: "Password incorrect..."})
         }
 
         const payload = {
@@ -59,7 +63,7 @@ async (req, res) => {
         )
     } catch (err) {
         console.error(err.message)
-        res.status(500).send("server error")
+        res.status(500).json({msg: "There was a server error"})
     }
 })
 

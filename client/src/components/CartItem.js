@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useContext, useEffect} from 'react'
 import AppContext from '../context/AppContext'
-import {CSSTransition} from "react-transition-group"
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 const CartItem = ({quantity, title, src, stock, id}) => {
     const appContext = useContext(AppContext)
@@ -67,11 +67,21 @@ const CartItem = ({quantity, title, src, stock, id}) => {
            <div className="cart-item" style={{transitionDelay: `${(id + 1.5) * 100}ms`}}>
                 <img src={`data:${src.contentType};base64, ${bytes.toString('base64')}`} 
                     alt={title} />
+                    
                 <div>
+                    <h2>{title}</h2>
+                    <p>Quantity: </p>
+                    <TransitionGroup className="cart-item--quantity__wrapper">
+                    
                     {edit === true ? 
+                        <CSSTransition
+                            key={1}
+                            classNames="switch"
+                            timeout={100}
+                        >
                         <form onSubmit={makeChanges}>
-                        <h2>{title}</h2>
-                        <p>Quantity: </p>
+                        
+                        
                         <p>5 x 8: 
                             <input 
                                 name="fiveEight"
@@ -100,16 +110,25 @@ const CartItem = ({quantity, title, src, stock, id}) => {
                                 onChange={updateQuantity} />
                         </p>
                         <button><i className="far fa-check-square fa-lg"></i></button>
-                        </form> :
-                        <Fragment>
-                        <h2>{title}</h2>
-                        <p>Quantity: </p>
-                        {fiveEight > 0 && <p>5 x 8: <span>{fiveEight}</span></p>}
-                        {eightEleven > 0 && <p>8.5 x 11: <span>{eightEleven}</span></p>}
-                        {oneeightTwofour > 0 && <p>18 x 24: <span>{oneeightTwofour}</span></p>}
-                        <button onClick={adjustQuan}><i className="far fa-edit fa-lg"></i></button>
-                        </Fragment>
+                        </form> 
+                        </CSSTransition>:
+                        <CSSTransition
+                            key={2}
+                            classNames="switch"
+                            timeout={100}
+                        >
+                        <div className="cart-item--quanity">
+                            {fiveEight > 0 && <p>5 x 8: <span>{fiveEight}</span></p>}
+                            {eightEleven > 0 && <p>8.5 x 11: <span>{eightEleven}</span></p>}
+                            {oneeightTwofour > 0 && <p>18 x 24: <span>{oneeightTwofour}</span></p>}
+
+                            <button onClick={adjustQuan}>
+                                <i className="far fa-edit fa-lg"></i>
+                            </button>
+                        </div>
+                        </CSSTransition>
                     }
+                    </TransitionGroup>
                 </div>
             </div> 
         </CSSTransition>

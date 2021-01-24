@@ -145,9 +145,9 @@ const EditGallery = () => {
                                 onChange={setUpdate}
                                 />
 
-                            <button onClick={submitChanges}>Submit</button>
+                            <button data-text="Submit" onClick={submitChanges}>Submit</button>
                             <p style={{textAlign: "center"}}>--OR--</p>
-                            <button onClick={remove}>Delete</button>
+                            <button data-text="Delete" onClick={remove}>Delete</button>
                         </div>
                 </CSSTransition>
             </div>
