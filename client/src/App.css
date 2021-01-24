@@ -596,10 +596,10 @@ header .cart-link:active > span {
   position: relative;
 }
 
-.cart-item--quantity__wrapper {
-  /* position: relative; */
-  /* height: 185px; */
-}
+/* .cart-item--quantity__wrapper {
+  position: relative;
+  height: 185px;
+} */
 
 .cart-item h2 {
   text-align: center;
@@ -610,10 +610,10 @@ header .cart-link:active > span {
   margin-left: 1rem;
 }
 
-.cart-item--quanity {
-  /* height: 185px; */
-  /* position: static; */
-}
+/* .cart-item--quanity {
+  height: 185px;
+  position: static;
+} */
 
 .cart-item p {
   margin: 0.5rem;

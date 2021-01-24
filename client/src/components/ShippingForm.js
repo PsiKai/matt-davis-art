@@ -43,7 +43,6 @@ const ShippingForm = ({shipForm}) => {
 
 
     return (
-        <Fragment>
         <TransitionGroup className="shipping-form__wrapper">
         {addy ?
             <CSSTransition
@@ -163,12 +162,13 @@ const ShippingForm = ({shipForm}) => {
             </div>
             
             </div>
-            <button type="submit"><i className="far fa-check-square fa-lg"></i></button>   
+            <button type="submit">
+                <i className="far fa-check-square fa-lg"></i>
+            </button>   
         </form>
         </CSSTransition>
         }
         </TransitionGroup>
-        </Fragment>
         
     )
 }
