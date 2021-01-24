@@ -80,8 +80,6 @@ const CartItem = ({quantity, title, src, stock, id}) => {
                             timeout={100}
                         >
                         <form onSubmit={makeChanges}>
-                        
-                        
                         <p>5 x 8: 
                             <input 
                                 name="fiveEight"
