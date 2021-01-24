@@ -67,12 +67,27 @@ const CartItems = () => {
                 />
 
                 <div className="cart-total">
-                    <p>Items in cart: <b>{cartItems}</b></p>
-                    <p>Subtotal: <b>${total}</b></p>
-                    <p>Shipping: <b>Free!</b></p>
-                    <hr className="underline"></hr>        
-                    <h3>Total: <span>${total + 0}</span></h3>  
-                    <button data-text="Checkout" onClick={clear}>Checkout</button>
+                    <div>
+                        <p>Items in cart:</p>
+                        <p>Subtotal:</p>
+                        <p>Shipping:</p>
+                        
+                    </div>
+                    <div>
+                        <p><b>{cartItems}</b></p>
+                        <p><b>${total}</b></p>
+                        <p><b>Free!</b></p>
+                        
+                    </div>
+                    <hr className="underline"></hr> 
+                    <h3>Total: </h3>       
+                    <h3>${total + 0}</h3>
+                    <button 
+                        className="checkout" 
+                        data-text="Checkout" 
+                        onClick={clear}>
+                            Checkout
+                    </button>
                 </div> 
 
                 <Alerts />

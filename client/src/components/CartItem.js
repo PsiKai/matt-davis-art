@@ -17,11 +17,12 @@ const CartItem = ({quantity, title, src, stock, id}) => {
 
     const makeChanges = (e) => {
         e.preventDefault()
-        
+        // console.log(e.target.parentNode.parentNode.children[0]);
+        var title = e.target.parentNode.parentNode.children[0].innerHTML;
         var savedCart = JSON.parse(localStorage.getItem("cart"));
         let updatedQuan = []
         savedCart.find((item) => {
-            if (item.title === e.target.children[0].innerHTML) {
+            if (item.title === title) {
                 item.quantity = quan
                 if (item.quantity.fiveEight > 0 || item.quantity.eightEleven > 0 || item.quantity.oneeightTwofour > 0) {
                     updatedQuan = [...updatedQuan, item]
