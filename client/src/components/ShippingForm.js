@@ -1,4 +1,4 @@
-import React, {Fragment, useState, useEffect} from 'react'
+import React, { useState, useEffect} from 'react'
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 const ShippingForm = ({shipForm}) => {
@@ -43,8 +43,9 @@ const ShippingForm = ({shipForm}) => {
 
 
     return (
+        <div>
         <TransitionGroup className="shipping-form__wrapper">
-        {addy ?
+        {addy === true ?
             <CSSTransition
                 key={1}
                 classNames="switch"
@@ -169,7 +170,7 @@ const ShippingForm = ({shipForm}) => {
         </CSSTransition>
         }
         </TransitionGroup>
-        
+        </div>
     )
 }
 
