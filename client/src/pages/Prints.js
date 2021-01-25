@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
+import "../styles/prints.css"
 import Print from "../components/Print";
 import PageHeader from "../components/PageHeader"
 import AppContext from "../context/AppContext"

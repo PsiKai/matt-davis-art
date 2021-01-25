@@ -75,11 +75,11 @@ const CartItem = ({quantity, title, src, stock, id}) => {
     var bytes = Buffer.from(src.data)
     return (
         <CSSTransition 
-            unmountOnExit={true} 
+            // unmountOnExit={true} 
             // key={id} 
             in={fade} 
             classNames="fadein" 
-            timeout={500} 
+            timeout={200} 
         >
            <div className="cart-item" style={{transitionDelay: `${(id + 1.5) * 100}ms`}}>
                 <div className="cart-item--img__wrapper">

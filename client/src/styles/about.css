@@ -1,0 +1,37 @@
+/* About Me Style  */
+
+.about-img {
+  background-image: url(../images/drawing-board.jpg);
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 300px;
+  min-height: 40vh;
+  object-fit: cover;
+  filter: brightness(0.7) contrast(200%);
+  box-shadow: 0 0 16px 16px white inset;
+}
+
+.about-content__grid {
+  margin: 4rem 0 0 4rem;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: repeat(2, auto);
+}
+
+.about-content {
+  margin: 2rem 0;
+  position: relative;
+  width: 60%;
+}
+
+.about-content img {
+  width: 300px;
+}
+
+.about-text {
+  margin: 2rem 0;
+  /* grid-column: 3; */
+  width: 90%;
+  padding: 0 3rem;
+}

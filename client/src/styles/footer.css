@@ -1,0 +1,25 @@
+/* Footer Styles  */
+
+footer {
+  background: url(../images/brushed-alum.png) var(--light);
+  grid-area: footer;
+  border-top: 2px solid;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 0 15px 0 inset rgba(0, 0, 0, 0.3);
+}
+
+.login-toast {
+  position: absolute;
+  z-index: -1;
+  margin: auto;
+  left: 34%;
+  transform: translateY(-76%);
+  transition: transform 200ms ease, z-index 100ms linear;
+}
+
+.slide-up {
+  transform: translateY(-200%);
+  z-index: 1;
+}

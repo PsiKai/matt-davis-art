@@ -1,0 +1,43 @@
+/* Key frame animations  */
+
+@keyframes press-text {
+  0% {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    transform: scale(1);
+  }
+  75% {
+    text-shadow: none;
+    transform: scale(0.95);
+  }
+  100% {
+    text-shadow: none;
+    transform: scale(1);
+  }
+}
+
+@keyframes press-cart {
+  0% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes press {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 1px inset var(--dark), 0 0 15px 0 rgba(0, 0, 0, 0.2);
+  }
+  75% {
+    box-shadow: 0 0 0 1px inset var(--dark), 0 0 10px 0 rgba(0, 0, 0, 0.3);
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 1px inset var(--dark), 0 0 15px 0 rgba(0, 0, 0, 0.2);
+  }
+}

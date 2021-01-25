@@ -2,6 +2,8 @@ import React, {Fragment} from 'react'
 import {Router, Switch, Route} from 'react-router-dom';
 import {createBrowserHistory} from 'history'
 import './App.css';
+import "./styles/keyframes.css"
+import "./styles/transitions.css"
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 
 import AppState from "./context/AppState"

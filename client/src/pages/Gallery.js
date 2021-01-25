@@ -1,4 +1,5 @@
 import React, {useContext, useEffect} from 'react';
+import "../styles/gallery.css"
 import AppContext from '../context/AppContext'
 import Piece from "../components/Piece";
 import CircularProgress from "@material-ui/core/CircularProgress"

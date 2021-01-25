@@ -1,6 +1,7 @@
 import React, {useEffect, useContext} from 'react'
 import Carousel from "../components/Carousel"
 import AppContext from "../context/AppContext"
+import "../styles/main.css"
 
 const Main = () => {    
     const appContext = useContext(AppContext)

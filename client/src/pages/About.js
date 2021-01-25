@@ -1,5 +1,6 @@
 import React from 'react'
 import PageHeader from "../components/PageHeader"
+import "../styles/about.css"
 
 const About = () => {
     return (

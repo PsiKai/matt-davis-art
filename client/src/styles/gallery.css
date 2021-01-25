@@ -1,0 +1,64 @@
+/* Gallery Styles  */
+
+.gallery-piece {
+  width: 80%;
+  max-height: 75vh;
+  margin: 5rem auto;
+  text-align: center;
+}
+
+.gallery-piece img {
+  object-fit: contain;
+  max-height: 58vh;
+  max-width: 100%;
+  border: 5px outset burlywood;
+  box-shadow: 10px 0 15px 2px rgba(0, 0, 0, 0.2),
+    -10px 0 15px 2px rgba(0, 0, 0, 0.2);
+}
+
+.plaque {
+  background: whitesmoke;
+  color: var(--dark);
+  padding: 0 0.5rem;
+  text-align: left;
+  margin: 1rem 3% 0 50%;
+  width: 300px;
+  border: 3px outset white;
+  border-radius: 4px;
+  font-family: sans-serif;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+.plaque h3 {
+  margin: 0.5rem 0 0.25rem;
+}
+
+.plaque-medium {
+  margin-top: 0;
+  font-size: 0.9rem;
+}
+
+.plaque-description {
+  white-space: pre-line;
+  font-size: 00.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.art-division {
+  overflow: visible;
+  padding: 0;
+  border: none;
+  border-top: medium double #333;
+  color: #333;
+  text-align: center;
+}
+
+.art-division:after {
+  content: "§";
+  display: inline-block;
+  position: relative;
+  top: -1.2rem;
+  font-size: 1.5rem;
+  padding: 0 0.23rem 0 0.28rem;
+  background: url(../images/brushed-alum.png) var(--white);
+}

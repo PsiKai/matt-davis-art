@@ -1,4 +1,5 @@
 import React, {useContext, useEffect} from 'react';
+import "../styles/cart.css"
 import AppContext from "../context/AppContext";
 import CartItems from "../components/CartItems";
 import { CircularProgress } from '@material-ui/core';

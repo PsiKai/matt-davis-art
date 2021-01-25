@@ -25,7 +25,7 @@ const Print = ({src, open, id, title, name, sku, stock}) => {
             in={fade} 
             classNames="fadein" 
             timeout={400}
-            unmountOnExit={true}
+            // unmountOnExit={true}
             >
            <div 
                 onClick={openUp} 

@@ -1,0 +1,56 @@
+/* Contact page styles  */
+
+.contact-img {
+  background-image: url(../images/matt-portrait.jpg);
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 300px;
+  min-height: 40vh;
+  object-fit: cover;
+  filter: brightness(0.89) contrast(103%);
+  box-shadow: 0 0 16px 16px white inset;
+}
+
+.contact__grid {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.contact__grid > .contact--info {
+  padding: 0 4rem 4rem;
+  text-align: center;
+}
+
+.contact__grid h3 {
+  margin-bottom: 3rem;
+}
+
+.contact--social__flex {
+  display: flex;
+  justify-content: space-evenly;
+  justify-items: start;
+  margin-bottom: 4rem;
+}
+
+.contact--social__flex a {
+  padding: 0.75rem 1rem;
+  border-radius: 25%;
+  transition: all 150ms ease-in-out;
+  box-shadow: 0 0 0 1px inset var(--dark);
+  background-color: var(--white);
+}
+
+.contact--social__flex a:hover {
+  box-shadow: 0 0 0 1px inset var(--dark), 0 0 15px 0 rgba(0, 0, 0, 0.2);
+}
+
+.contact--social__flex a:focus {
+  animation: press 150ms ease forwards;
+}
+
+.email-form,
+.contact--info {
+  width: 500px;
+  margin: 2rem auto;
+}

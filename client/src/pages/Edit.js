@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import "../styles/edit.css"
 import AppContext from "../context/AppContext"
 import AuthContext from "../context/authContext"
 import UploadGallery from '../components/UploadGallery'

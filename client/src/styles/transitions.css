@@ -1,0 +1,195 @@
+/* Page heading animation  */
+
+.widen-enter {
+  width: 200px;
+}
+
+.widen-enter.widen-enter-active {
+  width: 600px;
+  transition: width 600ms cubic-bezier(0.71, -0.415, 0.415, 1.65) 200ms;
+}
+
+.widen-enter-done {
+  width: 600px;
+}
+
+/* standard fade-in and out transition  */
+
+.fadein-enter {
+  opacity: 0;
+}
+
+.fadein-enter.fadein-enter-active {
+  opacity: 1;
+  transition: opacity 200ms ease;
+}
+
+.fadein-enter-done {
+  opacity: 1 !important;
+  transition-delay: 0ms !important;
+}
+
+.fadein-exit {
+  opacity: 1;
+}
+
+.fadein-exit.fadein-exit-active {
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.fadein-exit-done {
+  opacity: 0;
+}
+
+/* Alert message transition  */
+
+.fade-enter {
+  opacity: 0;
+  height: 0rem;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  height: 6rem;
+  transition: all 500ms ease-out;
+}
+
+/* .fade-enter-active::after {
+    transform: rotateX(90deg);
+    height: 6rem;
+  } */
+
+.fade-enter-done {
+  opacity: 1 !important;
+  height: 6rem !important;
+}
+
+.fade-enter-done::after {
+  /* transform: rotateX(90deg); */
+  transition: 200ms ease;
+  height: 6rem !important;
+}
+
+.fade-exit {
+  opacity: 1;
+  height: 6rem;
+}
+
+.fade-exit::after {
+  /* transform: rotateX(0); */
+  /* transition: height 200ms ease; */
+  height: 0;
+}
+
+.fade-exit.fade-exit-active {
+  opacity: 0;
+  height: 0;
+  transition: height 500ms ease, opacity 500ms ease !important;
+}
+
+.fade-exit-done {
+  opacity: 0;
+  height: 0;
+}
+
+/* page swipe transition  */
+
+.slide-enter {
+  position: absolute;
+  opacity: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.slide-enter ~ footer {
+  opacity: 0;
+}
+
+.slide-enter.slide-enter-active {
+  opacity: 1;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 100ms ease-out 100ms;
+}
+
+.slide-enter.slide-enter-active ~ footer {
+  opacity: 0;
+}
+
+.slide-enter-done {
+  position: relative;
+  opacity: 1;
+}
+
+.slide-enter-done ~ footer {
+  opacity: 1;
+  transition: opacity 400ms ease;
+}
+
+.slide-exit {
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
+  opacity: 1;
+}
+
+.slide-exit ~ footer {
+  opacity: 0;
+}
+
+.slide-exit.slide-exit-active {
+  opacity: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 100ms ease-in;
+}
+
+.slide-exit.slide-exit-active ~ footer {
+  opacity: 0;
+}
+
+.slide-exit-done {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+}
+
+.slide-exit-done ~ footer {
+  opacity: 0;
+}
+
+/* Form switch transition  */
+
+.switch-enter {
+  opacity: 0;
+  position: absolute;
+}
+
+.switch-enter.fadein-enter-active {
+  opacity: 0;
+}
+
+.switch-enter-done {
+  position: inherit;
+  opacity: 1 !important;
+  transition: opacity 200ms ease;
+}
+
+.switch-exit {
+  opacity: 0;
+  transition: opacity 100ms ease;
+}
+
+.switch-exit.fadein-exit-active {
+  opacity: 0;
+  position: absolute;
+}
+
+.switch-exit-done {
+  opacity: 0;
+}

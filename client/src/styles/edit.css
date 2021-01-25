@@ -1,0 +1,218 @@
+/* Edit Page Styles  */
+
+.login-form {
+  margin: 4rem auto;
+  width: 50%;
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 2rem 0 0 0;
+}
+
+.nav-buttons button {
+  width: 100%;
+  padding: 1rem 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.7);
+  border-top: none;
+  border-bottom: none;
+  background-color: inherit;
+  color: var(--dark);
+  box-shadow: none;
+}
+
+.nav-buttons button:hover {
+  background: (--white);
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+.nav-buttons button:focus {
+  background: inherit !important;
+}
+
+.nav-buttons a:hover {
+  text-decoration: none;
+}
+
+.nav-buttons button:after {
+  display: none;
+}
+
+.nav-buttons button:hover:after {
+  display: none;
+}
+
+.upload-prints,
+.upload-gallery,
+.update-stock,
+.edit-gallery {
+  max-width: 100%;
+  width: 66rem;
+}
+
+.upload-form {
+  width: 90%;
+  margin: 2rem auto 0;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.upload-form.prints {
+  height: 450px;
+}
+
+.upload-form.prints form {
+  padding: 1rem;
+}
+
+.upload-form.prints label {
+  display: inline-block;
+  width: auto;
+}
+
+.upload-prints--stock {
+  display: flex;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+  padding: 1rem 1rem 2rem;
+}
+
+.upload-prints--stock label {
+  margin-right: 0.5rem;
+}
+
+.img-preview {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding: 1rem;
+  display: block;
+  text-align: center;
+}
+
+.upload-form img {
+  height: 100%;
+  max-width: 90%;
+  transform: translateX(-50%);
+  object-fit: contain;
+  object-position: top;
+  position: absolute;
+}
+
+.update-stock h2 {
+  text-align: center;
+}
+
+.print-stock {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.print-stock-item {
+  margin: 1rem;
+  padding: 1rem 0.5rem;
+  width: 200px;
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+.print-stock-item h5 {
+  text-align: center;
+  margin: 0 0 0.5rem 0;
+}
+
+.print-stock img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.print-stock ul {
+  margin: 0;
+  list-style: none;
+  padding: 0;
+}
+
+.print-stock li {
+  padding: 0 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.print-stock li:last-of-type {
+  margin: 0.5rem 0 0 0;
+  justify-content: space-around;
+}
+
+.print-stock--buttons {
+  text-align: center;
+}
+
+.print-stock--buttons button {
+  display: inline-block;
+  margin: 1rem;
+}
+
+.update-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2rem auto;
+  justify-content: center;
+}
+
+.update-preview {
+  margin: 1rem;
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  transition: transform 100ms ease, box-shadow 100ms ease;
+}
+
+.update-preview:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.3);
+}
+
+.update-gallery--grid {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  height: 500px;
+}
+
+.update-gallery--wrapper {
+  position: relative;
+  height: 500px;
+}
+
+.update-gallery--form {
+  position: absolute;
+  opacity: 0;
+}
+
+.update-gallery--update {
+  padding: 1rem 2rem;
+  position: relative;
+}
+
+.edit-image {
+  min-width: 450px;
+  height: 450px;
+  width: 100%;
+  object-fit: contain;
+}
+
+.edit-transition {
+  margin-top: 3rem;
+}
+
+.logout {
+  position: absolute;
+  bottom: -3.5rem;
+  right: 2rem;
+  z-index: 2;
+  transform-origin: 0% 50%;
+}

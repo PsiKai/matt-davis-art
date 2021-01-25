@@ -1,0 +1,132 @@
+/* Prints Styles  */
+
+.prints-flexbox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.print-item img {
+  height: 250px;
+  width: 250px;
+  object-fit: cover;
+  position: relative;
+  /* z-index: 2; */
+}
+
+.print-item {
+  position: relative;
+  background: var(--white);
+  display: inline-block;
+  text-align: center;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  opacity: 0;
+  box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.print-item:hover {
+  transform: scale(1.05);
+  transform-origin: center;
+  box-shadow: 2px 2px 16px 0 rgba(0, 0, 0, 0.2);
+  transition-delay: 0ms !important;
+}
+
+/* .print-item h3 {
+    position: relative;
+    z-index: 2;
+  }
+  
+  .print-item h3::before {
+    content: "";
+    position: absolute;
+    background-color: var(--medium);
+    width: 100%;
+    height: 140%;
+    right: 0;
+    top: -4px;
+    z-index: -1;
+    transform: rotate(4deg) skew(4deg);
+  }
+  
+  .print-item h3::after {
+    content: "";
+    position: absolute;
+    background-color: var(--dark);
+    width: 230px;
+    height: 42px;
+    right: 1rem;
+    z-index: -2;
+    transform: rotate(-2deg) skew(5deg);
+  } */
+
+.sold-out {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  color: var(--medium);
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+  z-index: 3;
+}
+
+.sold-out h2 {
+  background: var(--dark);
+  transform: translateY(250px);
+  border-top: 2px outset var(--white);
+  border-bottom: 2px outset var(--white);
+}
+
+.print-item.zero-stock:hover {
+  transform: none;
+  box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3);
+  cursor: initial;
+}
+
+.print-modal {
+  background: url(../images/brushed-alum.png) var(--white);
+  opacity: 1;
+  border-radius: 8px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2rem;
+  text-align: center;
+  width: 35rem;
+  box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.5);
+}
+
+.print-modal__flex {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.close-modal {
+  box-sizing: content-box;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0 5px 0 6px;
+  border-radius: 4px;
+  width: 22px;
+  transition: background-color 200ms ease, box-shadow 200ms ease;
+  cursor: pointer;
+}
+
+.close-modal:hover {
+  background: var(--white);
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.print-modal img {
+  width: 100%;
+  display: block;
+  margin: 1rem auto;
+}

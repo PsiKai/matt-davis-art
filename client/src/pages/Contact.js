@@ -1,4 +1,5 @@
 import React, {useContext, useState} from 'react'
+import "../styles/contact.css"
 import AlertContext from "../context/alertContext";
 import axios from "axios"
 import Alerts from "../components/Alerts"
