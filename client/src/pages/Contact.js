@@ -35,9 +35,10 @@ const Contact = () => {
                         <a href="https://www.instagram.com/mattdavisart5280/"><i className="fab fa-instagram fa-2x"></i></a>
                         <a href="https://www.facebook.com/matthew.davis.5437"><i className="fab fa-facebook-f fa-2x"></i></a>
                     </div>
-                    <h3>Or just send me an email directly:</h3>
+                    
                 </div>
             <form className="email-form" onSubmit={submitEmail}>
+                <h3>Or just send me an email directly:</h3>
                 <label htmlFor="sender">Your email</label>
                 <input
                     type="email"

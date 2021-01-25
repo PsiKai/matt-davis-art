@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect} from 'react'
 import AppContext from '../context/AppContext'
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import ImgModal from './ImgModal';
 
 const CartItem = ({quantity, title, src, stock, id}) => {
     const appContext = useContext(AppContext)
@@ -8,6 +9,7 @@ const CartItem = ({quantity, title, src, stock, id}) => {
     const [edit, setEdit] = useState(false)
     const [quan, setQuan] = useState(quantity)
     const [fade, setFade] = useState(false)
+    const [imgModal, setImgModal] = useState({in: false, src: "", title: ""})
 
     const {fiveEight, eightEleven, oneeightTwofour} = quan
 
@@ -56,6 +58,20 @@ const CartItem = ({quantity, title, src, stock, id}) => {
         setEdit(true)
     }
 
+    const fullSize = (e) => {
+        setImgModal({
+            in: true,
+            src: e.target.src,
+            title: e.target.alt
+        })
+    }
+
+    const close = (e) => {
+        if (e.target.className !== "cart-preview") {
+        setImgModal({in: false, src: "", title:""})
+        }
+    }
+
     var bytes = Buffer.from(src.data)
     return (
         <CSSTransition 
@@ -66,10 +82,14 @@ const CartItem = ({quantity, title, src, stock, id}) => {
             timeout={500} 
         >
            <div className="cart-item" style={{transitionDelay: `${(id + 1.5) * 100}ms`}}>
-                <img src={`data:${src.contentType};base64, ${bytes.toString('base64')}`} 
-                    alt={title} />
-                    
-                <div>
+                <div className="cart-item--img__wrapper">
+                <img 
+                    src={`data:${src.contentType};base64, ${bytes.toString('base64')}`} 
+                    alt={title}
+                    onClick={fullSize} 
+                />
+                </div>    
+                <div className="cart-item--info__wrapper">
                     <h2>{title}</h2>
                     <p>Quantity: </p>
                     <TransitionGroup className="cart-item--quantity__wrapper">
@@ -129,6 +149,22 @@ const CartItem = ({quantity, title, src, stock, id}) => {
                     }
                     </TransitionGroup>
                 </div>
+                <TransitionGroup>
+                    {imgModal.in &&
+                        
+                        <CSSTransition
+                            key={title}
+                            classNames="fadein" 
+                            timeout={200}
+                        >
+                            <ImgModal 
+                                close={close} 
+                                img={imgModal.src} 
+                                title={imgModal.title}
+                            />
+                        </CSSTransition>
+                    }
+                </TransitionGroup>
             </div> 
         </CSSTransition>
     )

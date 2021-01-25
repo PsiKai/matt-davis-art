@@ -579,7 +579,7 @@ header .cart-link:active > span {
 .cart-item {
   background: var(--white);
   height: 300px;
-  padding: 1rem;
+  padding: 1rem 2rem 1rem 1rem;
   opacity: 1;
   display: flex;
   width: 60%;
@@ -589,17 +589,12 @@ header .cart-link:active > span {
   box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3);
 }
 
-.cart-item > div {
+.cart-item--info__wrapper {
   height: 185px !important;
   width: 50%;
   text-align: right;
   position: relative;
 }
-
-/* .cart-item--quantity__wrapper {
-  position: relative;
-  height: 185px;
-} */
 
 .cart-item h2 {
   text-align: center;
@@ -610,21 +605,17 @@ header .cart-link:active > span {
   margin-left: 1rem;
 }
 
-/* .cart-item--quanity {
-  height: 185px;
-  position: static;
-} */
-
 .cart-item p {
   margin: 0.5rem;
   margin-right: 0;
 }
 
-.cart-item img {
-  height: 250px;
+.cart-item--img__wrapper img {
+  height: 100%;
   width: 250px;
   object-fit: cover;
   align-self: center;
+  cursor: zoom-in;
 }
 
 .cart-item button {
@@ -652,6 +643,38 @@ header .cart-link:active > span {
 
 .cart-item button:active {
   animation: none;
+}
+
+.cart-preview__wrapper {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cart-preview {
+  width: 100%;
+  min-width: 500px;
+  max-height: 80%;
+  object-fit: contain;
+  border: 6px outset burlywood;
+}
+
+.cart-preview ~ .MuiSvgIcon-root {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  /* opacity: 0.8; */
+  border-radius: 4px;
+  border: 1px solid var(--dark);
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.cart-preview ~ .MuiSvgIcon-root:hover {
+  background-color: var(--white);
 }
 
 .cart-division {
@@ -881,8 +904,12 @@ header .cart-link:active > span {
 }
 
 .contact__grid > .contact--info {
-  padding: 4rem;
+  padding: 0 4rem 4rem;
   text-align: center;
+}
+
+.contact__grid h3 {
+  margin-bottom: 3rem;
 }
 
 .contact--social__flex {
@@ -896,6 +923,8 @@ header .cart-link:active > span {
   padding: 1rem 1.25rem;
   border-radius: 25%;
   transition: all 150ms ease-in-out;
+  box-shadow: 0 0 0 1px inset var(--dark);
+  background-color: var(--white);
 }
 
 .contact--social__flex a:hover {
@@ -921,7 +950,8 @@ header .cart-link:active > span {
   }
 }
 
-.email-form {
+.email-form,
+.contact--info {
   width: 500px;
   margin: 2rem auto;
 }
@@ -1032,7 +1062,7 @@ header .cart-link:active > span {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 100;
 }
 
