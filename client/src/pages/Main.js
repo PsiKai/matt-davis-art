@@ -14,8 +14,10 @@ const Main = () => {
 
     return (
         // <div className="page-content" style={{padding: "1rem 0"}}>
+        <div className="carousel__wrapper">
+            <div className="brand-backdrop"></div>
             <Carousel />
-        // </div>
+        </div>
     )
 }
 

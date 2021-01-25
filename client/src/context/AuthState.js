@@ -28,22 +28,34 @@ const AuthState = (props) => {
         if(localStorage.token) {
             setAuthToken(localStorage.token)
         }
-
-        const res = await axios.get("/login")
-
-        if (res.data.status === 400 || res.data.status === 401) {
-            console.log(res.data.msg);
+        try {
+            const res = await axios.get("/login")
+            dispatch({
+                type: USER_LOADED,
+                payload: res.data
+            })
+        } catch (err) {
+            console.log(err.response.data.msg);
             dispatch({
                 type: LOGOUT,
                 payload: ""
             })
-        } else {
-            console.log(res.data.name, "is logged in.");
-        dispatch({
-            type: USER_LOADED,
-            payload: res.data
-        })
-    }
+        }
+        
+
+        // if (res.data.status === 400 || res.data.status === 401) {
+        //     console.log(res.data.msg);
+        //     dispatch({
+        //         type: LOGOUT,
+        //         payload: ""
+        //     })
+        // } else {
+        //     console.log(res.data.name, "is logged in.");
+        // dispatch({
+        //     type: USER_LOADED,
+        //     payload: res.data
+        // })
+        // }
     }
 
     ///register user

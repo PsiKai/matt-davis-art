@@ -11,7 +11,12 @@ const Alerts = () => {
         {alerts.length > 0 &&
         alerts.map((alert) => (
             
-            <CSSTransition className="alert" key={alert.id} timeout={500} classNames="fade">
+            <CSSTransition 
+                className="alert" 
+                key={alert.id} 
+                timeout={500} 
+                classNames="fade"
+            >
                 <div style={{background: alert.color}}>
                     <h2>{alert.msg}</h2>
                 </div>

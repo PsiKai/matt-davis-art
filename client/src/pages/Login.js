@@ -21,7 +21,7 @@ const Login = (props) => {
     useEffect(() => {
         errors.forEach(err => {
             if (err !== "") {
-            setAlert(err, "lightpink")
+            setAlert(err, "var(--medium)")
             }
             errors.pop(err)
         })
