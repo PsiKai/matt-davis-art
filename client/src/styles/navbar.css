@@ -37,10 +37,8 @@ header li {
   padding: 1rem;
 }
 
-header li:last-of-type::before {
-  content: "";
-  border-left: 3px double var(--white-two);
-  padding: 1rem;
+header li:last-of-type {
+  border-top: 3px double var(--white-two);
 }
 
 header a {
@@ -118,14 +116,15 @@ header .cart-link:active > span {
 
 .menu {
   position: absolute;
-  z-index: -1;
-  top: 119px;
+  z-index: 200;
+  top: 76px;
   right: 0;
   background-color: var(--dark);
   /* background-color: aliceblue; */
   transform: translateX(101%);
   transition: transform 200ms ease;
   border: 1px solid black;
+  border-top: none;
   border-right: none;
   border-radius: 0 0 0 8px;
 }
@@ -133,7 +132,7 @@ header .cart-link:active > span {
 .menu__burger-icon {
   width: 33px;
   position: fixed;
-  top: 3rem;
+  top: 27px;
   right: 2rem;
   cursor: pointer;
   border-radius: 5px;
@@ -142,7 +141,7 @@ header .cart-link:active > span {
 .menu__burger-icon span {
   position: relative;
   display: block;
-  background-color: var(--dark);
+  background-color: var(--white-two);
   height: 4px;
   margin-bottom: 5px;
   border-radius: 3px;
@@ -154,7 +153,7 @@ header .cart-link:active > span {
   transform-origin: 0;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 850px) {
   header ul {
     flex-direction: row;
   }
@@ -171,5 +170,29 @@ header .cart-link:active > span {
     transform: none !important;
     position: static;
     border: none;
+  }
+
+  header li:last-of-type {
+    border: none;
+  }
+
+  header li:last-of-type::before {
+    content: "";
+    border-left: 3px double var(--white-two);
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 450px) {
+  header {
+    padding: 4px 2rem;
+  }
+
+  .menu {
+    top: 52px;
+  }
+
+  .menu__burger-icon {
+    top: 17px;
   }
 }

@@ -28,7 +28,7 @@ const Contact = () => {
     return (
         <div className="page-content">
             <div className="contact-img"></div>
-            <PageHeader heading="I'd love to hear from you!" />
+            <PageHeader heading="contact me" />
             <div className="contact__grid">
                 <div className="contact--info">
                     <h3>Drop me a line on my socials:</h3> 

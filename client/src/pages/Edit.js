@@ -43,7 +43,7 @@ const Edit = () => {
             <Route render={({location}) => (
                 <div className="page-content">
 
-                    <PageHeader heading="Make Changes To Your Content" />
+                    <PageHeader heading="Edit Your content" />
                     <div className="nav-buttons">
                         <Link to="/uploadgallery">
                             <button 

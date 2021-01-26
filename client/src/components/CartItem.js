@@ -91,7 +91,7 @@ const CartItem = ({quantity, title, src, stock, id}) => {
                 </div>    
                 <div className="cart-item--info__wrapper">
                     <h2>{title}</h2>
-                    <p>Quantity: </p>
+                    <h4>Quantity: </h4>
                     <TransitionGroup className="cart-item--quantity__wrapper">
                     
                     {edit === true ? 
@@ -100,8 +100,9 @@ const CartItem = ({quantity, title, src, stock, id}) => {
                             classNames="switch"
                             timeout={100}
                         >
-                        <form onSubmit={makeChanges}>
-                        <p>5 x 8: 
+                        <form className="cart-item--quantity" onSubmit={makeChanges}>
+                        <div className="cart-item--quantity__grid">
+                            <p>5 x 8: </p>
                             <input 
                                 name="fiveEight"
                                 type="number"
@@ -109,17 +110,19 @@ const CartItem = ({quantity, title, src, stock, id}) => {
                                 max={stock.fiveEight} 
                                 value={fiveEight} 
                                 onChange={updateQuantity} />
-                        </p>
-                        <p>8.5 x 11: 
-                            <input 
-                                name="eightEleven"
-                                type="number" 
-                                min="0"
-                                max={stock.eightEleven}
-                                value={eightEleven} 
-                                onChange={updateQuantity} />
-                        </p>
-                        <p>18 x 24: 
+                        </div>
+                        <div className="cart-item--quantity__grid">
+                            <p>8.5 x 11: </p>
+                                <input 
+                                    name="eightEleven"
+                                    type="number" 
+                                    min="0"
+                                    max={stock.eightEleven}
+                                    value={eightEleven} 
+                                    onChange={updateQuantity} />
+                        </div>
+                        <div className="cart-item--quantity__grid">    
+                            <p>18 x 24: </p>
                             <input 
                                 name="oneeightTwofour"
                                 type="number" 
@@ -127,7 +130,7 @@ const CartItem = ({quantity, title, src, stock, id}) => {
                                 max={stock.oneeightTwofour}
                                 value={oneeightTwofour} 
                                 onChange={updateQuantity} />
-                        </p>
+                        </div>
                         <button><i className="far fa-check-square fa-lg"></i></button>
                         </form> 
                         </CSSTransition>:
@@ -136,11 +139,25 @@ const CartItem = ({quantity, title, src, stock, id}) => {
                             classNames="switch"
                             timeout={100}
                         >
-                        <div className="cart-item--quanity">
-                            {fiveEight > 0 && <p>5 x 8: <span>{fiveEight}</span></p>}
-                            {eightEleven > 0 && <p>8.5 x 11: <span>{eightEleven}</span></p>}
-                            {oneeightTwofour > 0 && <p>18 x 24: <span>{oneeightTwofour}</span></p>}
-
+                        <div className="cart-item--quantity">
+                            {fiveEight > 0 && 
+                                <div className="cart-item--quantity__grid">
+                                    <p>5 x 8: </p>
+                                    <p>{fiveEight}</p>
+                                </div>
+                            }
+                            {eightEleven > 0 && 
+                                <div className="cart-item--quantity__grid">
+                                    <p>8.5 x 11: </p>
+                                    <p>{eightEleven}</p>
+                                </div>
+                            }
+                            {oneeightTwofour > 0 && 
+                                <div className="cart-item--quantity__grid">
+                                    <p>18 x 24: </p>
+                                    <p>{oneeightTwofour}</p>
+                                </div>
+                            }
                             <button onClick={adjustQuan}>
                                 <i className="far fa-edit fa-lg"></i>
                             </button>

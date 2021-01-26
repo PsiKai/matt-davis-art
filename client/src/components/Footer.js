@@ -5,7 +5,7 @@ const Footer = () => {
 
     return (
         <footer>
-            
+            <h1>Thanks for visiting!</h1>
         </footer>
     )
 }

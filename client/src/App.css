@@ -223,8 +223,8 @@ h2 {
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.4);
   align-items: center;
   justify-content: center;
-  height: 0;
-  opacity: 1;
+  /* height: 6rem;
+  opacity: 1; */
   /* overflow: hidden; */
   padding: 1rem 2rem;
   margin: 1rem 0;
@@ -242,7 +242,7 @@ h2 {
   /* transition: all 200ms ease 300ms; */
   transform-origin: bottom;
   background-color: var(--dark);
-  height: 0;
+  /* height: 0; */
   width: 100%;
 }
 
@@ -304,6 +304,7 @@ h2 {
 .brand-backdrop {
   position: absolute;
   top: -1rem;
+  left: -2rem;
   margin: 0;
   height: 100%;
   width: 100%;
@@ -336,4 +337,41 @@ h2 {
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   z-index: 100;
+}
+
+@media (max-width: 450px) {
+  .page-content {
+    padding: 0.5rem;
+    width: 100vw;
+    margin-bottom: 1rem;
+    margin-top: 58px;
+    /* overflow-x: hidden; */
+  }
+
+  .page-header__wrapper {
+    perspective-origin: -6% 120%;
+  }
+
+  .page-header {
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
+
+  .page-header__arrow {
+    top: -96px;
+  }
+
+  .page-header__left {
+    height: 83px;
+  }
+
+  .alert h2 {
+    font-size: 1rem;
+  }
+
+  .close-modal {
+    top: 0.5rem;
+    right: 0.5rem;
+    opacity: 0.7;
+  }
 }

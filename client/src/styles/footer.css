@@ -4,7 +4,7 @@ footer {
   background: url(../images/brushed-alum.png) var(--light);
   grid-area: footer;
   border-top: 2px solid;
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
   position: relative;
   box-shadow: 0 0 15px 0 inset rgba(0, 0, 0, 0.3);
@@ -22,4 +22,10 @@ footer {
 .slide-up {
   transform: translateY(-200%);
   z-index: 1;
+}
+
+footer h1 {
+  font-family: "Yellowtail", cursive;
+  font-weight: lighter;
+  margin: 0;
 }

@@ -43,10 +43,10 @@ const ShippingForm = ({shipForm}) => {
 
 
     return (
-        <div className="shipping-form__wrapper">
-        <h4>Buyer info:</h4>
-        <h4>Shipping info:</h4>
-        <TransitionGroup>
+        
+        <TransitionGroup className="shipping-form__wrapper">
+        {/* <div className="shipping-form__wrapper"> */}
+        
         
         {addy === true ?
             <CSSTransition
@@ -57,12 +57,12 @@ const ShippingForm = ({shipForm}) => {
             <form className="shipping-form" onSubmit={ship}>
                 <div className="info-grid">
                     <div className="email-grid">
-                        
+                    <h4>Buyer info:</h4>
                         <p>{name2}</p>
                         <p>{email}</p>
                     </div>
                     <div className="shipping-grid">
-                        
+                    <h4>Shipping info:</h4>
                         <p>{name}</p>
                         <p>{add1}</p>
                         <p>{add2}</p>
@@ -83,7 +83,7 @@ const ShippingForm = ({shipForm}) => {
         <form className="shipping-form" onSubmit={ship}>
             <div className="info-grid">
             <div className="email-grid">
-                {/* <h4>Buyer info:</h4> */}
+                <h4>Buyer info:</h4>
 
                 <input 
                     type='text'
@@ -103,7 +103,7 @@ const ShippingForm = ({shipForm}) => {
                 </input>
             </div>
             <div className="shipping-grid">
-                {/* <h4>Shipping info:</h4> */}
+                <h4>Shipping info:</h4>
                 <input 
                     type='text'
                     name='name'
@@ -172,8 +172,9 @@ const ShippingForm = ({shipForm}) => {
         </form>
         </CSSTransition>
         }
+        {/* </div> */}
         </TransitionGroup>
-        </div>
+        
     )
 }
 

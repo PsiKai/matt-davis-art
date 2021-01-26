@@ -27,7 +27,7 @@ const Cart = (props) => {
 
     return (
     <div className="page-content">
-        <PageHeader heading="Your Shopping Cart" />
+        <PageHeader heading="Your Cart" />
     
         {(Boolean(localStorage.getItem("cart")) && !prints) &&
             <div className="progress">

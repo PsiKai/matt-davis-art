@@ -16,7 +16,7 @@ const Gallery = () => {
 
     return (
         <div className="page-content">
-            <PageHeader heading="My Gallery of Works" />
+            <PageHeader heading="My Gallery" />
             
             {gallery ? gallery.map((piece, i) => {
                 return <Piece 

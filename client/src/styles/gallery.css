@@ -62,3 +62,16 @@
   padding: 0 0.23rem 0 0.28rem;
   background: url(../images/brushed-alum.png) var(--white);
 }
+
+@media (max-width: 450px) {
+  .plaque {
+    margin: 1rem 0 0 3%;
+    width: 270px;
+  }
+
+  .gallery-piece {
+    width: 100%;
+    margin: 2rem auto;
+    max-height: 90vh;
+  }
+}
