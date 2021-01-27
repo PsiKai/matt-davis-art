@@ -124,10 +124,9 @@ const UploadGallery = () => {
                 <button data-text="Submit" type="submit">Submit</button>
                 
             </form>
-            <TransitionGroup className="img-preview">
+            <TransitionGroup className="img-preview" style={preview !== "" ? {} : {display: "none" }}>
                 <CSSTransition
                     key={file.size}
-                    // in={preview.in}
                     timeout={400}
                     classNames="fadein"
                 >

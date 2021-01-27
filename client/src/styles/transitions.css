@@ -132,6 +132,7 @@
   opacity: 1;
   height: 100%;
   position: absolute;
+  z-index: 3;
   left: 50%;
   transform: translateX(-50%);
   transition: opacity 100ms ease-out 100ms;
@@ -152,10 +153,11 @@
 }
 
 .slide-exit {
-  position: absolute;
+  /* position: absolute; */
   transform: translateX(-50%);
   left: 50%;
   opacity: 1;
+  z-index: 3;
 }
 
 .slide-exit ~ footer {
@@ -175,7 +177,7 @@
 }
 
 .slide-exit-done {
-  position: absolute;
+  /* position: absolute; */
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;

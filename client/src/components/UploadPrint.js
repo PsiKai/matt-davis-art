@@ -119,7 +119,8 @@ const UploadPrint = () => {
                             name="fiveEight" 
                             value={stock.fiveEight} 
                             className="stock" 
-                            min="0" 
+                            min="0"  
+                            inputMode="numeric"
                         />
                         </div>
                     {/* </li>
@@ -134,6 +135,7 @@ const UploadPrint = () => {
                             value={stock.eightEleven}  
                             className="stock"
                             min="0" 
+                            inputMode="numeric" 
                         />
                         </div>
                     {/* </li>
@@ -147,6 +149,7 @@ const UploadPrint = () => {
                             value={stock.oneeightTwofour} 
                             className="stock"
                             min="0" 
+                            inputMode="numeric"
                         />
                         </div>
                         </div>
@@ -155,7 +158,7 @@ const UploadPrint = () => {
                 </ul> */}
                 <button data-text="Submit" type="submit">Submit</button>
             </form>
-            <TransitionGroup className="img-preview">
+            <TransitionGroup className="img-preview" style={preview !== "" ? {} : {display: "none" }}>
                 <CSSTransition
                     key={file.size}
                     // in={preview.in}

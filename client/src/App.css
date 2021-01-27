@@ -350,19 +350,21 @@ h2 {
 
   .page-header__wrapper {
     perspective-origin: -6% 120%;
+    margin-left: 1rem;
   }
 
   .page-header {
     margin-bottom: 1rem;
     padding: 1rem;
+    font-size: 1.5rem;
   }
 
   .page-header__arrow {
-    top: -96px;
+    top: -111px;
   }
 
   .page-header__left {
-    height: 83px;
+    height: 68px;
   }
 
   .alert h2 {

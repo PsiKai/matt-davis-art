@@ -95,6 +95,7 @@ const UpdateStock = () => {
                                 <input 
                                     id="fiveEight" 
                                     type="number" 
+                                    inputMode="numeric"
                                     onChange={update} 
                                     name={art.title} 
                                     className="quantity" 
@@ -106,7 +107,8 @@ const UpdateStock = () => {
                                 <label htmlFor="eightEleven" className="quantity">8.5 x 11:</label>
                                 <input 
                                     id="eightEleven" 
-                                    type="number" 
+                                    type="number"  
+                                    inputMode="numeric"
                                     onChange={update} 
                                     name={art.title} 
                                     className="quantity" 
@@ -118,7 +120,8 @@ const UpdateStock = () => {
                                 <label htmlFor="oneeightTwofour" className="quantity">18 x 24:</label>
                                 <input 
                                     id="oneeightTwofour"
-                                    type="number" 
+                                    type="number"  
+                                    inputMode="numeric"
                                     onChange={update} 
                                     name={art.title}  
                                     className="quantity"  

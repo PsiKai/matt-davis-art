@@ -105,7 +105,8 @@ const CartItem = ({quantity, title, src, stock, id}) => {
                             <p>5 x 8: </p>
                             <input 
                                 name="fiveEight"
-                                type="number"
+                                type="number" 
+                                inputMode="numeric"
                                 min="0"
                                 max={stock.fiveEight} 
                                 value={fiveEight} 
@@ -115,7 +116,8 @@ const CartItem = ({quantity, title, src, stock, id}) => {
                             <p>8.5 x 11: </p>
                                 <input 
                                     name="eightEleven"
-                                    type="number" 
+                                    type="number"  
+                                    inputMode="numeric"
                                     min="0"
                                     max={stock.eightEleven}
                                     value={eightEleven} 
@@ -125,7 +127,8 @@ const CartItem = ({quantity, title, src, stock, id}) => {
                             <p>18 x 24: </p>
                             <input 
                                 name="oneeightTwofour"
-                                type="number" 
+                                type="number"  
+                                inputMode="numeric"
                                 min="0"
                                 max={stock.oneeightTwofour}
                                 value={oneeightTwofour} 

@@ -104,7 +104,8 @@ const Prints = () => {
                             <label htmlFor="fiveEight" className="quantity">5 x 8:</label>
                             <input 
                                 id="fiveEight" 
-                                type="number" 
+                                type="number"  
+                                inputMode="numeric"
                                 name="fiveEight" 
                                 className="quantity" 
                                 min="0"
@@ -116,6 +117,7 @@ const Prints = () => {
                             <input 
                                 id="eightEleven" 
                                 type="number" 
+                                inputMode="numeric" 
                                 name="eightEleven"   
                                 className="quantity" 
                                 min="0"
@@ -126,7 +128,8 @@ const Prints = () => {
                             <label htmlFor="oneeightTwofour" className="quantity">18 x 24:</label>
                             <input 
                                 id="oneeightTwofour" 
-                                type="number" 
+                                type="number"  
+                                inputMode="numeric"
                                 name="oneeightTwofour" 
                                 className="quantity" 
                                 min="0"

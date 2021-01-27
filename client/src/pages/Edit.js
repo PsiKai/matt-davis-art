@@ -70,7 +70,7 @@ const Edit = () => {
                             <button 
                                 style={page === "/editgallery" ? style : null}
                                 name="/editgallery" 
-                                onClick={changePage}>Edit/Delete
+                                onClick={changePage}>Edit/Delete Gallery
                             </button>
                         </Link>
                     </div>
