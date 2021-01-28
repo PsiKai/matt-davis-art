@@ -2,12 +2,14 @@ const express = require("express")
 const router = express.Router();
 const fs = require("fs")
 const path = require("path");
-const {Storage} = require("@google-cloud/storage");
-if(process.env.NODE_ENV === "production") {
-    const storage = new Storage({keyFileName: "google-credentials.json"});
+let auth 
+if(process.env.NODE_ENV !== 'production') {
+    auth = "../config/matt-gcp-oauth.json"
 } else {
-    const storage = new Storage({keyFileName: "../config/matt-gcp-oauth.json"});
+    auth = "google-credentials.json"
 }
+
+const storage = new Storage({keyFileName: auth});
 
 const printBucket = "matt-d-prints"
 const galleryBucket = "matt-d-gallery"
