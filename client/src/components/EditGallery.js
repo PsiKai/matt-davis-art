@@ -45,6 +45,7 @@ const EditGallery = () => {
         const data = {
             old: {
                 title: artEdit.title,
+                type: artEdit.type
             },
             new: {
                 title: newTitle.title,
