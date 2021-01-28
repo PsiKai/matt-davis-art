@@ -9,13 +9,11 @@ const Main = () => {
 
     useEffect(() => {
         !gallery && getArt();
-        // localStorage.cart && reloadCart();
-        localStorage.removeItem("cart")
+        localStorage.cart && reloadCart();
         // eslint-disable-next-line 
     }, [])
 
     return (
-        // <div className="page-content" style={{padding: "1rem 0"}}>
         <div className="carousel__wrapper">
             <div className="brand-backdrop"></div>
             <Carousel />
