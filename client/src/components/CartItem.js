@@ -72,7 +72,6 @@ const CartItem = ({quantity, title, src, stock, id}) => {
         }
     }
 
-    var bytes = Buffer.from(src.data)
     return (
         <CSSTransition 
             // unmountOnExit={true} 
@@ -84,7 +83,7 @@ const CartItem = ({quantity, title, src, stock, id}) => {
            <div className="cart-item" style={{transitionDelay: `${(id + 1.5) * 100}ms`}}>
                 <div className="cart-item--img__wrapper">
                 <img 
-                    src={`data:${src.contentType};base64, ${bytes.toString('base64')}`} 
+                    src={src}
                     alt={title}
                     onClick={fullSize} 
                 />

@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
         const promise2 = printModel.find({}).exec()
         Promise.all([promise1, promise2])
         .then(([result1, result2]) => {
-            // console.log(result1, result2);
+            console.log("got art");
             art = {gallery: [...result1], prints: [...result2]}
             res.json(art)
         })

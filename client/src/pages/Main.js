@@ -9,7 +9,8 @@ const Main = () => {
 
     useEffect(() => {
         !gallery && getArt();
-        localStorage.cart && reloadCart();
+        // localStorage.cart && reloadCart();
+        localStorage.removeItem("cart")
         // eslint-disable-next-line 
     }, [])
 

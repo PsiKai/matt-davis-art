@@ -68,6 +68,7 @@ const AppState = (props) => {
         var newNew = [];
         reducedCart.forEach(item => {
             var obj = {}
+            obj.src = item.img
             obj.quantity = item.quantity
             obj.stock = item.stock
             obj.title = item.title

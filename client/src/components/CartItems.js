@@ -58,7 +58,7 @@ const CartItems = () => {
                         />
                     )
                 })
-                }
+                } 
                 </div>
                 <hr className="cart-division" />
                 
@@ -115,3 +115,5 @@ const CartItems = () => {
 }
 
 export default CartItems
+
+

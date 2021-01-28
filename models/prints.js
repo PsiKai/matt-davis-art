@@ -2,11 +2,12 @@ const mongoose = require('mongoose');
 
 var printSchema = new mongoose.Schema({
     title: String,
-    img: 
-    {
-        data: Buffer,
-        contentType: String
-    },
+    img: String,
+    type: String,
+    // {
+    //     data: Buffer,
+    //     contentType: String
+    // },
     stock: Object
 })
 

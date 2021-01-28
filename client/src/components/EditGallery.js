@@ -24,7 +24,8 @@ const EditGallery = () => {
             title: pic.name,
             alt: pic.name,
             medium: pic.dataset.medium,
-            description: pic.dataset.description
+            description: pic.dataset.description,
+            type: pic.dataset.type
         })
         setEdit(true)
     }
@@ -60,10 +61,15 @@ const EditGallery = () => {
     }
 
     const remove = async () => {
-        const res = await axios.post("/delete/gallery", {name: artEdit.title})
-        setAlert(res.data.msg, "lightblue")
-        setArtEdit({});
-        refreshArt();
+        try {
+            const res = await axios.post("/delete/gallery", {name: artEdit.title, type: artEdit.type})
+            setAlert(res.data.msg, "lightblue")
+            setArtEdit({});
+            refreshArt();
+        } catch (error) {
+            setAlert(error.response.msg, "lightpink")
+        }
+        
     }
 
     return (
@@ -72,7 +78,6 @@ const EditGallery = () => {
             <div className="update-gallery">
                 {
                 gallery ? gallery.map((item, i) => {
-                    var bytes = Buffer.from(item.img.data)
                     return (
                     <img 
                         key={i}
@@ -80,10 +85,11 @@ const EditGallery = () => {
                         className="update-preview"
                         name={item.title}
                         alt={item.title}
-                        src={`data:${item.img.contentType};base64, ${bytes.toString('base64')}`}
+                        src={item.img}
                         onClick={editArtwork}
                         data-description={item.description}
-                        data-medium={item.medium}>
+                        data-medium={item.medium}
+                        data-type={item.type}>
                     </img>)
                     
                 }) : 

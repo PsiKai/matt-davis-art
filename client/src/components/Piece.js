@@ -9,7 +9,7 @@ const Piece = ({src, name, title, medium, description, id}) => {
     }, [])
 
 
-    var bytes = Buffer.from(src.data)
+    // var bytes = Buffer.from(src.data)
     return (
         <CSSTransition 
             in={fade} 
@@ -24,7 +24,8 @@ const Piece = ({src, name, title, medium, description, id}) => {
            <div className="gallery-piece">
                 
                 <img 
-                    src={`data:${src.contentType};base64, ${bytes.toString('base64')}`} 
+                    src={src}
+                    // {`data:${src.contentType};base64, ${bytes.toString('base64')}`} 
                     alt={name}>
                 </img>
                 <div className="plaque">

@@ -2,6 +2,11 @@ const express = require("express")
 const router = express.Router();
 const fs = require("fs")
 const path = require("path");
+const {Storage} = require("@google-cloud/storage");
+const storage = new Storage({keyFileName: "../config/matt-gcp-oauth.json"});
+
+const printBucket = "matt-d-prints"
+const galleryBucket = "matt-d-gallery"
 
 var galleryModel = require("../models/gallery")
 var printModel = require("../models/prints")
@@ -13,8 +18,11 @@ router.post("/gallery", (req, res) => {
     }
     const file = req.files.file
     const {name} = file;
+    const type = name.split(".")[1]
+    const dirFileName = name.replace(/ /g, "-").toLowerCase()
+    const cloudName = req.body.title.replace(/ /g, "-").toLowerCase()
 
-    file.mv(path.join(__dirname + `/uploads/${name.replace(/ /g, "-").toLowerCase()}`), err => {
+    file.mv(path.join(__dirname + `/uploads/${dirFileName}`), err => {
         if(err) {
             console.error(err);
             return res.status(500).json({msg: "Error moving file", error: err});
@@ -23,21 +31,36 @@ router.post("/gallery", (req, res) => {
             title: req.body.title,
             medium: req.body.medium,
             description: req.body.description,
-            img: {
-                data: fs.readFileSync(path.join(__dirname + "/uploads/" + name.replace(/ /g, "-").toLowerCase())),
-                contentType: 'image/png'
-                }
+            type: type,
+            img: `https://storage.googleapis.com/${galleryBucket}/${cloudName}.${type}`
         }
-        galleryModel.create(imgObj, (err, item) => {
-            if (err) {
-                console.log(err);
-                res.json({msg: "Error uploading image"})
-            } else {
-                item.save();
-                res.json({msg: `${imgObj.title} was uploaded to gallery`})
-                fs.unlinkSync(path.join(__dirname + "/uploads/" + name.replace(/ /g, "-").toLowerCase()));
-            }
-        })
+        
+        console.log(imgObj.img);
+        const googleUploadGallery = () => {
+            storage.bucket(galleryBucket).upload(`routes/uploads/${dirFileName}`, {destination: cloudName + "." + type}, (err) => {
+                if (err) {
+                    console.log(err);
+                    res.json({msg: "Error uploading file to google", color: "var(--medium)"})
+                } else {
+                    uploadGallery();
+                }
+            })
+        }
+
+        const uploadGallery = () => {
+            galleryModel.create(imgObj, (err, item) => {
+                if (err) {
+                    console.log(err);
+                    res.json({msg: "Error uploading image to mongo"})
+                } else {
+                    item.save();
+                    res.json({msg: `${imgObj.title} was uploaded to gallery`})
+                    fs.unlinkSync(path.join(__dirname + "/uploads/" + name.replace(/ /g, "-").toLowerCase()));
+                }
+            })
+        }
+        
+        googleUploadGallery();
     })
 })
 
@@ -49,8 +72,11 @@ router.post("/prints", (req, res) => {
 
     const file = req.files.file
     const {name} = file;
+    const type = name.split(".")[1]
+    const dirFileName = name.replace(/ /g, "-").toLowerCase()
+    const cloudName = req.body.title.replace(/ /g, "-").toLowerCase()
 
-    file.mv(`${__dirname}/uploads/${name.replace(/ /g, "-").toLowerCase()}`, err => {
+    file.mv(`${__dirname}/uploads/${dirFileName}`, err => {
         if(err) {
             console.error(err);
             return res.status(500).json({msg: "Error moving file", error: err});
@@ -58,21 +84,34 @@ router.post("/prints", (req, res) => {
         var imgObj = {
             title: req.body.title,
             stock: JSON.parse(req.body.stock),
-            img: {
-                data: fs.readFileSync(path.join(__dirname + "/uploads/" + name.replace(/ /g, "-").toLowerCase())),
-                contentType: 'image/png'
-                    }
+            type: type,
+            img: `https://storage.googleapis.com/${printBucket}/${cloudName}.${type}`
             }
-        printModel.create(imgObj, (err, item) => {
-            if (err) {
-                console.log(err);
-                res.json({msg: "Error uploading image"})
-            } else {
-                item.save();
-                res.json({msg: `${imgObj.title} was uploaded to prints`})
-                fs.unlinkSync(path.join(__dirname + "/uploads/" + name.replace(/ /g, "-").toLowerCase()));
-            }
-        })
+        
+        const googleUploadPrint = () => {
+            storage.bucket(printBucket).upload(`routes/uploads/${dirFileName}`, {destination: cloudName + "." + type}, (err) => {
+                if (err) {
+                    console.log(err)
+                    res.json({msg: "Error uploading file to google", color: "var(--medium)"})
+                } else {
+                    uploadPrint();
+                }
+            })
+        } 
+
+        const uploadPrint = () => {
+            printModel.create(imgObj, (err, item) => {
+                if (err) {
+                    console.log(err);
+                    res.json({msg: "Error uploading image to mongo"})
+                } else {
+                    item.save();
+                    res.json({msg: `${imgObj.title} was uploaded to prints`})
+                    fs.unlinkSync(path.join(__dirname + "/uploads/" + dirFileName));
+                }
+            })
+        }
+        googleUploadPrint();
     })
 })
 

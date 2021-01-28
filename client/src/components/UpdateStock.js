@@ -52,8 +52,13 @@ const UpdateStock = () => {
     
     // saves checked prints in state 
     const stageDelete = (e) => {
+        console.log(e.target.name);
         if (e.target.checked) {
-            setChecked([...checked, e.target.value])
+            setChecked([...checked, {
+                title: e.target.value,
+                type: e.target.name
+                }
+            ])
         } else {
             var items = [...checked]
             const newArray = items.filter(item => {
@@ -65,6 +70,7 @@ const UpdateStock = () => {
     
     // deletes selected prints from database 
     const deletePrints = async () => {
+        console.log(checked);
         const res = await axios.post("/delete/prints", checked)
         setAlert(res.data.msg, res.data.color)
         var checkboxes = document.querySelectorAll("input[type='checkbox']");
@@ -81,12 +87,11 @@ const UpdateStock = () => {
             
             <div className="print-stock">
                 {prints ? prints.map((art, i) => {
-                    var bytes = Buffer.from(art.img.data)
                     return (
                     <div className="print-stock-item" key={i}>
                         <h5>{art.title}</h5>
                         <img 
-                            src={`data:${art.img.contentType};base64, ${bytes.toString('base64')}`} 
+                            src={art.img}
                             alt={art.name} 
                         />
                         <ul>
@@ -132,7 +137,12 @@ const UpdateStock = () => {
                             <hr/>
                             <li>
                                 <label htmlFor="delete-box">Delete?</label>
-                                <input value={art.title} type='checkbox' id="delete-box" onChange={stageDelete}/>
+                                <input 
+                                    value={art.title} 
+                                    name={art.type}
+                                    type='checkbox' 
+                                    id="delete-box" 
+                                    onChange={stageDelete}/>
                             </li>
                         </ul>
                     </div>

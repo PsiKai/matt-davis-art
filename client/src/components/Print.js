@@ -13,7 +13,7 @@ const Print = ({src, open, id, title, name, sku, stock}) => {
         // eslint-disable-next-line 
     }, [])
     
-    var bytes = Buffer.from(src.data)
+    // var bytes = Buffer.from(src.data)
     console.log();
 
     const openUp = (e) => {
@@ -34,7 +34,8 @@ const Print = ({src, open, id, title, name, sku, stock}) => {
             >
                 <h3>{title}</h3>
                 <img 
-                    src={`data:${src.contentType};base64, ${bytes.toString('base64')}`}
+                    src={src}
+                    // {`data:${src.contentType};base64, ${bytes.toString('base64')}`}
                     alt={name} 
                     name={sku}
                     id={id}>

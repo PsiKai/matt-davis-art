@@ -48,7 +48,7 @@ const ShippingForm = ({shipForm}) => {
         {/* <div className="shipping-form__wrapper"> */}
         
         
-        {addy === true ?
+        {addy ?
             <CSSTransition
                 key={1}
                 classNames="switch"

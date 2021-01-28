@@ -12,11 +12,9 @@ const Prints = () => {
 
     const [img, setImg] = useState({})
     const [modalOpen, setModalOpen] = useState(false)
-    // const [wide, setWide] = useState(false)
 
     useEffect(() => {
         !prints && getArt();
-        // setWide(true)
         //eslint-disable-next-line
     }, [])
 
@@ -65,15 +63,16 @@ const Prints = () => {
         <div className="page-content">
             <PageHeader heading="Prints" prints={prints}/>
             <div className="prints-flexbox">
-            {prints ? prints.map((print, index) => {
-                return <Print
-                            key={index}
-                            id={index}
-                            src={print.img}
-                            stock={print.stock}
-                            title={print.title}
-                            sku={print._id}
-                            open={openModal}
+            {prints ? 
+                prints.map((print, index) => {
+                    return <Print
+                        key={index}
+                        id={index}
+                        src={print.img}
+                        stock={print.stock}
+                        title={print.title}
+                        sku={print._id}
+                        open={openModal}
                         />
                 })
                 : 
@@ -129,7 +128,7 @@ const Prints = () => {
                             <input 
                                 id="oneeightTwofour" 
                                 type="number"  
-                                inputMode="numeric"
+                                 inputMode="numeric"
                                 name="oneeightTwofour" 
                                 className="quantity" 
                                 min="0"
@@ -149,3 +148,5 @@ const Prints = () => {
 }
 
 export default Prints
+
+
