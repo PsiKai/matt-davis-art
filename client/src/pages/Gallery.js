@@ -10,7 +10,6 @@ const Gallery = () => {
     const {gallery, getArt} = appContext;
 
     useEffect(() => {
-        localStorage.removeItem("cart")
         !gallery && getArt();
         // eslint-disable-next-line
     }, [])

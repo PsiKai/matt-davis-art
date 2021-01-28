@@ -200,7 +200,7 @@
 }
 
 .edit-image {
-  min-width: 450px;
+  min-width: 400px;
   height: 450px;
   width: 100%;
   object-fit: contain;
@@ -220,6 +220,10 @@
 }
 
 @media (max-width: 850px) {
+  .edit-transition {
+    min-height: 60vh;
+  }
+
   .page-content {
     padding: 0;
   }
@@ -233,10 +237,40 @@
     grid-template-columns: none;
     grid-template-rows: auto auto;
     margin: 1rem auto 0;
+    width: 500px;
+    max-width: 100%;
   }
 
   .img-preview {
     height: 500px;
+  }
+
+  .edit-image {
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .update-gallery {
+    margin-bottom: 1rem;
+  }
+
+  .update-gallery--wrapper {
+    height: 300px;
+  }
+
+  .edit-image {
+    height: 300px;
+  }
+
+  .update-gallery--grid {
+    grid-template-columns: none;
+    height: auto;
+  }
+
+  .update-preview {
+    margin: 0.25rem;
   }
 }
 
@@ -246,7 +280,7 @@
   }
 
   .nav-buttons button {
-    padding: 0;
+    padding: 0.5rem 0;
   }
 
   .upload-form textarea {
@@ -276,5 +310,49 @@
 
   .upload-prints--stock {
     padding: 1rem 0 2rem;
+  }
+
+  .upload-prints--stock > div {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% / 3);
+  }
+
+  .print-stock-item {
+    width: 300px;
+  }
+
+  .print-stock-item img {
+    height: 240px;
+  }
+
+  /* .print-stock ul {
+    display: flex;
+  } */
+
+  .print-stock li:not(:last-of-type) {
+    display: inline-flex;
+    flex-direction: column;
+    padding: 0 1rem 0.5rem;
+    width: calc(100% -3);
+  }
+
+  .print-stock li:last-of-type {
+    justify-content: flex-end;
+  }
+
+  .print-stock li:last-of-type label {
+    margin-right: 1rem;
+  }
+
+  .update-preview {
+    margin: 0;
+    justify-content: flex-start;
+    width: calc(100vw / 4);
+    height: calc(100vw / 4);
+  }
+
+  .logout {
+    right: 0rem;
   }
 }

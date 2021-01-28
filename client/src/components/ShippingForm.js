@@ -67,11 +67,11 @@ const ShippingForm = ({shipForm}) => {
                         <p>{add1}</p>
                         <p>{add2}</p>
                         <span>{city},</span>
-                        <span> {state}</span>
+                        <span> {state.toUpperCase()}</span>
                         <span> {zip}</span>
                     </div>
                 </div>
-                <button type="submit"><i className="far fa-edit fa-lg"></i></button>
+                <button type="submit"><label>Edit</label><i className="far fa-edit fa-lg"></i></button>
             </form>
             </CSSTransition>
             :
@@ -167,6 +167,7 @@ const ShippingForm = ({shipForm}) => {
             
             </div>
             <button type="submit">
+                <label>Confirm</label>
                 <i className="far fa-check-square fa-lg"></i>
             </button>   
         </form>

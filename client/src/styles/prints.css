@@ -102,6 +102,8 @@
   width: 35rem;
   max-width: 85%;
   box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.5);
+  max-height: 85%;
+  overflow-y: auto;
 }
 
 .print-modal__flex {
@@ -127,8 +129,8 @@
 }
 
 .print-modal img {
-  width: 100%;
-  /* max-height: 40vh; */
+  max-width: 100%;
+  max-height: 60vh;
   display: block;
   margin: 1rem auto;
 }
@@ -142,5 +144,12 @@
     width: auto;
     max-width: 100%;
     max-height: 45vh;
+  }
+}
+
+@media (max-height: 950px) {
+  .print-modal {
+    top: 88px;
+    transform: translate(-50%, 0);
   }
 }

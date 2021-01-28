@@ -43,7 +43,7 @@ html {
   height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
-  scrollbar-color: var(--medium) var(--white);
+  scrollbar-color: var(--light-two) var(--light);
   scrollbar-width: thin;
 }
 
@@ -105,6 +105,7 @@ input {
   border-bottom: 1px solid var(--dark);
   background-color: inherit;
   transition: box-shadow 200ms ease;
+  border-radius: 0px;
 }
 
 input:-webkit-autofill,
@@ -135,7 +136,7 @@ input[type="number"] {
   height: 1.7rem;
   margin: 0;
   text-indent: 6px;
-  margin-left: 0.5rem;
+  /* margin-left: 0.5rem; */
 }
 
 input[type="checkbox"] {
@@ -153,9 +154,12 @@ textarea {
   border: none;
   border-bottom: 1px solid var(--dark);
   border-top: 1px dotted var(--dark);
+  border-radius: 0;
   background-color: inherit;
   resize: none;
   transition: all 200ms ease;
+  background-clip: padding-box;
+  outline: none;
 }
 
 button {
@@ -171,6 +175,7 @@ button {
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
   transition: all 200ms ease;
   position: relative;
+  border: 2px outset var(--dark);
 }
 
 button:hover {
@@ -255,7 +260,7 @@ h2 {
   padding: 2rem;
   width: 97vw;
   max-width: 70rem;
-  margin: 88px auto 0 auto;
+  margin: 88px auto 1rem auto;
 }
 
 .page-header {
@@ -265,7 +270,7 @@ h2 {
   margin-bottom: 3rem;
   background-color: var(--medium);
   padding: 2rem;
-  transition: width 400ms ease-in;
+  transition: width 400ms cubic-bezier(0.71, -0.415, 0.415, 1.65);
   overflow: hidden;
   text-transform: uppercase;
   border: 3px solid var(--dark);
@@ -287,6 +292,7 @@ h2 {
   top: -63px;
   transform: rotateX(90deg);
   transform-origin: bottom;
+  transition: width 400ms cubic-bezier(0.71, -0.415, 0.415, 1.65);
   background: var(--dark);
 }
 
@@ -339,6 +345,12 @@ h2 {
   z-index: 100;
 }
 
+@media (max-width: 850px) {
+  .page-header__wrapper {
+    margin-left: 1rem;
+  }
+}
+
 @media (max-width: 450px) {
   .page-content {
     padding: 0.5rem;
@@ -350,7 +362,6 @@ h2 {
 
   .page-header__wrapper {
     perspective-origin: -6% 120%;
-    margin-left: 1rem;
   }
 
   .page-header {
@@ -365,6 +376,10 @@ h2 {
 
   .page-header__left {
     height: 68px;
+  }
+
+  .alert__wrapper {
+    left: 1rem;
   }
 
   .alert h2 {

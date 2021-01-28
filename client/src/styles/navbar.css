@@ -185,7 +185,7 @@ header .cart-link:active > span {
 
 @media (max-width: 450px) {
   header {
-    padding: 4px 2rem;
+    padding: 4px 1rem;
   }
 
   .menu {
@@ -194,5 +194,6 @@ header .cart-link:active > span {
 
   .menu__burger-icon {
     top: 17px;
+    right: 1rem;
   }
 }

@@ -67,7 +67,7 @@ const Modal = ({setModalOpen, total, shipData, cart}) => {
                         {add2}
                         {add2 !== "" && <br/>}
                         <span>{city},</span>
-                        <span> {state}</span>
+                        <span> {state.toUpperCase()}</span>
                         <span> {zip}</span>
                     </p>
                 </div>

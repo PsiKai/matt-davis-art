@@ -14,25 +14,34 @@
 }
 
 @media (max-width: 850px) {
+  .widen-enter {
+    width: 200px;
+  }
+
   .widen-enter.widen-enter-active {
-    width: 400px;
+    /* min-width: 400px; */
+    width: 70%;
   }
 
   .widen-enter-done {
-    width: 400px;
+    min-width: 400px;
+    width: 70%;
   }
 }
 
 @media (max-width: 450px) {
   .widen-enter {
+    min-width: 0;
     width: 30%;
   }
 
   .widen-enter.widen-enter-active {
+    min-width: 0;
     width: 90%;
   }
 
   .widen-enter-done {
+    min-width: 0;
     width: 90%;
   }
 }

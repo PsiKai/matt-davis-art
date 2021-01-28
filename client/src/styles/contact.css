@@ -55,9 +55,25 @@
   margin: 2rem auto;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 850px) {
   .contact__grid {
     grid-template-columns: none;
+    padding: 0 2rem;
+  }
+
+  .contact__grid > .contact--info {
+    padding: 0 4rem;
+  }
+
+  .email-form {
+    margin: 0 auto;
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 450px) {
+  .contact__grid {
+    padding: 0 1rem;
   }
 
   .contact__grid > .contact--info {
