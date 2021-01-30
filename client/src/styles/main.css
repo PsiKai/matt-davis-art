@@ -5,41 +5,29 @@
   margin: 14rem auto 1rem;
   position: relative;
   width: 1080px;
-  max-width: 100%;
+  max-width: 100vw;
   object-fit: contain;
   height: 800px;
   max-height: 70vw;
 }
 
-/* .carousel-container {
-    grid-area: body;
-    margin: 14rem auto 1rem;
-    position: relative;
-    width: 1080px;
-    max-width: 100%;
-    object-fit: contain;
-  } */
-
-/* .alice-carousel {
-  } */
+.alice-carousel {
+  max-width: 100vw;
+}
 
 .alice-carousel > div {
   box-shadow: 2px 2px 25px 0 rgba(0, 0, 0, 0.3);
   width: auto !important;
 }
 
-/* .alice-carousel__wrapper {
-    width: fit-content !important;
-  } */
-
 .alice-carousel__stage-item.__active {
   max-width: 100vw !important;
-  max-height: 80vh !important;
+  max-height: 70vw !important;
 }
 
 .carousel-image {
   max-width: 100vw !important;
-  max-height: 80vh !important;
+  max-height: 70vw !important;
 }
 
 .alice-carousel__stage-item.__active:nth-child(2) > .carousel-image,
@@ -57,8 +45,30 @@
 @keyframes ken-burns {
   0% {
     transform: translate(0, 0) scale(1);
+    transform-origin: 50% 0;
   }
   100% {
     transform: translate(20px, -30px) scale(1.2);
+
+    transform-origin: 50% 0;
+  }
+}
+
+@media (max-width: 850px) {
+  .carousel__wrapper {
+    margin-top: 10rem;
+  }
+
+  .carousel__wrapper .brand-backdrop {
+    /* display: none; */
+    left: 2rem;
+    /* top: 0; */
+    max-width: 80vw;
+  }
+}
+
+@media (max-width: 450px) {
+  .carousel__wrapper .brand-backdrop {
+    max-width: 75vw;
   }
 }

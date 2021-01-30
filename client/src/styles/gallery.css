@@ -51,6 +51,11 @@
   border-top: medium double #333;
   color: #333;
   text-align: center;
+  width: 95%;
+}
+
+.art-division:first-of-type {
+  margin-top: 1rem;
 }
 
 .art-division:after {

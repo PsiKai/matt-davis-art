@@ -38,7 +38,7 @@
   border-radius: 25%;
   transition: all 150ms ease-in-out;
   box-shadow: 0 0 0 1px inset var(--dark);
-  background-color: var(--white);
+  background-color: var(--dark);
 }
 
 .contact--social__flex a:hover {
@@ -47,6 +47,10 @@
 
 .contact--social__flex a:focus {
   animation: press 150ms ease forwards;
+}
+
+.contact--social__flex i {
+  color: var(--white-two);
 }
 
 .email-form,

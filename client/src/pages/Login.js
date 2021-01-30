@@ -46,9 +46,11 @@ const Login = (props) => {
     return (
         <div className="page-content">
             <PageHeader heading="Matt's admin page" />
-            <h3>Hey, y'all!</h3>  
-            <p>Don't peak behind the curtain, and don't try to guess my password!</p>
-            <p>HINT: it's definitely not 12345</p>
+            <div className="login-greeting">
+                <h3>Hey, y'all!</h3>  
+                <p>Don't peak behind the curtain, and don't try to guess my password!</p>
+                <p>HINT: it's definitely not 12345</p>
+            </div>
             <form className="login-form" onSubmit={startLogin}>
                 <label>Password:</label>
                 <input type="password" onChange={typing} value={password}></input>

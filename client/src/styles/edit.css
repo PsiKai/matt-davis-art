@@ -1,5 +1,9 @@
 /* Edit Page Styles  */
 
+.login-greeting {
+  margin: 0 1rem;
+}
+
 .login-form {
   margin: 4rem auto;
   width: 50%;
@@ -62,7 +66,7 @@
   height: 450px;
 } */
 
-.upload-form.prints form {
+.upload-form {
   padding: 1rem;
 }
 
@@ -212,11 +216,28 @@
 }
 
 .logout {
-  position: absolute;
-  bottom: -3.5rem;
-  right: 2rem;
+  position: fixed !important;
   z-index: 2;
-  transform-origin: 0% 50%;
+  right: 1rem;
+  bottom: 1rem;
+  background: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: auto;
+  box-shadow: none;
+  font-size: inherit;
+  transition: all 150ms linear;
+}
+
+.logout:hover {
+  width: 56px;
+  background-color: var(--medium) !important;
+  /* box-shadow: initial; */
+}
+
+.logout::after {
+  display: none;
 }
 
 @media (max-width: 850px) {
@@ -249,6 +270,13 @@
     min-width: 0;
     max-width: 100%;
   }
+
+  /* .logout {
+    right: 0rem;
+    bottom: -70px;
+    width: 80px;
+    height: 78px;
+  } */
 }
 
 @media (max-width: 700px) {
@@ -350,9 +378,5 @@
     justify-content: flex-start;
     width: calc(100vw / 4);
     height: calc(100vw / 4);
-  }
-
-  .logout {
-    right: 0rem;
   }
 }

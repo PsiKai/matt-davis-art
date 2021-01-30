@@ -27,7 +27,7 @@ const Header = () => {
     return (
         <header>
             <Link to="/" className="header--main-link">
-                <h1>Matt Davis</h1>
+                <h1 onClick={() => setOpen(false)}>Matt Davis</h1>
             </Link>
             <div className="menu__burger-icon" onClick={() => setOpen(!open)}>
                   <span style={open ? 
@@ -73,9 +73,10 @@ const Header = () => {
                   </Badge>
                 </Link>
               </li>
+              
               <li onClick={() => setOpen(false)}>
                 <Link to="/login" className="login-edit">
-                  {isAuthenticated ? 
+                  {isAuthenticated ?
                     <EditIcon 
                       style={{position: "relative", top: "4px"}}  
                     /> : 

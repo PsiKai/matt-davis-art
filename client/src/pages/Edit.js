@@ -7,6 +7,7 @@ import UpdateStock from '../components/UpdateStock'
 import UploadPrint from "../components/UploadPrint"
 import EditGallery from "../components/EditGallery"
 import Alerts from "../components/Alerts"
+import { Fab } from '@material-ui/core';
 
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 import {Router, Switch, Route, Link} from 'react-router-dom';
@@ -90,9 +91,15 @@ const Edit = () => {
                         </CSSTransition>
                     </TransitionGroup>     
                         
-                    <button data-text="Logout" className="logout" type="submit" onClick={signOut}>
-                        Logout
-                    </button>
+                   
+                  <Fab 
+                    data-text="Logout" 
+                    className="logout" 
+                    type="submit" 
+                    onClick={signOut}>
+                        <i className="fas fa-sign-out-alt fa-lg"></i>
+                    </Fab>
+      
                     
                     <Alerts />
                 </div>
