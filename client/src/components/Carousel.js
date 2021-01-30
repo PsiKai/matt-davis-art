@@ -27,7 +27,6 @@ const Carousel = () => {
                 })}
              </AliceCarousel>
         </div>
-        
     )
 }
 

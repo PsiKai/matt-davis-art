@@ -32,7 +32,7 @@ router.post("/stock", (req, res) => {
 })
 
 
-router.post("/gallery", (req, res) => {
+router.post("/gallery", async (req, res) => {
     
     var old = req.body.old.title
     var type = req.body.old.type
@@ -48,7 +48,7 @@ router.post("/gallery", (req, res) => {
     }
 
     try {
-        editFile()
+        await editFile()
         res.json({msg: `${old} was updated to ${newTit} ${newDesc}`})
         console.log(old, "was updated to ", newTit, newDesc);
     } catch (error) {

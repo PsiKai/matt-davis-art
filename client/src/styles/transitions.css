@@ -1,3 +1,72 @@
+/* Landing heading animation  */
+
+.expand-enter {
+  opacity: 0;
+  width: 10%;
+  padding: 2rem 0 !important;
+}
+
+.expand-enter.expand-enter-active {
+  width: 80%;
+  opacity: 1;
+  transition: width 400ms cubic-bezier(0.34, 0.125, 0.225, 1.295) 300ms,
+    opacity 600ms ease-in 200ms;
+}
+
+.expand-enter-done {
+  width: 80%;
+  padding: 2rem;
+  opacity: 1;
+  transition: padding 600ms linear;
+}
+
+@media (max-width: 450px) {
+  .expand-enter {
+    padding: 1rem 0 !important;
+  }
+
+  .expand-enter.expand-enter-active {
+    width: 90%;
+  }
+
+  .expand-enter-done {
+    padding: 1rem 0 !important;
+    width: 90%;
+  }
+}
+
+/* @media (max-width: 450px) {
+  .expand-enter {
+    min-width: 0;
+    width: 30%;
+  }
+
+  .expand-enter.expand-enter-active {
+    min-width: 0;
+    width: 90%;
+  }
+
+  .expand-enter-done {
+    min-width: 0;
+    width: 90%;
+  }
+} */
+
+/* Carousel Appear animation  */
+
+.move-down-enter {
+  transform: translateY(-50%);
+}
+
+.move-down-enter.move-down-enter-active {
+  transform: translateY(0);
+  transition: transform 300ms cubic-bezier(0.34, 0.125, 0.225, 1.295) 100ms;
+}
+
+.move-down-enter-done {
+  transform: none;
+}
+
 /* Page heading animation  */
 
 .widen-enter {

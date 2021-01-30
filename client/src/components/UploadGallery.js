@@ -74,7 +74,7 @@ const UploadGallery = () => {
         setFile("");
         // setFile("Choose File")
         setPreview("")
-        e.target.children[4].value = null
+        e.target.children[6].value = null
     }
 
     return (

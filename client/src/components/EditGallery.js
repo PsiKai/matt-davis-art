@@ -55,10 +55,11 @@ const EditGallery = () => {
         }
         const res = await axios.post("/update/gallery", data)
         setAlert(res.data.msg, "lightgrey")
+        refreshArt() 
         setNewTitle({})
         setArtEdit({})
         setEdit(false)
-        refreshArt()   
+          
     }
 
     const remove = async () => {
@@ -67,6 +68,7 @@ const EditGallery = () => {
             setAlert(res.data.msg, "lightblue")
             setArtEdit({});
             refreshArt();
+            setEdit(false)
         } catch (error) {
             setAlert(error.response.msg, "lightpink")
         }

@@ -61,7 +61,8 @@ const Prints = () => {
 
     return (
         <div className="page-content">
-            <PageHeader heading="Prints" prints={prints}/>
+            <PageHeader heading="Art for Sale" prints={prints}/>
+            <h2>Prints</h2>
             <div className="prints-flexbox">
             {prints ? 
                 prints.map((print, index) => {

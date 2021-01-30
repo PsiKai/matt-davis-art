@@ -1,7 +1,7 @@
 const prints = [
     {
-        name: "Walken",
-        src: "../images/walken.jpg"
+        name: "Joker",
+        src: "../images/joker.jpg"
     },
     {
         name: "X-23",
@@ -12,8 +12,8 @@ const prints = [
         src: "../images/rpg-girl.jpg"
     },
     {
-        name: "Joker",
-        src: "../images/joker.jpg"
+        name: "Walken",
+        src: "../images/walken.jpg"
     },
     {
         name: "Gun",

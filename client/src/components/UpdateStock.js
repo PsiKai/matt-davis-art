@@ -70,13 +70,17 @@ const UpdateStock = () => {
     
     // deletes selected prints from database 
     const deletePrints = async () => {
-        console.log(checked);
-        const res = await axios.post("/delete/prints", checked)
-        setAlert(res.data.msg, res.data.color)
+        try {
+            const res = await axios.post("/delete/prints", checked)
+            setAlert(res.data.msg, "var(--medium)")
+            
+        } catch (err) {
+            setAlert(err.response.msg, "var(--medium)")
+        }
         var checkboxes = document.querySelectorAll("input[type='checkbox']");
-        checkboxes.forEach(box => {
-            if (box.checked) {box.checked = false}
-        })
+            checkboxes.forEach(box => {
+                if (box.checked) {box.checked = false}
+            })
         setChecked([])
         refreshArt();
     }
