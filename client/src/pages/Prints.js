@@ -80,7 +80,12 @@ const Prints = () => {
     return (
         <div className="page-content">
             <PageHeader heading="Art for Sale" prints={prints}/>
+            
+            <div className="print-orders">
             <h2>Available for Print</h2>
+                <div className="brand-backdrop"></div>
+                <p>Get as many prints as you want! They are all high quality 11" x 17" 300dpi.  Once I collect a batch of preorders, I'll send them to the printer and mail them out to you. So, you should expect to receive your prints in about 4 weeks.</p>
+            </div>
             <div className="prints-flexbox">
             {prints ? 
                 prints.map((print, index) => {
@@ -107,7 +112,11 @@ const Prints = () => {
                 </div>
             }
             </div>
-            <h2>One of a Kind Original Art</h2>
+            <div className="print-orders">
+                <h2>Original Artwork</h2>
+                <div className="brand-backdrop"></div>
+                <p>Here's your chance to get your hands on a one of a kind piece from me!  Some are one-off ideas, and some are from a collection.  When I sell out that's it!  I'll be continually updating the stock, so check back again for more.</p>
+            </div>
             <div className="prints-flexbox">
             {prints && 
                 prints.map((print, index) => {
@@ -146,14 +155,17 @@ const Prints = () => {
                         alt={img.title}
                         name={img.name}>
                     </img>
+                    {img.original ?
+                            <h5>This is a one of a kind item</h5> :
+                            <h5>All prints are PREORDER and will ship within 4 weeks</h5>}
                     <div className="print-modal__flex">
                         <div>
-                            <label htmlFor="artCost">Price:</label>
-                            <p>${img.price}</p>
+                            {/* <label htmlFor="artCost">Price:</label> */}
+                            <h2>${img.price}</h2>
                         </div>
                         {!img.original ?
                             <div>
-                                <label htmlFor="amount">Number of Prints</label>
+                                <label htmlFor="amount">Number of Prints: </label>
                                 <input 
                                     id="amount" 
                                     type="number" 
@@ -168,9 +180,7 @@ const Prints = () => {
                                 <p>{img.size.width}" x {img.size.height}"</p>
                             </div>
                         }
-                        {img.original ?
-                            <p>This is a one of a kind item</p> :
-                            <p>All prints are PREORDER and will ship within 4 weeks</p>}
+                       
                         
                         {/* <div>
                             <label htmlFor="fiveEight" className="quantity">5 x 8:</label>

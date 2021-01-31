@@ -50,28 +50,28 @@ const Edit = () => {
                             <button 
                                 style={page === "/uploadgallery" ? style : null}
                                 name="/uploadgallery" 
-                                onClick={changePage}>Upload to Gallery
+                                onClick={changePage}>NEW Gallery
                             </button>
                         </Link>
                         <Link to="/uploadprint">
                             <button 
                                 style={page === "/uploadprint" ? style : null}
                                 name="/uploadprint" 
-                                onClick={changePage}>Upload New Print
+                                onClick={changePage}>NEW Store
                             </button>
                         </Link>
                         <Link to="/updatestock">
                             <button 
                                 style={page === "/updatestock" ? style : null}
                                 name="/updatestock" 
-                                onClick={changePage}>Update Print Stock
+                                onClick={changePage}>Edit Store
                             </button>
                         </Link>
                         <Link to="/editgallery">
                             <button 
                                 style={page === "/editgallery" ? style : null}
                                 name="/editgallery" 
-                                onClick={changePage}>Edit/Delete Gallery
+                                onClick={changePage}>Edit Gallery
                             </button>
                         </Link>
                     </div>

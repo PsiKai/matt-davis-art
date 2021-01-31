@@ -18,9 +18,10 @@
 .nav-buttons button {
   width: 100%;
   padding: 1rem 2rem;
-  border: 1px solid rgba(0, 0, 0, 0.7);
+  border: none;
+  /* border: 1px solid rgba(0, 0, 0, 0.7);
   border-top: none;
-  border-bottom: none;
+  border-bottom: none; */
   background-color: inherit;
   color: var(--dark);
   box-shadow: none;
@@ -82,10 +83,11 @@
   justify-content: left;
   align-items: flex-start;
   padding: 1rem;
-  height: 75px;
+  height: 135px;
 }
 
 .upload-prints--stock > div {
+  /* flex-grow: 1; */
   display: flex;
   align-items: center;
 }
@@ -265,7 +267,7 @@
 
   .nav-buttons button {
     font-size: 1rem;
-    padding: 1rem 0.5rem;
+    padding: 1rem;
   }
 
   .upload-form {
@@ -291,6 +293,14 @@
     width: 80px;
     height: 78px;
   } */
+
+  .upload-prints--stock > div:nth-child(2) {
+    margin-left: 20%;
+  }
+
+  .update-stock h4 {
+    margin-left: 1rem;
+  }
 }
 
 @media (max-width: 700px) {
@@ -322,7 +332,7 @@
   }
 
   .nav-buttons button {
-    padding: 0.5rem 0;
+    padding: 0.5rem;
   }
 
   .upload-form textarea {
@@ -355,17 +365,17 @@
   }
 
   .upload-prints--stock > div {
-    /* display: flex; */
-    /* flex-direction: column; */
-    width: 50%;
+    margin: 0.5rem 0;
   }
 
   .print-stock-item {
-    width: 300px;
+    /* width: 300px; */
+    width: 40%;
   }
 
   .print-stock-item img {
-    height: 240px;
+    height: 100px;
+    /* height: auto; */
   }
 
   /* .print-stock ul {

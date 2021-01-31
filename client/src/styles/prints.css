@@ -1,5 +1,38 @@
 /* Prints Styles  */
 
+.print-orders {
+  margin: 2rem 2rem auto auto;
+  width: 60%;
+  position: relative;
+  color: var(--white);
+}
+
+.print-orders .brand-backdrop {
+  transform: skew(7deg) rotate(-4deg);
+}
+
+.print-orders .brand-backdrop::after {
+  transform: rotate(4deg);
+}
+
+.print-orders:nth-of-type(4) {
+  margin: 4rem auto auto 4rem;
+}
+
+.print-orders:nth-of-type(4) .brand-backdrop {
+  transform: skew(7deg) rotate(4deg);
+}
+
+.print-orders:nth-of-type(4) .brand-backdrop::after {
+  transform: rotate(-4deg);
+}
+
+.print-orders p {
+  padding: 1rem 3rem 3rem 0;
+  font-size: 0.9rem;
+  font-weight: lighter;
+}
+
 .prints-flexbox {
   display: flex;
   flex-wrap: wrap;
@@ -106,9 +139,14 @@
   overflow-y: auto;
 }
 
+.print-modal h5 {
+  margin: 0 0 0.5rem;
+}
+
 .print-modal__flex {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  align-items: center;
 }
 
 .close-modal {
@@ -135,8 +173,54 @@
   margin: 1rem auto;
 }
 
+.print-modal__flex h2,
+.print-modal__flex p {
+  margin: 0 1rem;
+}
+
+@media (max-width: 850px) {
+  .print-orders {
+    width: 70%;
+  }
+}
+
 @media (max-width: 450px) {
-  .print-modal {
+  .print-orders {
+    width: 280px;
+    margin: 4rem auto 0 5rem;
+    /* text-align: left; */
+  }
+
+  .print-orders:only-of-type(4) {
+    margin: 4rem auto 0 !important;
+  }
+
+  .print-orders .brand-backdrop {
+    transform: skew(7deg) rotate(-7deg);
+  }
+
+  .print-orders .brand-backdrop::after {
+    transform: rotate(7deg);
+  }
+
+  .print-orders:nth-of-type(4) .brand-backdrop {
+    transform: skew(7deg) rotate(7deg);
+  }
+
+  .print-orders:nth-of-type(4) .brand-backdrop::after {
+    transform: rotate(-7deg);
+  }
+
+  .print-orders h2 {
+    text-align: left;
+    margin-bottom: 0rem;
+  }
+
+  .print-orders p {
+    padding: 0 2.5rem 2.5rem 0;
+  }
+
+  .print-orders .print-modal {
     padding: 1rem;
   }
 

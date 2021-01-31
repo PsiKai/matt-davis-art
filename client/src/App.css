@@ -45,6 +45,7 @@ html {
   overflow-x: hidden;
   scrollbar-color: var(--light-two) var(--light);
   scrollbar-width: thin;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -143,6 +144,9 @@ input[type="checkbox"] {
   width: 1.5rem;
   height: 1.5rem;
   margin: 0;
+  background-color: var(--white) !important;
+  border: none;
+  color: var(--medium);
 }
 
 textarea {

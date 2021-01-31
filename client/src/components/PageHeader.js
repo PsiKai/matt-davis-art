@@ -27,7 +27,7 @@ const PageHeader = ({heading}) => {
                 classNames="widen"
                 timeout={800}
             >   
-                <div className="page-header__arrow">{heading}</div>
+                <div className="page-header__arrow"></div>
             </CSSTransition>
             
             

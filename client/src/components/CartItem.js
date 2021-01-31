@@ -110,6 +110,7 @@ const CartItem = ({quantity, title, src, id, original, size, price}) => {
                         <h4>Original Artwork</h4>
                         <h5>{size.width}" x {size.height}"</h5>
                         <h4>${price}</h4>
+                        <h5>The one and only!</h5>
                         <button onClick={removeArt}><i className="far fa-minus-square fa-lg"></i></button>
                     </div> :
 
@@ -119,7 +120,7 @@ const CartItem = ({quantity, title, src, id, original, size, price}) => {
                     <h4>High Quality Print</h4>
                     <h5>11 x 17</h5>
                     <h4>${price} each</h4>
-                    <label htmlFor="cart-quantity">Quantity: </label>
+                    <p>Quantity: </p>
                     <TransitionGroup className="cart-item--quantity__wrapper">
                     
                     {edit === true ? 

@@ -39,7 +39,7 @@ const Print = ({src, open, id, title, name, sku, price, sold, size}) => {
             >
            <div 
                 onClick={openUp} 
-                className={!isZero ? "print-item" : "print-item zero-stock"} 
+                className={!isZero && !inCart ? "print-item" : "print-item zero-stock"} 
                 style={{transitionDelay: `${id * 50}ms`}}
             >
                 <h3>{title}</h3>
