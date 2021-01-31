@@ -77,6 +77,8 @@ router.post("/prints", (req, res) => {
         return res.status(400).json({msg: "No file was received"})
     }
 
+    console.log(req.body);
+
     const file = req.files.file
     const {name} = file;
     const type = name.split(".")[1]
@@ -90,8 +92,11 @@ router.post("/prints", (req, res) => {
         }
         var imgObj = {
             title: req.body.title,
-            stock: JSON.parse(req.body.stock),
+            // stock: JSON.parse(req.body.stock),
+            original: req.body.original,
+            price: req.body.price,
             type: type,
+            soldOut: false,
             img: `https://storage.googleapis.com/${printBucket}/${cloudName}.${type}`
             }
         

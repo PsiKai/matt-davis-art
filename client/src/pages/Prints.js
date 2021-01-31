@@ -12,6 +12,7 @@ const Prints = () => {
 
     const [img, setImg] = useState({})
     const [modalOpen, setModalOpen] = useState(false)
+    const [quantity, setQuantity] = useState(1)
 
     useEffect(() => {
         !prints && getArt();
@@ -20,14 +21,19 @@ const Prints = () => {
 
     const openModal = (item) => {
         setModalOpen(true)
-        var stock = prints[item[1].id].stock
-
+        console.log(item);
+        // var stock = prints[item[1].id].stock
+        var price = prints[item[1].id].price
+        var original = prints[item[1].id].original
         setImg({
             src: item[1].src,
             title: item[0].innerText,
-            _5x8: stock.fiveEight,
-            _8x11: stock.eightEleven,
-            _18x24: stock.oneeightTwofour,
+            price: price,
+            original: original,
+            // original: item[1],
+            // _5x8: stock.fiveEight,
+            // _8x11: stock.eightEleven,
+            // _18x24: stock.oneeightTwofour,
             name: item[1].name
         })
     }
@@ -40,23 +46,35 @@ const Prints = () => {
         }
     }
 
-    const addToCart = (e) => {
-        const info = e.target.parentNode.children[3].children
+    const updateQuantity = (e) => {
+        setQuantity(e.target.value)
+    }
+
+    const addToCart = () => {
+        // const info = e.target.parentNode.children[3].children
+        // console.log(img.name);
         const item = {
-            quantity: {
-                fiveEight: info[0].children[1].value > 0 ? info[0].children[1].value : 0,
-                eightEleven: info[1].children[1].value > 0 ? info[1].children[1].value : 0,
-                oneeightTwofour: info[2].children[1].value > 0 ? info[2].children[1].value : 0
-            },
-            id: e.target.parentNode.children[2].name
+            quantity: quantity,
+            id: img.name
         }
-        if (item.quantity.fiveEight > 0 || 
-            item.quantity.eightEleven > 0 || 
-            item.quantity.oneeightTwofour > 0) {
-                addItem(item);
-        }
+        item.quantity > 0 && addItem(item)
+        // const item = {
+        //     quantity: {
+        //         fiveEight: info[0].children[1].value > 0 ? info[0].children[1].value : 0,
+        //         eightEleven: info[1].children[1].value > 0 ? info[1].children[1].value : 0,
+        //         oneeightTwofour: info[2].children[1].value > 0 ? info[2].children[1].value : 0
+        //     },
+        //     id: e.target.parentNode.children[2].name
+        // }
+        // if (item.quantity.fiveEight > 0 || 
+        //     item.quantity.eightEleven > 0 || 
+        //     item.quantity.oneeightTwofour > 0) {
+        //         addItem(item);
+        // }
         
         setModalOpen(false)
+        setImg({})
+        setQuantity(1)
     }
 
     return (
@@ -66,20 +84,47 @@ const Prints = () => {
             <div className="prints-flexbox">
             {prints ? 
                 prints.map((print, index) => {
+                    if (print.original === false) {
                     return <Print
                         key={index}
                         id={index}
                         src={print.img}
-                        stock={print.stock}
+                        // stock={print.stock}
+                        price={print.price}
                         title={print.title}
                         sku={print._id}
+                        sold={print.soldOut}
                         open={openModal}
-                        />
+                        /> 
+                    } else {
+                        return null
+                    }
                 })
                 : 
                 <div className="progress">
                     <CircularProgress color="inherit"/>
                 </div>
+            }
+            </div>
+            <h2>One of a Kind Original Art</h2>
+            <div className="prints-flexbox">
+            {prints && 
+                prints.map((print, index) => {
+                    if (print.original === true) {
+                    return <Print
+                        key={index}
+                        id={index}
+                        src={print.img}
+                        price={print.price}
+                        title={print.title}
+                        sku={print._id}
+                        sold={print.soldOut}
+                        open={openModal}
+                        /> 
+                    } else {
+                        return null
+                    }
+                })
             }
             </div>
             <TransitionGroup>
@@ -101,6 +146,28 @@ const Prints = () => {
                     </img>
                     <div className="print-modal__flex">
                         <div>
+                            <label htmlFor="artCost">Price:</label>
+                            <p>${img.price}</p>
+                        </div>
+                        {!img.original &&
+                            <div>
+                                <label htmlFor="amount">Number of Prints</label>
+                                <input 
+                                    id="amount" 
+                                    type="number" 
+                                    inputMode="numeric" 
+                                    className="quantity" 
+                                    min="1" 
+                                    value={quantity}
+                                    onChange={updateQuantity}
+                                    />
+                            </div>
+                        }
+                        {img.original ?
+                            <p>This is a one of a kind item</p> :
+                            <p>All prints are PREORDER and will ship within 4 weeks</p>}
+                        
+                        {/* <div>
                             <label htmlFor="fiveEight" className="quantity">5 x 8:</label>
                             <input 
                                 id="fiveEight" 
@@ -135,7 +202,7 @@ const Prints = () => {
                                 min="0"
                                 max={img._18x24}
                             />
-                        </div>
+                        </div> */}
                     </div>
 
                     <button data-text="Add To Cart" onClick={addToCart}>Add To Cart</button>

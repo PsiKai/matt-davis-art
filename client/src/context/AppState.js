@@ -34,7 +34,7 @@ const AppState = (props) => {
         var newCartItem = state.prints.filter(print => {
            return print._id === item.id
         })
-
+        
         newCartItem[0].quantity = item.quantity;            
         
         if (localStorage.getItem("cart") !== null) {
@@ -42,6 +42,7 @@ const AppState = (props) => {
         } else {
             newCart = [...newCartItem]
         } 
+        console.log(newCart);
 
         var reducedCart = newCart.reduce((accumulator, cur) => {
             var name = cur._id;
@@ -49,34 +50,39 @@ const AppState = (props) => {
                 return elem._id === name
             })
             if (found) {
-                var values = Object.entries(found.quantity)
-                values.forEach(value => {
-                    if (value[0] === "fiveEight") {
-                        found.quantity.fiveEight = +cur.quantity.fiveEight + +value[1]
-                    }
-                    if (value[0] === "eightEleven") {
-                        found.quantity.eightEleven = +cur.quantity.eightEleven + +value[1]
-                    }
-                    if (value[0] === "oneeightTwofour") {
-                        found.quantity.oneeightTwofour = +cur.quantity.oneeightTwofour + +value[1]
-                    }
-                })
+                found.quantity = +found.quantity + +cur.quantity
+
+                // var values = Object.entries(found.quantity)
+                // values.forEach(value => {
+                //     if (value[0] === "fiveEight") {
+                //         found.quantity.fiveEight = +cur.quantity.fiveEight + +value[1]
+                //     }
+                //     if (value[0] === "eightEleven") {
+                //         found.quantity.eightEleven = +cur.quantity.eightEleven + +value[1]
+                //     }
+                //     if (value[0] === "oneeightTwofour") {
+                //         found.quantity.oneeightTwofour = +cur.quantity.oneeightTwofour + +value[1]
+                //     }
+                // })
+
             }
             else accumulator.push(cur);
             return accumulator;
         }, []);
-        var newNew = [];
-        reducedCart.forEach(item => {
-            var obj = {}
-            obj.src = item.img
-            obj.quantity = item.quantity
-            obj.stock = item.stock
-            obj.title = item.title
-            obj._id = item._id
-            newNew.push(obj)
-        })
 
-        localStorage.setItem("cart", JSON.stringify(newNew))
+        // console.log(reducedCart);
+        // var newNew = [];
+        // reducedCart.forEach(item => {
+        //     var obj = {}
+        //     obj.src = item.img
+        //     obj.quantity = item.quantity
+        //     obj.stock = item.stock
+        //     obj.title = item.title
+        //     obj._id = item._id
+        //     newNew.push(obj)
+        // })
+
+        localStorage.setItem("cart", JSON.stringify(reducedCart))
         
         dispatch({
             type: ADD_TO_CART,

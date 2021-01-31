@@ -1,4 +1,5 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, Fragment} from 'react';
+import {Link} from "react-router-dom"
 import "../styles/cart.css"
 import AppContext from "../context/AppContext";
 import CartItems from "../components/CartItems";
@@ -35,7 +36,12 @@ const Cart = (props) => {
             </div>
         }
         {cart ? <CartItems /> :
-            <h2>The cart is empty.  Please check for available prints on the Prints page.</h2>
+            <Fragment>
+            <h2 className="empty-cart">The cart is empty.  Please check for available artwork in the store.</h2>
+            <Link to="/prints">
+                <button data-text="To the Store!">To the Store!</button>
+            </Link>
+            </Fragment>
         }   
 
         <TransitionGroup>

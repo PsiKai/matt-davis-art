@@ -37,24 +37,19 @@ const CartItems = () => {
     return (
             <Fragment>
                 <div className="cart-flexbox">
-                {prints && cart.map((item, i) => {
-                    var id = item._id
-                    var newSrc = prints.filter(print => {
-                        if (print._id === id) {
-                            return print
-                        } else {
-                            return null
-                        }
-                    })
+                {
+                cart.map((item, i) => {
                     return (
                         <CartItem 
-                            key={id}
+                            key={item._id}
                             id={i}
-                            src={newSrc[0].img}
+                            // src={newSrc[0].img}
+                            src={item.img}
                             title={item.title}
                             price={item.price}
                             quantity={item.quantity}
-                            stock={item.stock}
+                            original={item.original}
+                            // stock={item.stock}
                         />
                     )
                 })

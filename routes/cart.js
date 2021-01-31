@@ -4,15 +4,19 @@ const nodemailer = require("nodemailer")
 
 
 router.post("/checkout", (req, res) => {
-    var _5x8 = 0
-    var _8x11 = 0
-    var _18x24 = 0
+    let total = null;
     req.body.forEach(item => {
-        _5x8 += +item.quantity.fiveEight
-        _8x11 += +item.quantity.eightEleven
-        _18x24 += +item.quantity.oneeightTwofour
+        total = total + +item.price
     })
-    var total = (_5x8 * 1) + (_8x11 * 1) + (_18x24 * 1)
+    // var _5x8 = 0
+    // var _8x11 = 0
+    // var _18x24 = 0
+    // req.body.forEach(item => {
+    //     _5x8 += +item.quantity.fiveEight
+    //     _8x11 += +item.quantity.eightEleven
+    //     _18x24 += +item.quantity.oneeightTwofour
+    // })
+    // var total = (_5x8 * 1) + (_8x11 * 1) + (_18x24 * 1)
 
     res.json(total)
 })

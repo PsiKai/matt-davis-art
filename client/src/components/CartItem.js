@@ -3,7 +3,7 @@ import AppContext from '../context/AppContext'
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import ImgModal from './ImgModal';
 
-const CartItem = ({quantity, title, src, stock, id}) => {
+const CartItem = ({quantity, title, src, id, original}) => {
     const appContext = useContext(AppContext)
 
     const [edit, setEdit] = useState(false)
@@ -11,7 +11,7 @@ const CartItem = ({quantity, title, src, stock, id}) => {
     const [fade, setFade] = useState(false)
     const [imgModal, setImgModal] = useState({in: false, src: "", title: ""})
 
-    const {fiveEight, eightEleven, oneeightTwofour} = quan
+    // const {fiveEight, eightEleven, oneeightTwofour} = quan
 
     useEffect(() => {
         setFade(true)
@@ -20,13 +20,16 @@ const CartItem = ({quantity, title, src, stock, id}) => {
     const makeChanges = (e) => {
         e.preventDefault()
         // console.log(e.target.parentNode.parentNode.children[0]);
-        var title = e.target.parentNode.parentNode.children[0].innerHTML;
+        // var title = e.target.parentNode.parentNode.children[0].innerHTML;
         var savedCart = JSON.parse(localStorage.getItem("cart"));
         let updatedQuan = []
         savedCart.find((item) => {
             if (item.title === title) {
                 item.quantity = quan
-                if (item.quantity.fiveEight > 0 || item.quantity.eightEleven > 0 || item.quantity.oneeightTwofour > 0) {
+                // if (item.quantity.fiveEight > 0 || item.quantity.eightEleven > 0 || item.quantity.oneeightTwofour > 0) {
+                //     updatedQuan = [...updatedQuan, item]
+                // }
+                if (item.quantity > 0) {
                     updatedQuan = [...updatedQuan, item]
                 }
             } 
@@ -47,15 +50,24 @@ const CartItem = ({quantity, title, src, stock, id}) => {
 
     const updateQuantity = (e) => {
         var value = e.target.value
+        console.log(value);
         if (value < 0) value = 0
-        setQuan({
-            ...quan,
-            [e.target.name]: value
-        })
+        setQuan(
+            // ...quan,
+            // [e.target.name]: 
+            value
+        )
     }
 
     const adjustQuan = () => {
         setEdit(true)
+    }
+
+    const removeArt = () => {
+        var cart = JSON.parse(localStorage.getItem("cart"))
+        var newCart = cart.filter((item) => item.title !== title)
+        localStorage.setItem("cart", JSON.stringify(newCart))
+        appContext.reloadCart();
     }
 
     const fullSize = (e) => {
@@ -82,15 +94,26 @@ const CartItem = ({quantity, title, src, stock, id}) => {
         >
            <div className="cart-item" style={{transitionDelay: `${(id + 1.5) * 100}ms`}}>
                 <div className="cart-item--img__wrapper">
-                <img 
-                    src={src}
-                    alt={title}
-                    onClick={fullSize} 
-                />
-                </div>    
+                    <img 
+                        src={src}
+                        alt={title}
+                        onClick={fullSize} 
+                    />
+                </div>
+                {original ? 
+                    <div className="cart-item--info__wrapper">
+                        <h2>{title}</h2>
+                        <h4>Original Artwork</h4>
+                        <h5>10 x 12</h5>
+                        <button onClick={removeArt}><i className="far fa-minus-square fa-lg"></i></button>
+                    </div> :
+
+                    
                 <div className="cart-item--info__wrapper">
                     <h2>{title}</h2>
-                    <h4>Quantity: </h4>
+                    <h4>High Quality Print</h4>
+                    <h5>11 x 17</h5>
+                    <label htmlFor="cart-quantity">Quantity: </label>
                     <TransitionGroup className="cart-item--quantity__wrapper">
                     
                     {edit === true ? 
@@ -100,7 +123,16 @@ const CartItem = ({quantity, title, src, stock, id}) => {
                             timeout={100}
                         >
                         <form className="cart-item--quantity" onSubmit={makeChanges}>
-                        <div className="cart-item--quantity__grid">
+                            <input 
+                                id="cart-quantity"
+                                name="quantity"
+                                type="number"
+                                inputMode="numeric"
+                                min="0"
+                                value={quan}
+                                onChange={updateQuantity}
+                            />
+                        {/* <div className="cart-item--quantity__grid">
                             <p>5 x 8: </p>
                             <input 
                                 name="fiveEight"
@@ -132,17 +164,19 @@ const CartItem = ({quantity, title, src, stock, id}) => {
                                 max={stock.oneeightTwofour}
                                 value={oneeightTwofour} 
                                 onChange={updateQuantity} />
-                        </div>
+                        </div> */}
                         <button><i className="far fa-check-square fa-lg"></i></button>
                         </form> 
                         </CSSTransition>:
+
                         <CSSTransition
                             key={2}
                             classNames="switch"
                             timeout={100}
                         >
                         <div className="cart-item--quantity">
-                            {fiveEight > 0 && 
+                            <span>{quan}</span>
+                            {/* {fiveEight > 0 && 
                                 <div className="cart-item--quantity__grid">
                                     <p>5 x 8: </p>
                                     <p>{fiveEight}</p>
@@ -159,7 +193,7 @@ const CartItem = ({quantity, title, src, stock, id}) => {
                                     <p>18 x 24: </p>
                                     <p>{oneeightTwofour}</p>
                                 </div>
-                            }
+                            } */}
                             <button onClick={adjustQuan}>
                                 <i className="far fa-edit fa-lg"></i>
                             </button>
@@ -168,6 +202,7 @@ const CartItem = ({quantity, title, src, stock, id}) => {
                     }
                     </TransitionGroup>
                 </div>
+                }
                 <TransitionGroup>
                     {imgModal.in &&
                         
@@ -185,6 +220,7 @@ const CartItem = ({quantity, title, src, stock, id}) => {
                     }
                 </TransitionGroup>
             </div> 
+                
         </CSSTransition>
     )
 }

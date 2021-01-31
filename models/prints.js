@@ -8,7 +8,10 @@ var printSchema = new mongoose.Schema({
     //     data: Buffer,
     //     contentType: String
     // },
-    stock: Object
+    // stock: Object,
+    original: Boolean,
+    price: Number,
+    soldOut: Boolean
 })
 
 module.exports = new mongoose.model('Print', printSchema);

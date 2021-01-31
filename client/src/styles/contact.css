@@ -85,8 +85,16 @@
     margin: 0;
   }
 
+  .contact--social__flex {
+    margin-bottom: 2rem;
+  }
+
   .email-form {
     margin: 0;
     padding: 0 0.5rem;
+  }
+
+  .email-form textarea {
+    height: 8rem;
   }
 }

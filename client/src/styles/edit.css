@@ -78,12 +78,22 @@
 .upload-prints--stock {
   display: flex;
   margin-bottom: 1rem;
-  justify-content: space-between;
+  justify-content: left;
   padding: 1rem 1rem 2rem;
+  height: 75px;
+}
+
+.upload-prints--stock > div {
+  display: flex;
+  align-items: center;
 }
 
 .upload-prints--stock label {
   margin-right: 0.5rem;
+}
+
+.upload-prints--stock #price {
+  width: 80px;
 }
 
 .img-preview {
@@ -343,9 +353,9 @@
   }
 
   .upload-prints--stock > div {
-    display: flex;
-    flex-direction: column;
-    width: calc(100% / 3);
+    /* display: flex; */
+    /* flex-direction: column; */
+    width: 50%;
   }
 
   .print-stock-item {

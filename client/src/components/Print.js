@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react'
 import {CSSTransition} from "react-transition-group"
 
-const Print = ({src, open, id, title, name, sku, stock}) => {
+const Print = ({src, open, id, title, name, sku, price, sold}) => {
     const [fade, setFade] = useState(false)
     const [isZero, setIsZero] = useState(false)
 
     useEffect(() => {
         setFade(true)
-        if (stock.fiveEight === "0" && stock.eightEleven ==="0" && stock.oneeightTwofour === "0") {
-        setIsZero(true)
-        }
+        // if (stock.fiveEight === "0" && stock.eightEleven ==="0" && stock.oneeightTwofour === "0") {
+        sold && setIsZero(true)
+        // }
         // eslint-disable-next-line 
     }, [])
     
@@ -38,8 +38,11 @@ const Print = ({src, open, id, title, name, sku, stock}) => {
                     // {`data:${src.contentType};base64, ${bytes.toString('base64')}`}
                     alt={name} 
                     name={sku}
-                    id={id}>
+                    id={id}
+                    >
                 </img>
+                <label htmlFor="cost">Price:</label>
+                <p id="cost">${price}</p>
                 {/* <button onClick={openUp}>Select Prints</button> */}
                 {isZero && <div className="sold-out"><h2>Sold Out</h2></div>}
             </div> 

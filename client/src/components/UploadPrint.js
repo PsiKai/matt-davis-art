@@ -10,15 +10,14 @@ const UploadPrint = () => {
     const {refreshArt} = appContext;
     const {setAlert} = alertContext;
 
-    const [stock, setStock] = useState({
-        "eightEleven": 0,
-        "oneeightTwofour": 0,
-        "fiveEight": 0
-    })
-    const [form, setForm] = useState({
-        title: "",
-        stock: stock
-    })
+    // const [stock, setStock] = useState({
+    //     "eightEleven": 0,
+    //     "oneeightTwofour": 0,
+    //     "fiveEight": 0
+    // })
+    const [original, setOriginal] = useState(false);
+    const [price, setPrice] = useState("")
+    const [form, setForm] = useState({title: ""})
     const [file, setFile] = useState('');
     const [preview, setPreview] = useState('')
 
@@ -49,11 +48,22 @@ const UploadPrint = () => {
     }
 
     // Sets the number of prints to state
-    const quantChange = (e) => {
-        setStock({
-            ...stock,
-            [e.target.name]: e.target.value
-        })
+    // const quantChange = (e) => {
+    //     setStock({
+    //         ...stock,
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
+
+    // Indicates original artwork 
+    const makeOriginal = (e) => {
+        e.target.checked ? setOriginal(true) : setOriginal(false)
+    }
+
+    // Set Price of Original art 
+    const updatePrice = (e) => {
+        setPrice(e.target.value)
+        console.log(e.target.value);
     }
 
     // Uploads new print to database
@@ -63,7 +73,11 @@ const UploadPrint = () => {
         const formData = new FormData();
         formData.append("file", file)
         formData.append('title', title)
-        formData.append('stock', JSON.stringify(stock))
+        // formData.append('stock', JSON.stringify(stock))
+        formData.append('original', original)
+        original ? 
+            formData.append('price', price) : 
+            formData.append("price", 15)
 
         try {
             const res = await axios.post("/upload/prints", formData, {
@@ -76,15 +90,17 @@ const UploadPrint = () => {
         } catch (err) {
             setAlert(err.response.data.msg, "lightred")
         }
-        setStock({
-            "eightEleven": 0,
-            "oneeightTwofour": 0,
-            "fiveEight": 0
-        })
-        setForm({title: "", stock: stock})
+        // setStock({
+        //     "eightEleven": 0,
+        //     "oneeightTwofour": 0,
+        //     "fiveEight": 0
+        // })
+        setOriginal(false)
+        setForm({title: "", original: original})
         setFile("");
         // setFile("Choose File")
         setPreview("")
+        setPrice("")
         e.target.children[4].value = null;
     }
 
@@ -105,12 +121,31 @@ const UploadPrint = () => {
                     required>
                 </input>
 
-                
-                {/* <ul>
-                    <li> */}
-                    <label htmlFor="prints-stock">Number of Prints</label>
-                    <div id="prints-stock" className="upload-prints--stock">
+                <div className="upload-prints--stock" style={original ? {justifyContent: "space-between"} : {}}>
+                    <div>
+                        <label htmlFor="original">Original Art?</label>
+                        <input id="original" type="checkbox" onChange={makeOriginal}></input>
+                    </div>
+                    {original &&
                         <div>
+                            <label htmlFor="price">Price: $</label>
+                            <input 
+                                id="price" 
+                                type="number" 
+                                min="0.00" 
+                                max="10000.00" 
+                                step="0.01" 
+                                onChange={updatePrice}
+                                value={price}
+                                inputMode="decimal"
+                                />
+                        </div>
+                    }
+                    
+                </div>
+                {/* <label htmlFor="prints-stock">Number of Prints</label>
+                <div id="prints-stock" className="upload-prints--stock">
+                    <div>
                         <label htmlFor="fiveEight" className="stock">5 x 8: </label>
                         <input 
                             id="fiveEight" 
@@ -122,10 +157,9 @@ const UploadPrint = () => {
                             min="0"  
                             inputMode="numeric"
                         />
-                        </div>
-                    {/* </li>
-                    <li> */}
-                        <div>
+                    </div>
+            
+                    <div>
                         <label htmlFor="eightEleven" className="stock">8.5 x 11: </label>
                         <input 
                             id="eightEleven" 
@@ -137,10 +171,9 @@ const UploadPrint = () => {
                             min="0" 
                             inputMode="numeric" 
                         />
-                        </div>
-                    {/* </li>
-                    <li> */}
-                        <div>
+                    </div>
+              
+                    <div>
                         <label htmlFor="oneeightTwofour" className="stock">18 x 24: </label>
                         <input 
                             type="number" 
@@ -151,11 +184,11 @@ const UploadPrint = () => {
                             min="0" 
                             inputMode="numeric"
                         />
-                        </div>
-                        </div>
-                        <input id="image" type="file" onChange={imgUpdate} required/>
-                    {/* </li>
-                </ul> */}
+                    </div>
+                </div> */}
+
+                <input id="image" type="file" onChange={imgUpdate} required/>
+          
                 <button data-text="Submit" type="submit">Submit</button>
             </form>
             <TransitionGroup className="img-preview" style={preview !== "" ? {} : {display: "none" }}>
