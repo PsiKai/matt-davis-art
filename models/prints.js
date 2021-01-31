@@ -11,6 +11,7 @@ var printSchema = new mongoose.Schema({
     // stock: Object,
     original: Boolean,
     price: Number,
+    dimensions: Object,
     soldOut: Boolean
 })
 

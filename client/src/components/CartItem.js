@@ -3,7 +3,7 @@ import AppContext from '../context/AppContext'
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import ImgModal from './ImgModal';
 
-const CartItem = ({quantity, title, src, id, original}) => {
+const CartItem = ({quantity, title, src, id, original, size, price}) => {
     const appContext = useContext(AppContext)
 
     const [edit, setEdit] = useState(false)
@@ -66,7 +66,11 @@ const CartItem = ({quantity, title, src, id, original}) => {
     const removeArt = () => {
         var cart = JSON.parse(localStorage.getItem("cart"))
         var newCart = cart.filter((item) => item.title !== title)
-        localStorage.setItem("cart", JSON.stringify(newCart))
+        if (newCart.length > 0) {
+            localStorage.setItem("cart", JSON.stringify(newCart))
+        } else {
+            localStorage.removeItem("cart")
+        }
         appContext.reloadCart();
     }
 
@@ -104,7 +108,8 @@ const CartItem = ({quantity, title, src, id, original}) => {
                     <div className="cart-item--info__wrapper">
                         <h2>{title}</h2>
                         <h4>Original Artwork</h4>
-                        <h5>10 x 12</h5>
+                        <h5>{size.width}" x {size.height}"</h5>
+                        <h4>${price}</h4>
                         <button onClick={removeArt}><i className="far fa-minus-square fa-lg"></i></button>
                     </div> :
 
@@ -113,6 +118,7 @@ const CartItem = ({quantity, title, src, id, original}) => {
                     <h2>{title}</h2>
                     <h4>High Quality Print</h4>
                     <h5>11 x 17</h5>
+                    <h4>${price} each</h4>
                     <label htmlFor="cart-quantity">Quantity: </label>
                     <TransitionGroup className="cart-item--quantity__wrapper">
                     

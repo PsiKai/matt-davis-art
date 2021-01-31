@@ -49,6 +49,7 @@ const CartItems = () => {
                             price={item.price}
                             quantity={item.quantity}
                             original={item.original}
+                            size={item.dimensions}
                             // stock={item.stock}
                         />
                     )

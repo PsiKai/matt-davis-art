@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, Fragment} from 'react'
 import AppContext from '../context/AppContext'
 import AlertContext from "../context/alertContext"
 import axios from 'axios'
@@ -17,6 +17,7 @@ const UploadPrint = () => {
     // })
     const [original, setOriginal] = useState(false);
     const [price, setPrice] = useState("")
+    const [dimensions, setDimensions] = useState({width: 11, height: 17})
     const [form, setForm] = useState({title: ""})
     const [file, setFile] = useState('');
     const [preview, setPreview] = useState('')
@@ -66,10 +67,17 @@ const UploadPrint = () => {
         console.log(e.target.value);
     }
 
+    // Set dimensions of original art
+    const updateDimensions = (e) => {
+        setDimensions({
+            ...dimensions,
+            [e.target.name]: e.target.value
+        })
+    }
+
     // Uploads new print to database
     const upload = async (e) => {
         e.preventDefault();
-        console.log(e.target.children);
         const formData = new FormData();
         formData.append("file", file)
         formData.append('title', title)
@@ -78,6 +86,7 @@ const UploadPrint = () => {
         original ? 
             formData.append('price', price) : 
             formData.append("price", 15)
+        formData.append("dimensions", JSON.stringify(dimensions))
 
         try {
             const res = await axios.post("/upload/prints", formData, {
@@ -101,7 +110,10 @@ const UploadPrint = () => {
         // setFile("Choose File")
         setPreview("")
         setPrice("")
-        e.target.children[4].value = null;
+        setDimensions({width: 11, height: 17})
+        var checkbox = document.querySelector("input[type='checkbox']");
+        checkbox.checked = false
+        e.target.children[3].value = null;
     }
 
     return (
@@ -127,6 +139,23 @@ const UploadPrint = () => {
                         <input id="original" type="checkbox" onChange={makeOriginal}></input>
                     </div>
                     {original &&
+                        <Fragment>
+                        
+                        <div>
+                            <label htmlFor="width">Width:</label>
+                        
+                            <input 
+                                id="width" 
+                                name="width"
+                                type="number" 
+                                min="0.0" 
+                                max="100.0" 
+                                step="0.5" 
+                                onChange={updateDimensions}
+                                value={dimensions.width}
+                                inputMode="decimal"
+                                />
+                        </div>
                         <div>
                             <label htmlFor="price">Price: $</label>
                             <input 
@@ -140,6 +169,21 @@ const UploadPrint = () => {
                                 inputMode="decimal"
                                 />
                         </div>
+                        <div>
+                            <label htmlFor="height">Height:</label>
+                            <input 
+                                id="height"
+                                name="height" 
+                                type="number" 
+                                min="0.0" 
+                                max="100.0" 
+                                step="0.5" 
+                                onChange={updateDimensions}
+                                value={dimensions.height}
+                                inputMode="decimal"
+                                />
+                        </div>
+                        </Fragment>
                     }
                     
                 </div>

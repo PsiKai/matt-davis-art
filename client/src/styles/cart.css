@@ -58,6 +58,7 @@
 
 .cart-item--img__wrapper {
   width: 50%;
+  display: flex;
 }
 
 .cart-item--img__wrapper img {

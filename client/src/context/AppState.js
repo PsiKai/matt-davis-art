@@ -35,7 +35,8 @@ const AppState = (props) => {
            return print._id === item.id
         })
         
-        newCartItem[0].quantity = item.quantity;            
+        newCartItem[0].quantity = item.quantity;
+        newCartItem[0].dimensions = JSON.parse(newCartItem[0].dimensions)            
         
         if (localStorage.getItem("cart") !== null) {
             newCart = [...JSON.parse(localStorage.getItem("cart")), ...newCartItem]
@@ -70,7 +71,7 @@ const AppState = (props) => {
             return accumulator;
         }, []);
 
-        // console.log(reducedCart);
+        console.log(reducedCart);
         // var newNew = [];
         // reducedCart.forEach(item => {
         //     var obj = {}

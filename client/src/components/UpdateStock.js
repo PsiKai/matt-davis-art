@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from 'react'
+import React, {useContext, useState} from 'react'
 import AppContext from "../context/AppContext"
 import AlertContext from "../context/alertContext"
 import CircularProgress from "@material-ui/core/CircularProgress"
@@ -10,49 +10,48 @@ const UpdateStock = () => {
     const {prints, refreshArt} = appContext;
     const {setAlert} = alertContext;
 
-    const [stock, setStock] = useState([])
+    // const [stock, setStock] = useState([])
     const [checked, setChecked] = useState([])
 
 
 
-    useEffect(() => {
-        prints && prints.forEach(print => {
-            setStock(stock => [
-                ...stock,
-                {title: print.title,
-                stock: print.stock}
-            ]) 
-        })
-    }, [prints])
+    // useEffect(() => {
+    //     prints && prints.forEach(print => {
+    //         setStock(stock => [
+    //             ...stock,
+    //             {title: print.title,
+    //             stock: print.stock}
+    //         ]) 
+    //     })
+    // }, [prints])
 
     //changes state of stock on input change
-    const update = (e) => {
-        var newStock = [...stock]
-        var title = e.target.name
-        var stockItem = e.target.id
-        var newValue = e.target.value
+    // const update = (e) => {
+    //     var newStock = [...stock]
+    //     var title = e.target.name
+    //     var stockItem = e.target.id
+    //     var newValue = e.target.value
         
-        newStock.filter(item => {
-            if (item.title === title) {
-                return item.stock = {
-                    ...item.stock,
-                    [stockItem]: newValue
-                }
-            } return item
-        })
-        setStock(newStock)  
-    }
+    //     newStock.filter(item => {
+    //         if (item.title === title) {
+    //             return item.stock = {
+    //                 ...item.stock,
+    //                 [stockItem]: newValue
+    //             }
+    //         } return item
+    //     })
+    //     setStock(newStock)  
+    // }
 
     //sends stock changes to database
-    const sendChanges = async () => {
-        const res = await axios.post("/update/stock", stock);
-        setAlert(res.data.msg, "lightgreen")
-        refreshArt();
-    }   
+    // const sendChanges = async () => {
+    //     const res = await axios.post("/update/stock", stock);
+    //     setAlert(res.data.msg, "lightgreen")
+    //     refreshArt();
+    // }   
     
     // saves checked prints in state 
     const stageDelete = (e) => {
-        console.log(e.target.name);
         if (e.target.checked) {
             setChecked([...checked, {
                 title: e.target.value,
@@ -62,7 +61,7 @@ const UpdateStock = () => {
         } else {
             var items = [...checked]
             const newArray = items.filter(item => {
-                return item !== e.target.value
+                return item.title !== e.target.value
             })
             setChecked(newArray)
         }
@@ -73,6 +72,10 @@ const UpdateStock = () => {
         try {
             const res = await axios.post("/delete/prints", checked)
             setAlert(res.data.msg, "var(--medium)")
+            setTimeout(() => {
+                refreshArt();
+            }, [200])
+            
             
         } catch (err) {
             setAlert(err.response.msg, "var(--medium)")
@@ -82,15 +85,16 @@ const UpdateStock = () => {
                 if (box.checked) {box.checked = false}
             })
         setChecked([])
-        refreshArt();
+        
     }
     
     return (
         <div className="update-stock">
-            <h2>Update Print Stock</h2>
-            
+            <h2>Update Art for Sale</h2>
+            <h4>Originals</h4>
             <div className="print-stock">
                 {prints ? prints.map((art, i) => {
+                    if(art.original) {
                     return (
                     <div className="print-stock-item" key={i}>
                         <h5>{art.title}</h5>
@@ -99,7 +103,7 @@ const UpdateStock = () => {
                             alt={art.name} 
                         />
                         <ul>
-                            <li>
+                            {/* <li>
                                 <label htmlFor="fiveEight" className="quantity">5 x 8:</label>
                                 <input 
                                     id="fiveEight" 
@@ -138,7 +142,7 @@ const UpdateStock = () => {
                                     min="0"
                                 />
                             </li>
-                            <hr/>
+                            <hr/> */}
                             <li>
                                 <label htmlFor="delete-box">Delete?</label>
                                 <input 
@@ -150,20 +154,52 @@ const UpdateStock = () => {
                             </li>
                         </ul>
                     </div>
-                    )
+                    )} else {
+                        return null
+                    }
                 }) :
                 <div className="progress">
                     <CircularProgress color="inherit" />
                 </div>
             }  
             </div>
+            <h4>Prints</h4>
+            <div className="print-stock">
+                {prints && prints.map((art, i) => {
+                    if(!art.original) {
+                        return (
+                        <div className="print-stock-item" key={i}>
+                            <h5>{art.title}</h5>
+                            <img 
+                                src={art.img}
+                                alt={art.name} 
+                            />
+                            <ul>
+                                <li>
+                                    <label htmlFor="delete-box">Delete?</label>
+                                    <input 
+                                        value={art.title} 
+                                        name={art.type}
+                                        type='checkbox' 
+                                        id="delete-box" 
+                                        onChange={stageDelete}/>
+                                </li>
+                            </ul>
+                        </div>
+                        )
+                    } else {
+                        return null
+                    }
+                })
+                }
+            </div>
+            
         <div className="print-stock--buttons">
-            <button data-text="Submit Changes" onClick={sendChanges}>Submit Changes</button>
+            {/* <button data-text="Submit Changes" onClick={sendChanges}>Submit Changes</button> */}
             <button data-text="Delete Items" onClick={deletePrints}>Delete Items</button>
         </div>
-        </div>
-    )     
-    
+    </div>
+    )       
 }
 
 export default UpdateStock

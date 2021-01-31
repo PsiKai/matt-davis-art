@@ -21,7 +21,6 @@ const Prints = () => {
 
     const openModal = (item) => {
         setModalOpen(true)
-        console.log(item);
         // var stock = prints[item[1].id].stock
         var price = prints[item[1].id].price
         var original = prints[item[1].id].original
@@ -30,6 +29,7 @@ const Prints = () => {
             title: item[0].innerText,
             price: price,
             original: original,
+            size: JSON.parse(item[1].dataset.size),
             // original: item[1],
             // _5x8: stock.fiveEight,
             // _8x11: stock.eightEleven,
@@ -80,7 +80,7 @@ const Prints = () => {
     return (
         <div className="page-content">
             <PageHeader heading="Art for Sale" prints={prints}/>
-            <h2>Prints</h2>
+            <h2>Available for Print</h2>
             <div className="prints-flexbox">
             {prints ? 
                 prints.map((print, index) => {
@@ -95,6 +95,7 @@ const Prints = () => {
                         sku={print._id}
                         sold={print.soldOut}
                         open={openModal}
+                        size={print.dimensions}
                         /> 
                     } else {
                         return null
@@ -120,6 +121,7 @@ const Prints = () => {
                         sku={print._id}
                         sold={print.soldOut}
                         open={openModal}
+                        size={print.dimensions}
                         /> 
                     } else {
                         return null
@@ -149,7 +151,7 @@ const Prints = () => {
                             <label htmlFor="artCost">Price:</label>
                             <p>${img.price}</p>
                         </div>
-                        {!img.original &&
+                        {!img.original ?
                             <div>
                                 <label htmlFor="amount">Number of Prints</label>
                                 <input 
@@ -161,6 +163,9 @@ const Prints = () => {
                                     value={quantity}
                                     onChange={updateQuantity}
                                     />
+                            </div> :
+                            <div>
+                                <p>{img.size.width}" x {img.size.height}"</p>
                             </div>
                         }
                         {img.original ?

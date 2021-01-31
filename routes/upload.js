@@ -92,9 +92,9 @@ router.post("/prints", (req, res) => {
         }
         var imgObj = {
             title: req.body.title,
-            // stock: JSON.parse(req.body.stock),
             original: req.body.original,
             price: req.body.price,
+            dimensions: req.body.dimensions,
             type: type,
             soldOut: false,
             img: `https://storage.googleapis.com/${printBucket}/${cloudName}.${type}`

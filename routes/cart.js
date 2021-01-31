@@ -6,7 +6,7 @@ const nodemailer = require("nodemailer")
 router.post("/checkout", (req, res) => {
     let total = null;
     req.body.forEach(item => {
-        total = total + +item.price
+        total = total + (+item.price * +item.quantity)
     })
     // var _5x8 = 0
     // var _8x11 = 0

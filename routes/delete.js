@@ -68,9 +68,10 @@ router.post("/prints", (req, res) => {
     }
     const awaitAll = async () => {
         await deletePrints()
-        res.json({msg: "Prints were deleted"})
+        await res.json({msg: "Prints were deleted"})
     }
     awaitAll()
+    
 })
 
 
