@@ -272,7 +272,7 @@
   position: absolute;
 }
 
-.switch-enter.fadein-enter-active {
+.switch-enter.switch-enter-active {
   opacity: 0;
 }
 
@@ -294,4 +294,19 @@
 
 .switch-exit-done {
   opacity: 0;
+}
+
+/* Brand colors flying in  */
+
+.fly-enter {
+  transform: translate(-1000px, -400px);
+}
+
+.fly-enter.fly-enter-active {
+  transform: translate(0);
+  transition: all 2000ms linear 200ms;
+}
+
+.fly-enter-done {
+  transform: translate(0);
 }

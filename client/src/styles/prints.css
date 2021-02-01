@@ -27,8 +27,12 @@
   transform: rotate(-4deg);
 }
 
+.print-orders h2 {
+  text-align: left;
+}
+
 .print-orders p {
-  padding: 1rem 3rem 3rem 0;
+  padding: 0 3rem 3rem 0;
   font-size: 0.9rem;
   font-weight: lighter;
 }
@@ -107,6 +111,12 @@
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 0.5rem;
   z-index: 3;
+}
+
+.print-item .sold-out:hover {
+  transform: scale(1) !important;
+  box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3);
+  cursor: initial;
 }
 
 .sold-out h2 {
@@ -196,6 +206,7 @@
   }
 
   .print-orders .brand-backdrop {
+    left: -1.5rem;
     transform: skew(7deg) rotate(-7deg);
   }
 
@@ -214,6 +225,7 @@
   .print-orders h2 {
     text-align: left;
     margin-bottom: 0rem;
+    font-size: 1.2rem;
   }
 
   .print-orders p {
@@ -222,6 +234,10 @@
 
   .print-orders .print-modal {
     padding: 1rem;
+  }
+
+  .print-modal {
+    padding: 2rem 1rem;
   }
 
   .print-modal img {
@@ -235,5 +251,11 @@
   .print-modal {
     top: 88px;
     transform: translate(-50%, 0);
+  }
+
+  @media (max-width: 450px) {
+    .print-modal {
+      top: 60px;
+    }
   }
 }

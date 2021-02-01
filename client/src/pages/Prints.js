@@ -13,9 +13,11 @@ const Prints = () => {
     const [img, setImg] = useState({})
     const [modalOpen, setModalOpen] = useState(false)
     const [quantity, setQuantity] = useState(1)
+    const [mount, setMount] = useState(false);
 
     useEffect(() => {
         !prints && getArt();
+        setMount(true)
         //eslint-disable-next-line
     }, [])
 
@@ -43,6 +45,7 @@ const Prints = () => {
         if (name.contains("backdrop") || name.contains("close-modal") || name.contains("fas")) {
             setModalOpen(false)
             setImg({})
+            setQuantity(1)
         }
     }
 
@@ -83,8 +86,14 @@ const Prints = () => {
             
             <div className="print-orders">
             <h2>Available for Print</h2>
-                <div className="brand-backdrop"></div>
-                <p>Get as many prints as you want! They are all high quality 11" x 17" 300dpi.  Once I collect a batch of preorders, I'll send them to the printer and mail them out to you. So, you should expect to receive your prints in about 4 weeks.</p>
+                <CSSTransition
+                    in={mount}
+                    timeout={2200}
+                    classNames="fly"
+                >
+                    <div className="brand-backdrop"></div>
+                </CSSTransition>
+                <p>I sell on preorder, so there's no limit, get as many prints as you want! They are all $15 each for a high quality 11" x 17" 300dpi print.  You should expect to receive your prints in about 4 weeks.</p>
             </div>
             <div className="prints-flexbox">
             {prints ? 

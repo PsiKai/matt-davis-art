@@ -12,8 +12,7 @@ const Print = ({src, open, id, title, name, sku, price, sold, size}) => {
         setFade(true)
         sold && setIsZero(true)
         
-        // }
-        // eslint-disable-next-line 
+    // eslint-disable-next-line 
     }, [])
 
     useEffect(() => {
@@ -21,8 +20,9 @@ const Print = ({src, open, id, title, name, sku, price, sold, size}) => {
             if(item.original && item.title === title) {
                 setInCart(true)
             }
+            return null
         })
-    }, [savedCart])
+    }, [savedCart, title])
     
     // var bytes = Buffer.from(src.data)
 
@@ -39,7 +39,7 @@ const Print = ({src, open, id, title, name, sku, price, sold, size}) => {
             >
            <div 
                 onClick={openUp} 
-                className={!isZero && !inCart ? "print-item" : "print-item zero-stock"} 
+                className={isZero ? "print-item zero-stock" : "print-item"} 
                 style={{transitionDelay: `${id * 50}ms`}}
             >
                 <h3>{title}</h3>
