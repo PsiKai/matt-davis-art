@@ -23,6 +23,7 @@ const Prints = () => {
 
     const openModal = (item) => {
         setModalOpen(true)
+        // console.log(JSON.parse(item[1].dataset.size))
         // var stock = prints[item[1].id].stock
         var price = prints[item[1].id].price
         var original = prints[item[1].id].original
@@ -31,7 +32,7 @@ const Prints = () => {
             title: item[0].innerText,
             price: price,
             original: original,
-            size: JSON.parse(item[1].dataset.size),
+            size: JSON.parse(item[1].dataset.size) || item[1].dataset.size,
             // original: item[1],
             // _5x8: stock.fiveEight,
             // _8x11: stock.eightEleven,

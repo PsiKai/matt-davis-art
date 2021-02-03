@@ -27,9 +27,10 @@ const Print = ({src, open, id, title, name, sku, price, sold, size}) => {
     // var bytes = Buffer.from(src.data)
 
     const openUp = (e) => {
+        console.log(e.target.parentNode.children);
         !isZero && !inCart && open(e.target.parentNode.children)
     }
-
+ 
     return (
         <CSSTransition 
             in={fade} 

@@ -34,9 +34,13 @@ const AppState = (props) => {
         var newCartItem = state.prints.filter(print => {
            return print._id === item.id
         })
+        console.log(newCartItem);
         
         newCartItem[0].quantity = item.quantity;
-        newCartItem[0].dimensions = JSON.parse(newCartItem[0].dimensions)            
+        newCartItem[0].dimensions = 
+        // JSON.parse(
+            newCartItem[0].dimensions
+            // )            
         
         if (localStorage.getItem("cart") !== null) {
             newCart = [...JSON.parse(localStorage.getItem("cart")), ...newCartItem]

@@ -49,7 +49,7 @@ const CartItems = () => {
                             price={item.price}
                             quantity={item.quantity}
                             original={item.original}
-                            size={item.dimensions}
+                            size={JSON.parse(item.dimensions)}
                             // stock={item.stock}
                         />
                     )
