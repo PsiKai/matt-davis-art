@@ -11,24 +11,17 @@ const CartItem = ({quantity, title, src, id, original, size, price}) => {
     const [fade, setFade] = useState(false)
     const [imgModal, setImgModal] = useState({in: false, src: "", title: ""})
 
-    // const {fiveEight, eightEleven, oneeightTwofour} = quan
-
     useEffect(() => {
         setFade(true)
     }, [])
 
     const makeChanges = (e) => {
         e.preventDefault()
-        // console.log(e.target.parentNode.parentNode.children[0]);
-        // var title = e.target.parentNode.parentNode.children[0].innerHTML;
         var savedCart = JSON.parse(localStorage.getItem("cart"));
         let updatedQuan = []
         savedCart.find((item) => {
             if (item.title === title) {
                 item.quantity = quan
-                // if (item.quantity.fiveEight > 0 || item.quantity.eightEleven > 0 || item.quantity.oneeightTwofour > 0) {
-                //     updatedQuan = [...updatedQuan, item]
-                // }
                 if (item.quantity > 0) {
                     updatedQuan = [...updatedQuan, item]
                 }
@@ -52,11 +45,7 @@ const CartItem = ({quantity, title, src, id, original, size, price}) => {
         var value = e.target.value
         console.log(value);
         if (value < 0) value = 0
-        setQuan(
-            // ...quan,
-            // [e.target.name]: 
-            value
-        )
+        setQuan(value)
     }
 
     const adjustQuan = () => {
@@ -90,8 +79,6 @@ const CartItem = ({quantity, title, src, id, original, size, price}) => {
 
     return (
         <CSSTransition 
-            // unmountOnExit={true} 
-            // key={id} 
             in={fade} 
             classNames="fadein" 
             timeout={200} 
@@ -139,39 +126,6 @@ const CartItem = ({quantity, title, src, id, original, size, price}) => {
                                 value={quan}
                                 onChange={updateQuantity}
                             />
-                        {/* <div className="cart-item--quantity__grid">
-                            <p>5 x 8: </p>
-                            <input 
-                                name="fiveEight"
-                                type="number" 
-                                inputMode="numeric"
-                                min="0"
-                                max={stock.fiveEight} 
-                                value={fiveEight} 
-                                onChange={updateQuantity} />
-                        </div>
-                        <div className="cart-item--quantity__grid">
-                            <p>8.5 x 11: </p>
-                                <input 
-                                    name="eightEleven"
-                                    type="number"  
-                                    inputMode="numeric"
-                                    min="0"
-                                    max={stock.eightEleven}
-                                    value={eightEleven} 
-                                    onChange={updateQuantity} />
-                        </div>
-                        <div className="cart-item--quantity__grid">    
-                            <p>18 x 24: </p>
-                            <input 
-                                name="oneeightTwofour"
-                                type="number"  
-                                inputMode="numeric"
-                                min="0"
-                                max={stock.oneeightTwofour}
-                                value={oneeightTwofour} 
-                                onChange={updateQuantity} />
-                        </div> */}
                         <button><i className="far fa-check-square fa-lg"></i></button>
                         </form> 
                         </CSSTransition>:
@@ -183,24 +137,6 @@ const CartItem = ({quantity, title, src, id, original, size, price}) => {
                         >
                         <div className="cart-item--quantity">
                             <span>{quan}</span>
-                            {/* {fiveEight > 0 && 
-                                <div className="cart-item--quantity__grid">
-                                    <p>5 x 8: </p>
-                                    <p>{fiveEight}</p>
-                                </div>
-                            }
-                            {eightEleven > 0 && 
-                                <div className="cart-item--quantity__grid">
-                                    <p>8.5 x 11: </p>
-                                    <p>{eightEleven}</p>
-                                </div>
-                            }
-                            {oneeightTwofour > 0 && 
-                                <div className="cart-item--quantity__grid">
-                                    <p>18 x 24: </p>
-                                    <p>{oneeightTwofour}</p>
-                                </div>
-                            } */}
                             <button onClick={adjustQuan}>
                                 <i className="far fa-edit fa-lg"></i>
                             </button>
@@ -226,8 +162,7 @@ const CartItem = ({quantity, title, src, id, original, size, price}) => {
                         </CSSTransition>
                     }
                 </TransitionGroup>
-            </div> 
-                
+            </div>     
         </CSSTransition>
     )
 }

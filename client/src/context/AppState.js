@@ -34,20 +34,14 @@ const AppState = (props) => {
         var newCartItem = state.prints.filter(print => {
            return print._id === item.id
         })
-        console.log(newCartItem);
-        
-        newCartItem[0].quantity = item.quantity;
-        newCartItem[0].dimensions = 
-        // JSON.parse(
-            newCartItem[0].dimensions
-            // )            
+
+        newCartItem[0].quantity = item.quantity;       
         
         if (localStorage.getItem("cart") !== null) {
             newCart = [...JSON.parse(localStorage.getItem("cart")), ...newCartItem]
         } else {
             newCart = [...newCartItem]
         } 
-        console.log(newCart);
 
         var reducedCart = newCart.reduce((accumulator, cur) => {
             var name = cur._id;
@@ -56,36 +50,10 @@ const AppState = (props) => {
             })
             if (found) {
                 found.quantity = +found.quantity + +cur.quantity
-
-                // var values = Object.entries(found.quantity)
-                // values.forEach(value => {
-                //     if (value[0] === "fiveEight") {
-                //         found.quantity.fiveEight = +cur.quantity.fiveEight + +value[1]
-                //     }
-                //     if (value[0] === "eightEleven") {
-                //         found.quantity.eightEleven = +cur.quantity.eightEleven + +value[1]
-                //     }
-                //     if (value[0] === "oneeightTwofour") {
-                //         found.quantity.oneeightTwofour = +cur.quantity.oneeightTwofour + +value[1]
-                //     }
-                // })
-
             }
             else accumulator.push(cur);
             return accumulator;
         }, []);
-
-        console.log(reducedCart);
-        // var newNew = [];
-        // reducedCart.forEach(item => {
-        //     var obj = {}
-        //     obj.src = item.img
-        //     obj.quantity = item.quantity
-        //     obj.stock = item.stock
-        //     obj.title = item.title
-        //     obj._id = item._id
-        //     newNew.push(obj)
-        // })
 
         localStorage.setItem("cart", JSON.stringify(reducedCart))
         
@@ -144,13 +112,6 @@ const AppState = (props) => {
     //completes the purchase
     const completePurchase = async (order) => {
         const res = await axios.post("/cart/purchase", order)
-
-        // if (res.status !== 200) {
-        //     dispatch({
-        //         type: PURCHASED,
-        //         payload: res.data
-        //     })
-        // }
         dispatch({
             type: PURCHASED,
             payload: res.data

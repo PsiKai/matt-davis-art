@@ -24,112 +24,121 @@ router.post("/checkout", (req, res) => {
 
 router.post("/purchase", (req, res) => {
     const {ship, items, total} = req.body
-    const {email, name, add1, add2, zip, state, city} = ship
+    const {name2, email, name, add1, add2, zip, state, city} = ship
     var prints = ""
     items.forEach(item => {
-        var _5x8 = item.quantity.fiveEight;
-        var _8x11 = item.quantity.eightEleven;
-        var _18x24 = item.quantity.oneeightTwofour
-        if (_5x8.length < 1) _5x8 = 0;
-        if (_8x11.length < 1) _8x11 = 0;
-        if (_18x24.length < 1) _18x24 = 0;
+        const {width, height} = JSON.parse(item.dimensions)
         var string = 
-        `<div style='margin: 1rem; border: 1px solid black; padding: 1rem; border-radius: 0.5rem; background: lightgrey; min-width: 150px; display: inline-block;'>
-            <h4>Print: ${item.title}</h4>
-            <p>5x8: <b>${_5x8}</b></p>
-            <p>8.5x11: <b>${_8x11}</b></p>
-            <p>18x24: <b>${_18x24}</b></p>
+        `<div style='margin: 0.5rem; border: 1px solid black; padding: 1rem; border-radius: 0.5rem; background: lightgrey; min-width: 150px; display: inline-block;'>
+            <h4>${item.title}</h4>
+            <img src=${item.img} alt=${item.title} style="width: 100px; height: 100px; object-fit: cover;" />
+            <p>Size: ${width}" x ${height}"</p>
         </div>`
         prints = prints.concat(string)
     })
 
     var emailFormat = 
-    `<h1>You have a new order for prints!</h1>
-    <div style="max-width: 100%; padding: 2rem; border: 1px solid black; border-radius: 1rem; margin: 1rem;">    
-        <h2>Order Details:</h2>
-        <div style="padding: 1rem 2rem;">
-            <h3>Purchaser:</h3>
-            <p>${name}</p>
-            <p>${email}</p>
-            <h3>Shipping Address:</h3>
-            <p>${name}</p>
-            <p>${add1}</p>
-            <p>${add2}</p>
-            <span>${city}</span>
-            <span>${state}</span>
-            <span>${zip}</span>
-            <h3>Items Purchased:</h3>
-            <div style="text-align: center">
-                ${prints}
+    `<div style="background-color: #f9f9f9; color: #305973; font-family: sans-serif; padding: 1rem;">
+        <h1>You have a new order for Art!</h1>
+        <div style="max-width: 500px; padding: 0 2rem; border: 1px solid black; border-radius: 1rem; margin: 1rem;">    
+            <h2>Order Details:</h2>
+            <div style="padding: 1rem 2rem;">
+                <h3>Purchaser:</h3>
+                <div style="margin-left: 3rem;">
+                    <p>${name2}</p>
+                    <p>${email}</p>
+                </div>
+                <h3>Shipping Address:</h3>
+                <div style="margin-left: 3rem;">
+                    <p>${name}</p>
+                    <p style="margin-bottom: 0.5rem;">${add1}</p>
+                    <p style="margin: 0.5rem 0;">${add2}</p>
+                    <span>${city},</span>
+                    <span>${state}</span>
+                    <span>${zip}</span>
+                </div>
+                <h3>Items Purchased:</h3>
+                <div style="text-align: center">
+                    ${prints}
+                </div>
+                <h3>Amount charged: $${total}</h3>
             </div>
-            <h3>Amount charged: $${total}</h3>
         </div>
     </div>`
 
     var emailFormat2 = 
-    `<h1>Thank you for your Purchase!</h1>
-    <div style="max-width: 100%; padding: 2rem; border: 1px solid black; border-radius: 1rem; margin: 1rem;">    
-        <h2>Order Details:</h2>
-        <div style="padding: 1rem 2rem;">
-            <h3>Shipping Address:</h3>
-            <p>${name}</p>
-            <p>${add1}</p>
-            <p>${add2}</p>
-            <span>${city}</span>
-            <span>${state}</span>
-            <span>${zip}</span>
-            <h3>Items Purchased:</h3>
-            <div style="text-align: center">
-                ${prints}
+    `<div style="background-color: #f9f9f9; color: #305973; font-family: sans-serif; padding: 1rem;">
+        <h1>Thank you for your purchase, ${name2}!</h1>
+        <div style="max-width: 500px; padding: 0 2rem; border: 1px solid black; border-radius: 1rem; margin: 1rem;">    
+            <h2>Order Details:</h2>
+            <div style="padding: 1rem;">
+                <h3>Shipping Address:</h3>
+                <div style="margin-left: 3rem;">
+                    <p>${name}</p>
+                    <p style="margin-bottom: 0.5rem;">${add1}</p>
+                    <p style="margin: 0.5rem 0;">${add2}</p>
+                    <span>${city},</span>
+                    <span>${state}</span>
+                    <span>${zip}</span>
+                </div>
+                <h3>Art Purchased:</h3>
+                <div style="text-align: center">
+                    ${prints}
+                </div>
+                <h3>Amount charged: $${total}</h3>
+                <p>Please reach out to me if any of the information doesn't look correct.</p>
             </div>
-            <h3>Amount charged: $${total}</h3>
-            <p>Please reach out to me if any of the information doesn't look correct.</p>
         </div>
-    </div>
-    <h2>Thank you so much for supporting my art!</h2>
-    <p>I'm grateful that I get to make art, and even more grateful to be able to share it with you.  People like you who patronize the arts are what's going to keep this world fun and interesting.</p>
-    <p>Stay tuned for more art to be posted to the website.  Hope to hear from you again.</p>
-    <p>Your friend,</p>
-    <h3>Matt Davis</h3>
-    <a style="margin: 1rem" href="https://www.instagram.com/mattdavisart5280/">
-        Instagram
-    </a>
-    <a style="margin: 1rem" href="https://www.facebook.com/matthew.davis.5437">
-        Facebook
-    </a>`
+        <div style="max-width: 500px;">
+            <h2>Thank you so much for supporting my art!</h2>
+            <p>I'm grateful that I get to make art, and even more grateful to be able to share it with you.  People like you who patronize the arts are what's going to keep this world fun and interesting.</p>
+            <p>Stay tuned for more art to be posted to the website.  Hope to hear from you again.</p>
+            <p>Your friend,</p>
+            <h3>Matt Davis</h3>
+        </div>
+    </div>`
 
     let transporter = nodemailer.createTransport({
-        // service: 'gmail',
-        // auth: {
-        //     user: 'davidirvin47@gmail.com',
-        //     pass: "12345"
-        // }
-        host: 'smtp.gmail.com',
+        // host: 'smtp.gmail.com',
+        service: "Gmail",
         port: 465,
         secure: true,
         auth: {
             type: 'OAuth2',
-            user: 'davidirvin47@gmail.com',
+            // user: 'davidirvin47@gmail.com',
             clientId: process.env.CLIENT_ID,
             clientSecret: process.env.CLIENT_SECRET,
-            refreshToken: process.env.REFRESH_TOKEN,
-            accessToken: process.env.TOKEN,
+            // refreshToken: process.env.REFRESH_TOKEN,
+            // accessToken: process.env.TOKEN,
         }
     });
 
+    transporter.on("token", token => {
+        console.log(token.user, token.accessToken, token.expires);
+    })
 
     var mailOptions = {
         from: 'davidirvin47@gmail.com',
         to: 'davidirvin47@gmail.com',
         subject: "New order from " + name,
-        html: emailFormat
+        html: emailFormat,
+        auth: {
+            user: 'davidirvin47@gmail.com',
+            refreshToken: process.env.REFRESH_TOKEN,
+            accessToken: process.env.TOKEN,
+        }
     }
 
     var mailOptions2 = {
         from: 'davidirvin47@gmail.com',
         to: email,
         subject: "Your purchase from Artist Matt Davis",
-        html: emailFormat2
+        html: emailFormat2,
+        auth: {
+            user: 'davidirvin47@gmail.com',
+            refreshToken: process.env.REFRESH_TOKEN,
+            accessToken: process.env.TOKEN,
+        }
     }
 
     var orderReq = transporter.sendMail(mailOptions)

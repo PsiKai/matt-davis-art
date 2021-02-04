@@ -29,6 +29,10 @@
 
 .print-orders h2 {
   text-align: left;
+  text-decoration: underline var(--medium);
+  text-underline-offset: 5px;
+  /* color: var(--medium); */
+  /* text-shadow: 0 0 2px var(--dark-two); */
 }
 
 .print-orders p {
@@ -174,6 +178,10 @@
 .close-modal:hover {
   background: var(--white);
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.close-modal:active {
+  animation: press-cart 150ms linear;
 }
 
 .print-modal img {

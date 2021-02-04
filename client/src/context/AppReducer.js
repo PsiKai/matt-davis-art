@@ -22,23 +22,6 @@ export default (state, action) => {
             action.payload.forEach(item => {
                 items = +items + +item.quantity
                 price = +price + (+item.price * +item.quantity)
-                // var values = Object.entries(item.quantity)
-
-                // values.forEach(value => {
-                    
-                    // if (value[0] === "fiveEight") {
-                    //     items = items + +value[1]
-                    //     price = price + (1 * +value[1])
-                    // }
-                    // if (value[0] === "eightEleven") {
-                    //     items = items + +value[1]
-                    //     price = price + (1 * +value[1])
-                    // }
-                    // if (value[0] === "oneeightTwofour") {
-                    //     items = items + +value[1]
-                    //     price = price + (1 * +value[1])
-                    // }
-                // })
             })
             return {
                 ...state,

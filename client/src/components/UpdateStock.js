@@ -72,10 +72,6 @@ const UpdateStock = () => {
         try {
             const res = await axios.post("/delete/prints", checked)
             setAlert(res.data.msg, "var(--medium)")
-            setTimeout(() => {
-                refreshArt();
-            }, [200])
-            
             
         } catch (err) {
             setAlert(err.response.msg, "var(--medium)")
@@ -85,7 +81,7 @@ const UpdateStock = () => {
                 if (box.checked) {box.checked = false}
             })
         setChecked([])
-        
+        refreshArt();
     }
     
     return (

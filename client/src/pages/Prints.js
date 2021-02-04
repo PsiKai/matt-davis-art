@@ -87,6 +87,7 @@ const Prints = () => {
             
             <div className="print-orders">
             <h2>Available for Print</h2>
+            <p>I sell on preorder, so there's no limit, get as many prints as you want! They are all $15 each for a high quality 11" x 17" 300dpi print.  You should expect to receive your prints in about 4 weeks.</p>
                 <CSSTransition
                     in={mount}
                     timeout={2200}
@@ -94,7 +95,7 @@ const Prints = () => {
                 >
                     <div className="brand-backdrop"></div>
                 </CSSTransition>
-                <p>I sell on preorder, so there's no limit, get as many prints as you want! They are all $15 each for a high quality 11" x 17" 300dpi print.  You should expect to receive your prints in about 4 weeks.</p>
+                
             </div>
             <div className="prints-flexbox">
             {prints ? 
@@ -124,8 +125,8 @@ const Prints = () => {
             </div>
             <div className="print-orders">
                 <h2>Original Artwork</h2>
+                <p>Here's your chance to get your hands on a one-of-a-kind piece from me!  Some are one-off ideas, and some are from a collection.  When I sell out that's it!  I'll be continually updating the stock, so check back again for more.</p>
                 <div className="brand-backdrop"></div>
-                <p>Here's your chance to get your hands on a one of a kind piece from me!  Some are one-off ideas, and some are from a collection.  When I sell out that's it!  I'll be continually updating the stock, so check back again for more.</p>
             </div>
             <div className="prints-flexbox">
             {prints && 

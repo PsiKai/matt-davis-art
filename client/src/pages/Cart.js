@@ -56,7 +56,13 @@ const Cart = (props) => {
                 <div className="purchase-modal">
                     <h1>{modal.heading}</h1>
                     <p>{modal.msg}</p>
-                    <button onClick={orderComplete}>{modal.code === 200 ? "Continue Browsing" : "Contact Me"}</button>
+                    <button 
+                        style={{width: "180px"}} 
+                        onClick={orderComplete} 
+                        data-text={modal.code === 200 ? "Continue Browsing" : "Contact Me"}
+                    >
+                        {modal.code === 200 ? "Continue Browsing" : "Contact Me"}
+                    </button>
                 </div>
             </div>
         </CSSTransition>

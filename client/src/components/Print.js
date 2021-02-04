@@ -11,7 +11,6 @@ const Print = ({src, open, id, title, name, sku, price, sold, size}) => {
     useEffect(() => {
         setFade(true)
         sold && setIsZero(true)
-        
     // eslint-disable-next-line 
     }, [])
 
@@ -27,7 +26,6 @@ const Print = ({src, open, id, title, name, sku, price, sold, size}) => {
     // var bytes = Buffer.from(src.data)
 
     const openUp = (e) => {
-        console.log(e.target.parentNode.children);
         !isZero && !inCart && open(e.target.parentNode.children)
     }
  
@@ -36,7 +34,6 @@ const Print = ({src, open, id, title, name, sku, price, sold, size}) => {
             in={fade} 
             classNames="fadein" 
             timeout={400}
-            // unmountOnExit={true}
             >
            <div 
                 onClick={openUp} 
@@ -53,9 +50,7 @@ const Print = ({src, open, id, title, name, sku, price, sold, size}) => {
                     data-size={size}
                     >
                 </img>
-                {/* <label htmlFor="cost">Price:</label> */}
                 <p id="cost">${price}</p>
-                {/* <button onClick={openUp}>Select Prints</button> */}
                 {isZero && <div className="sold-out"><h2>Sold Out</h2></div>}
                 {inCart && <div className="sold-out"><h2>Already in Cart</h2></div>}
             </div> 
