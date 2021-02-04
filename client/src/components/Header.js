@@ -24,6 +24,11 @@ const Header = () => {
     // eslint-disable-next-line 
   }, [])
 
+  const navigate = () => {
+    setOpen(false); 
+    window.scrollTo(0,0);
+  }
+
     return (
         <header>
             <Link to="/" className="header--main-link">
@@ -43,19 +48,19 @@ const Header = () => {
             <div className="menu" style={open ? {transform: "translateX(0)"} : {transform: "translateX(100%)"}}>
               
             <ul className="header-links">
-              <li onClick={() => setOpen(false)}>
+              <li onClick={navigate}>
                 <Link to="/about">About</Link>
               </li>
-              <li onClick={() => setOpen(false)}>
+              <li onClick={navigate}>
                 <Link to="/prints">Store</Link>
               </li>
-              <li onClick={() => setOpen(false)}>
+              <li onClick={navigate}>
                 <Link to="/contact">Contact</Link>
               </li>
-              <li onClick={() => setOpen(false)}>
+              <li onClick={navigate}>
                 <Link to="/gallery">Gallery</Link>
               </li>
-              <li onClick={() => setOpen(false)}>
+              <li onClick={navigate}>
                 <Link to="/cart" className="cart-link">
                   <Badge 
                     badgeContent={cartItems} 
