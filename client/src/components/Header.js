@@ -32,7 +32,7 @@ const Header = () => {
     return (
         <header>
             <Link to="/" className="header--main-link">
-                <h1 onClick={() => setOpen(false)}>Matt Davis</h1>
+                <h1 onClick={navigate}>Matt Davis</h1>
             </Link>
             <div className="menu__burger-icon" onClick={() => setOpen(!open)}>
                   <span style={open ? 
