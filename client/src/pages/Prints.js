@@ -22,9 +22,6 @@ const Prints = () => {
     }, [])
 
     const openModal = (item) => {
-        setModalOpen(true)
-        // console.log(JSON.parse(item[1].dataset.size))
-        // var stock = prints[item[1].id].stock
         var price = prints[item[1].id].price
         var original = prints[item[1].id].original
         setImg({
@@ -33,12 +30,9 @@ const Prints = () => {
             price: price,
             original: original,
             size: JSON.parse(item[1].dataset.size) || item[1].dataset.size,
-            // original: item[1],
-            // _5x8: stock.fiveEight,
-            // _8x11: stock.eightEleven,
-            // _18x24: stock.oneeightTwofour,
             name: item[1].name
         })
+        setModalOpen(true)
     }
 
     const hideModal = (e) => {
@@ -62,19 +56,6 @@ const Prints = () => {
             id: img.name
         }
         item.quantity > 0 && addItem(item)
-        // const item = {
-        //     quantity: {
-        //         fiveEight: info[0].children[1].value > 0 ? info[0].children[1].value : 0,
-        //         eightEleven: info[1].children[1].value > 0 ? info[1].children[1].value : 0,
-        //         oneeightTwofour: info[2].children[1].value > 0 ? info[2].children[1].value : 0
-        //     },
-        //     id: e.target.parentNode.children[2].name
-        // }
-        // if (item.quantity.fiveEight > 0 || 
-        //     item.quantity.eightEleven > 0 || 
-        //     item.quantity.oneeightTwofour > 0) {
-        //         addItem(item);
-        // }
         
         setModalOpen(false)
         setImg({})
@@ -86,8 +67,8 @@ const Prints = () => {
             <PageHeader heading="Art for Sale" prints={prints}/>
             
             <div className="print-orders">
-            <h2>Available for Print</h2>
-            <p>I sell on preorder, so there's no limit, get as many prints as you want! They are all $15 each for a high quality 11" x 17" 300dpi print.  You should expect to receive your prints in about 4 weeks.</p>
+                <h2>Available for Print</h2>
+                <p>I sell on preorder, so there's no limit, get as many prints as you want! They are all $15 each for a high quality 11" x 17" 300dpi print.  You should expect to receive your prints in about 4 weeks.</p>
                 <CSSTransition
                     in={mount}
                     timeout={2200}
@@ -105,7 +86,6 @@ const Prints = () => {
                         key={index}
                         id={index}
                         src={print.img}
-                        // stock={print.stock}
                         price={print.price}
                         title={print.title}
                         sku={print._id}
@@ -158,6 +138,11 @@ const Prints = () => {
                 unmountOnExit={true}
             >
             <div className="backdrop" onClick={hideModal}>
+                <CSSTransition
+                    in={modalOpen}
+                    timeout={400}
+                    classNames="move-down"
+                >
                 <div className="print-modal">
                     <div className="close-modal" onClick={hideModal}><i className="fas fa-times fa-2x"></i></div>
                    
@@ -167,11 +152,10 @@ const Prints = () => {
                         name={img.name}>
                     </img>
                     {img.original ?
-                            <h5>This is a one of a kind item</h5> :
+                            <h5>This is a one of a kind piece</h5> :
                             <h5>All prints are PREORDER and will ship within 4 weeks</h5>}
                     <div className="print-modal__flex">
                         <div>
-                            {/* <label htmlFor="artCost">Price:</label> */}
                             <h2>${img.price}</h2>
                         </div>
                         {!img.original ?
@@ -191,48 +175,11 @@ const Prints = () => {
                                 <p>{img.size.width}" x {img.size.height}"</p>
                             </div>
                         }
-                       
-                        
-                        {/* <div>
-                            <label htmlFor="fiveEight" className="quantity">5 x 8:</label>
-                            <input 
-                                id="fiveEight" 
-                                type="number"  
-                                inputMode="numeric"
-                                name="fiveEight" 
-                                className="quantity" 
-                                min="0"
-                                max={img._5x8}
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="eightEleven" className="quantity">8.5 x 11:</label>
-                            <input 
-                                id="eightEleven" 
-                                type="number" 
-                                inputMode="numeric" 
-                                name="eightEleven"   
-                                className="quantity" 
-                                min="0"
-                                max={img._8x11}
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="oneeightTwofour" className="quantity">18 x 24:</label>
-                            <input 
-                                id="oneeightTwofour" 
-                                type="number"  
-                                 inputMode="numeric"
-                                name="oneeightTwofour" 
-                                className="quantity" 
-                                min="0"
-                                max={img._18x24}
-                            />
-                        </div> */}
                     </div>
 
                     <button data-text="Add To Cart" onClick={addToCart}>Add To Cart</button>
                 </div>
+                </CSSTransition>
             </div>
             </CSSTransition>
             }

@@ -39,6 +39,7 @@ router.post("/gallery", (req, res) => {
             medium: req.body.medium,
             description: req.body.description,
             type: type,
+            sold: false,
             img: `https://storage.googleapis.com/${galleryBucket}/${cloudName}.${type}`
         }
         

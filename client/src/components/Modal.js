@@ -17,11 +17,11 @@ const Modal = ({setModalOpen, total, shipData, cart}) => {
                     description: "Art from Matt Davis",
                     amount: {
                         currency_code: "USD",
-                        value: `${total}`,
+                        value: `${total + 5}`,
                         details: {
                             subtotal: `${total}`,
                             tax: 0,
-                            shipping: 0
+                            shipping: 5
                         }
                     }
                 }
@@ -45,6 +45,7 @@ const Modal = ({setModalOpen, total, shipData, cart}) => {
     const sendShipping = (order) => {
         appContext.completePurchase(order)
         setModalOpen(false)
+        appContext.refreshArt();
     }
 
     return (
@@ -72,7 +73,7 @@ const Modal = ({setModalOpen, total, shipData, cart}) => {
                     </p>
                 </div>
                 </div>
-                <h2>Total: ${total}</h2>
+                <h2>Total: ${total + 5}</h2>
                 <PayPalButton
                     createOrder={(data, actions) => createOrder(data, actions)}
                     onApprove={(data, actions) => onApprove(data, actions)}

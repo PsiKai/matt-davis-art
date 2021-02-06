@@ -5,7 +5,8 @@ var galleryImageSchema = new mongoose.Schema({
     medium: String,
     description: String,
     img: String,
-    type: String
+    type: String,
+
     // {
     //     data: Buffer,
     //     contentType: String

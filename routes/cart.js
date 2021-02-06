@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router();
 const nodemailer = require("nodemailer")
+var printModel = require("../models/prints")
 
 
 router.post("/checkout", (req, res) => {
@@ -35,6 +36,16 @@ router.post("/purchase", (req, res) => {
             <p>Size: ${width}" x ${height}"</p>
         </div>`
         prints = prints.concat(string)
+        if (item.original === true) {
+            printModel.findOneAndUpdate({title: item.title}, {soldOut: true}, err => {
+                if (err) {
+                    console.log("Did not update original stock");
+                } else {
+                    console.log("Artwork sold!");
+                }
+               
+            })
+        }
     })
 
     var emailFormat = 

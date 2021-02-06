@@ -21,7 +21,7 @@ const Piece = ({src, name, title, medium, description, id}) => {
         
             
             <hr className="art-division" />
-           <div className="gallery-piece">
+           <div className="gallery-piece" id={title.replace(/ /g, "-")}>
                 
                 <img 
                     src={src}

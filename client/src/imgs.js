@@ -8,19 +8,19 @@ const prints = [
         src: "../images/x-23.jpg"
     },
     {
-        name: "RPG Girl",
+        name: "RPG-Girl",
         src: "../images/rpg-girl.jpg"
     },
     {
-        name: "Walken",
+        name: "Christopher-Walken",
         src: "../images/walken.jpg"
     },
     {
-        name: "Gun",
+        name: "Smoking-Gun",
         src: "../images/smoking-gun.jpg"
     },
     {
-        name: "Guitar",
+        name: "Guitar-Man",
         src: "../images/guitar-man.jpg"
     }
 ]

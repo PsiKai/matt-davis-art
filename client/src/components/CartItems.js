@@ -72,12 +72,12 @@ const CartItems = () => {
                     <div>
                         <p><b>{cartItems}</b></p>
                         <p><b>${total}</b></p>
-                        <p><b>Free!</b></p>
+                        <p><b>$5</b></p>
                         
                     </div>
                     <hr className="underline"></hr> 
                     <h3>Total: </h3>       
-                    <h3>${total + 0}</h3>
+                    <h3>${total + 5}</h3>
                     <button 
                         className="checkout" 
                         data-text="Checkout" 

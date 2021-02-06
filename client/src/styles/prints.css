@@ -49,11 +49,15 @@
 }
 
 .print-item img {
-  height: 250px;
-  width: 250px;
+  height: 150px;
+  width: 175px;
   object-fit: cover;
   position: relative;
   /* z-index: 2; */
+}
+
+.print-item p {
+  margin: 0;
 }
 
 .print-item {
@@ -125,7 +129,7 @@
 
 .sold-out h2 {
   background: var(--dark);
-  transform: translateY(250px);
+  transform: translateY(200px);
   border-top: 2px outset var(--white);
   border-bottom: 2px outset var(--white);
 }
