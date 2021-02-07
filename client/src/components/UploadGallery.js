@@ -79,7 +79,7 @@ const UploadGallery = () => {
 
     return (
         <div className="upload-gallery">
-            <h2>Add Art to Gallery</h2>
+            <h2>Add Artwork to Gallery</h2>
             <div className="upload-form">
             
             <form onSubmit={upload}>
@@ -109,7 +109,7 @@ const UploadGallery = () => {
                     id="description" 
                     type="text" 
                     name="description" 
-                    rows="9"
+                    rows="7"
                     onChange={formUpdate}
                     value={description}
                     required>

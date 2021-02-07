@@ -33,6 +33,7 @@ const Edit = () => {
 
     const changePage = (e) => {
         setPage(e.target.name)
+        window.scrollTo(0, 0)
     }
 
     const signOut = () => {

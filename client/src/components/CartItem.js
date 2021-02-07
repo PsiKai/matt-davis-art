@@ -43,7 +43,6 @@ const CartItem = ({quantity, title, src, id, original, size, price}) => {
 
     const updateQuantity = (e) => {
         var value = e.target.value
-        console.log(value);
         if (value < 0) value = 0
         setQuan(value)
     }

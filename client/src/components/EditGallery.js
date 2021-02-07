@@ -77,7 +77,7 @@ const EditGallery = () => {
 
     return (
         <div className="edit-gallery">
-            <h2>Edit or Delete Artwork from Gallery</h2>
+            <h2>Update Artwork in Gallery</h2>
             <div className="update-gallery">
                 {
                 gallery ? gallery.map((item, i) => {

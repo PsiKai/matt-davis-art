@@ -64,7 +64,6 @@ const UploadPrint = () => {
     // Set Price of Original art 
     const updatePrice = (e) => {
         setPrice(e.target.value)
-        console.log(e.target.value);
     }
 
     // Set dimensions of original art
@@ -118,7 +117,7 @@ const UploadPrint = () => {
 
     return (
         <div className="upload-prints">
-        <h2>Add Art to Prints</h2>
+        <h2>Add Artwork to Store</h2>
         <div className="upload-form prints">
             
             <form onSubmit={upload}>

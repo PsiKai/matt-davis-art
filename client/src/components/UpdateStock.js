@@ -86,7 +86,7 @@ const UpdateStock = () => {
     
     return (
         <div className="update-stock">
-            <h2>Update Art for Sale</h2>
+            <h2>Update Artwork in Store</h2>
             <h4>Originals</h4>
             <div className="print-stock">
                 {prints ? prints.map((art, i) => {
