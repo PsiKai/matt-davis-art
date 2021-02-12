@@ -7,17 +7,12 @@ router.post("/", (req, res) => {
     const {address, subject, body, name} = req.body
 
     let transporter = nodemailer.createTransport({
-        // service: 'gmail',
-        // auth: {
-        //     user: 'davidirvin47@gmail.com',
-        //     pass: "12345"
-        // }
         host: 'smtp.gmail.com',
         port: 465,
         secure: true,
         auth: {
             type: 'OAuth2',
-            user: 'davidirvin47@gmail.com',
+            user: 'dmatthew8282@gmail.com',
             clientId: process.env.CLIENT_ID,
             clientSecret: process.env.CLIENT_SECRET,
             refreshToken: process.env.REFRESH_TOKEN,
@@ -34,8 +29,8 @@ router.post("/", (req, res) => {
     </p>`
 
     var mailOptions = {
-        from: 'davidirvin47@gmail.com',
-        to: 'davidirvin47@gmail.com',
+        from: 'dmatthew8282@gmail.com',
+        to: 'dmatthew8282@gmail.com',
         subject: subject,
         html: emailFormat
     }

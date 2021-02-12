@@ -110,17 +110,13 @@ router.post("/purchase", (req, res) => {
     </div>`
 
     let transporter = nodemailer.createTransport({
-        // host: 'smtp.gmail.com',
         service: "Gmail",
         port: 465,
         secure: true,
         auth: {
             type: 'OAuth2',
-            // user: 'davidirvin47@gmail.com',
             clientId: process.env.CLIENT_ID,
             clientSecret: process.env.CLIENT_SECRET,
-            // refreshToken: process.env.REFRESH_TOKEN,
-            // accessToken: process.env.TOKEN,
         }
     });
 
@@ -129,24 +125,24 @@ router.post("/purchase", (req, res) => {
     })
 
     var mailOptions = {
-        from: 'davidirvin47@gmail.com',
-        to: 'davidirvin47@gmail.com',
+        from: 'dmatthew8282@gmail.com',
+        to: 'dmatthew8282@gmail.com',
         subject: "New order from " + name,
         html: emailFormat,
         auth: {
-            user: 'davidirvin47@gmail.com',
+            user: 'dmatthew8282@gmail.com',
             refreshToken: process.env.REFRESH_TOKEN,
             accessToken: process.env.TOKEN,
         }
     }
 
     var mailOptions2 = {
-        from: 'davidirvin47@gmail.com',
+        from: 'dmatthew8282@gmail.com',
         to: email,
         subject: "Your purchase from Artist Matt Davis",
         html: emailFormat2,
         auth: {
-            user: 'davidirvin47@gmail.com',
+            user: 'dmatthew8282@gmail.com',
             refreshToken: process.env.REFRESH_TOKEN,
             accessToken: process.env.TOKEN,
         }
