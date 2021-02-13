@@ -66,9 +66,9 @@
   display: inline-block;
   text-align: center;
   margin: 1rem;
-  padding: 1rem;
+  padding: 0 0.5rem 1rem;
   border-radius: 0.5rem;
-  opacity: 0;
+  /* opacity: 0; */
   box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3);
   cursor: pointer;
   transition: transform 150ms ease, box-shadow 150ms ease;
@@ -121,22 +121,20 @@
   z-index: 3;
 }
 
-.print-item .sold-out:hover {
-  transform: scale(1) !important;
-  box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3);
-  cursor: initial;
-}
-
 .sold-out h2 {
   background: var(--dark);
   transform: translateY(200px);
   border-top: 2px outset var(--white);
-  border-bottom: 2px outset var(--white);
+  border-bottom: 2px solid var(--white);
+}
+
+.print-item.print-item.zero-stock {
+  box-shadow: initial;
 }
 
 .print-item.zero-stock:hover {
   transform: none;
-  box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: initial;
   cursor: initial;
 }
 

@@ -43,7 +43,7 @@ const Edit = () => {
     return (
         <Router history={history}>
             <Route render={({location}) => (
-                <div className="page-content">
+                <div className="page-content" style={{padding: "2rem"}}>
 
                     <PageHeader heading="Edit Your content" />
                     <div className="nav-buttons">

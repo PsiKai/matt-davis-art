@@ -261,7 +261,7 @@ h2 {
 
 .page-content {
   position: relative;
-  padding: 2rem;
+  /* padding: 2rem; */
   width: 97vw;
   max-width: 70rem;
   margin: 88px auto 1rem auto;

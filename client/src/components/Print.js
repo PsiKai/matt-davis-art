@@ -22,6 +22,8 @@ const Print = ({src, open, id, title, name, sku, price, sold, size}) => {
             return null
         })
     }, [savedCart, title])
+
+    const className = inCart || isZero ? "print-item zero-stock" : "print-item"
     
     // var bytes = Buffer.from(src.data)
 
@@ -37,7 +39,7 @@ const Print = ({src, open, id, title, name, sku, price, sold, size}) => {
             >
            <div 
                 onClick={openUp} 
-                className={isZero ? "print-item zero-stock" : "print-item"} 
+                className={className}
                 style={{transitionDelay: `${id * 50}ms`}}
             >
                 <h3>{title}</h3>
