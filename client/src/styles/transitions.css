@@ -20,6 +20,12 @@
   transition: padding 600ms linear;
 }
 
+@media (max-width: 850px) {
+  .expand-enter.expand-enter-active {
+    width: 85%;
+  }
+}
+
 @media (max-width: 450px) {
   .expand-enter {
     padding: 1rem 0 !important;

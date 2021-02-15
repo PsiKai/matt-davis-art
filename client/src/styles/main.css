@@ -36,7 +36,7 @@
   height: 200px;
   padding: 2rem;
   position: absolute;
-  top: -55px;
+  top: -54px;
   border: 1px solid var(--medium-two);
   transform: rotateX(90deg) translateX(-50%);
   transform-origin: bottom;
@@ -110,6 +110,15 @@
 }
 
 @media (max-width: 850px) {
+  .landing-header {
+    font-size: 1.7rem;
+    padding: 1.5rem;
+  }
+
+  .landing-header__bottom {
+    top: -73px;
+  }
+
   /* .carousel__wrapper {
     margin-top: 10rem;
   } */
