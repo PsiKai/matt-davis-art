@@ -7,9 +7,11 @@ const connectDB = require("./db")
 const bodyParser = require('body-parser');
 const fileUpload = require("express-fileupload")
 const path = require("path")
+const secure = require("ssl-express-www");
 
 const app = express();
 
+app.use(secure)
 app.use(bodyParser.json());
 app.use(fileUpload())
 
