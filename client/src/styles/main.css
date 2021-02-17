@@ -57,13 +57,18 @@
 
 .carousel__wrapper {
   grid-area: body;
-  margin: 4rem auto 1rem;
+  margin: 3rem auto 4rem;
   position: relative;
   width: 1080px;
   max-width: 100vw;
   object-fit: contain;
-  height: 800px;
+  /* height: 800px; */
   max-height: 70vw;
+}
+
+.carousel__wrapper .brand-backdrop {
+  left: 0;
+  transform: skew(12deg) rotate(-4deg);
 }
 
 .alice-carousel {

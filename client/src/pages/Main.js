@@ -21,10 +21,10 @@ const Main = () => {
         <div>
             <LandingHeader />
             <CSSTransition
-            in={land}
-            appear={true}
-            classNames={"move-down"}
-            timeout={400}
+                in={land}
+                appear={true}
+                classNames={"move-down"}
+                timeout={400}
             >
                 <div className="carousel__wrapper">
                     <div className="brand-backdrop"></div>
