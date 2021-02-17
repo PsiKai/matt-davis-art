@@ -188,9 +188,13 @@
 
 .print-modal img {
   max-width: 100%;
-  max-height: 60vh;
+  max-height: 58vh;
   display: block;
   margin: 1rem auto;
+}
+
+.print-modal > h2 {
+  line-height: 1;
 }
 
 .print-modal__flex h2,
@@ -279,6 +283,9 @@
   @media (max-width: 450px) {
     .print-modal {
       top: 60px;
+      /* bottom: 5px; */
+      max-width: 95%;
+      max-height: 90vh;
     }
   }
 }

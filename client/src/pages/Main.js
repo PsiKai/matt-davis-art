@@ -18,7 +18,7 @@ const Main = () => {
     }, [])
 
     return (
-        <div>
+        <div className="main-landing__wrapper">
             <LandingHeader />
             <CSSTransition
                 in={land}

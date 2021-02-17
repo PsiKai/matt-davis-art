@@ -22,6 +22,9 @@ const Prints = () => {
     }, [])
 
     const openModal = (item) => {
+        if (item[0].classList.contains("print-item")) {
+            return null;
+        } 
         var price = prints[item[1].id].price
         var original = prints[item[1].id].original
         setImg({
