@@ -1,27 +1,27 @@
 const prints = [
     {
-        name: "Smoking-Gun",
-        src: "../images/smoking-gun.png"
+        name: "Bear",
+        src: "../images/bear.jpg"
     },
     {
-        name: "Bear",
-        src: "../images/bear.png"
+        name: "Smoking-Gun",
+        src: "../images/smoking-gun.jpg"
     },
     {
         name: "Wolf",
-        src: "../images/wolf.png"
+        src: "../images/wolf.jpg"
     },
     {
         name: "Christopher-Walken",
-        src: "../images/walken.png"
+        src: "../images/walken.jpg"
     },
     {
         name: "Thought",
-        src: "../images/thought.png"
+        src: "../images/thought.jpg"
     },
     {
         name: "Guitar-Man",
-        src: "../images/guitar-man.png"
+        src: "../images/guitar-man.jpg"
     }
 ]
 
