@@ -61,6 +61,9 @@ const Header = () => {
                 <Link to="/gallery">Gallery</Link>
               </li>
               <li onClick={navigate}>
+                <Link to="/sculptures">Sculptures</Link>
+              </li>
+              <li onClick={navigate}>
                 <Link to="/cart" className="cart-link">
                   <Badge 
                     badgeContent={cartItems} 

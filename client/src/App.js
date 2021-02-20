@@ -14,6 +14,7 @@ import setAuthToken from './components/utils/setAuthToken'
 import PrivateRoute from "./routing/PrivateRoute"
 import Main from './pages/Main';
 import About from './pages/About';
+import Sculptures from "./pages/Sculptures"
 import Prints from './pages/Prints';
 import Header from './components/Header';
 import Cart from "./pages/Cart";
@@ -47,6 +48,7 @@ function App() {
                   <Switch location={location}>
                     <Route exact path="/about" component={About} />          
                     <Route exact path="/prints" component={Prints} />
+                    <Route exact path="/sculptures" component={Sculptures} />
                     <Route exact path="/gallery" component={Gallery} />
                     <Route exact path="/contact" component={Contact} />
                     <Route exact path="/cart" component={Cart} />

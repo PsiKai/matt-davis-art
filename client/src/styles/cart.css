@@ -528,8 +528,14 @@
     margin: 0.5rem;
   }
 
+  .cart-preview__wrapper {
+    top: calc(50% + 28px);
+  }
+
   .cart-preview {
     /* width: 90%; */
-    min-width: 350px;
+    /* min-width: 350px; */
+    width: 95vw;
+    min-width: auto;
   }
 }

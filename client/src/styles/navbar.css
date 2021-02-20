@@ -33,12 +33,13 @@ header ul {
 }
 
 header li {
-  margin: 0 1rem;
+  margin: 0 0.8rem;
   padding: 1rem;
 }
 
 header li:last-of-type {
   border-top: 3px double var(--white-two);
+  margin-right: 0.8rem;
 }
 
 header a {
@@ -174,6 +175,7 @@ header .cart-link:active > span {
 
   header li:last-of-type {
     border: none;
+    margin-right: 0;
   }
 
   header li:last-of-type::before {
