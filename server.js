@@ -4,7 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const express = require("express");
 const connectDB = require("./db")
-const bodyParser = require('body-parser');
+const expressStaticGzip = require("express-static-gzip");
 const fileUpload = require("express-fileupload")
 const path = require("path")
 const secure = require("ssl-express-www");
@@ -12,7 +12,7 @@ const secure = require("ssl-express-www");
 const app = express();
 
 app.use(secure)
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(fileUpload())
 
 connectDB();
@@ -29,7 +29,7 @@ app.use("/contact", require("./routes/contact"))
 
 
 if(process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, "client/build")));
+    app.use(expressStaticGzip(path.join(__dirname, "client/build")));
 
     app.get("*", (req, res) => res.sendFile(path.resolve(__dirname, "client", "build", "index.html")))
 }
