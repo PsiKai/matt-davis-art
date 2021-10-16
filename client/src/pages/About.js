@@ -17,12 +17,12 @@ const About = () => {
                 </div>
                 <div className="about-content">
                     <div className="brand-backdrop"></div>
-                    <img src="./images/storm.jpg" alt="about me" />
+                    <img src="./images/storm.webp" alt="about me" />
                     <span>X-Men Storm</span>
                 </div>
                 <div className="about-content">
                     <div className="brand-backdrop"></div>
-                    <img src="./images/tp-man.jpg" alt="about me" />
+                    <img src="./images/tp-man.webp" alt="about me" />
                     <span>My Character TP-Man!</span>
                 </div>
                 <div className="about-text">
@@ -35,7 +35,7 @@ const About = () => {
                 </div>
                 <div className="about-content">
                     <div className="brand-backdrop"></div>
-                    <img src="./images/creature.jpg" alt="about me" />
+                    <img src="./images/creature.webp" alt="about me" />
                     <span>Bird-Warrior</span>
                 </div>
             </div>

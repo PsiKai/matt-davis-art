@@ -10,11 +10,11 @@ const Sculptures = () => {
             <div className="sculptures" >
                 <div className="sculpture__wrapper" >
                     <div className="brand-backdrop"></div>
-                    <img src="../images/dino.jpg" alt="Dinosaur Sculpture"/>
+                    <img src="../images/dino.webp" alt="Dinosaur Sculpture"/>
                 </div>
                 <div className="sculpture__wrapper" >
                     <div className="brand-backdrop"></div>
-                    <img src="../images/creature.jpg" alt="Bird Warrior Sculpture"/>
+                    <img src="../images/creature.webp" alt="Bird Warrior Sculpture"/>
                 </div>
             </div>
         </div>
