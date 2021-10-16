@@ -1,6 +1,10 @@
 const express = require("express")
 const router = express.Router();
+
 const nodemailer = require("nodemailer")
+const { google } = require("googleapis");
+const OAuth2 = google.auth.OAuth2;
+
 const { orderConfirmation } = require("../email-templates/order-confirmation")
 const { orderRequest } = require("../email-templates/order-req")
 const { artwork } = require("../email-templates/artwork-cards")
@@ -20,31 +24,55 @@ router.post("/purchase", (req, res) => {
 
     var art = artwork(items)
 
+    const oauth2Client = new OAuth2(
+        process.env.CLIENT_ID,
+        process.env.CLIENT_SECRET,
+        'https://developers.google.com/oauthplayground'
+    )
+
+    oauth2Client.setCredentials({
+        refresh_token: process.env.REFRESH_TOKEN
+    })
+    
+    const accessToken = await oauth2Client.getAccessToken()
+    
     let transporter = nodemailer.createTransport({
         service: "Gmail",
-        port: 465,
-        secure: true,
         auth: {
             type: 'OAuth2',
+            user: process.env.EMAIL,
             clientId: process.env.CLIENT_ID,
             clientSecret: process.env.CLIENT_SECRET,
+            refreshToken: process.env.REFRESH_TOKEN,
+            accessToken: accessToken
         }
     });
 
-    transporter.on("token", token => {
-        console.log(token.user, token.accessToken, token.expires);
-    })
+    // let transporter = nodemailer.createTransport({
+    //     service: "Gmail",
+    //     port: 465,
+    //     secure: true,
+    //     auth: {
+    //         type: 'OAuth2',
+    //         clientId: process.env.CLIENT_ID,
+    //         clientSecret: process.env.CLIENT_SECRET,
+    //     }
+    // });
+
+    // transporter.on("token", token => {
+    //     console.log(token.user, token.accessToken, token.expires);
+    // })
 
     var mailOptions = {
         from: process.env.EMAIL,
         to: process.env.EMAIL,
         subject: "New order from " + name,
         html: orderRequest(art, ship, total),
-        auth: {
-            user: 'dmatthew8282@gmail.com',
-            refreshToken: process.env.REFRESH_TOKEN,
-            accessToken: process.env.TOKEN,
-        }
+        // auth: {
+        //     user: 'dmatthew8282@gmail.com',
+        //     refreshToken: process.env.REFRESH_TOKEN,
+        //     accessToken: process.env.TOKEN,
+        // }
     }
 
     var mailOptions2 = {
@@ -52,11 +80,11 @@ router.post("/purchase", (req, res) => {
         to: email,
         subject: "Your purchase from Artist Matt Davis",
         html: orderConfirmation(art, ship, total),
-        auth: {
-            user: 'dmatthew8282@gmail.com',
-            refreshToken: process.env.REFRESH_TOKEN,
-            accessToken: process.env.TOKEN,
-        }
+        // auth: {
+        //     user: 'dmatthew8282@gmail.com',
+        //     refreshToken: process.env.REFRESH_TOKEN,
+        //     accessToken: process.env.TOKEN,
+        // }
     }
 
     var orderReq = transporter.sendMail(mailOptions)
