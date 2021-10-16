@@ -1,7 +1,7 @@
 const contactEmail = (body, name, address) => {
-    return `<h2>From:</h2> 
+    return `<h3>From:</h3> 
     <p>${name} <br> ${address}</p>
-    <h2>Message: </h2>
+    <h3>Message: </h3>
     <p style="white-space: pre-line;">
         ${body}
     </p>`

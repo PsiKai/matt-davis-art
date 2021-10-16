@@ -35,10 +35,9 @@ router.post("/", async (req, res) => {
 
     var mailOptions = {
         from: process.env.EMAIL,
-        to: "davidirvin47@gmail.com",
-        // to: process.env.EMAIL,
+        to: process.env.EMAIL,
         subject: subject,
-        html: contactEmail(name, body, address)
+        html: contactEmail(body, name, address)
     }
 
     transporter.sendMail(mailOptions, (err, response) => {
