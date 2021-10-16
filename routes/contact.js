@@ -3,17 +3,11 @@ const router = express.Router();
 const nodemailer = require('nodemailer')
 const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
+const { contactEmail } = require("../email-templates/contact")
 
 router.post("/", async (req, res) => {
     console.log(req.body);
     const {address, subject, body, name} = req.body
-    var emailFormat = 
-    `<h2>From:</h2> 
-    <p>${name} <br> ${address}</p>
-    <h2>Message: </h2>
-    <p style="white-space: pre-line;">
-        ${body}
-    </p>`
 
     const oauth2Client = new OAuth2(
         process.env.CLIENT_ID,
@@ -41,9 +35,10 @@ router.post("/", async (req, res) => {
 
     var mailOptions = {
         from: process.env.EMAIL,
-        to: process.env.EMAIL,
+        to: "davidirvin47@gmail.com",
+        // to: process.env.EMAIL,
         subject: subject,
-        html: emailFormat
+        html: contactEmail(name, body, address)
     }
 
     transporter.sendMail(mailOptions, (err, response) => {
@@ -52,8 +47,8 @@ router.post("/", async (req, res) => {
             res.json({msg: "There was an error sending the email. Please try again", color: "pink"})
         } else {
             res.json({msg: "Your email was sent", color: "aliceblue"})  
-            transporter.close()
         }
+        transporter.close()
     })
 })
 
