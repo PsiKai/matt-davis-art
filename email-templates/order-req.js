@@ -1,7 +1,7 @@
-const orderReq = (artwork, shippingDetails, total) => {
+const orderRequest = (artwork, shippingDetails, total) => {
     const {name2, email, name, add1, add2, zip, state, city} = shippingDetails
 
-    var emailFormat = 
+    var requestEmail = 
     `<div style="background-color: #f9f9f9; color: #305973; font-family: sans-serif; padding: 1rem;">
         <h1>You have a new order for Art!</h1>
         <div style="max-width: 500px; padding: 0 2rem; border: 1px solid black; border-radius: 1rem; margin: 1rem;">    
@@ -29,6 +29,8 @@ const orderReq = (artwork, shippingDetails, total) => {
             </div>
         </div>
     </div>`
+
+    return requestEmail
 }
 
-module.exports = { orderReq }
+module.exports = { orderRequest }
