@@ -180,6 +180,7 @@ button {
   transition: all 200ms ease;
   position: relative;
   border: 2px outset var(--dark);
+  z-index: 1;
 }
 
 button:hover {
@@ -197,22 +198,27 @@ button:active {
 }
 
 button::after {
-  content: attr(data-text);
+  box-sizing: border-box;
+  /* content: attr(data-text); */
+  content: "";
   position: absolute;
   background-color: var(--medium);
   padding: 0.25rem 0;
-  /* height: 78%; */
+  height: 100%;
   width: 100%;
   left: 0;
   top: 0;
   transform: scaleY(0);
+  transform-origin: 50% 100%;
   /* transform-origin: 50% 50%; */
   transition: transform 200ms ease-in-out;
+  z-index: -1;
 }
 
 button:hover:after {
   transform: scaleY(1);
-  transform-origin: 50% 50%;
+  transform-origin: 50% 0%;
+  /* transform-origin: 50% 50%; */
 }
 
 h2 {

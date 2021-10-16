@@ -57,7 +57,7 @@ const Cart = (props) => {
                     <h1>{modal.heading}</h1>
                     <p>{modal.msg}</p>
                     <button 
-                        style={{width: "180px"}} 
+                        style={{width: "250px"}} 
                         onClick={orderComplete} 
                         data-text={modal.code === 200 ? "Continue Browsing" : "Contact Me"}
                     >

@@ -28,6 +28,7 @@
     "express-fileupload": "^1.2.0",
     "express-validator": "^6.9.2",
     "fs": "0.0.1-security",
+    "googleapis": "^88.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.10",
     "multer": "^1.4.2",
