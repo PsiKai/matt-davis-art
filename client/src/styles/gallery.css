@@ -12,8 +12,9 @@
   max-height: 58vh;
   max-width: 100%;
   border: 5px outset burlywood;
-  box-shadow: 10px 0 15px 2px rgba(0, 0, 0, 0.2),
-    -10px 0 15px 2px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 10px 0 15px 2px rgba(0, 0, 0, 0.2),
+    -10px 0 15px 2px rgba(0, 0, 0, 0.2); */
+  box-shadow: 8px 12px 8px rgba(0, 0, 0, 0.4), 0 0 8px 2px rgba(0, 0, 0, 0.3);
 }
 
 .plaque {
@@ -26,7 +27,7 @@
   border: 3px outset white;
   border-radius: 4px;
   font-family: sans-serif;
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.3);
 }
 
 .plaque h3 {
