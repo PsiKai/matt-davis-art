@@ -69,15 +69,15 @@
   padding: 0 0.5rem 0.5rem;
   border-radius: 0.5rem;
   /* opacity: 0; */
-  box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.3);
   cursor: pointer;
   transition: transform 150ms ease, box-shadow 150ms ease;
 }
 
 .print-item:hover {
-  transform: scale(1.05);
+  transform: translateY(-5px);
   transform-origin: center;
-  box-shadow: 2px 2px 16px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 6px 6px 8px 0 rgba(0, 0, 0, 0.2);
   transition-delay: 0ms !important;
 }
 
