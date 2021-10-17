@@ -327,6 +327,10 @@
     height: 300px;
   }
 
+  .update-gallery--update {
+    padding: 1rem 0;
+  }
+
   .edit-image {
     height: 300px;
   }
