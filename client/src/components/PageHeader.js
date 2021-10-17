@@ -9,29 +9,29 @@ const PageHeader = ({heading}) => {
     }, [])
     return (
         // prints &&
+                <CSSTransition
+                in={widen}
+                appear={true}
+                classNames="widen"
+                timeout={800}
+            >   
         <div className="page-header__wrapper">
             <div className="page-header__left"></div>
              
-                <CSSTransition
-                in={widen}
-                appear={true}
-                classNames="widen"
-                timeout={800}
-            >   
             
                 <h1 className="page-header">{heading}</h1>
-                </CSSTransition>
+                {/* </CSSTransition>
                 <CSSTransition
                 in={widen}
                 appear={true}
                 classNames="widen"
-                timeout={800}
-            >   
+                timeout={800} */}
+            {/* >    */}
                 <div className="page-header__arrow"></div>
-            </CSSTransition>
             
             
         </div>
+            </CSSTransition>
         
     )
 }

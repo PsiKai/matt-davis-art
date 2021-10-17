@@ -20,8 +20,17 @@
 }
 
 @media (max-width: 850px) {
+  .expand-enter {
+    padding: 1.5rem !important;
+  }
+
   .expand-enter.expand-enter-active {
     width: 85%;
+  }
+
+  .expand-enter-done {
+    width: 85%;
+    padding: 1.5rem !important;
   }
 }
 
