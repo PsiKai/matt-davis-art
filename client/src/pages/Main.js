@@ -24,7 +24,7 @@ const Main = () => {
                 in={land}
                 appear={true}
                 classNames={"move-down"}
-                timeout={400}
+                timeout={1000}
             >
                 <div className="carousel__wrapper">
                     <div className="brand-backdrop"></div>
