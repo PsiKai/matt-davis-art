@@ -183,7 +183,8 @@ button {
   z-index: 1;
 }
 
-button:hover {
+button:hover,
+button:focus {
   /* background-color: white !important; */
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
   width: 200px;
@@ -215,7 +216,8 @@ button::after {
   z-index: -1;
 }
 
-button:hover:after {
+button:hover:after,
+button:focus:after {
   transform: scaleY(1);
   transform-origin: 50% 0%;
   /* transform-origin: 50% 50%; */
