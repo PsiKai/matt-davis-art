@@ -9,7 +9,7 @@ const prints = [
     },
     {
         name: "Wolf",
-        src: "../images/wolf.png"
+        src: "../images/wolf.webp"
     },
     {
         name: "Christopher-Walken",

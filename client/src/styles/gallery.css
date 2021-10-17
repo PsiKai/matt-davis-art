@@ -65,7 +65,7 @@
   top: -1.2rem;
   font-size: 1.5rem;
   padding: 0 0.23rem 0 0.28rem;
-  background: url(../images/brushed-alum.png) var(--white);
+  background: url(../images/brushed-alum.webp) var(--white);
 }
 
 @media (max-width: 450px) {

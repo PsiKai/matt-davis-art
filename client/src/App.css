@@ -54,7 +54,7 @@ body {
   height: 100%;
   background-color: var(--white);
   color: var(--dark);
-  background-image: url(./images/brushed-alum.png);
+  background-image: url(./images/brushed-alum.webp);
   font-family: "Noto Sans SC", sans-serif;
 }
 

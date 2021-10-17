@@ -139,7 +139,7 @@
 }
 
 .print-modal {
-  background: url(../images/brushed-alum.png) var(--white);
+  background: url(../images/brushed-alum.webp) var(--white);
   opacity: 1;
   border-radius: 8px;
   position: absolute;
