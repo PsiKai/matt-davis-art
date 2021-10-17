@@ -331,6 +331,7 @@ h2 {
   max-width: 100%;
   background-color: var(--medium);
   transform: skew(7deg) rotate(-6deg);
+  box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.4);
 }
 
 .brand-backdrop::after {
@@ -340,6 +341,7 @@ h2 {
   width: 100%;
   background-color: var(--dark);
   transform: rotate(10deg);
+  box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.4);
 }
 
 .progress {
