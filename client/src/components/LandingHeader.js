@@ -9,29 +9,17 @@ const LandingHeader = () => {
     }, [])
 
     return (
-        <div className="landing-header__wrapper">
-            <div className="landing-header__left"></div>
-             
-                <CSSTransition
-                in={expand}
-                appear={true}
-                classNames="expand"
-                timeout={1600}
-            >   
-            
+        <CSSTransition
+            in={expand}
+            appear={true}
+            classNames="expand"
+            timeout={1200}
+        >   
+            <div className="landing-header__wrapper">
                 <h1 className="landing-header">The Art of <span>Matt Davis</span></h1>
-                </CSSTransition>
-                <CSSTransition
-                in={expand}
-                appear={true}
-                classNames="expand"
-                timeout={1600}
-            >   
-                <div className="landing-header__bottom"></div>
-            </CSSTransition>
-            
-            
-        </div>
+                <div className="landing-header__bottom"></div>  
+            </div>
+        </CSSTransition>
     )
 }
 

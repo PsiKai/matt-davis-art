@@ -47,7 +47,7 @@
 .about-content img {
   width: 300px;
   height: 300px;
-  box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.4);
 }
 
 .about-content span {
@@ -64,6 +64,9 @@
   /* grid-column: 3; */
   /* width: 90%; */
   padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 @media (max-width: 850px) {
@@ -84,7 +87,8 @@
 
 @media (max-width: 450px) {
   .about-content__grid {
-    margin: 0 0 2rem 0;
+    padding: 0 0 2rem 0;
+    margin: 0;
     overflow: hidden;
     row-gap: 0.5rem;
   }
