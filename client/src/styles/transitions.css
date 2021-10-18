@@ -3,7 +3,6 @@
 .expand-enter {
   opacity: 0;
   width: 10%;
-  /* padding: 2rem !important; */
 }
 
 .expand-enter.expand-enter-active {
@@ -14,23 +13,16 @@
 
 .expand-enter-done {
   width: 80%;
-  /* padding: 2rem; */
   opacity: 1;
-  /* transition: padding 600ms linear; */
 }
 
 @media (max-width: 850px) {
-  .expand-enter {
-    /* padding: 1.5rem !important; */
-  }
-
   .expand-enter.expand-enter-active {
     width: 85%;
   }
 
   .expand-enter-done {
     width: 85%;
-    /* padding: 1.5rem !important; */
   }
 }
 
