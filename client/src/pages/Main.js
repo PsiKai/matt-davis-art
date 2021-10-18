@@ -25,6 +25,7 @@ const Main = () => {
                 appear={true}
                 classNames={"move-down"}
                 timeout={1000}
+                unmountOnExit
             >
                 <div className="carousel__wrapper">
                     <div className="brand-backdrop"></div>

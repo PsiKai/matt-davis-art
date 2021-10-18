@@ -94,13 +94,13 @@
 .alice-carousel__stage-item.__active:nth-child(2) > .carousel-image,
 .alice-carousel__stage-item.__active:nth-child(4) > .carousel-image,
 .alice-carousel__stage-item.__active:nth-child(6) > .carousel-image {
-  animation: ken-burns 10000ms linear normal !important;
+  animation: ken-burns 7600ms linear normal !important;
 }
 
 .alice-carousel__stage-item.__active:nth-child(3) > .carousel-image,
 .alice-carousel__stage-item.__active:nth-child(5) > .carousel-image,
 .alice-carousel__stage-item.__active:nth-child(7) > .carousel-image {
-  animation: ken-burns 10000ms linear reverse !important;
+  animation: ken-burns 7600ms linear reverse !important;
 }
 
 @keyframes ken-burns {
