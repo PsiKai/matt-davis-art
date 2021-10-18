@@ -242,6 +242,7 @@
 .edit-transition {
   margin-top: 3rem;
   position: relative;
+  min-height: 600px;
 }
 
 .logout {
