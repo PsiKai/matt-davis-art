@@ -20,7 +20,7 @@ const Header = () => {
 
   useEffect(() => {
     reloadCart();
-    loadUser();
+    localStorage.token && loadUser();
     // eslint-disable-next-line 
   }, [])
 

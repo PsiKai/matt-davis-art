@@ -39,6 +39,7 @@
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
   background-color: var(--dark);
   transition: all 150ms ease-in-out;
+  aspect-ratio: 3;
 }
 
 .contact--social__flex a:hover,
