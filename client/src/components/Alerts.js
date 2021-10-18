@@ -14,7 +14,7 @@ const Alerts = () => {
             <CSSTransition 
                 className="alert" 
                 key={alert.id} 
-                timeout={500} 
+                timeout={400} 
                 classNames="fade"
             >
                 <div style={{background: alert.color}}>

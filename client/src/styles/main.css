@@ -1,5 +1,9 @@
 /* Main page Styles  */
 
+.main-landing__wrapper {
+  position: relative;
+}
+
 .landing-header {
   white-space: nowrap;
   width: 100%;

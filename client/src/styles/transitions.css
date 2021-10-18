@@ -139,49 +139,42 @@
 
 .fade-enter {
   opacity: 0;
-  height: 0rem;
+  transform: scaleY(0);
+}
+
+.fade-enter::before {
+  opacity: 0 !important;
 }
 
 .fade-enter.fade-enter-active {
   opacity: 1;
-  height: 6rem;
-  transition: all 500ms cubic-bezier(0.635, -0.09, 0.65, 1.62);
-}
-
-.fade-enter-active::after {
-  height: 6rem;
-  transition: height 200ms ease 200ms;
+  transform: scaleY(1);
+  transform-origin: bottom;
+  transition: all 400ms cubic-bezier(0.635, -0.09, 0.65, 1.62);
 }
 
 .fade-enter-done {
   opacity: 1;
-  height: 6rem;
-}
-
-.fade-enter-done::after {
-  /* transform: rotateX(90deg); */
-  height: 6rem;
 }
 
 .fade-exit {
   opacity: 1;
-  height: 6rem;
 }
 
-.fade-exit::after {
-  transition: height 200ms ease;
-  height: 0;
+.fade-exit::before {
+  opacity: 0 !important;
 }
 
 .fade-exit.fade-exit-active {
   opacity: 0;
-  height: 0;
-  transition: all 500ms ease;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: all 400ms ease;
 }
 
 .fade-exit-done {
   opacity: 0;
-  height: 0;
+  transform: scaleY(0);
 }
 
 /* page swipe transition  */
@@ -220,6 +213,7 @@
 .slide-exit {
   opacity: 1;
   z-index: 3;
+  position: absolute;
 }
 
 .slide-exit ~ footer {
