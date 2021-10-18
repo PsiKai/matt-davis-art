@@ -23,9 +23,6 @@
   width: 100%;
   padding: 1rem 2rem;
   border: none;
-  /* border: 1px solid rgba(0, 0, 0, 0.7);
-  border-top: none;
-  border-bottom: none; */
   background-color: inherit;
   color: var(--dark);
   box-shadow: none;
@@ -67,10 +64,6 @@
   grid-template-columns: 50% 50%;
 }
 
-/* .upload-form.prints {
-  height: 450px;
-} */
-
 .upload-form {
   padding: 1rem;
 }
@@ -91,7 +84,6 @@
 }
 
 .upload-prints--stock > div {
-  /* flex-grow: 1; */
   width: 50%;
   display: flex;
   align-items: center;
@@ -107,7 +99,6 @@
 }
 
 .upload-prints--stock #price {
-  /* width: 80px; */
   text-indent: 0;
 }
 
