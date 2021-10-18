@@ -97,12 +97,12 @@
 
   .widen-enter.widen-enter-active {
     min-width: 0;
-    width: 90%;
+    width: 85%;
   }
 
   .widen-enter-done {
     min-width: 0;
-    width: 90%;
+    width: 85%;
   }
 }
 
