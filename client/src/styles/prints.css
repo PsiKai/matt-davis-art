@@ -219,6 +219,7 @@
 @media (max-width: 450px) {
   .prints-flexbox {
     justify-content: space-evenly;
+    min-height: 244px;
   }
 
   .print-item img {
