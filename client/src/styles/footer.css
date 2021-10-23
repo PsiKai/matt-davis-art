@@ -25,7 +25,7 @@ footer {
 }
 
 footer h1 {
-  font-family: "Yellowtail", cursive;
+  font-family: var(--yellowtail);
   font-weight: lighter;
   margin: 0;
 }
