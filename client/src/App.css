@@ -1,7 +1,20 @@
 /* Shared Styles  */
 
-@import url("https://fonts.googleapis.com/css2?family=Yellowtail&display=swap");
+@font-face {
+  font-family: yellow-tail;
+  src: url("./fonts/Yellowtail-Regular.ttf");
+}
+/* @import url("https://fonts.googleapis.com/css2?family=Yellowtail&display=swap"); */
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&display=swap");
+@font-face {
+  font-family: "noto-sans";
+  src: url("./fonts/NotoSans-Regular.ttf");
+}
+
+@font-face {
+  font-family: "noto-bold";
+  src: url("./fonts/NotoSans-Bold.ttf");
+}
 @import url("./styles/transitions.css");
 :root {
   --white: #f9f9f9;
@@ -13,6 +26,10 @@
   --light-two: #9ba4b4;
   --medium-two: #394867;
   --dark-two: #14274e;
+
+  --yellowtail: "yellow-tail", "cursive";
+  --noto: "noto-sans", "sans-serif";
+  --noto-bold: "noto-bold", "sans-serif";
 }
 /* :root {
   --white: #f2f2f0;
@@ -55,7 +72,8 @@ body {
   background-color: var(--white);
   color: var(--dark);
   background-image: url(./images/brushed-alum.webp);
-  font-family: "Noto Sans SC", sans-serif;
+  font-family: var(--noto);
+  /* font-family: "Noto Sans SC", sans-serif; */
 }
 
 #root {
@@ -291,6 +309,8 @@ h2 {
   text-transform: uppercase;
   border: 3px solid var(--dark);
   transform-style: preserve-3d;
+  font-family: var(--noto-bold);
+  font-size: 33px;
 }
 
 .page-header__wrapper::after {
@@ -389,7 +409,7 @@ h2 {
   .page-header {
     margin-bottom: 1rem;
     padding: 1rem;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
 
   .page-header__arrow {

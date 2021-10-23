@@ -14,6 +14,8 @@ const Prints = () => {
     const [modalOpen, setModalOpen] = useState(false)
     const [quantity, setQuantity] = useState(1)
     const [mount, setMount] = useState(false);
+    const [counted, setCount] = useState(0)
+    const [loaded, setLoaded] = useState(false)
 
     useEffect(() => {
         !prints && getArt();
@@ -52,8 +54,6 @@ const Prints = () => {
     }
 
     const addToCart = () => {
-        // const info = e.target.parentNode.children[3].children
-        // console.log(img.name);
         const item = {
             quantity: quantity,
             id: img.name
@@ -63,6 +63,13 @@ const Prints = () => {
         setModalOpen(false)
         setImg({})
         setQuantity(1)
+    }
+
+    const incrementLoaded = () => {
+        setCount(counted + 1)
+        if (counted + 1 === prints.length) {
+            setLoaded(true)
+        }
     }
 
     return (
@@ -82,29 +89,28 @@ const Prints = () => {
                 
             </div>
             <div className="prints-flexbox">
-            {prints ? 
-                prints.map((print, index) => {
-                    if (print.original === false) {
-                    return <Print
-                        key={index}
-                        id={index}
-                        src={print.img}
-                        price={print.price}
-                        title={print.title}
-                        sku={print._id}
-                        sold={print.soldOut}
-                        open={openModal}
-                        size={print.dimensions}
-                        /> 
-                    } else {
-                        return null
-                    }
-                })
-                : 
-                <div className="progress">
-                    <CircularProgress color="inherit"/>
-                </div>
-            }
+                {prints &&
+                    prints.map((print, index) => {
+                        if (print.original === false) {
+                        return <Print
+                            key={index}
+                            id={index}
+                            src={print.img}
+                            price={print.price}
+                            title={print.title}
+                            sku={print._id}
+                            sold={print.soldOut}
+                            open={openModal}
+                            size={print.dimensions}
+                            incrementLoaded={incrementLoaded}
+                            loaded={loaded}
+                            /> 
+                        } else {
+                            return null
+                        }
+                    })
+                }
+                <CircularProgress style={{opacity: loaded ? "0" : "1"}}/>
             </div>
             <div className="print-orders">
                 <h2>Original Artwork</h2>
@@ -112,25 +118,28 @@ const Prints = () => {
                 <div className="brand-backdrop"></div>
             </div>
             <div className="prints-flexbox">
-            {prints && 
-                prints.map((print, index) => {
-                    if (print.original === true) {
-                    return <Print
-                        key={index}
-                        id={index}
-                        src={print.img}
-                        price={print.price}
-                        title={print.title}
-                        sku={print._id}
-                        sold={print.soldOut}
-                        open={openModal}
-                        size={print.dimensions}
-                        /> 
-                    } else {
-                        return null
-                    }
-                })
-            }
+                {prints && 
+                    prints.map((print, index) => {
+                        if (print.original === true) {
+                        return <Print
+                            key={index}
+                            id={index}
+                            src={print.img}
+                            price={print.price}
+                            title={print.title}
+                            sku={print._id}
+                            sold={print.soldOut}
+                            open={openModal}
+                            size={print.dimensions}
+                            incrementLoaded={incrementLoaded}
+                            loaded={loaded}
+                            /> 
+                        } else {
+                            return null
+                        }
+                    })
+                }
+                <CircularProgress style={{opacity: loaded ? "0" : "1"}}/>
             </div>
             <TransitionGroup>
             {modalOpen && 

@@ -43,9 +43,11 @@
 
 .prints-flexbox {
   display: flex;
+  position: relative;
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 2rem;
+  min-height: 280px;
 }
 
 .print-item img {
@@ -53,6 +55,7 @@
   width: 175px;
   object-fit: cover;
   position: relative;
+  /* transition: opacity 600ms ease; */
   /* z-index: 2; */
 }
 
@@ -68,10 +71,9 @@
   margin: 1rem;
   padding: 0 0.5rem 0.5rem;
   border-radius: 0.5rem;
-  /* opacity: 0; */
   box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  transition: transform 150ms ease, box-shadow 150ms ease;
+  transition: transform 150ms ease, box-shadow 150ms ease, opacity 450ms ease;
 }
 
 .print-item:hover {
@@ -136,6 +138,12 @@
   transform: none;
   box-shadow: initial;
   cursor: initial;
+}
+
+.MuiCircularProgress-root {
+  position: absolute;
+  top: 50%;
+  transition: opacity 250ms ease;
 }
 
 .print-modal {
@@ -211,6 +219,7 @@
 @media (max-width: 450px) {
   .prints-flexbox {
     justify-content: space-evenly;
+    min-height: 244px;
   }
 
   .print-item img {

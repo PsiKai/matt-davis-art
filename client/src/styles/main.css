@@ -18,7 +18,7 @@
 }
 
 .landing-header span {
-  font-family: "Yellowtail", cursive;
+  font-family: var(--yellowtail);
   text-transform: initial;
   font-weight: lighter;
   font-size: 2.5rem;
