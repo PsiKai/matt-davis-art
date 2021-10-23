@@ -23,8 +23,6 @@ const Prints = () => {
         //eslint-disable-next-line
     }, [])
 
-    const fillerArray = [1,2,3]
-
     const openModal = (item) => {
         if (item[0].classList.contains("print-item")) {
             return null;
