@@ -41,6 +41,8 @@ const Login = (props) => {
         // authContext.register(form)
         login(form)
         setPassword("")
+        setShowPassword(false)
+        passwordInput.current.type = "password"
     }
 
     const typing = (e) => {
