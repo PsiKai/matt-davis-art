@@ -13,6 +13,17 @@
   padding: 0.5rem 0;
 }
 
+.password-input {
+  position: relative;
+}
+
+.password-input svg {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .nav-buttons {
   display: flex;
   justify-content: space-evenly;

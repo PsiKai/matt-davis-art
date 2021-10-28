@@ -1,9 +1,11 @@
-import React, {useContext, useState, useEffect} from 'react'
+import React, {useContext, useState, useEffect, useRef} from 'react'
 import PageHeader from '../components/PageHeader';
 import AuthContext from "../context/authContext"
 import Alerts from "../components/Alerts"
 import AlertContext from "../context/alertContext";
 
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 
 const Login = (props) => {
     const alertContext = useContext(AlertContext)
@@ -11,6 +13,8 @@ const Login = (props) => {
     const authContext = useContext(AuthContext)
     const {isAuthenticated, login, errors} = authContext;
     const [password, setPassword] = useState("")
+    const [showPassword, setShowPassword] = useState(false)
+    const passwordInput = useRef()
 
     useEffect(() => {
         if(isAuthenticated) {
@@ -37,10 +41,17 @@ const Login = (props) => {
         // authContext.register(form)
         login(form)
         setPassword("")
+        setShowPassword(false)
+        passwordInput.current.type = "password"
     }
 
     const typing = (e) => {
         setPassword(e.target.value)
+    }
+
+    const revealPassword = (type) => {
+        setShowPassword(!showPassword)
+        passwordInput.current.type = type
     }
 
     return (
@@ -53,7 +64,13 @@ const Login = (props) => {
             </div>
             <form className="login-form" onSubmit={startLogin}>
                 <label>Password:</label>
-                <input type="password" onChange={typing} value={password}></input>
+                <div className="password-input">
+                    <input type="password" onChange={typing} value={password} ref={passwordInput}></input>
+                    {showPassword ? 
+                        <VisibilityIcon onClick={() => revealPassword("password")}/>
+                        : 
+                        <VisibilityOffIcon onClick={() => revealPassword("text")}/>}
+                </div>
                 <button data-text="Login" type="submit">Login</button>
                 
             </form>
