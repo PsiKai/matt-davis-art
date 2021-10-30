@@ -15,9 +15,6 @@ router.get("/", auth, async (req, res) => {
         res.json(user)
     } catch (err) {
         console.log(err.message);
-        if(process.env.NODE_ENV === 'production') {
-            res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
-        } 
         res.status(500).json({msg: "Server Error"})   
     }
 })
