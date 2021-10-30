@@ -1,21 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react'
+import {Router, Switch, Route, Link} from 'react-router-dom';
+import {createBrowserHistory} from 'history'
+
 import "../styles/edit.css"
+
 import AppContext from "../context/AppContext"
 import AuthContext from "../context/authContext"
+
 import UploadGallery from '../components/UploadGallery'
 import UpdateStock from '../components/UpdateStock'
 import UploadPrint from "../components/UploadPrint"
 import EditGallery from "../components/EditGallery"
-import Alerts from "../components/Alerts"
-import { Fab } from '@material-ui/core';
-
-import {CSSTransition, TransitionGroup} from "react-transition-group";
-import {Router, Switch, Route, Link} from 'react-router-dom';
-import {createBrowserHistory} from 'history'
 import PageHeader from '../components/PageHeader'
+import Alerts from "../components/Alerts"
+
+import { Fab } from '@material-ui/core';
+import {CSSTransition, TransitionGroup} from "react-transition-group";
 
 const history = createBrowserHistory();
-
 
 const Edit = () => {
     const authContext = useContext(AuthContext)
