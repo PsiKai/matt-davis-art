@@ -12,6 +12,7 @@ import AlertState from "./context/AlertState"
 import setAuthToken from './components/utils/setAuthToken'
 
 import PrivateRoute from "./routing/PrivateRoute"
+import LoginRoute from "./routing/LoginRoute"
 import Main from './pages/Main';
 import About from './pages/About';
 import Sculptures from "./pages/Sculptures"
@@ -52,8 +53,8 @@ function App() {
                     <Route exact path="/gallery" component={Gallery} />
                     <Route exact path="/contact" component={Contact} />
                     <Route exact path="/cart" component={Cart} />
-                    <Route exact path="/signin" component={Login} />
-                    <PrivateRoute exact path="/edit" component={Edit} />  
+                    <LoginRoute exact path="/signin" component={Login} />
+                    <PrivateRoute exact path="/edit*" component={Edit} />  
                     <Route exact path="/" component={Main} />      
                   </Switch>
                   <Footer />

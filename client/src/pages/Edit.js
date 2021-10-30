@@ -47,31 +47,31 @@ const Edit = () => {
 
                     <PageHeader heading="Edit Your content" />
                     <div className="nav-buttons">
-                        <Link to="/uploadgallery">
+                        <Link to="/edit/uploadgallery">
                             <button 
-                                style={page === "/uploadgallery" ? style : null}
+                                style={page === "/edit/uploadgallery" ? style : null}
                                 name="/uploadgallery" 
                                 onClick={changePage}>NEW Gallery
                             </button>
                         </Link>
-                        <Link to="/uploadprint">
+                        <Link to="/edit/uploadprint">
                             <button 
-                                style={page === "/uploadprint" ? style : null}
-                                name="/uploadprint" 
+                                style={page === "/edit/uploadprint" ? style : null}
+                                name="/edit/uploadprint" 
                                 onClick={changePage}>NEW Store
                             </button>
                         </Link>
-                        <Link to="/updatestock">
+                        <Link to="/edit/updatestock">
                             <button 
-                                style={page === "/updatestock" ? style : null}
-                                name="/updatestock" 
+                                style={page === "/edit/updatestock" ? style : null}
+                                name="/edit/updatestock" 
                                 onClick={changePage}>Edit Store
                             </button>
                         </Link>
-                        <Link to="/editgallery">
+                        <Link to="/edit/editgallery">
                             <button 
-                                style={page === "/editgallery" ? style : null}
-                                name="/editgallery" 
+                                style={page === "/edit/editgallery" ? style : null}
+                                name="/edit/editgallery" 
                                 onClick={changePage}>Edit Gallery
                             </button>
                         </Link>
@@ -84,10 +84,10 @@ const Edit = () => {
                             timeout={200}
                         >
                             <Switch location={location}>
-                                <Route exact path="/uploadgallery" component={UploadGallery}/>
-                                <Route exact path="/uploadprint" component={UploadPrint}/>
-                                <Route exact path="/updatestock" component={UpdateStock}/>
-                                <Route exact path="/editgallery" component={EditGallery}/>
+                                <Route exact path="/edit/uploadgallery" component={UploadGallery}/>
+                                <Route exact path="/edit/uploadprint" component={UploadPrint}/>
+                                <Route exact path="/edit/updatestock" component={UpdateStock}/>
+                                <Route exact path="/edit/editgallery" component={EditGallery}/>
                             </Switch>
                         </CSSTransition>
                     </TransitionGroup>     

@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect, useRef, useLayoutEffect} from 'react'
+import React, {useContext, useState, useEffect, useRef} from 'react'
 import PageHeader from '../components/PageHeader';
 import AuthContext from "../context/authContext"
 import Alerts from "../components/Alerts"
@@ -11,16 +11,10 @@ const Login = (props) => {
     const alertContext = useContext(AlertContext)
     const {setAlert} = alertContext
     const authContext = useContext(AuthContext)
-    const {isAuthenticated, login, errors} = authContext;
+    const {login, errors} = authContext;
     const [password, setPassword] = useState("")
     const [showPassword, setShowPassword] = useState(false)
     const passwordInput = useRef()
-
-    useLayoutEffect(() => {
-        if(isAuthenticated) {
-            props.history.push("/edit")
-        }
-    }, [isAuthenticated, props.history])
 
     useEffect(() => {
         errors.forEach(err => {
