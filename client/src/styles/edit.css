@@ -34,6 +34,7 @@
 .nav-buttons button {
   width: 100%;
   padding: 1rem 2rem;
+  margin: 0;
   border: none;
   background-color: inherit;
   color: var(--dark);
@@ -360,6 +361,10 @@
 
   .nav-buttons button {
     padding: 0.5rem;
+  }
+
+  .nav-buttons a {
+    flex-basis: 25%;
   }
 
   .upload-form textarea {

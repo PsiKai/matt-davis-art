@@ -50,7 +50,7 @@ const Edit = () => {
                         <Link to="/edit/uploadgallery">
                             <button 
                                 style={page === "/edit/uploadgallery" ? style : null}
-                                name="/uploadgallery" 
+                                name="/edit/uploadgallery" 
                                 onClick={changePage}>NEW Gallery
                             </button>
                         </Link>
