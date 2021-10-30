@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect, useRef} from 'react'
+import React, {useContext, useState, useEffect, useRef, useLayoutEffect} from 'react'
 import PageHeader from '../components/PageHeader';
 import AuthContext from "../context/authContext"
 import Alerts from "../components/Alerts"
@@ -16,7 +16,7 @@ const Login = (props) => {
     const [showPassword, setShowPassword] = useState(false)
     const passwordInput = useRef()
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if(isAuthenticated) {
             props.history.push("/edit")
         }
