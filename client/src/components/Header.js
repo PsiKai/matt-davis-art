@@ -69,7 +69,7 @@ const Header = () => {
                     badgeContent={cartItems} 
                     style={{
                       color: "var(--medium)", 
-                      backgroundColor: "var(--medium", 
+                      backgroundColor: "var(--medium)", 
                       }}
                   >
                     <ShoppingCartOutlinedIcon 
@@ -83,7 +83,7 @@ const Header = () => {
               </li>
               
               <li onClick={() => setOpen(false)}>
-                <Link to="/login" className="login-edit">
+                <Link to="/edit" className="login-edit">
                   {isAuthenticated ?
                     <EditIcon 
                       style={{position: "relative", top: "4px"}}  
