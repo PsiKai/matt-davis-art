@@ -42,6 +42,10 @@ header li:last-of-type {
   margin-right: 0.8rem;
 }
 
+header li:last-of-type a:active {
+  animation: press 100ms ease;
+}
+
 header a {
   box-shadow: none;
   transition: all 150ms linear;
@@ -96,8 +100,10 @@ header .cart-link:active > span {
 }
 
 .login-edit {
-  padding: 2px;
+  padding: 4px;
   border-radius: 4px;
+  position: relative;
+  bottom: 3px;
 }
 
 .login-edit i {

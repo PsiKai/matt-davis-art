@@ -11,16 +11,10 @@ const Login = (props) => {
     const alertContext = useContext(AlertContext)
     const {setAlert} = alertContext
     const authContext = useContext(AuthContext)
-    const {isAuthenticated, login, errors} = authContext;
+    const {login, errors} = authContext;
     const [password, setPassword] = useState("")
     const [showPassword, setShowPassword] = useState(false)
     const passwordInput = useRef()
-
-    useEffect(() => {
-        if(isAuthenticated) {
-            props.history.push("/edit")
-        }
-    }, [isAuthenticated, props.history])
 
     useEffect(() => {
         errors.forEach(err => {
