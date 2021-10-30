@@ -7,7 +7,7 @@ module.exports = function (req, res, next) {
 
     if (!token) {
         if(process.env.NODE_ENV === 'production') {
-            res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+            return res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
         } 
         return res.status(401).json({msg: "no token, authorization denied"})
     }
