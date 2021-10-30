@@ -52,7 +52,7 @@ function App() {
                     <Route exact path="/gallery" component={Gallery} />
                     <Route exact path="/contact" component={Contact} />
                     <Route exact path="/cart" component={Cart} />
-                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/signin" component={Login} />
                     <PrivateRoute exact path="/edit" component={Edit} />  
                     <Route exact path="/" component={Main} />      
                   </Switch>
