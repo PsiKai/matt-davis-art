@@ -10,7 +10,7 @@
     transform: scale(0.95);
   }
   100% {
-    text-shadow: none;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     transform: scale(1);
   }
 }

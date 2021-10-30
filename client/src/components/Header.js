@@ -86,13 +86,13 @@ const Header = () => {
                 <Link to="/edit" className="login-edit">
                   {isAuthenticated ?
                     <EditIcon 
-                      style={{position: "relative", top: "4px"}}  
+                      style={{position: "relative", top: "6px"}}  
                     /> : 
                     <ExitToAppIcon 
                       style={{
                         color: "var(--light-two)", 
                         position: "relative", 
-                        top: "5px"
+                        top: "6px"
                         }}
                     />}
                 </Link>
