@@ -151,32 +151,60 @@ input[type="checkbox"]:focus {
   cursor: pointer;
   border: 1px solid var(--dark);
   border-radius: 4px;
-  background-color: var(--dark);
+  background-color: var(--white);
+  color: var(--dark);
   opacity: 1;
-  color: var(--white);
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: space-between;
-  transition: all 200ms ease;
+  position: relative;
+  transition: all 400ms ease;
 }
 
 .file-input__label:hover,
 .file-input__label:focus-within {
-  background-color: var(--white);
-  color: var(--dark);
+  background-color: var(--dark);
+  color: var(--white);
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-.file-input__label:active {
-  animation: press-text 200ms ease;
+/* .file-input__label:hover > .file-input__name,
+.file-input__label:focus-within > .file-input__name {
+  max-width: 100%;
+} */
+
+.small-label {
+  flex-direction: column;
 }
 
-.file-input__label > span {
-  max-width: 20ch;
+.small-label > span {
+  position: relative;
+  top: -100%;
+  font-size: 0.8rem;
+}
+
+.file-input__label > svg {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.5rem;
+}
+
+.file-input__label:active {
+  animation: press 200ms ease;
+}
+
+.file-input__label > .file-input__name {
+  max-width: 100%;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow-x: hidden;
   display: inline-block;
+  /* transition: max-width 500ms ease; */
+}
+
+.file-input__label > span:first-of-type {
+  font-size: inherit;
+  transition: top 500ms ease, font-size 500ms ease;
 }
 
 input[type="file"] {
