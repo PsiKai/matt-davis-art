@@ -2,6 +2,9 @@
 
 .main-landing__wrapper {
   position: relative;
+  overflow-x: clip;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .landing-header {
