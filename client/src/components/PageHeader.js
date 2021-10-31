@@ -12,7 +12,7 @@ const PageHeader = ({heading}) => {
             in={widen}
             appear={true}
             classNames="widen"
-            timeout={800}
+            timeout={1200}
         >   
             <div className="page-header__wrapper">
                 <div className="page-header__left"></div>
