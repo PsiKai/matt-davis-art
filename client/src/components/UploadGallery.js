@@ -115,11 +115,15 @@ const UploadGallery = () => {
                     required>
                 </textarea>
                 
-                <input 
-                    id="gallery-image" 
-                    type="file" 
-                    onChange={imgUpdate}
-                    required />
+                <label className="file-input__label">
+                    Choose A File
+                    <span>{file.name}</span>
+                    <input 
+                        id="gallery-image" 
+                        type="file" 
+                        onChange={imgUpdate}
+                        required />
+                </label>
             
                 <button data-text="Submit" type="submit">Submit</button>
                 

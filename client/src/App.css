@@ -144,8 +144,45 @@ input[type="checkbox"]:focus {
   box-shadow: none;
 }
 
-input[type="file"] {
+.file-input__label {
+  padding: 0.5rem;
   margin-bottom: 2rem;
+  display: block;
+  cursor: pointer;
+  border: 1px solid var(--dark);
+  border-radius: 4px;
+  background-color: var(--dark);
+  opacity: 1;
+  color: var(--white);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: space-between;
+  transition: all 200ms ease;
+}
+
+.file-input__label:hover,
+.file-input__label:focus-within {
+  background-color: var(--white);
+  color: var(--dark);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.file-input__label:active {
+  animation: press-text 200ms ease;
+}
+
+.file-input__label > span {
+  max-width: 20ch;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  display: inline-block;
+}
+
+input[type="file"] {
+  /* margin-bottom: 2rem; */
+  position: absolute;
+  width: 0.01px;
 }
 
 input[type="number"] {

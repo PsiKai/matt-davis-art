@@ -77,10 +77,6 @@
   grid-template-columns: 50% 50%;
 }
 
-.upload-form {
-  padding: 1rem;
-}
-
 .upload-form.prints label {
   display: inline-block;
   width: auto;
