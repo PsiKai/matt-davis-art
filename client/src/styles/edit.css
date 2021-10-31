@@ -355,6 +355,13 @@
     width: 80%;
   }
 
+  .password-input svg {
+    right: 0rem;
+    padding: 0.5rem;
+    height: 3rem;
+    width: 3rem;
+  }
+
   .nav-buttons {
     margin: 0;
   }
