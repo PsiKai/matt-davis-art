@@ -445,6 +445,7 @@ h2 {
 
   .alert__wrapper {
     left: 1rem;
+    bottom: 0;
   }
 
   .alert h2 {
