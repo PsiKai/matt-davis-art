@@ -13,7 +13,7 @@ const LandingHeader = () => {
             in={expand}
             appear={true}
             classNames="expand"
-            timeout={1200}
+            timeout={1400}
         >   
             <div className="landing-header__wrapper">
                 <h1 className="landing-header">The Art of <span>Matt Davis</span></h1>

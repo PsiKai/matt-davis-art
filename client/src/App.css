@@ -430,8 +430,22 @@ h2 {
     margin-top: 58px;
   }
 
+  .page-header {
+    font-size: 1.4rem;
+  }
+
+  .page-header__arrow {
+    transform: rotateX(-90deg) translate3d(0, 100%, -116px);
+  }
+
+  .page-header__left {
+    transform: rotateY(90deg) translateY(16px);
+    height: 69px;
+  }
+
   .alert__wrapper {
     left: 1rem;
+    bottom: 0;
   }
 
   .alert h2 {
