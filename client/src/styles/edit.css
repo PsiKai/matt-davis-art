@@ -77,11 +77,6 @@
   grid-template-columns: 50% 50%;
 }
 
-.upload-form.prints label {
-  display: inline-block;
-  width: auto;
-}
-
 .upload-prints--stock {
   display: flex;
   flex-wrap: wrap;
@@ -96,11 +91,10 @@
   width: 50%;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
 }
 
-.upload-prints--stock > div:nth-child(3) {
-  justify-content: center;
+.upload-prints--stock > div:nth-child(even) {
+  justify-content: flex-end;
 }
 
 .upload-prints--stock label {

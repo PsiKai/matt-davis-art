@@ -229,8 +229,11 @@ const UploadPrint = () => {
                         />
                     </div>
                 </div> */}
-
+                <label className="file-input__label">
+                Choose A File
+                <span>{file.name}</span>
                 <input id="image" type="file" onChange={imgUpdate} required/>
+                </label>
           
                 <button data-text="Submit" type="submit">Submit</button>
             </form>
