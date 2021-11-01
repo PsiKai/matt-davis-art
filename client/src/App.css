@@ -144,8 +144,61 @@ input[type="checkbox"]:focus {
   box-shadow: none;
 }
 
-input[type="file"] {
+.file-input__label {
+  padding: 0.5rem 0.5rem 0.5rem 0;
   margin-bottom: 2rem;
+  display: block;
+  cursor: pointer;
+  border-bottom: 1px solid var(--dark);
+  color: var(--dark);
+  opacity: 1;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  transition: box-shadow 400ms ease;
+}
+
+.file-input__label:hover,
+.file-input__label:focus-within {
+  box-shadow: 0 3px var(--dark);
+}
+
+.small-label {
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-bottom: 0.25rem;
+}
+
+.file-input__label > svg {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+.file-input__label > svg > path {
+  opacity: 0.7;
+}
+
+.file-input__label:active {
+  animation: press-label 200ms ease;
+}
+
+.file-input__label > .file-input__name {
+  max-width: 80vw;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  display: block;
+  font-size: 0.8rem;
+}
+
+.file-input__label > span:first-of-type {
+  opacity: 0.6;
+}
+
+input[type="file"] {
+  position: absolute;
+  width: 0.01px;
 }
 
 input[type="number"] {
@@ -154,6 +207,8 @@ input[type="number"] {
   height: 1.7rem;
   margin: 0;
   text-indent: 6px;
+  font-size: 1rem;
+  line-height: 110%;
 }
 
 input[type="checkbox"] {

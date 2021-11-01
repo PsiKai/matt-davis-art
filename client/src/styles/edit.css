@@ -77,22 +77,13 @@
   grid-template-columns: 50% 50%;
 }
 
-.upload-form {
-  padding: 1rem;
-}
-
-.upload-form.prints label {
-  display: inline-block;
-  width: auto;
-}
-
 .upload-prints--stock {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 1rem;
   justify-content: left;
   align-items: flex-start;
-  padding: 1rem;
+  padding: 1rem 0;
   height: 135px;
 }
 
@@ -100,11 +91,10 @@
   width: 50%;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
 }
 
-.upload-prints--stock > div:nth-child(3) {
-  justify-content: center;
+.upload-prints--stock > div:nth-child(even) {
+  justify-content: flex-end;
 }
 
 .upload-prints--stock label {
@@ -130,7 +120,7 @@
   transform: translateX(-50%);
   object-fit: contain;
 
-  object-position: center;
+  object-position: top;
   position: absolute;
 }
 

@@ -42,6 +42,7 @@ const UploadGallery = () => {
             setPreview("")
             setFile("")
         }
+        e.target.blur()
     }
 
     // Uploads image to the database
@@ -83,6 +84,15 @@ const UploadGallery = () => {
             <div className="upload-form">
             
             <form onSubmit={upload}>
+                <label className={file ? "file-input__label small-label" : "file-input__label"}>
+                    <span>Choose A File</span>
+                    <span className="file-input__name">{file.name}</span>
+                    <input 
+                        id="gallery-image" 
+                        type="file" 
+                        onChange={imgUpdate}
+                        required />
+                </label>
 
                 <label htmlFor="gallery-title">Title</label>
                 <input 
@@ -115,11 +125,6 @@ const UploadGallery = () => {
                     required>
                 </textarea>
                 
-                <input 
-                    id="gallery-image" 
-                    type="file" 
-                    onChange={imgUpdate}
-                    required />
             
                 <button data-text="Submit" type="submit">Submit</button>
                 

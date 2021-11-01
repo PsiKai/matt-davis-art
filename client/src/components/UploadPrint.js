@@ -46,6 +46,7 @@ const UploadPrint = () => {
             setPreview("")
             setFile("")
         }
+        e.target.blur()
     }
 
     // Sets the number of prints to state
@@ -121,6 +122,11 @@ const UploadPrint = () => {
         <div className="upload-form prints">
             
             <form onSubmit={upload}>
+                <label className={file ? "file-input__label small-label" : "file-input__label"}>
+                    <span>Choose A File</span>
+                    <span className="file-input__name">{file.name}</span>
+                    <input id="image" type="file" onChange={imgUpdate} required/>
+                </label>
 
                 <label htmlFor="title">Title</label>
                 <input 
@@ -229,8 +235,6 @@ const UploadPrint = () => {
                         />
                     </div>
                 </div> */}
-
-                <input id="image" type="file" onChange={imgUpdate} required/>
           
                 <button data-text="Submit" type="submit">Submit</button>
             </form>
