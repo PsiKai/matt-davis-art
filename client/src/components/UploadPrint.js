@@ -59,7 +59,8 @@ const UploadPrint = () => {
 
     // Indicates original artwork 
     const makeOriginal = (e) => {
-        e.target.checked ? setOriginal(true) : setOriginal(false)
+        console.log(e.target);
+        e.target.value === "original" ? setOriginal(true) : setOriginal(false)
     }
 
     // Set Price of Original art 
@@ -138,10 +139,18 @@ const UploadPrint = () => {
                     required>
                 </input>
 
-                <div className="upload-prints--stock" style={original ? {justifyContent: "space-between"} : {}}>
-                    <div>
-                        <label htmlFor="original">Original Art?</label>
-                        <input id="original" type="checkbox" onChange={makeOriginal}></input>
+                <div className="upload-prints--stock">
+                    <div className={original ? "radio-group original" : "radio-group"}>
+                        {/* <label htmlFor="original">Original Art?</label>
+                        <input id="original" type="checkbox" onChange={makeOriginal}></input> */}
+                        <label>
+                            <span>Print</span>
+                            <input type="radio" value="prints" onClick={makeOriginal} checked={original}/>
+                        </label>
+                        <label>
+                            <span>Original</span>
+                            <input type="radio" value="original" onClick={makeOriginal} checked={!original}/>
+                        </label>
                     </div>
                     {original &&
                         <Fragment>
@@ -162,19 +171,6 @@ const UploadPrint = () => {
                                 />
                         </div>
                         <div>
-                            <label htmlFor="price">Price: $</label>
-                            <input 
-                                id="price" 
-                                type="number" 
-                                min="0.00" 
-                                max="10000.00" 
-                                step="0.01" 
-                                onChange={updatePrice}
-                                value={price}
-                                inputMode="decimal"
-                                />
-                        </div>
-                        <div>
                             <label htmlFor="height">Height:</label>
                             <input 
                                 id="height"
@@ -185,6 +181,19 @@ const UploadPrint = () => {
                                 step="0.5" 
                                 onChange={updateDimensions}
                                 value={dimensions.height}
+                                inputMode="decimal"
+                                />
+                        </div>
+                        <div className="price">
+                            <label htmlFor="price">Price: $</label>
+                            <input 
+                                id="price" 
+                                type="number" 
+                                min="0.00" 
+                                max="10000.00" 
+                                step="0.01" 
+                                onChange={updatePrice}
+                                value={price}
                                 inputMode="decimal"
                                 />
                         </div>
