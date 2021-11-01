@@ -155,7 +155,7 @@ input[type="checkbox"]:focus {
   display: flex;
   justify-content: space-between;
   position: relative;
-  transition: all 400ms ease;
+  transition: box-shadow 400ms ease;
 }
 
 .file-input__label:hover,
@@ -166,13 +166,8 @@ input[type="checkbox"]:focus {
 .small-label {
   flex-direction: column;
   gap: 0.5rem;
+  padding-bottom: 0.25rem;
 }
-/* 
-.small-label > span {
-  position: relative;
-  top: -100%;
-  font-size: 0.8rem;
-} */
 
 .file-input__label > svg {
   position: absolute;
@@ -185,7 +180,7 @@ input[type="checkbox"]:focus {
 }
 
 .file-input__label:active {
-  animation: press-text 200ms ease;
+  animation: press-label 200ms ease;
 }
 
 .file-input__label > .file-input__name {

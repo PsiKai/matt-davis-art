@@ -47,6 +47,7 @@ const UploadPrint = () => {
             setPreview("")
             setFile("")
         }
+        e.target.blur()
     }
 
     // Sets the number of prints to state

@@ -41,3 +41,12 @@
     box-shadow: 0 0 0 1px inset var(--dark), 0 0 15px 0 rgba(0, 0, 0, 0.2);
   }
 }
+
+@keyframes press-label {
+  75% {
+    transform: scale(0.98);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

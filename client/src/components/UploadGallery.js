@@ -43,6 +43,7 @@ const UploadGallery = () => {
             setPreview("")
             setFile("")
         }
+        e.target.blur()
     }
 
     // Uploads image to the database
