@@ -84,7 +84,6 @@
   justify-content: space-between;
   align-items: flex-start;
   padding: 1rem 0;
-  /* height: 200px; */
 }
 
 .upload-prints--stock > .radio-group {
@@ -102,30 +101,17 @@
   align-items: flex-end;
 }
 
-.radio-group::before {
-  content: "";
-  position: absolute;
-  width: 50%;
-  height: 100%;
-  top: 0;
-  border-right: 1px solid var(--dark);
-  transform: translateX(-50%);
-  transition: transform 200ms ease;
-}
-
 .radio-group::after {
   content: "";
   position: absolute;
   width: 50%;
+  height: 100%;
   border-bottom: 1px solid var(--dark);
-  /* box-shadow: 0 -4px 0 4px var(--medium); */
+  border-right: 1px solid var(--dark);
   bottom: 0;
   transform: translateX(-50%);
   transition: transform 200ms ease;
-}
-
-.original::before {
-  transform: translateX(50%);
+  z-index: -1;
 }
 
 .original::after {
@@ -142,6 +128,11 @@
   justify-content: center;
   height: 100%;
   width: 100%;
+}
+
+.radio-group label:hover,
+.radio-group label:focus-within {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .radio-group input[type="radio"] {
