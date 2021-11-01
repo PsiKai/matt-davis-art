@@ -1,4 +1,4 @@
-import React, {useState, useContext, Fragment} from 'react'
+import React, {useState, useContext, Fragment, useRef} from 'react'
 import AppContext from '../context/AppContext'
 import AlertContext from "../context/alertContext"
 import axios from 'axios'
@@ -18,29 +18,26 @@ const UploadPrint = () => {
     const [original, setOriginal] = useState(false);
     const [price, setPrice] = useState("")
     const [dimensions, setDimensions] = useState({width: 11, height: 17})
-    const [form, setForm] = useState({title: ""})
+    const [title, setTitle] = useState('')
     const [file, setFile] = useState('');
     const [preview, setPreview] = useState('')
 
-    const {title} = form;
+    const inputFile = useRef()
 
-    // Sets state when form inputs change
-    const formUpdate = (e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        })
+    const updateTitle = (e) => {
+        setTitle(e.target.value)
     }
 
     // Sets image file to state
     const imgUpdate = (e) => {
-        if (e.target.files[0]) {
-            if (e.target.files[0].size / 1024 / 1024 > 16) {
+        const [imgFile] = e.target.files
+        if (imgFile) {
+            if (imgFile.size / 1024 / 1024 > 16) {
                 setAlert("File is larger than the 16mb max size", "lightpink")
                 e.target.value = null;
             } else {
-            setFile(e.target.files[0])
-            setPreview(URL.createObjectURL(e.target.files[0]))
+            setFile(imgFile)
+            setPreview(URL.createObjectURL(imgFile))
             }
         } else {
             setPreview("")
@@ -59,7 +56,6 @@ const UploadPrint = () => {
 
     // Indicates original artwork 
     const makeOriginal = (e) => {
-        console.log(e.target);
         e.target.value === "original" ? setOriginal(true) : setOriginal(false)
     }
 
@@ -84,11 +80,13 @@ const UploadPrint = () => {
         formData.append('title', title)
         // formData.append('stock', JSON.stringify(stock))
         formData.append('original', original)
-        original ? 
-            formData.append('price', price) : 
+        if (original) {
+            formData.append('price', price)
+            formData.append("dimensions", JSON.stringify(dimensions))
+        } else {
             formData.append("price", 15)
-        formData.append("dimensions", JSON.stringify(dimensions))
-
+            formData.append("dimensions", {"width": "11", "height": "17"})
+        }
         try {
             const res = await axios.post("/upload/prints", formData, {
                 header: {
@@ -106,15 +104,12 @@ const UploadPrint = () => {
         //     "fiveEight": 0
         // })
         setOriginal(false)
-        setForm({title: "", original: original})
+        setTitle("")
         setFile("");
-        // setFile("Choose File")
         setPreview("")
         setPrice("")
         setDimensions({width: 11, height: 17})
-        var checkbox = document.querySelector("input[type='checkbox']");
-        checkbox.checked = false
-        e.target.children[3].value = null;
+        inputFile.current.value = null;
     }
 
     return (
@@ -126,7 +121,7 @@ const UploadPrint = () => {
                 <label className={file ? "file-input__label small-label" : "file-input__label"}>
                     <span>Choose A File</span>
                     <span className="file-input__name">{file.name}</span>
-                    <input id="image" type="file" onChange={imgUpdate} required/>
+                    <input id="image" type="file" onChange={imgUpdate} ref={inputFile} required/>
                 </label>
 
                 <label htmlFor="title">Title</label>
@@ -134,22 +129,20 @@ const UploadPrint = () => {
                     id="title" 
                     type="text" 
                     name="title" 
-                    onChange={formUpdate} 
+                    onChange={updateTitle} 
                     value={title}
                     required>
                 </input>
 
                 <div className="upload-prints--stock">
                     <div className={original ? "radio-group original" : "radio-group"}>
-                        {/* <label htmlFor="original">Original Art?</label>
-                        <input id="original" type="checkbox" onChange={makeOriginal}></input> */}
                         <label>
                             <span>Print</span>
-                            <input type="radio" value="prints" onClick={makeOriginal} checked={original}/>
+                            <input type="radio" value="prints" onClick={makeOriginal}/>
                         </label>
                         <label>
                             <span>Original</span>
-                            <input type="radio" value="original" onClick={makeOriginal} checked={!original}/>
+                            <input type="radio" value="original" onClick={makeOriginal}/>
                         </label>
                     </div>
                     {original &&
@@ -254,7 +247,7 @@ const UploadPrint = () => {
                     timeout={400}
                     classNames="fadein"
                 >
-                    <img src={preview} alt={form.title} />
+                    <img src={preview} alt={title} />
                 </CSSTransition>
             </TransitionGroup>
         </div>
