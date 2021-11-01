@@ -3,7 +3,6 @@ import AppContext from "../context/AppContext"
 import AlertContext from "../context/alertContext"
 import axios from 'axios'
 import { CSSTransition, TransitionGroup} from 'react-transition-group';
-import CloudUploadOutlinedIcon from '@material-ui/icons/CloudUploadOutlined';
 
 const UploadGallery = () => {
     const appContext = useContext(AppContext);
@@ -85,6 +84,15 @@ const UploadGallery = () => {
             <div className="upload-form">
             
             <form onSubmit={upload}>
+                <label className={file ? "file-input__label small-label" : "file-input__label"}>
+                    <span>Choose A File</span>
+                    <span className="file-input__name">{file.name}</span>
+                    <input 
+                        id="gallery-image" 
+                        type="file" 
+                        onChange={imgUpdate}
+                        required />
+                </label>
 
                 <label htmlFor="gallery-title">Title</label>
                 <input 
@@ -117,16 +125,6 @@ const UploadGallery = () => {
                     required>
                 </textarea>
                 
-                <label className={file ? "file-input__label small-label" : "file-input__label"}>
-                    <span>Choose A File</span>
-                    <span className="file-input__name">{file.name}</span>
-                    <input 
-                        id="gallery-image" 
-                        type="file" 
-                        onChange={imgUpdate}
-                        required />
-                    <CloudUploadOutlinedIcon />
-                </label>
             
                 <button data-text="Submit" type="submit">Submit</button>
                 
