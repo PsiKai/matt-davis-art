@@ -7,7 +7,7 @@
   }
   75% {
     text-shadow: none;
-    transform: scale(0.95);
+    transform: scale(0.98);
   }
   100% {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
@@ -34,7 +34,7 @@
   }
   75% {
     box-shadow: 0 0 0 1px inset var(--dark), 0 0 10px 0 rgba(0, 0, 0, 0.3);
-    transform: scale(0.98);
+    transform: scale(0.96);
   }
   100% {
     transform: scale(1);

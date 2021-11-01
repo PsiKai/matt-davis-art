@@ -145,16 +145,13 @@ input[type="checkbox"]:focus {
 }
 
 .file-input__label {
-  padding: 0.5rem;
+  padding: 0.5rem 0.5rem 0.5rem 0;
   margin-bottom: 2rem;
   display: block;
   cursor: pointer;
-  border: 1px solid var(--dark);
-  border-radius: 4px;
-  background-color: var(--white);
+  border-bottom: 1px solid var(--dark);
   color: var(--dark);
   opacity: 1;
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: space-between;
   position: relative;
@@ -163,18 +160,12 @@ input[type="checkbox"]:focus {
 
 .file-input__label:hover,
 .file-input__label:focus-within {
-  background-color: var(--dark);
-  color: var(--white);
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px var(--dark);
 }
-
-/* .file-input__label:hover > .file-input__name,
-.file-input__label:focus-within > .file-input__name {
-  max-width: 100%;
-} */
 
 .small-label {
   flex-direction: column;
+  gap: 0.5rem;
 }
 
 .small-label > span {
@@ -185,12 +176,16 @@ input[type="checkbox"]:focus {
 
 .file-input__label > svg {
   position: absolute;
-  top: 0.25rem;
+  top: 0.5rem;
   right: 0.5rem;
 }
 
+.file-input__label > svg > path {
+  opacity: 0.7;
+}
+
 .file-input__label:active {
-  animation: press 200ms ease;
+  animation: press-text 200ms ease;
 }
 
 .file-input__label > .file-input__name {
@@ -199,16 +194,15 @@ input[type="checkbox"]:focus {
   text-overflow: ellipsis;
   overflow-x: hidden;
   display: inline-block;
-  /* transition: max-width 500ms ease; */
 }
 
 .file-input__label > span:first-of-type {
   font-size: inherit;
   transition: top 500ms ease, font-size 500ms ease;
+  opacity: 0.6;
 }
 
 input[type="file"] {
-  /* margin-bottom: 2rem; */
   position: absolute;
   width: 0.01px;
 }
