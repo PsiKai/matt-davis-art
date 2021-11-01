@@ -167,12 +167,12 @@ input[type="checkbox"]:focus {
   flex-direction: column;
   gap: 0.5rem;
 }
-
+/* 
 .small-label > span {
   position: relative;
   top: -100%;
   font-size: 0.8rem;
-}
+} */
 
 .file-input__label > svg {
   position: absolute;
@@ -189,16 +189,15 @@ input[type="checkbox"]:focus {
 }
 
 .file-input__label > .file-input__name {
-  max-width: 100%;
+  max-width: 80vw;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow-x: hidden;
-  display: inline-block;
+  display: block;
+  font-size: 0.8rem;
 }
 
 .file-input__label > span:first-of-type {
-  font-size: inherit;
-  transition: top 500ms ease, font-size 500ms ease;
   opacity: 0.6;
 }
 
