@@ -120,7 +120,7 @@
   transform: translateX(-50%);
   object-fit: contain;
 
-  object-position: center;
+  object-position: top;
   position: absolute;
 }
 
