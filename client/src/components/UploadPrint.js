@@ -137,16 +137,21 @@ const UploadPrint = () => {
                 <div className="upload-prints--stock">
                     <div className={original ? "radio-group original" : "radio-group"}>
                         <label>
-                            <span>Print</span>
                             <input type="radio" value="prints" onClick={makeOriginal}/>
+                            <span>Print</span>
                         </label>
                         <label>
-                            <span>Original</span>
                             <input type="radio" value="original" onClick={makeOriginal}/>
+                            <span>Original</span>
                         </label>
                     </div>
-                    {original &&
-                        <Fragment>
+                    <CSSTransition
+                        in={original}
+                        timeout={200}
+                        classNames="drop-in"
+                        unmountOnExit
+                    >
+                        <div className="upload-prints--dimensions">
                         
                         <div>
                             <label htmlFor="width">Width:</label>
@@ -190,8 +195,8 @@ const UploadPrint = () => {
                                 inputMode="decimal"
                                 />
                         </div>
-                        </Fragment>
-                    }
+                        </div>
+                    </CSSTransition>
                     
                 </div>
                 {/* <label htmlFor="prints-stock">Number of Prints</label>

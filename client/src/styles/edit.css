@@ -78,11 +78,7 @@
 }
 
 .upload-prints--stock {
-  display: flex;
-  flex-wrap: wrap;
   margin-bottom: 1rem;
-  justify-content: space-between;
-  align-items: flex-start;
   padding: 1rem 0;
 }
 
@@ -94,11 +90,6 @@
   justify-content: center;
   height: 3rem;
   margin-bottom: 2rem;
-}
-
-.upload-prints--stock > div:not(.radio-group) {
-  display: flex;
-  align-items: flex-end;
 }
 
 .radio-group::after {
@@ -123,25 +114,37 @@
   text-align: center;
   cursor: pointer;
   margin: 0 !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   height: 100%;
   width: 100%;
 }
 
-.radio-group label:hover,
+/* .radio-group label:hover,
 .radio-group label:focus-within {
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
+} */
 
 .radio-group input[type="radio"] {
   width: 0.01px;
   position: absolute;
 }
 
-.upload-prints--stock > div:nth-child(even) {
-  justify-content: flex-end;
+.radio-group label span {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radio-group input[type="radio"]:focus-visible ~ span,
+.radio-group label:hover span {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.upload-prints--dimensions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .upload-prints--stock label {

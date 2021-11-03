@@ -283,3 +283,37 @@
 .fly-enter-done {
   transform: translate(0);
 }
+
+/* Form elements appearing */
+
+.drop-in-enter {
+  height: 0;
+  opacity: 0;
+}
+
+.drop-in-enter-active {
+  height: 40px;
+  opacity: 1;
+  transition: height 200ms ease, opacity 200ms ease;
+}
+
+.drop-in-enter-done {
+  height: 40px;
+  opacity: 1;
+}
+
+.drop-in-exit {
+  height: 40px;
+  opacity: 1;
+}
+
+.drop-in-exit-active {
+  opacity: 0;
+  height: 0;
+  transition: height 200ms ease, opacity 200ms ease;
+}
+
+.drop-in-exit-done {
+  height: 0;
+  opacity: 0;
+}
