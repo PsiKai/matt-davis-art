@@ -240,17 +240,18 @@
 }
 
 .update-preview {
-  margin: 1rem;
+  margin: 0.5rem;
   height: 100px;
   width: 100px;
   object-fit: cover;
-  transition: transform 100ms ease, box-shadow 100ms ease;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
 .update-preview:hover {
   cursor: pointer;
-  transform: scale(1.1);
-  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .update-gallery--grid {
