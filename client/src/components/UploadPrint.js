@@ -144,11 +144,11 @@ const UploadPrint = () => {
 
                 <div className="upload-prints--stock">
                     <div className={original ? "radio-group original" : "radio-group"}>
-                        <label>
+                        <label className="input__wrapper" style={!original ? {opacity: "1"}: {}}>
                             <input type="radio" value="prints" onClick={makeOriginal}/>
                             <span>Print</span>
                         </label>
-                        <label>
+                        <label className="input__wrapper" style={original ? {opacity: "1"} : {}}>
                             <input type="radio" value="original" onClick={makeOriginal}/>
                             <span>Original</span>
                         </label>
@@ -161,7 +161,7 @@ const UploadPrint = () => {
                     >
                         <div className="upload-prints--dimensions">
                         
-                        <div>
+                        <div className="input__wrapper">
                             <label htmlFor="width">Width:</label>
                         
                             <input 
@@ -176,7 +176,7 @@ const UploadPrint = () => {
                                 inputMode="decimal"
                                 />
                         </div>
-                        <div>
+                        <div className="input__wrapper">
                             <label htmlFor="height">Height:</label>
                             <input 
                                 id="height"
@@ -190,7 +190,7 @@ const UploadPrint = () => {
                                 inputMode="decimal"
                                 />
                         </div>
-                        <div className="price">
+                        <div className="price input__wrapper">
                             <label htmlFor="price">Price: $</label>
                             <input 
                                 id="price" 
