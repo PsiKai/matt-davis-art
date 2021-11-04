@@ -104,11 +104,17 @@ a:visited {
   color: var(--white-two);
 }
 
+.input__wrapper:hover > label,
+.input__wrapper:focus-within > label {
+  opacity: 1;
+}
+
 label {
   font-family: inherit;
   color: var(--dark);
   font-size: 1rem;
   opacity: 0.6;
+  transition: opacity 200ms ease;
 }
 
 input {
@@ -124,6 +130,8 @@ input {
   background-color: inherit;
   transition: box-shadow 200ms ease;
   border-radius: 0px;
+  text-indent: 0;
+  -webkit-appearance: none;
 }
 
 input:-webkit-autofill,
@@ -194,6 +202,12 @@ input[type="checkbox"]:focus {
 
 .file-input__label > span:first-of-type {
   opacity: 0.6;
+  transition: opacity 400ms ease;
+}
+
+.file-input__label:hover > span:first-of-type,
+.file-input__label:focus-within > span:first-of-type {
+  opacity: 1;
 }
 
 input[type="file"] {

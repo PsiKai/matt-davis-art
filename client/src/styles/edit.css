@@ -92,13 +92,18 @@
   margin-bottom: 2rem;
 }
 
+.radio-group {
+  border: 1px dotted var(--dark);
+}
+
 .radio-group::after {
   content: "";
   position: absolute;
   width: 50%;
   height: 100%;
-  border-bottom: 1px solid var(--dark);
-  border-right: 1px solid var(--dark);
+  /* border-bottom: 1px solid var(--dark);
+  border-right: 1px solid var(--dark); */
+  border: 1px solid var(--dark);
   bottom: 0;
   transform: translateX(-50%);
   transition: transform 200ms ease;
@@ -396,6 +401,19 @@
 }
 
 @media (max-width: 450px) {
+  .edit-transition h2 {
+    position: sticky;
+    top: 53px;
+    background-color: var(--white);
+    background-image: url("../images/brushed-alum.webp");
+    height: fit-content;
+    padding: 0.25rem 0;
+    width: calc(100% + 3px);
+    display: flex;
+    align-items: center;
+    z-index: 3;
+  }
+
   .login-form {
     width: 80%;
   }
@@ -412,7 +430,7 @@
   }
 
   .nav-buttons button {
-    padding: 0.5rem;
+    padding: 0.5rem 0.8rem;
   }
 
   .nav-buttons a {
@@ -441,6 +459,26 @@
 
   .edit-transition {
     margin-top: 2rem;
+  }
+
+  .upload-prints--dimensions {
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .upload-prints--dimensions > div {
+    flex-basis: calc(50% - 0.5rem);
+  }
+
+  .upload-prints--dimensions label {
+    position: absolute;
+  }
+
+  .upload-prints--dimensions input {
+    width: 100%;
+    text-align: right;
   }
 
   .upload-prints--stock {

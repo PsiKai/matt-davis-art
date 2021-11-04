@@ -120,10 +120,17 @@ const UploadPrint = () => {
             <form onSubmit={upload}>
                 <label className={file ? "file-input__label small-label" : "file-input__label"}>
                     <span>Choose A File</span>
-                    <span className="file-input__name">{file.name}</span>
+                    <CSSTransition
+                        in={file.name}
+                        timeout={200}
+                        classNames="drop-in"
+                        unmountOnExit
+                    >
+                        <span className="file-input__name">{file.name}</span>
+                    </CSSTransition>
                     <input id="image" type="file" onChange={imgUpdate} ref={inputFile} required/>
                 </label>
-
+                <div className="input__wrapper">
                 <label htmlFor="title">Title</label>
                 <input 
                     id="title" 
@@ -133,6 +140,7 @@ const UploadPrint = () => {
                     value={title}
                     required>
                 </input>
+                </div>
 
                 <div className="upload-prints--stock">
                     <div className={original ? "radio-group original" : "radio-group"}>
