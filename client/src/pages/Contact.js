@@ -38,44 +38,52 @@ const Contact = () => {
                     </div>
                     
                 </div>
-            <form className="email-form" onSubmit={submitEmail}>
-                <h3>Or just send me an email directly:</h3>
-                <label htmlFor="sender">Your email</label>
-                <input
-                    type="email"
-                    name="address" 
-                    onChange={onChange} 
-                    value={email.address}
-                    id="sender"
-                    required>
-                </input>
-                <label htmlFor="name">Your name</label>
-                <input 
-                    type="text"
-                    name="name"
-                    onChange={onChange} 
-                    value={email.name}
-                    id="name">
-                </input>
-                <label htmlFor="subject">Subject</label>
-                <input 
-                    type="text"
-                    name="subject"
-                    onChange={onChange} 
-                    value={email.subject}
-                    id="subject">
-                </input>
-                <label htmlFor="email-body">Your message</label>
-                <textarea 
-                    name="body"
-                    onChange={onChange} 
-                    value={email.body}
-                    id="email-body"
-                    rows="8"
-                    required>
-                </textarea>
-                <button data-text="Send">Send</button>
-            </form>
+                <form className="email-form" onSubmit={submitEmail}>
+                    <h3>Or just send me an email directly:</h3>
+                    <div className="input__wrapper">
+                        <label htmlFor="sender">Your email</label>
+                        <input
+                            type="email"
+                            name="address" 
+                            onChange={onChange} 
+                            value={email.address}
+                            id="sender"
+                            required>
+                        </input>
+                    </div>
+                    <div className="input__wrapper">
+                        <label htmlFor="name">Your name</label>
+                        <input 
+                            type="text"
+                            name="name"
+                            onChange={onChange} 
+                            value={email.name}
+                            id="name">
+                        </input>
+                    </div>
+                    <div className="input__wrapper">
+                        <label htmlFor="subject">Subject</label>
+                        <input 
+                            type="text"
+                            name="subject"
+                            onChange={onChange} 
+                            value={email.subject}
+                            id="subject">
+                        </input>
+                    </div>
+                    <div className="input__wrapper">
+                        <label htmlFor="email-body">Your message</label>
+                        <textarea 
+                            name="body"
+                            onChange={onChange} 
+                            value={email.body}
+                            id="email-body"
+                            rows="8"
+                            required>
+                        </textarea>
+                    </div>
+                    <button data-text="Send">Send</button>
+                </form>
             </div>
             <Alerts />
         </div>

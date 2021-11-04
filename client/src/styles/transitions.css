@@ -283,3 +283,51 @@
 .fly-enter-done {
   transform: translate(0);
 }
+
+/* Form elements appearing */
+
+.drop-in-enter {
+  max-height: 0;
+  opacity: 0;
+}
+
+.drop-in-enter-active {
+  max-height: 50px;
+  opacity: 1;
+  transition: max-height 200ms ease, opacity 200ms ease;
+}
+
+.drop-in-enter-done {
+  max-height: 50px;
+  opacity: 1;
+}
+
+.drop-in-exit {
+  max-height: 50px;
+  opacity: 1;
+}
+
+.drop-in-exit-active {
+  opacity: 0 !important;
+  max-height: 0 !important;
+  transition: max-height 200ms ease, opacity 200ms ease;
+}
+
+.drop-in-exit-done {
+  max-height: 0;
+  opacity: 0;
+}
+
+@media (max-width: 450px) {
+  .upload-prints--dimensions.drop-in-enter-active {
+    max-height: 80px;
+  }
+
+  .upload-prints--dimensions.drop-in-enter-done {
+    max-height: 80px;
+  }
+
+  .upload-prints--dimensions.drop-in-exit {
+    max-height: 80px;
+  }
+}

@@ -93,7 +93,7 @@ const UploadGallery = () => {
                         onChange={imgUpdate}
                         required />
                 </label>
-
+                <div className="input__wrapper">
                 <label htmlFor="gallery-title">Title</label>
                 <input 
                     id="gallery-title" 
@@ -103,7 +103,9 @@ const UploadGallery = () => {
                     value={title}
                     required>
                 </input>
+                </div>
 
+                <div className="input__wrapper">
                 <label htmlFor="gallery-medium">Medium</label>
                 <input 
                     id="gallery-medium" 
@@ -113,7 +115,9 @@ const UploadGallery = () => {
                     value={medium}
                     required>
                 </input>
+                </div>
 
+                <div className="input__wrapper">
                 <label htmlFor="title">Description</label>
                 <textarea 
                     id="description" 
@@ -124,7 +128,7 @@ const UploadGallery = () => {
                     value={description}
                     required>
                 </textarea>
-                
+                </div>
             
                 <button data-text="Submit" type="submit">Submit</button>
                 

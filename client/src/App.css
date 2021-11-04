@@ -104,11 +104,19 @@ a:visited {
   color: var(--white-two);
 }
 
+.input__wrapper:hover > label,
+.input__wrapper:focus-within > label,
+label.input__wrapper:focus-within,
+label.input__wrapper:hover {
+  opacity: 1;
+}
+
 label {
   font-family: inherit;
   color: var(--dark);
   font-size: 1rem;
   opacity: 0.6;
+  transition: opacity 200ms ease;
 }
 
 input {
@@ -124,6 +132,8 @@ input {
   background-color: inherit;
   transition: box-shadow 200ms ease;
   border-radius: 0px;
+  text-indent: 0;
+  -webkit-appearance: none;
 }
 
 input:-webkit-autofill,
@@ -194,6 +204,12 @@ input[type="checkbox"]:focus {
 
 .file-input__label > span:first-of-type {
   opacity: 0.6;
+  transition: opacity 400ms ease;
+}
+
+.file-input__label:hover > span:first-of-type,
+.file-input__label:focus-within > span:first-of-type {
+  opacity: 1;
 }
 
 input[type="file"] {
@@ -226,6 +242,7 @@ textarea {
   width: 100%;
   font-size: 1.2rem;
   margin: 0.5rem 0 1rem;
+  padding: 0.5rem;
   border: none;
   border-bottom: 1px solid var(--dark);
   border-top: 1px dotted var(--dark);
@@ -297,7 +314,7 @@ h2 {
 
 .alert__wrapper {
   position: fixed;
-  bottom: 5rem;
+  bottom: 1rem;
   margin-right: 4rem;
   z-index: 8;
 }

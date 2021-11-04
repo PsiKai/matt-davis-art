@@ -78,11 +78,7 @@
 }
 
 .upload-prints--stock {
-  display: flex;
-  flex-wrap: wrap;
   margin-bottom: 1rem;
-  justify-content: space-between;
-  align-items: flex-start;
   padding: 1rem 0;
 }
 
@@ -96,9 +92,8 @@
   margin-bottom: 2rem;
 }
 
-.upload-prints--stock > div:not(.radio-group) {
-  display: flex;
-  align-items: flex-end;
+.radio-group {
+  border: 1px dotted var(--dark);
 }
 
 .radio-group::after {
@@ -106,8 +101,7 @@
   position: absolute;
   width: 50%;
   height: 100%;
-  border-bottom: 1px solid var(--dark);
-  border-right: 1px solid var(--dark);
+  outline: 2px solid var(--dark);
   bottom: 0;
   transform: translateX(-50%);
   transition: transform 200ms ease;
@@ -123,25 +117,37 @@
   text-align: center;
   cursor: pointer;
   margin: 0 !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   height: 100%;
   width: 100%;
 }
 
-.radio-group label:hover,
+/* .radio-group label:hover,
 .radio-group label:focus-within {
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
+} */
 
 .radio-group input[type="radio"] {
   width: 0.01px;
   position: absolute;
 }
 
-.upload-prints--stock > div:nth-child(even) {
-  justify-content: flex-end;
+.radio-group label span {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radio-group input[type="radio"]:focus-visible ~ span,
+.radio-group label:hover span {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.upload-prints--dimensions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .upload-prints--stock label {
@@ -393,6 +399,19 @@
 }
 
 @media (max-width: 450px) {
+  .edit-transition h2 {
+    position: sticky;
+    top: 53px;
+    background-color: var(--white);
+    background-image: url("../images/brushed-alum.webp");
+    height: fit-content;
+    padding: 0.25rem 0;
+    width: calc(100% + 3px);
+    display: flex;
+    align-items: center;
+    z-index: 3;
+  }
+
   .login-form {
     width: 80%;
   }
@@ -409,7 +428,7 @@
   }
 
   .nav-buttons button {
-    padding: 0.5rem;
+    padding: 0.5rem 0.8rem;
   }
 
   .nav-buttons a {
@@ -438,6 +457,26 @@
 
   .edit-transition {
     margin-top: 2rem;
+  }
+
+  .upload-prints--dimensions {
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem 1rem;
+  }
+
+  .upload-prints--dimensions > div {
+    flex-basis: calc(50% - 0.5rem);
+  }
+
+  .upload-prints--dimensions label {
+    position: absolute;
+  }
+
+  .upload-prints--dimensions input {
+    width: 100%;
+    text-align: right;
   }
 
   .upload-prints--stock {

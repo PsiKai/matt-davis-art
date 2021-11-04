@@ -1,4 +1,4 @@
-import React, {useState, useContext, Fragment, useRef} from 'react'
+import React, {useState, useContext, useRef} from 'react'
 import AppContext from '../context/AppContext'
 import AlertContext from "../context/alertContext"
 import axios from 'axios'
@@ -120,10 +120,17 @@ const UploadPrint = () => {
             <form onSubmit={upload}>
                 <label className={file ? "file-input__label small-label" : "file-input__label"}>
                     <span>Choose A File</span>
-                    <span className="file-input__name">{file.name}</span>
+                    <CSSTransition
+                        in={file.name}
+                        timeout={200}
+                        classNames="drop-in"
+                        unmountOnExit
+                    >
+                        <span className="file-input__name">{file.name}</span>
+                    </CSSTransition>
                     <input id="image" type="file" onChange={imgUpdate} ref={inputFile} required/>
                 </label>
-
+                <div className="input__wrapper">
                 <label htmlFor="title">Title</label>
                 <input 
                     id="title" 
@@ -133,22 +140,28 @@ const UploadPrint = () => {
                     value={title}
                     required>
                 </input>
+                </div>
 
                 <div className="upload-prints--stock">
                     <div className={original ? "radio-group original" : "radio-group"}>
-                        <label>
-                            <span>Print</span>
+                        <label className="input__wrapper" style={!original ? {opacity: "1"}: {}}>
                             <input type="radio" value="prints" onClick={makeOriginal}/>
+                            <span>Print</span>
                         </label>
-                        <label>
-                            <span>Original</span>
+                        <label className="input__wrapper" style={original ? {opacity: "1"} : {}}>
                             <input type="radio" value="original" onClick={makeOriginal}/>
+                            <span>Original</span>
                         </label>
                     </div>
-                    {original &&
-                        <Fragment>
+                    <CSSTransition
+                        in={original}
+                        timeout={200}
+                        classNames="drop-in"
+                        unmountOnExit
+                    >
+                        <div className="upload-prints--dimensions">
                         
-                        <div>
+                        <div className="input__wrapper">
                             <label htmlFor="width">Width:</label>
                         
                             <input 
@@ -163,7 +176,7 @@ const UploadPrint = () => {
                                 inputMode="decimal"
                                 />
                         </div>
-                        <div>
+                        <div className="input__wrapper">
                             <label htmlFor="height">Height:</label>
                             <input 
                                 id="height"
@@ -177,7 +190,7 @@ const UploadPrint = () => {
                                 inputMode="decimal"
                                 />
                         </div>
-                        <div className="price">
+                        <div className="price input__wrapper">
                             <label htmlFor="price">Price: $</label>
                             <input 
                                 id="price" 
@@ -190,8 +203,8 @@ const UploadPrint = () => {
                                 inputMode="decimal"
                                 />
                         </div>
-                        </Fragment>
-                    }
+                        </div>
+                    </CSSTransition>
                     
                 </div>
                 {/* <label htmlFor="prints-stock">Number of Prints</label>
