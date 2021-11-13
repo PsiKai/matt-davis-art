@@ -105,6 +105,11 @@ i {
   transform: translate(1px, -1px);
 }
 
+p {
+  line-height: 1.4;
+  font-size: 1rem;
+}
+
 a:visited {
   color: var(--white-two);
 }
@@ -388,6 +393,7 @@ h2 {
   transform-style: preserve-3d;
   font-family: var(--noto-bold);
   font-size: 33px;
+  line-height: 45px;
 }
 
 .page-header__wrapper::after {
@@ -487,6 +493,7 @@ h2 {
     margin-bottom: 1rem;
     padding: 1rem;
     font-size: 1.6rem;
+    line-height: 35px;
   }
 
   .page-header__arrow {
@@ -509,6 +516,7 @@ h2 {
 
   .page-header {
     font-size: 1.4rem;
+    line-height: 31px;
   }
 
   .page-header__arrow {

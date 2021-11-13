@@ -276,6 +276,10 @@
   margin: 0.7rem 0;
 }
 
+.info-grid input {
+  line-height: 1.4rem;
+}
+
 .shipping-grid,
 .email-grid {
   text-align: left;

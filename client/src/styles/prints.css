@@ -37,7 +37,7 @@
 
 .print-orders p {
   padding: 0 3rem 3rem 0;
-  font-size: 0.9rem;
+  /* font-size: 0.9rem; */
   font-weight: lighter;
 }
 
