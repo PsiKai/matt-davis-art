@@ -1,9 +1,11 @@
-import React, {useContext, useState, useEffect} from 'react'
+import React, {useContext, useState, useEffect, useRef} from 'react'
 import AppContext from "../context/AppContext"
 import AlertContext from "../context/alertContext"
+
 import axios from "axios";
-import CircularProgress from "@material-ui/core/CircularProgress"
 import { CSSTransition, TransitionGroup} from 'react-transition-group';
+
+import CircularProgress from "@material-ui/core/CircularProgress"
 
 const EditGallery = () => {
     const appContext = useContext(AppContext)
@@ -11,10 +13,11 @@ const EditGallery = () => {
     const {gallery, refreshArt} = appContext
     const {setAlert} = alertContext
 
-
     const [artEdit, setArtEdit] = useState({})
     const [newTitle, setNewTitle] = useState({})
     const [edit, setEdit] = useState(false)
+
+    const updateForm = useRef()
 
     const editArtwork = (e) => {
         var pic = e.target
@@ -28,6 +31,8 @@ const EditGallery = () => {
             type: pic.dataset.type
         })
         setEdit(true)
+        const y = updateForm.current.getBoundingClientRect().top - 100
+        window.scrollBy({top: y, behavior: "smooth"})
     }
 
     useEffect(() => {
@@ -59,7 +64,6 @@ const EditGallery = () => {
         setNewTitle({})
         setArtEdit({})
         setEdit(false)
-          
     }
 
     const remove = async () => {
@@ -71,45 +75,42 @@ const EditGallery = () => {
             setEdit(false)
         } catch (error) {
             setAlert(error.response.msg, "lightpink")
-        }
-        
+        } 
     }
 
     return (
         <div className="edit-gallery">
             <h2>Update Artwork in Gallery</h2>
             <div className="update-gallery">
-                {
-                gallery ? gallery.map((item, i) => {
-                    return (
-                    <img 
-                        key={i}
-                        id={i}
-                        className="update-preview"
-                        name={item.title}
-                        alt={item.title}
-                        src={item.img}
-                        onClick={editArtwork}
-                        data-description={item.description}
-                        data-medium={item.medium}
-                        data-type={item.type}>
-                    </img>)
-                    
-                }) : 
+                {gallery ? 
+                    gallery.map((item, i) => {
+                        return (
+                            <img 
+                                key={i}
+                                id={i}
+                                className="update-preview"
+                                name={item.title}
+                                alt={item.title}
+                                src={item.img}
+                                onClick={editArtwork}
+                                data-description={item.description}
+                                data-medium={item.medium}
+                                data-type={item.type}>
+                            </img>)
+                    }) 
+                    : 
                     <div className="progress">
                         <CircularProgress color="inherit" />
                     </div>
                 }
-                
             </div>
-            <div className="update-gallery--grid">
+            <div className="update-gallery--grid" ref={updateForm}>
                 <TransitionGroup className="update-gallery--wrapper">
                     <CSSTransition
                         key={artEdit.key}
                         timeout={400}
                         classNames="fadein"
-                    >
-                    
+                    >          
                         <div className="update-gallery--form">
                             <img 
                                 className="edit-image"
@@ -127,8 +128,8 @@ const EditGallery = () => {
                     timeout={200}
                     unmountOnExit={true}
                 >
-                        <div className="update-gallery--update">
-                                
+                    <div className="update-gallery--update">
+                        <div className="input__wrapper">
                             <label htmlFor="update-title">New Title</label>
                             <input 
                                 id="update-title" 
@@ -136,7 +137,9 @@ const EditGallery = () => {
                                 type="text" 
                                 value={newTitle.title || ""}
                                 onChange={setUpdate} />
+                        </div>
 
+                        <div className="input__wrapper">
                             <label htmlFor="update-medium">New Medium</label>
                             <input 
                                 id="update-medium" 
@@ -144,7 +147,9 @@ const EditGallery = () => {
                                 type="text" 
                                 value={newTitle.medium || ""}
                                 onChange={setUpdate} />
+                        </div>
 
+                        <div className="input__wrapper">
                             <label htmlFor="update-description">New Description</label>
                             <textarea 
                                 id="update-description"
@@ -153,11 +158,12 @@ const EditGallery = () => {
                                 value={newTitle.description || ""} 
                                 onChange={setUpdate}
                                 />
-
-                            <button data-text="Submit" onClick={submitChanges}>Submit</button>
-                            <p style={{textAlign: "center"}}>--OR--</p>
-                            <button data-text="Delete" onClick={remove}>Delete</button>
                         </div>
+                        
+                        <button data-text="Submit" onClick={submitChanges}>Submit</button>
+                        <p style={{textAlign: "center"}}>--OR--</p>
+                        <button data-text="Delete" onClick={remove}>Delete</button>
+                    </div>
                 </CSSTransition>
             </div>
         </div>
