@@ -16,14 +16,19 @@ links.forEach(link => {
   if (/\.css$/.test(link)) {
     fileType = "style";
   }
-//   fileWithPreload = [
-//     ...fileWithPreload,
-//     `<link rel="preload" href=".${link}" as="${fileType}">`
-//   ];
+
 headContent.push(`<link rel="preload" href=".${link}" as="${fileType}">`)
 });
 
-// fileWithPreload = [...fileWithPreload, parts[1]];
+const fontFiles = /\.ttf$/
+fs.readdirSync('./build/static/media/').forEach(file => {
+    if (fontFiles.test(file)) {
+        headContent.push(
+            `<link rel="preload" href="/static/media/${file}" as="font" type="font/ttf">`
+        )
+    }
+})
+
 headContent.push(parts[1]);
 
 fs.writeFileSync(pathToEntry, headContent.join(""));
