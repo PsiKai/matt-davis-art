@@ -20,14 +20,19 @@ links.forEach(link => {
 headContent.push(`<link rel="preload" href=".${link}" as="${fileType}">`)
 });
 
-const fontFiles = /\.ttf$/
-fs.readdirSync('./build/static/media/').forEach(file => {
-    if (fontFiles.test(file)) {
-        headContent.push(
-            `<link rel="preload" href="/static/media/${file}" as="font" type="font/ttf">`
-        )
-    }
-})
+// const fontFiles = /\.ttf$/
+// fs.readdirSync('./build/static/media/').forEach(file => {
+//     console.log(file);
+//     if (fontFiles.test(file)) {
+//         console.log("File match");
+//         headContent.push(
+//             `<link rel="preload" href="/static/media/${file}" as="font" type="font/ttf">`
+//         )
+//     }
+// })
+headContent.push('<link rel="preload" href="/static/media/NotoSans-Bold.66ab2974.ttf" as="font" type="font/ttf" crossorigin')
+headContent.push('<link rel="preload" href="/static/media/NotoSans-Regular.fa11626f.ttf" as="font" type="font/ttf" crossorigin')
+headContent.push('<link rel="preload" href="/static/media/Yellowtail-Regular.52d25579.ttf" as="font" type="font/ttf" crossorigin')
 
 headContent.push(parts[1]);
 
