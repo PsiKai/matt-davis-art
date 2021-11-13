@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-const pathToEntry = "./client/build/index.html";
+const pathToEntry = "./build/index.html";
 const bundlesRegExp = /\/static\/\w+\/\w+.[a-z0-9]+.[a-z0-9]+.\w{2,3}/g;
 const splitBy = "</title>";
 
