@@ -17,7 +17,7 @@ links.forEach(link => {
     fileType = "style";
   }
 
-headContent.push(`<link rel="preload" href=".${link}" as="${fileType}">`)
+  headContent.push(`<link rel="preload" href=".${link}" as="${fileType}">`)
 });
 
 // const fontFiles = /\.ttf$/
@@ -30,9 +30,9 @@ headContent.push(`<link rel="preload" href=".${link}" as="${fileType}">`)
 //         )
 //     }
 // })
-headContent.push('<link rel="preload" href="/static/media/NotoSans-Bold.66ab2974.ttf" as="font" type="font/ttf" crossorigin')
-headContent.push('<link rel="preload" href="/static/media/NotoSans-Regular.fa11626f.ttf" as="font" type="font/ttf" crossorigin')
-headContent.push('<link rel="preload" href="/static/media/Yellowtail-Regular.52d25579.ttf" as="font" type="font/ttf" crossorigin')
+headContent.push('<link rel="preload" href="./static/media/NotoSans-Bold.66ab2974.ttf" as="font" type="font/ttf" crossorigin')
+headContent.push('<link rel="preload" href="./static/media/NotoSans-Regular.fa11626f.ttf" as="font" type="font/ttf" crossorigin')
+headContent.push('<link rel="preload" href="./static/media/Yellowtail-Regular.52d25579.ttf" as="font" type="font/ttf" crossorigin')
 
 headContent.push(parts[1]);
 
