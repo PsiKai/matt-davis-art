@@ -12,7 +12,7 @@ import UpdateStock from '../components/UpdateStock'
 import UploadPrint from "../components/UploadPrint"
 import EditGallery from "../components/EditGallery"
 import PageHeader from '../components/layout/PageHeader'
-import Alerts from "../components/Alerts"
+import Alerts from "../components/layout/Alerts"
 
 import { Fab } from '@material-ui/core';
 import {CSSTransition, TransitionGroup} from "react-transition-group";
