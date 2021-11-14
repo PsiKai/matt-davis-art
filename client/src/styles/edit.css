@@ -319,10 +319,6 @@
     min-height: 60vh;
   }
 
-  .page-content {
-    padding: 0;
-  }
-
   .nav-buttons button {
     font-size: 1rem;
     padding: 1rem;
