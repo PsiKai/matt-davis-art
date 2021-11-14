@@ -18,15 +18,15 @@ import { CircularProgress } from '@material-ui/core';
 import Header from './components/Header';
 import Footer from "./components/Footer"
 
-const Main = lazy(() => import('./pages/Main'))
-const About = lazy(() => import('./pages/About'))
-const Prints = lazy(() => import('./pages/Prints'))
-const Contact = lazy(() => import('./pages/Contact'))
-const Cart = lazy(() => import('./pages/Cart'))
-const Gallery = lazy(() => import('./pages/Gallery'))
-const Sculptures = lazy(() => import('./pages/Sculptures'))
-const Edit = lazy(() => import('./pages/Edit'))
-const Login = lazy(() => import('./pages/Login'))
+const Main = lazy(() => /* webpackPreload: true */ import('./pages/Main'))
+const About = lazy(() => /* webpackPreload: true */ import('./pages/About'))
+const Prints = lazy(() => /* webpackPreload: true */ import('./pages/Prints'))
+const Contact = lazy(() => /* webpackPreload: true */ import('./pages/Contact'))
+const Cart = lazy(() => /* webpackPreload: true */ import('./pages/Cart'))
+const Gallery = lazy(() => /* webpackPreload: true */ import('./pages/Gallery'))
+const Sculptures = lazy(() => /* webpackPreload: true */ import('./pages/Sculptures'))
+const Edit = lazy(() => /* webpackPreload: true */ import('./pages/Edit'))
+const Login = lazy(() => /* webpackPreload: true */ import('./pages/Login'))
 
 // import About from './pages/About';
 // import Prints from './pages/Prints';
