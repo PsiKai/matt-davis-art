@@ -7,6 +7,7 @@ const PageHeader = ({heading}) => {
     useEffect(() => {
         setWiden(true)
     }, [])
+    
     return (
         <CSSTransition
             in={widen}
@@ -16,8 +17,8 @@ const PageHeader = ({heading}) => {
         >   
             <div className="page-header__wrapper">
                 <div className="page-header__left"></div>
-                    <h1 className="page-header">{heading}</h1>
-                    <div className="page-header__arrow"></div>      
+                <h1 className="page-header">{heading}</h1>
+                <div className="page-header__arrow"></div>      
             </div>
         </CSSTransition>
     )

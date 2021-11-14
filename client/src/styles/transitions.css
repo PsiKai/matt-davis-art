@@ -66,7 +66,7 @@
 
 .widen-enter.widen-enter-active {
   width: 600px;
-  transition: width 600ms cubic-bezier(0.71, -0.415, 0.415, 1.65) 600ms;
+  transition: width 600ms cubic-bezier(0.3, 0.015, 0.42, 1.305) 400ms;
 }
 
 .widen-enter-done {
@@ -79,7 +79,6 @@
   }
 
   .widen-enter.widen-enter-active {
-    /* min-width: 400px; */
     width: 70%;
   }
 
@@ -193,7 +192,7 @@
   height: 100%;
   position: absolute;
   z-index: 3;
-  transition: opacity 200ms ease-out 400ms;
+  transition: opacity 300ms ease-out 400ms;
 }
 
 .slide-enter.slide-enter-active ~ footer {

@@ -22,7 +22,7 @@ const Gallery = () => {
                 return <Piece 
                     key={piece._id} 
                     id={i}
-                    alt={piece.name} 
+                    alt={piece.title}
                     src={piece.img}
                     title={piece.title}
                     medium={piece.medium}

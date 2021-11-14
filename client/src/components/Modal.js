@@ -1,6 +1,7 @@
 import React, {useContext} from 'react'
 import ReactDOM from "react-dom"
 import AppContext from "../context/AppContext"
+import "../styles/prints.css"
 
 
 const Modal = ({setModalOpen, total, shipData, cart}) => {
