@@ -79,6 +79,7 @@ body {
   background-image: url(./images/brushed-alum.webp);
   font-family: var(--noto);
   /* font-family: "Noto Sans SC", sans-serif; */
+  transition: opacity 500ms ease;
 }
 
 #root {
