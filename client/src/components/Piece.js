@@ -20,11 +20,8 @@ const Piece = ({src, alt, title, medium, description, id}) => {
             unmountOnExit={true}
         >
         <div style={{transitionDelay: `${id * 50}ms`}}>
-        
-            
             <hr className="art-division" />
-           <div className="gallery-piece" id={title.replace(/ /g, "-")}>
-                
+            <div className="gallery-piece" id={title.replace(/ /g, "-")}>    
                 <LazyLoadImage 
                     src={src}
                     // {`data:${src.contentType};base64, ${bytes.toString('base64')}`} 
@@ -38,7 +35,6 @@ const Piece = ({src, alt, title, medium, description, id}) => {
                     <p className="plaque-description">{description}</p>
                 </div>
             </div> 
-            
         </div>
         </CSSTransition>
         

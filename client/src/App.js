@@ -58,15 +58,6 @@ function App() {
               routes={[
                 Main, About, Prints, Contact, Gallery, Sculptures, Cart, Login, Edit
               ]}
-              // Main={Main}
-              // About={About}
-              // Prints={Prints}
-              // Contact={Contact}
-              // Gallery={Gallery}
-              // Sculptures={Sculptures}
-              // Cart={Cart}
-              // Login={Login}
-              // Edit={Edit}
             />
             <TransitionGroup>
               <CSSTransition 
