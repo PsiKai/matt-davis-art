@@ -11,7 +11,7 @@ import UploadGallery from '../components/UploadGallery'
 import UpdateStock from '../components/UpdateStock'
 import UploadPrint from "../components/UploadPrint"
 import EditGallery from "../components/EditGallery"
-import PageHeader from '../components/PageHeader'
+import PageHeader from '../components/layout/PageHeader'
 import Alerts from "../components/Alerts"
 
 import { Fab } from '@material-ui/core';

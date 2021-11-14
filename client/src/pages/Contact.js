@@ -3,7 +3,7 @@ import "../styles/contact.css"
 import AlertContext from "../context/alertContext";
 import axios from "axios"
 import Alerts from "../components/Alerts"
-import PageHeader from "../components/PageHeader"
+import PageHeader from "../components/layout/PageHeader"
 
 const Contact = () => {
     const alertContext = useContext(AlertContext);

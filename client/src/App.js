@@ -16,8 +16,8 @@ import setAuthToken from './components/utils/setAuthToken'
 
 import PrivateRoute from "./routing/PrivateRoute"
 import LoginRoute from "./routing/LoginRoute"
-import Header from './components/Header';
-import Footer from "./components/Footer"
+import Header from './components/layout/Header';
+import Footer from "./components/layout/Footer"
 
 const Main = lazy(() => import('./pages/Main'))
 const About = lazy(() => import('./pages/About'))

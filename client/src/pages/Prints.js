@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react'
 import "../styles/prints.css"
 import Print from "../components/Print";
-import PageHeader from "../components/PageHeader"
+import PageHeader from "../components/layout/PageHeader"
 import AppContext from "../context/AppContext"
 import CircularProgress from "@material-ui/core/CircularProgress"
 import { CSSTransition, TransitionGroup } from 'react-transition-group';

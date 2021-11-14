@@ -1,7 +1,7 @@
 import React, {useEffect, useContext, useState} from 'react'
 import Carousel from "../components/Carousel"
 import AppContext from "../context/AppContext"
-import LandingHeader from "../components/LandingHeader"
+import LandingHeader from "../components/layout/LandingHeader"
 import {CSSTransition} from "react-transition-group"
 import "../styles/main.css"
 

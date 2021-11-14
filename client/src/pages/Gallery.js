@@ -3,7 +3,7 @@ import "../styles/gallery.css"
 import AppContext from '../context/AppContext'
 import Piece from "../components/Piece";
 import CircularProgress from "@material-ui/core/CircularProgress"
-import PageHeader from '../components/PageHeader';
+import PageHeader from '../components/layout/PageHeader';
 
 const Gallery = () => {
     const appContext = useContext(AppContext);
