@@ -426,10 +426,6 @@
     text-align: center;
   }
 
-  .cart-item p {
-    /* display: block; */
-  }
-
   .cart-item button {
     right: -4px;
     bottom: 0;

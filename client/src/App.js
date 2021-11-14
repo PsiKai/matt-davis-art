@@ -1,10 +1,11 @@
 import React, { Fragment, useEffect } from 'react'
 import { Router, Switch, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history'
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+
 import './App.css';
 import "./styles/keyframes.css"
 import "./styles/transitions.css"
-import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 import AppState from "./context/AppState"
 import AuthState from "./context/AuthState"
@@ -13,24 +14,24 @@ import setAuthToken from './components/utils/setAuthToken'
 
 import PrivateRoute from "./routing/PrivateRoute"
 import LoginRoute from "./routing/LoginRoute"
+
 import Main from './pages/Main';
 import About from './pages/About';
-import Sculptures from "./pages/Sculptures"
 import Prints from './pages/Prints';
-import Header from './components/Header';
+import Contact from './pages/Contact'
 import Cart from "./pages/Cart";
 import Gallery from './pages/Gallery'
-import Contact from './pages/Contact'
+import Sculptures from "./pages/Sculptures"
 import Edit from './pages/Edit'
-import Footer from "./components/Footer"
 import Login from "./pages/Login"
+
+import Header from './components/Header';
+import Footer from "./components/Footer"
 
 if(localStorage.token) {
   setAuthToken(localStorage.token)
 }
 const history = createBrowserHistory();
-
-
 
 function App() {
   useEffect(() => {
@@ -75,7 +76,6 @@ function App() {
     </AlertState>
     </AppState>
     </AuthState>
-    
   );
 }
 

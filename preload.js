@@ -13,21 +13,16 @@ let headContent = [parts[0], splitBy];
 links.forEach(link => {
   let fileType = "script";
 
-  if (/\.css$/.test(link)) {
-    fileType = "style";
-  }
+  /\.css$/.test(link) && (fileType = "style")
 
   headContent.push(`<link rel="preload" href=".${link}" as="${fileType}">`)
 });
 
 fs.readdirSync('./build/static/media/').forEach(file => {
     /\.ttf/.test(file) && headContent.push(
-            `<link rel="preload" href="./static/media/${file.split(".gz")[0]}" as="font" type="font/ttf" crossorigin>`
-        )
+        `<link rel="preload" href="./static/media/${file.split(".gz")[0]}" as="font" type="font/ttf" crossorigin>`
+    )
 })
-// headContent.push('<link rel="preload" href="./static/media/NotoSans-Bold.66ab2974.ttf" as="font" type="font/ttf" crossorigin>' )
-// headContent.push('<link rel="preload" href="./static/media/NotoSans-Regular.fa11626f.ttf" as="font" type="font/ttf" crossorigin>')
-// headContent.push('<link rel="preload" href="./static/media/Yellowtail-Regular.52d25579.ttf" as="font" type="font/ttf" crossorigin>')
 
 headContent.push(parts[1]);
 
