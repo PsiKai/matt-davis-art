@@ -18,15 +18,51 @@ import { CircularProgress } from '@material-ui/core';
 import Header from './components/Header';
 import Footer from "./components/Footer"
 
-const Main = lazy(() => /* webpackPreload: true */ import('./pages/Main'))
-const About = lazy(() => /* webpackPreload: true */ import('./pages/About'))
-const Prints = lazy(() => /* webpackPreload: true */ import('./pages/Prints'))
-const Contact = lazy(() => /* webpackPreload: true */ import('./pages/Contact'))
-const Cart = lazy(() => /* webpackPreload: true */ import('./pages/Cart'))
-const Gallery = lazy(() => /* webpackPreload: true */ import('./pages/Gallery'))
-const Sculptures = lazy(() => /* webpackPreload: true */ import('./pages/Sculptures'))
-const Edit = lazy(() => /* webpackPreload: true */ import('./pages/Edit'))
-const Login = lazy(() => /* webpackPreload: true */ import('./pages/Login'))
+const Main = lazy(() => {
+  /* webpackPreload: true */ 
+  /* webpackChunkName: "mainPage" */
+  return import('./pages/Main')
+})
+const About = lazy(() => {
+  /* webpackPreload: true */ 
+  /* webpackChunkName: "aboutPage" */
+  return import('./pages/About')
+})
+const Prints = lazy(() => {
+  /* webpackPreload: true */ 
+  /* webpackChunkName: "storePage" */
+  return import('./pages/Prints')
+})
+const Contact = lazy(() => {
+  /* webpackPreload: true */
+  /* webpackChunkName: "contactPage" */ 
+  return import('./pages/Contact')
+})
+const Cart = lazy(() => {
+  /* webpackPreload: true */ 
+  /* webpackChunkName: "cartPage" */
+  return import('./pages/Cart')
+})
+const Gallery = lazy(() => {
+  /* webpackPreload: true */ 
+  /* webpackChunkName: "galleryPage" */
+  return import('./pages/Gallery')
+})
+const Sculptures = lazy(() => {
+  /* webpackPreload: true */ 
+  /* webpackChunkName: "sculpturePage" */
+  return import('./pages/Sculptures')
+})
+const Edit = lazy(() => {
+  /* webpackPreload: true */ 
+  /* webpackChunkName: "editPage" */
+  return import('./pages/Edit')
+})
+const Login = lazy(() => {
+  /* webpackPreload: true */ 
+  /* webpackChunkName: "mychunk" */
+  return import('./pages/Login')
+})
 
 // import About from './pages/About';
 // import Prints from './pages/Prints';
@@ -61,7 +97,7 @@ function App() {
               <CSSTransition 
                 key={location.key} 
                 classNames="slide" 
-                timeout={600}>
+                timeout={700}>
                 <Fragment>
                 <Suspense fallback={<CircularProgress/>}>
                   <Switch location={location}>
