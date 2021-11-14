@@ -9,11 +9,11 @@ import Badge from '@material-ui/core/Badge';
 import EditIcon from '@material-ui/icons/Edit';
 
 
-const Header = (props) => {
-  const { 
-    preload, About, Prints, Sculptures, Gallery,
-    Contact, Cart, Login, Edit, Main 
-  } = props
+const Header = ({routes, preload}) => {
+  const [
+    Main, About, Prints, Contact,
+    Gallery, Sculptures, Cart, Login, Edit  
+  ] = routes
   const appContext = useContext(AppContext);
   const {cartItems, reloadCart} = appContext;
   const authContext = useContext(AuthContext);
@@ -32,13 +32,18 @@ const Header = (props) => {
     window.scrollTo(0,0); 
   }
 
+  const openSidenav = () => {
+    setOpen(!open)
+    routes.forEach(route => preload(route))
+  }
+
     return (
         <header>
           <Link to="/" className="header--main-link">
             <h1 onClick={navigate}  onMouseOver={() => preload(Main)}>Matt Davis</h1>
           </Link>
-          
-          <div className="menu__burger-icon" onClick={() => setOpen(!open)}>
+
+          <div className="menu__burger-icon" onClick={openSidenav}>
                 <span style={open ? 
                   {transform: "rotate(45deg)"} : 
                   {transform: "none"}}>
