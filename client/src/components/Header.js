@@ -10,7 +10,19 @@ import Badge from '@material-ui/core/Badge';
 import EditIcon from '@material-ui/icons/Edit';
 
 
-const Header = () => {
+const Header = (props) => {
+  const { 
+    preload, 
+    About, 
+    Prints, 
+    Sculptures, 
+    Gallery, 
+    Contact, 
+    Cart, 
+    Login, 
+    Edit, 
+    Main 
+  } = props
   const appContext = useContext(AppContext);
   const {cartItems, reloadCart} = appContext;
   const authContext = useContext(AuthContext);
@@ -32,7 +44,7 @@ const Header = () => {
     return (
         <header>
             <Link to="/" className="header--main-link">
-                <h1 onClick={navigate}>Matt Davis</h1>
+                <h1 onClick={navigate}  onMouseOver={() => preload(Main)}>Matt Davis</h1>
             </Link>
             <div className="menu__burger-icon" onClick={() => setOpen(!open)}>
                   <span style={open ? 
@@ -48,22 +60,22 @@ const Header = () => {
             <div className="menu" style={open ? {transform: "translateX(0)"} : {transform: "translateX(100%)"}}>
               
             <ul className="header-links">
-              <li onClick={navigate}>
+              <li onClick={navigate} onMouseOver={() => preload(About)}>
                 <Link to="/about">About</Link>
               </li>
-              <li onClick={navigate}>
+              <li onClick={navigate} onMouseOver={() => preload(Prints)}>
                 <Link to="/prints">Store</Link>
               </li>
-              <li onClick={navigate}>
+              <li onClick={navigate} onMouseOver={() => preload(Contact)}>
                 <Link to="/contact">Contact</Link>
               </li>
-              <li onClick={navigate}>
+              <li onClick={navigate} onMouseOver={() => preload(Gallery)}>
                 <Link to="/gallery">Gallery</Link>
               </li>
-              <li onClick={navigate}>
+              <li onClick={navigate} onMouseOver={() => preload(Sculptures)}>
                 <Link to="/sculptures">Sculptures</Link>
               </li>
-              <li onClick={navigate}>
+              <li onClick={navigate} onMouseOver={() => preload(Cart)}>
                 <Link to="/cart" className="cart-link">
                   <Badge 
                     badgeContent={cartItems} 
@@ -86,9 +98,11 @@ const Header = () => {
                 <Link to="/edit" className="login-edit">
                   {isAuthenticated ?
                     <EditIcon 
+                      onMouseOver={() => preload(Edit)}
                       style={{position: "relative", top: "6px"}}  
                     /> : 
-                    <ExitToAppIcon 
+                    <ExitToAppIcon
+                       onMouseOver={() => preload(Login)} 
                       style={{
                         color: "var(--light-two)", 
                         position: "relative", 
