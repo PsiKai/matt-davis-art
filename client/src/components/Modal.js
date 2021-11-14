@@ -1,7 +1,6 @@
 import React, {useContext} from 'react'
 import ReactDOM from "react-dom"
 import AppContext from "../context/AppContext"
-// import "../styles/cart.css"
 import "../styles/prints.css"
 
 

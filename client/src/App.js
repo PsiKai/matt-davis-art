@@ -3,6 +3,7 @@ import lazy from 'react-lazy-with-preload'
 import { Router, Switch, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history'
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { CircularProgress } from '@material-ui/core';
 
 import './App.css';
 import "./styles/keyframes.css"
@@ -15,7 +16,6 @@ import setAuthToken from './components/utils/setAuthToken'
 
 import PrivateRoute from "./routing/PrivateRoute"
 import LoginRoute from "./routing/LoginRoute"
-import { CircularProgress } from '@material-ui/core';
 import Header from './components/Header';
 import Footer from "./components/Footer"
 
@@ -36,7 +36,7 @@ if(localStorage.token) {
 const history = createBrowserHistory();
 
 function App() {
-  
+
   useEffect(() => {
     const body = document.querySelector("body")
     body.style.opacity = 1
@@ -55,34 +55,35 @@ function App() {
           <Fragment>
             <Header 
               preload={preloadComponent} 
+              Main={Main}
               About={About}
               Prints={Prints}
-              Sculptures={Sculptures}
-              Gallery={Gallery}
               Contact={Contact}
+              Gallery={Gallery}
+              Sculptures={Sculptures}
               Cart={Cart}
               Login={Login}
               Edit={Edit}
-              Main={Main}
             />
             <TransitionGroup>
               <CSSTransition 
                 key={location.key} 
                 classNames="slide" 
-                timeout={700}>
+                timeout={700}
+              >
                 <Fragment>
-                <Suspense fallback={<CircularProgress/>}>
-                  <Switch location={location}>
-                    <Route exact path="/about" component={About} />          
-                    <Route exact path="/prints" component={Prints} />
-                    <Route exact path="/sculptures" component={Sculptures} />
-                    <Route exact path="/gallery" component={Gallery} />
-                    <Route exact path="/contact" component={Contact} />
-                    <Route exact path="/cart" component={Cart} />
-                    <LoginRoute exact path="/signin" component={Login} />
-                    <PrivateRoute exact path="/edit*" component={Edit} />  
-                    <Route exact path="/" component={Main} />      
-                  </Switch>
+                  <Suspense fallback={<CircularProgress/>}>
+                    <Switch location={location}>
+                      <Route exact path="/" component={Main} />      
+                      <Route exact path="/about" component={About} />          
+                      <Route exact path="/prints" component={Prints} />
+                      <Route exact path="/contact" component={Contact} />
+                      <Route exact path="/gallery" component={Gallery} />
+                      <Route exact path="/sculptures" component={Sculptures} />
+                      <Route exact path="/cart" component={Cart} />
+                      <LoginRoute exact path="/signin" component={Login} />
+                      <PrivateRoute exact path="/edit*" component={Edit} />  
+                    </Switch>
                   </Suspense>
                   <Footer />
                 </Fragment>
