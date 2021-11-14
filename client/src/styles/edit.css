@@ -252,7 +252,7 @@
 .update-gallery--grid {
   display: grid;
   grid-template-columns: 50% 50%;
-  height: 500px;
+  height: 530px;
 }
 
 .update-gallery--wrapper {

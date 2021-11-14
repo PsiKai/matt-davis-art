@@ -10,7 +10,7 @@ import AuthContext from "../context/authContext"
 import UploadGallery from '../components/UploadGallery'
 import UpdateStock from '../components/UpdateStock'
 import UploadPrint from "../components/UploadPrint"
-import EditGallery from "../components/EditGallery"
+import EditGallery from "../components/edit/EditGallery"
 import PageHeader from '../components/layout/PageHeader'
 import Alerts from "../components/layout/Alerts"
 
