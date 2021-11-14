@@ -3,19 +3,24 @@
 @font-face {
   font-family: yellow-tail;
   src: url("./fonts/Yellowtail-Regular.ttf");
+  font-display: swap;
 }
 /* @import url("https://fonts.googleapis.com/css2?family=Yellowtail&display=swap"); */
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&display=swap"); */
 @font-face {
   font-family: "noto-sans";
   src: url("./fonts/NotoSans-Regular.ttf");
+  font-display: swap;
 }
 
 @font-face {
   font-family: "noto-bold";
   src: url("./fonts/NotoSans-Bold.ttf");
+  font-display: swap;
 }
+
 @import url("./styles/transitions.css");
+
 :root {
   --white: #f9f9f9;
   --light: #ded5c4;
@@ -74,6 +79,7 @@ body {
   background-image: url(./images/brushed-alum.webp);
   font-family: var(--noto);
   /* font-family: "Noto Sans SC", sans-serif; */
+  transition: opacity 500ms ease;
 }
 
 #root {
@@ -98,6 +104,11 @@ i {
 
 .fa-edit {
   transform: translate(1px, -1px);
+}
+
+p {
+  line-height: 1.4;
+  font-size: 1rem;
 }
 
 a:visited {
@@ -383,6 +394,7 @@ h2 {
   transform-style: preserve-3d;
   font-family: var(--noto-bold);
   font-size: 33px;
+  line-height: 45px;
 }
 
 .page-header__wrapper::after {
@@ -482,6 +494,7 @@ h2 {
     margin-bottom: 1rem;
     padding: 1rem;
     font-size: 1.6rem;
+    line-height: 35px;
   }
 
   .page-header__arrow {
@@ -504,6 +517,7 @@ h2 {
 
   .page-header {
     font-size: 1.4rem;
+    line-height: 31px;
   }
 
   .page-header__arrow {
