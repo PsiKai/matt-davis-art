@@ -78,7 +78,7 @@
 }
 
 .upload-prints--stock {
-  margin-bottom: 1rem;
+  margin-bottom: 4rem;
   padding: 1rem 0;
 }
 
@@ -453,6 +453,7 @@
 
   .upload-prints--stock {
     padding: 1rem 0 2rem;
+    margin-bottom: 1rem;
   }
 
   .upload-prints--stock > div {

@@ -48,7 +48,8 @@ const UpdateStock = () => {
         })
         setArtEdit({
             _id: pic.id,
-            src: pic.src
+            src: pic.src,
+            title: pic.alt
         })
         setEdit(true)
         // const y = updateForm.current.getBoundingClientRect().top - 100
@@ -74,9 +75,10 @@ const UpdateStock = () => {
 
     const remove = async () => {
         try {
-            const res = await axios.post("/delete/gallery", {name: artEdit.title, type: artEdit.type})
+            const res = await axios.post("/delete/prints", artEdit)
             setAlert(res.data.msg, "lightblue")
             setArtEdit({});
+            setNewTitle({})
             refreshArt();
             setEdit(false)
         } catch (error) {
