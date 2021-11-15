@@ -40,22 +40,6 @@ router.post("/gallery", (req, res) => {
 router.post("/prints", (req, res) => {
     const { src, title, _id } = req.body
     const img = src.split("prints/")[1]
-    // storage.bucket(printBucket).file(img).delete(err => {
-    //     if (err) {
-    //         console.log(err);
-    //         res.status(500).json({msg: "Error deleting artwork"})
-    //     } else {
-    //         printModel.deleteOne({_id: _id}, err => {
-    //             if (err) {
-    //                 console.log(err);
-    //                 res.status(500).json({msg: "Error deleting artwork"})
-    //             } else {
-    //                 console.log("Artwork deleted");
-    //                 res.json({msg: `${title} was deleted`})
-    //             }
-    //         })
-    //     }
-    // })
 
     let promises = [
         storage.bucket(printBucket).file(img).delete(),
