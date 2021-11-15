@@ -35,7 +35,7 @@
 
 .contact--social__flex a {
   padding: 0.75rem 1rem;
-  border-radius: 25%;
+  border-radius: 1rem;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
   background-color: var(--dark);
   transition: all 150ms ease-in-out;
