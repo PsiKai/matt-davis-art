@@ -85,7 +85,7 @@ const UploadPrint = () => {
             formData.append("dimensions", JSON.stringify(dimensions))
         } else {
             formData.append("price", 15)
-            formData.append("dimensions", {"width": "11", "height": "17"})
+            formData.append("dimensions", JSON.stringify({width: 11, height: 17}))
         }
         try {
             const res = await axios.post("/upload/prints", formData, {
