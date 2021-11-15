@@ -1,19 +1,117 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useRef, useEffect} from 'react'
 import AppContext from "../../context/AppContext"
 import AlertContext from "../../context/alertContext"
 import CircularProgress from "@material-ui/core/CircularProgress"
+
+import { CSSTransition, TransitionGroup} from 'react-transition-group';
 import axios from "axios"
 
 const UpdateStock = () => {
     const appContext = useContext(AppContext)
     const alertContext = useContext(AlertContext)
-    const {prints, refreshArt} = appContext;
-    const {setAlert} = alertContext;
+    const {prints, refreshArt} = appContext
+    const {setAlert} = alertContext
+
+    const [artEdit, setArtEdit] = useState({})
+    const [newTitle, setNewTitle] = useState({})
+    const [edit, setEdit] = useState(false)
+    // const [dimensions, setDimensions] = useState({})
+
+    const updateForm = useRef()
+
+    useEffect(() => {
+        setNewTitle(artEdit)
+    }, [artEdit])
+
+    console.log(newTitle.dimensions);
+
+    const setUpdate = (e) => {
+        console.log(e.target.value);
+        if (e.target.name === "width" || e.target.name === "height") {
+            setNewTitle({
+                ...newTitle, 
+                ["dimensions"]: {...newTitle["dimensions"], [e.target.name]: +e.target.value}})
+            return
+        }
+        setNewTitle( {
+            ...newTitle,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    // const updateDimensions = (e) => {
+    //     setDimensions({
+    //         ...dimensions,
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
+
+    const editArtwork = (e) => {
+        var pic = e.target
+        setArtEdit({
+            key: pic.id,
+            src: pic.src,
+            title: pic.alt,
+            alt: pic.alt,
+            price: pic.dataset.price,
+            original: JSON.parse(pic.dataset.original),
+            type: pic.dataset.type,
+            dimensions: {
+                height: +pic.dataset.height,
+                width: +pic.dataset.width
+            }
+        })
+        // setDimensions({
+        //     width: pic.dataset.width,
+        //     height: pic.dataset.height
+        // })
+        setEdit(true)
+        // const y = updateForm.current.getBoundingClientRect().top - 100
+        // window.scrollBy({top: y, behavior: "smooth"})
+    }
 
     // const [stock, setStock] = useState([])
-    const [checked, setChecked] = useState([])
+    // const [checked, setChecked] = useState([])
 
+    const submitChanges = async () => {
+        const data = {
+            old: {
+                title: artEdit.title,
+                type: artEdit.type
+            },
+            new: {
+                title: newTitle.title,
+                medium: newTitle.medium,
+                description: newTitle.description
+            }
+        }
+        const res = await axios.post("/update/gallery", data)
+        setAlert(res.data.msg, "lightgrey")
+        refreshArt() 
+        setNewTitle({})
+        setArtEdit({})
+        setEdit(false)
+    }
 
+    const remove = async () => {
+        try {
+            const res = await axios.post("/delete/gallery", {name: artEdit.title, type: artEdit.type})
+            setAlert(res.data.msg, "lightblue")
+            setArtEdit({});
+            refreshArt();
+            setEdit(false)
+        } catch (error) {
+            setAlert(error.response.msg, "lightpink")
+        } 
+    }
+
+    const makeOriginal = (e) => {
+        // console.log(e.target.value);
+        e.target.name === "original" ? 
+            setNewTitle({...newTitle, original: true}) 
+            : 
+            setNewTitle({...newTitle, original: false})
+    }
 
     // useEffect(() => {
     //     prints && prints.forEach(print => {
@@ -51,149 +149,232 @@ const UpdateStock = () => {
     // }   
     
     // saves checked prints in state 
-    const stageDelete = (e) => {
-        if (e.target.checked) {
-            setChecked([...checked, {
-                title: e.target.value,
-                type: e.target.name
-                }
-            ])
-        } else {
-            var items = [...checked]
-            const newArray = items.filter(item => {
-                return item.title !== e.target.value
-            })
-            setChecked(newArray)
-        }
-    }
+    // const stageDelete = (e) => {
+    //     if (e.target.checked) {
+    //         setChecked([...checked, {
+    //             title: e.target.value,
+    //             type: e.target.name
+    //             }
+    //         ])
+    //     } else {
+    //         var items = [...checked]
+    //         const newArray = items.filter(item => {
+    //             return item.title !== e.target.value
+    //         })
+    //         setChecked(newArray)
+    //     }
+    // }
     
     // deletes selected prints from database 
-    const deletePrints = async () => {
-        try {
-            const res = await axios.post("/delete/prints", checked)
-            setAlert(res.data.msg, "var(--medium)")
+    // const deletePrints = async () => {
+    //     try {
+    //         const res = await axios.post("/delete/prints", checked)
+    //         setAlert(res.data.msg, "var(--medium)")
             
-        } catch (err) {
-            setAlert(err.response.msg, "var(--medium)")
-        }
-        var checkboxes = document.querySelectorAll("input[type='checkbox']");
-            checkboxes.forEach(box => {
-                if (box.checked) {box.checked = false}
-            })
-        setChecked([])
-        refreshArt();
-    }
+    //     } catch (err) {
+    //         setAlert(err.response.msg, "var(--medium)")
+    //     }
+    //     var checkboxes = document.querySelectorAll("input[type='checkbox']");
+    //         checkboxes.forEach(box => {
+    //             if (box.checked) {box.checked = false}
+    //         })
+    //     setChecked([])
+    //     refreshArt();
+    // }
     
     return (
-        <div className="update-stock">
+        <div className="edit-gallery">
             <h2>Update Artwork in Store</h2>
-            <h4>Originals</h4>
-            <div className="print-stock">
+            <h3>Originals</h3>
+            <div className="update-gallery">
                 {prints ? prints.map((art, i) => {
-                    if(art.original) {
-                    return (
-                    <div className="print-stock-item" key={i}>
-                        <h5>{art.title}</h5>
+                    if (art.original) {
+                    const size = JSON.parse(art.dimensions)
+                     return (
                         <img 
+                            key={i}
+                            id={art._id}
+                            className="update-preview"
                             src={art.img}
-                            alt={art.name} 
+                            alt={art.title}
+                            data-height={size.height}
+                            data-width={size.width}
+                            data-price={art.price}
+                            data-type={art.type}
+                            data-sold-out={art.soldOut}
+                            data-original={art.original}
+                            onClick={editArtwork}  
                         />
-                        <ul>
-                            {/* <li>
-                                <label htmlFor="fiveEight" className="quantity">5 x 8:</label>
-                                <input 
-                                    id="fiveEight" 
-                                    type="number" 
-                                    inputMode="numeric"
-                                    onChange={update} 
-                                    name={art.title} 
-                                    className="quantity" 
-                                    value={stock.length && stock[i].stock.fiveEight}
-                                    min="0"
-                                />
-                            </li>
-                            <li>
-                                <label htmlFor="eightEleven" className="quantity">8.5 x 11:</label>
-                                <input 
-                                    id="eightEleven" 
-                                    type="number"  
-                                    inputMode="numeric"
-                                    onChange={update} 
-                                    name={art.title} 
-                                    className="quantity" 
-                                    value={stock.length && stock[i].stock.eightEleven}
-                                    min="0"
-                                />
-                            </li>
-                            <li>
-                                <label htmlFor="oneeightTwofour" className="quantity">18 x 24:</label>
-                                <input 
-                                    id="oneeightTwofour"
-                                    type="number"  
-                                    inputMode="numeric"
-                                    onChange={update} 
-                                    name={art.title}  
-                                    className="quantity"  
-                                    value={stock.length && stock[i].stock.oneeightTwofour}
-                                    min="0"
-                                />
-                            </li>
-                            <hr/> */}
-                            <li>
-                                <label htmlFor="delete-box">Delete?</label>
-                                <input 
-                                    value={art.title} 
-                                    name={art.type}
-                                    type='checkbox' 
-                                    id="delete-box" 
-                                    onChange={stageDelete}/>
-                            </li>
-                        </ul>
-                    </div>
-                    )} else {
-                        return null
-                    }
+                    )} else return null
                 }) :
                 <div className="progress">
                     <CircularProgress color="inherit" />
                 </div>
-            }  
+                }  
             </div>
-            <h4>Prints</h4>
-            <div className="print-stock">
+            <h3>Prints</h3>
+            <div className="update-gallery">
                 {prints && prints.map((art, i) => {
-                    if(!art.original) {
+                    if (!art.original) {
+                        const size = JSON.parse(art.dimensions)
                         return (
-                        <div className="print-stock-item" key={i}>
-                            <h5>{art.title}</h5>
                             <img 
+                                key={i}
+                                id={art._id}
+                                className="update-preview"
                                 src={art.img}
-                                alt={art.name} 
+                                alt={art.title}
+                                data-height={size.height}
+                                data-width={size.width}
+                                data-price={art.price}
+                                data-type={art.type}
+                                data-sold-out={art.soldOut}
+                                data-original={art.original}
+                                onClick={editArtwork}  
                             />
-                            <ul>
-                                <li>
-                                    <label htmlFor="delete-box">Delete?</label>
-                                    <input 
-                                        value={art.title} 
-                                        name={art.type}
-                                        type='checkbox' 
-                                        id="delete-box" 
-                                        onChange={stageDelete}/>
-                                </li>
-                            </ul>
-                        </div>
                         )
-                    } else {
-                        return null
-                    }
-                })
-                }
+                    } else return null
+                })}
             </div>
+        <div className="update-gallery--grid" ref={updateForm}>
+                <TransitionGroup className="update-gallery--wrapper">
+                    <CSSTransition
+                        key={artEdit.key}
+                        timeout={400}
+                        classNames="fadein"
+                    >          
+                        <div className="update-gallery--form">
+                            <img 
+                                className="edit-image"
+                                name={artEdit && artEdit.name}
+                                alt={artEdit && artEdit.alt}
+                                src={artEdit && artEdit.src}>
+                            </img>
+                        </div>
+                    </CSSTransition>
+                </TransitionGroup>
             
-        <div className="print-stock--buttons">
-            {/* <button data-text="Submit Changes" onClick={sendChanges}>Submit Changes</button> */}
-            <button data-text="Delete Items" onClick={deletePrints}>Delete Items</button>
-        </div>
+                <CSSTransition
+                    in={edit}
+                    classNames="fadein"
+                    timeout={200}
+                    unmountOnExit={true}
+                >
+                    <div className="update-gallery--update">
+                        <div className="input__wrapper">
+                            <label htmlFor="update-title">New Title</label>
+                            <input 
+                                id="update-title" 
+                                name="title"
+                                type="text" 
+                                value={newTitle.title || ""}
+                                onChange={setUpdate} />
+                        </div>
+
+                        {/* <div className="input__wrapper">
+                            <label htmlFor="update-medium">New Medium</label>
+                            <input 
+                                id="update-medium" 
+                                name="medium"
+                                type="text" 
+                                value={newTitle.medium || ""}
+                                onChange={setUpdate} />
+                        </div> */}
+                        <div className="upload-prints--stock">
+                        <div className={newTitle.original ? "radio-group original" : "radio-group"}>
+                        <label 
+                            className="input__wrapper" 
+                            style={!newTitle.original ? {opacity: "1"}: {}}
+                        >
+                            <input 
+                                type="radio" 
+                                name="print"
+                                // value={false} 
+                                onChange={makeOriginal}
+                                checked={newTitle.original}
+                                onClick={makeOriginal}
+                            />
+                            <span>Print</span>
+                        </label>
+                        <label 
+                            className="input__wrapper" 
+                            style={artEdit.original ? {opacity: "1"} : {}}
+                        >
+                            <input 
+                                type="radio" 
+                                name="original"
+                                // value={true}
+                                checked={newTitle.original} 
+                                onChange={makeOriginal}
+                                onClick={makeOriginal}
+                            />
+                            <span>Original</span>
+                        </label>
+                    </div>
+                        <div className="upload-prints--dimensions">
+                        
+                        <div className="input__wrapper">
+                            <label htmlFor="width">Width:</label>
+                        
+                            <input 
+                                id="width" 
+                                name="width"
+                                type="number" 
+                                min="0.0" 
+                                max="100.0" 
+                                step="0.5" 
+                                onChange={setUpdate}
+                                value={newTitle && newTitle.dimensions.width}
+                                inputMode="decimal"
+                                />
+                        </div>
+                        <div className="input__wrapper">
+                            <label htmlFor="height">Height:</label>
+                            <input 
+                                id="height"
+                                name="height" 
+                                type="number" 
+                                min="0.0" 
+                                max="100.0" 
+                                step="0.5" 
+                                onChange={setUpdate}
+                                value={newTitle && newTitle.dimensions.height}
+                                inputMode="decimal"
+                                />
+                        </div>
+                        <div className="price input__wrapper">
+                            <label htmlFor="price">Price: $</label>
+                            <input 
+                                id="price" 
+                                type="number" 
+                                min="0.00" 
+                                max="10000.00" 
+                                step="0.01" 
+                                name="price"
+                                onChange={setUpdate}
+                                value={newTitle.price}
+                                inputMode="decimal"
+                                />
+                        </div>
+                        </div>
+                        </div>
+                        {/* <div className="input__wrapper">
+                            <label htmlFor="update-description">New Description</label>
+                            <textarea 
+                                id="update-description"
+                                name="description" 
+                                rows="5" 
+                                value={newTitle.description || ""} 
+                                onChange={setUpdate}
+                                />
+                        </div> */}
+                        
+                        <button data-text="Submit" onClick={submitChanges}>Submit</button>
+                        <p style={{textAlign: "center"}}>--OR--</p>
+                        <button data-text="Delete" onClick={remove}>Delete</button>
+                    </div>
+                </CSSTransition>
+            </div>
     </div>
     )       
 }
