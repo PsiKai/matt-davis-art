@@ -101,7 +101,7 @@
   position: absolute;
   width: 50%;
   height: 100%;
-  outline: 2px solid var(--dark);
+  outline: 1px solid var(--dark);
   bottom: 0;
   transform: translateX(-50%);
   transition: transform 200ms ease;
