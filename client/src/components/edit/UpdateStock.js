@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react'
-import AppContext from "../context/AppContext"
-import AlertContext from "../context/alertContext"
+import AppContext from "../../context/AppContext"
+import AlertContext from "../../context/alertContext"
 import CircularProgress from "@material-ui/core/CircularProgress"
 import axios from "axios"
 
