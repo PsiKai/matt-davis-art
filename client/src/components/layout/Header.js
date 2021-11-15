@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState} from 'react';
-import '../styles/navbar.css'
+import '../../styles/navbar.css'
 import {Link} from 'react-router-dom';
-import AppContext from "../context/AppContext";
-import AuthContext from "../context/authContext";
+import AppContext from "../../context/AppContext";
+import AuthContext from "../../context/authContext";
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Badge from '@material-ui/core/Badge';

@@ -1,8 +1,8 @@
 import React, {useContext, useState, useEffect, useRef} from 'react'
 import "../styles/edit.css"
-import PageHeader from '../components/PageHeader';
+import PageHeader from '../components/layout/PageHeader';
 import AuthContext from "../context/authContext"
-import Alerts from "../components/Alerts"
+import Alerts from "../components/layout/Alerts"
 import AlertContext from "../context/alertContext";
 
 import VisibilityIcon from '@material-ui/icons/Visibility';

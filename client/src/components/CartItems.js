@@ -1,10 +1,10 @@
 import React, {Fragment, useContext, useEffect, useState} from 'react'
 import CartItem from './CartItem'
-import Modal from "../components/Modal"
+import Modal from "./modals/Modal"
 import ShippingForm from "./ShippingForm.js"
 import AppContext from "../context/AppContext";
 import AlertContext from "../context/alertContext";
-import Alerts  from "../components/Alerts"
+import Alerts  from "../components/layout/Alerts"
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 const CartItems = () => {

@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect} from 'react'
 import AppContext from '../context/AppContext'
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
-import ImgModal from './ImgModal';
+import ImgModal from './modals/ImgModal';
 
 const CartItem = ({quantity, title, src, id, original, size, price}) => {
     const appContext = useContext(AppContext)

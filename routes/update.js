@@ -15,20 +15,24 @@ var galleryModel = require("../models/gallery")
 var printModel = require("../models/prints")
 
 router.post("/stock", (req, res) => {
-    req.body.forEach(item => {
-        printModel.updateOne({"title": item.title}, {"$set": {"stock": item.stock}}, (err) => {
+    console.log(req.body);
+    const { old: { _id }, new: { title, price, original, dimensions } } = req.body
+    printModel.findOneAndUpdate(
+        {"_id": _id}, 
+        {"$set": {
+            "title": title,
+            "price": price,
+            "original": original,
+            "dimensions": JSON.stringify(dimensions)
+        }},
+        (err) => {
             if (err) {
                 console.log(err);
-                res.json({msg: "Error updating stock"})
-                
+                res.json({msg: "There was an error updating this artwork"})
             } else {
-                console.log("Item Updated")
-                
+                res.json({msg: `Successfully updated artwork!`})
             }
         })
-    })
-    // res.send("Items Successfully Updated");
-    res.json({msg: `Updated stock amounts`})
 })
 
 

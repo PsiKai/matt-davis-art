@@ -275,7 +275,7 @@ button {
   font-size: 1.2rem;
   font-family: inherit;
   display: block;
-  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 4px 6px 0px rgb(0 0 0 / 40%);
   transition: all 200ms ease;
   position: relative;
   border: 2px outset var(--dark);
@@ -284,7 +284,7 @@ button {
 
 button:hover,
 button:focus {
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 5px 8px 2px rgb(0 0 0 / 30%);
   width: 200px;
 }
 

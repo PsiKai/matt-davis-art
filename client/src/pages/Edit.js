@@ -7,12 +7,13 @@ import "../styles/edit.css"
 import AppContext from "../context/AppContext"
 import AuthContext from "../context/authContext"
 
-import UploadGallery from '../components/UploadGallery'
-import UpdateStock from '../components/UpdateStock'
-import UploadPrint from "../components/UploadPrint"
-import EditGallery from "../components/EditGallery"
-import PageHeader from '../components/PageHeader'
-import Alerts from "../components/Alerts"
+import UploadGallery from '../components/edit/UploadGallery'
+import UpdateStock from '../components/edit/UpdateStock'
+import UploadPrint from "../components/edit/UploadPrint"
+import EditGallery from "../components/edit/EditGallery"
+
+import PageHeader from '../components/layout/PageHeader'
+import Alerts from "../components/layout/Alerts"
 
 import { Fab } from '@material-ui/core';
 import {CSSTransition, TransitionGroup} from "react-transition-group";

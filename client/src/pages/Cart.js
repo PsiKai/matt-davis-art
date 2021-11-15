@@ -5,7 +5,7 @@ import AppContext from "../context/AppContext";
 import CartItems from "../components/CartItems";
 import { CircularProgress } from '@material-ui/core';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import PageHeader from '../components/PageHeader';
+import PageHeader from '../components/layout/PageHeader';
 
 const Cart = (props) => {
     const appContext = useContext(AppContext);

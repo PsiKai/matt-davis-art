@@ -38,18 +38,20 @@ router.post("/gallery", (req, res) => {
 })
 
 router.post("/prints", (req, res) => {
-    let promises = []
-    req.body.forEach(image => {
-        var name = image.title.replace(/ /g, "-").toLowerCase() + "." + image.type
-        var google = storage.bucket(printBucket).file(name).delete()
-        var mongo = printModel.deleteOne({title: image.title}).exec()
-        promises.push(google, mongo)
-    })
+    const { src, title, _id } = req.body
+    const img = src.split("prints/")[1]
 
-    Promise.all([...promises])
-        .then(console.log("deleting"))
-        .catch(err => res.json({msg: err}))
-        .finally(res.json({msg: "Artwork deleted"}))
+    let promises = [
+        storage.bucket(printBucket).file(img).delete(),
+        printModel.deleteOne({_id: _id}).exec()
+    ]
+
+    Promise.all(promises)
+        .then(res.json({msg: `${title} was deleted`}))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({msg: "Error deleting artwork"})
+        })
 })
 
 module.exports = router

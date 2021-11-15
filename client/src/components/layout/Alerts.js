@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import AlertContext from "../context/alertContext"
+import AlertContext from "../../context/alertContext"
 import {CSSTransition, TransitionGroup} from "react-transition-group"
 
 const Alerts = () => {
