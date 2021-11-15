@@ -15,13 +15,12 @@ const UpdateStock = () => {
     const [artEdit, setArtEdit] = useState({})
     const [newTitle, setNewTitle] = useState({})
     const [edit, setEdit] = useState(false)
-    // const [dimensions, setDimensions] = useState({})
 
     const updateForm = useRef()
 
-    useEffect(() => {
-        setNewTitle(artEdit)
-    }, [artEdit])
+    // useEffect(() => {
+    //     setNewTitle(artEdit)
+    // }, [artEdit])
 
     console.log(newTitle.dimensions);
 
@@ -39,17 +38,10 @@ const UpdateStock = () => {
         })
     }
 
-    // const updateDimensions = (e) => {
-    //     setDimensions({
-    //         ...dimensions,
-    //         [e.target.name]: e.target.value
-    //     })
-    // }
-
     const editArtwork = (e) => {
         var pic = e.target
-        setArtEdit({
-            key: pic.id,
+        setNewTitle({
+            _id: pic.id,
             src: pic.src,
             title: pic.alt,
             alt: pic.alt,
@@ -61,36 +53,26 @@ const UpdateStock = () => {
                 width: +pic.dataset.width
             }
         })
-        // setDimensions({
-        //     width: pic.dataset.width,
-        //     height: pic.dataset.height
-        // })
+        setArtEdit({
+            _id: pic.id,
+            src: pic.src
+        })
         setEdit(true)
         // const y = updateForm.current.getBoundingClientRect().top - 100
         // window.scrollBy({top: y, behavior: "smooth"})
     }
 
-    // const [stock, setStock] = useState([])
-    // const [checked, setChecked] = useState([])
-
     const submitChanges = async () => {
         const data = {
-            old: {
-                title: artEdit.title,
-                type: artEdit.type
-            },
-            new: {
-                title: newTitle.title,
-                medium: newTitle.medium,
-                description: newTitle.description
-            }
+            old: artEdit,
+            new: newTitle
         }
-        const res = await axios.post("/update/gallery", data)
+        const res = await axios.post("/update/stock", data)
         setAlert(res.data.msg, "lightgrey")
         refreshArt() 
+        setEdit(false)
         setNewTitle({})
         setArtEdit({})
-        setEdit(false)
     }
 
     const remove = async () => {
@@ -239,16 +221,16 @@ const UpdateStock = () => {
         <div className="update-gallery--grid" ref={updateForm}>
                 <TransitionGroup className="update-gallery--wrapper">
                     <CSSTransition
-                        key={artEdit.key}
+                        key={artEdit._id}
                         timeout={400}
                         classNames="fadein"
                     >          
                         <div className="update-gallery--form">
                             <img 
                                 className="edit-image"
-                                name={artEdit && artEdit.name}
-                                alt={artEdit && artEdit.alt}
-                                src={artEdit && artEdit.src}>
+                                name={newTitle && newTitle.name}
+                                alt={newTitle && newTitle.alt}
+                                src={newTitle && newTitle.src}>
                             </img>
                         </div>
                     </CSSTransition>
@@ -324,7 +306,7 @@ const UpdateStock = () => {
                                 max="100.0" 
                                 step="0.5" 
                                 onChange={setUpdate}
-                                value={newTitle && newTitle.dimensions.width}
+                                value={newTitle.dimensions && newTitle.dimensions.width}
                                 inputMode="decimal"
                                 />
                         </div>
@@ -338,7 +320,7 @@ const UpdateStock = () => {
                                 max="100.0" 
                                 step="0.5" 
                                 onChange={setUpdate}
-                                value={newTitle && newTitle.dimensions.height}
+                                value={newTitle.dimensions && newTitle.dimensions.height}
                                 inputMode="decimal"
                                 />
                         </div>
