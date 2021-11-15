@@ -1,4 +1,4 @@
-import React, {useContext, useState, useRef, useEffect} from 'react'
+import React, { useContext, useState, useRef } from 'react'
 import AppContext from "../../context/AppContext"
 import AlertContext from "../../context/alertContext"
 import CircularProgress from "@material-ui/core/CircularProgress"
@@ -18,18 +18,11 @@ const UpdateStock = () => {
 
     const updateForm = useRef()
 
-    // useEffect(() => {
-    //     setNewTitle(artEdit)
-    // }, [artEdit])
-
-    console.log(newTitle.dimensions);
-
     const setUpdate = (e) => {
-        console.log(e.target.value);
         if (e.target.name === "width" || e.target.name === "height") {
             setNewTitle({
                 ...newTitle, 
-                ["dimensions"]: {...newTitle["dimensions"], [e.target.name]: +e.target.value}})
+                "dimensions": {...newTitle["dimensions"], [e.target.name]: +e.target.value}})
             return
         }
         setNewTitle( {
@@ -67,12 +60,16 @@ const UpdateStock = () => {
             old: artEdit,
             new: newTitle
         }
-        const res = await axios.post("/update/stock", data)
-        setAlert(res.data.msg, "lightgrey")
-        refreshArt() 
-        setEdit(false)
-        setNewTitle({})
-        setArtEdit({})
+        try {
+            const res = await axios.post("/update/stock", data)
+            setAlert(res.data.msg, "lightgrey")
+            setNewTitle({})
+            setArtEdit({})
+            refreshArt() 
+            setEdit(false)
+        } catch (error) {
+            setAlert(error.response.msg, "lightpink")
+        }
     }
 
     const remove = async () => {
@@ -88,81 +85,11 @@ const UpdateStock = () => {
     }
 
     const makeOriginal = (e) => {
-        // console.log(e.target.value);
         e.target.name === "original" ? 
             setNewTitle({...newTitle, original: true}) 
             : 
             setNewTitle({...newTitle, original: false})
     }
-
-    // useEffect(() => {
-    //     prints && prints.forEach(print => {
-    //         setStock(stock => [
-    //             ...stock,
-    //             {title: print.title,
-    //             stock: print.stock}
-    //         ]) 
-    //     })
-    // }, [prints])
-
-    //changes state of stock on input change
-    // const update = (e) => {
-    //     var newStock = [...stock]
-    //     var title = e.target.name
-    //     var stockItem = e.target.id
-    //     var newValue = e.target.value
-        
-    //     newStock.filter(item => {
-    //         if (item.title === title) {
-    //             return item.stock = {
-    //                 ...item.stock,
-    //                 [stockItem]: newValue
-    //             }
-    //         } return item
-    //     })
-    //     setStock(newStock)  
-    // }
-
-    //sends stock changes to database
-    // const sendChanges = async () => {
-    //     const res = await axios.post("/update/stock", stock);
-    //     setAlert(res.data.msg, "lightgreen")
-    //     refreshArt();
-    // }   
-    
-    // saves checked prints in state 
-    // const stageDelete = (e) => {
-    //     if (e.target.checked) {
-    //         setChecked([...checked, {
-    //             title: e.target.value,
-    //             type: e.target.name
-    //             }
-    //         ])
-    //     } else {
-    //         var items = [...checked]
-    //         const newArray = items.filter(item => {
-    //             return item.title !== e.target.value
-    //         })
-    //         setChecked(newArray)
-    //     }
-    // }
-    
-    // deletes selected prints from database 
-    // const deletePrints = async () => {
-    //     try {
-    //         const res = await axios.post("/delete/prints", checked)
-    //         setAlert(res.data.msg, "var(--medium)")
-            
-    //     } catch (err) {
-    //         setAlert(err.response.msg, "var(--medium)")
-    //     }
-    //     var checkboxes = document.querySelectorAll("input[type='checkbox']");
-    //         checkboxes.forEach(box => {
-    //             if (box.checked) {box.checked = false}
-    //         })
-    //     setChecked([])
-    //     refreshArt();
-    // }
     
     return (
         <div className="edit-gallery">
@@ -218,7 +145,7 @@ const UpdateStock = () => {
                     } else return null
                 })}
             </div>
-        <div className="update-gallery--grid" ref={updateForm}>
+            <div className="update-gallery--grid" ref={updateForm}>
                 <TransitionGroup className="update-gallery--wrapper">
                     <CSSTransition
                         key={artEdit._id}
@@ -253,103 +180,84 @@ const UpdateStock = () => {
                                 onChange={setUpdate} />
                         </div>
 
-                        {/* <div className="input__wrapper">
-                            <label htmlFor="update-medium">New Medium</label>
-                            <input 
-                                id="update-medium" 
-                                name="medium"
-                                type="text" 
-                                value={newTitle.medium || ""}
-                                onChange={setUpdate} />
-                        </div> */}
                         <div className="upload-prints--stock">
-                        <div className={newTitle.original ? "radio-group original" : "radio-group"}>
-                        <label 
-                            className="input__wrapper" 
-                            style={!newTitle.original ? {opacity: "1"}: {}}
-                        >
-                            <input 
-                                type="radio" 
-                                name="print"
-                                // value={false} 
-                                onChange={makeOriginal}
-                                checked={newTitle.original}
-                                onClick={makeOriginal}
-                            />
-                            <span>Print</span>
-                        </label>
-                        <label 
-                            className="input__wrapper" 
-                            style={artEdit.original ? {opacity: "1"} : {}}
-                        >
-                            <input 
-                                type="radio" 
-                                name="original"
-                                // value={true}
-                                checked={newTitle.original} 
-                                onChange={makeOriginal}
-                                onClick={makeOriginal}
-                            />
-                            <span>Original</span>
-                        </label>
-                    </div>
-                        <div className="upload-prints--dimensions">
-                        
-                        <div className="input__wrapper">
-                            <label htmlFor="width">Width:</label>
-                        
-                            <input 
-                                id="width" 
-                                name="width"
-                                type="number" 
-                                min="0.0" 
-                                max="100.0" 
-                                step="0.5" 
-                                onChange={setUpdate}
-                                value={newTitle.dimensions && newTitle.dimensions.width}
-                                inputMode="decimal"
-                                />
+                            <div className={newTitle.original ? "radio-group original" : "radio-group"}>
+                                <label 
+                                    className="input__wrapper" 
+                                    style={!newTitle.original ? {opacity: "1"}: {}}
+                                >
+                                    <input 
+                                        type="radio" 
+                                        name="print"
+                                        onChange={() => {}}
+                                        checked={newTitle.original || true}
+                                        onClick={makeOriginal}
+                                    />
+                                    <span>Print</span>
+                                </label>
+
+                                <label 
+                                    className="input__wrapper" 
+                                    style={artEdit.original ? {opacity: "1"} : {}}
+                                >
+                                    <input 
+                                        type="radio" 
+                                        name="original"
+                                        checked={newTitle.original || false} 
+                                        onChange={() => {}}
+                                        onClick={makeOriginal}
+                                    />
+                                    <span>Original</span>
+                                </label>
+                            </div>
+
+                            <div className="upload-prints--dimensions">
+                                <div className="input__wrapper">
+                                    <label htmlFor="width">Width:</label>
+                                    <input 
+                                        id="width" 
+                                        name="width"
+                                        type="number" 
+                                        min="0.0" 
+                                        max="100.0" 
+                                        step="0.5" 
+                                        onChange={setUpdate}
+                                        value={newTitle.dimensions ? newTitle.dimensions.width : 0}
+                                        inputMode="decimal"
+                                    />
+                                </div>
+
+                                <div className="input__wrapper">
+                                    <label htmlFor="height">Height:</label>
+                                    <input 
+                                        id="height"
+                                        name="height" 
+                                        type="number" 
+                                        min="0.0" 
+                                        max="100.0" 
+                                        step="0.5" 
+                                        onChange={setUpdate}
+                                        value={newTitle.dimensions ? newTitle.dimensions.height : 0}
+                                        inputMode="decimal"
+                                    />
+                                </div>
+
+                                <div className="price input__wrapper">
+                                    <label htmlFor="price">Price: $</label>
+                                    <input 
+                                        id="price" 
+                                        type="number" 
+                                        min="0.00" 
+                                        max="10000.00" 
+                                        step="0.01" 
+                                        name="price"
+                                        onChange={setUpdate}
+                                        value={newTitle.price || 0}
+                                        inputMode="decimal"
+                                        />
+                                </div>
+                            </div>
                         </div>
-                        <div className="input__wrapper">
-                            <label htmlFor="height">Height:</label>
-                            <input 
-                                id="height"
-                                name="height" 
-                                type="number" 
-                                min="0.0" 
-                                max="100.0" 
-                                step="0.5" 
-                                onChange={setUpdate}
-                                value={newTitle.dimensions && newTitle.dimensions.height}
-                                inputMode="decimal"
-                                />
-                        </div>
-                        <div className="price input__wrapper">
-                            <label htmlFor="price">Price: $</label>
-                            <input 
-                                id="price" 
-                                type="number" 
-                                min="0.00" 
-                                max="10000.00" 
-                                step="0.01" 
-                                name="price"
-                                onChange={setUpdate}
-                                value={newTitle.price}
-                                inputMode="decimal"
-                                />
-                        </div>
-                        </div>
-                        </div>
-                        {/* <div className="input__wrapper">
-                            <label htmlFor="update-description">New Description</label>
-                            <textarea 
-                                id="update-description"
-                                name="description" 
-                                rows="5" 
-                                value={newTitle.description || ""} 
-                                onChange={setUpdate}
-                                />
-                        </div> */}
                         
                         <button data-text="Submit" onClick={submitChanges}>Submit</button>
                         <p style={{textAlign: "center"}}>--OR--</p>
@@ -357,7 +265,7 @@ const UpdateStock = () => {
                     </div>
                 </CSSTransition>
             </div>
-    </div>
+        </div>
     )       
 }
 
