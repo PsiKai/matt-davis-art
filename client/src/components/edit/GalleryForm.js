@@ -1,18 +1,21 @@
 import React from 'react'
 
 const GalleryForm = ({form: { title, medium, description}, formUpdate, imgUpdate, upload, file }) => {
+
     return (
         <form onSubmit={upload}>
-                <label className={file ? "file-input__label small-label" : "file-input__label"}>
-                    <span>Choose A File</span>
-                    <span className="file-input__name">{file.name}</span>
-                    <input 
-                        id="gallery-image" 
-                        type="file" 
-                        onChange={imgUpdate}
-                        required />
-                </label>
-                <div className="input__wrapper">
+                
+            <label className={file ? "file-input__label small-label" : "file-input__label"}>
+                <span>Choose A File</span>
+                <span className="file-input__name">{file.name}</span>
+                <input 
+                    id="gallery-image" 
+                    type="file" 
+                    onChange={imgUpdate}
+                    required />
+            </label>
+
+            <div className="input__wrapper">
                 <label htmlFor="gallery-title">Title</label>
                 <input 
                     id="gallery-title" 
@@ -22,9 +25,9 @@ const GalleryForm = ({form: { title, medium, description}, formUpdate, imgUpdate
                     value={title}
                     required>
                 </input>
-                </div>
+            </div>
 
-                <div className="input__wrapper">
+            <div className="input__wrapper">
                 <label htmlFor="gallery-medium">Medium</label>
                 <input 
                     id="gallery-medium" 
@@ -34,9 +37,9 @@ const GalleryForm = ({form: { title, medium, description}, formUpdate, imgUpdate
                     value={medium}
                     required>
                 </input>
-                </div>
+            </div>
 
-                <div className="input__wrapper">
+            <div className="input__wrapper">
                 <label htmlFor="title">Description</label>
                 <textarea 
                     id="description" 
@@ -47,11 +50,11 @@ const GalleryForm = ({form: { title, medium, description}, formUpdate, imgUpdate
                     value={description}
                     required>
                 </textarea>
-                </div>
+            </div>
+        
+            <button data-text="Submit" type="submit">Submit</button>
             
-                <button data-text="Submit" type="submit">Submit</button>
-                
-            </form>
+        </form>
     )
 }
 
