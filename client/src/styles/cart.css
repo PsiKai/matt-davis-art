@@ -322,7 +322,7 @@
   transform: translate(-50%, -50%);
   background: var(--white) url(../images/brushed-alum.webp);
   width: 40rem;
-  padding: 2rem;
+  padding: 2rem 2rem 0;
   text-align: center;
   border-radius: 8px;
 }
@@ -489,12 +489,9 @@
   }
 
   .cart-modal {
-    top: 55px;
-    bottom: 1%;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, -50%);
     width: 95%;
-    padding: 1rem 0.5rem 0.5rem;
-    /* max-height: 85vh; */
+    padding: 1rem 0.5rem 0;
   }
 
   .close-modal {
