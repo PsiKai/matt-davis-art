@@ -491,6 +491,10 @@
     border: 1px solid var(--white);
   }
 
+  .update-gallery {
+    justify-content: flex-start;
+  }
+
   @media (hover: none) {
     .update-preview:hover {
       transform: none;

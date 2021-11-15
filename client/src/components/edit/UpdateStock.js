@@ -52,8 +52,8 @@ const UpdateStock = () => {
             title: pic.alt
         })
         setEdit(true)
-        // const y = updateForm.current.getBoundingClientRect().top - 100
-        // window.scrollBy({top: y, behavior: "smooth"})
+        const y = updateForm.current.getBoundingClientRect().top - 100
+        window.scrollBy({top: y, behavior: "smooth"})
     }
 
     const submitChanges = async () => {
