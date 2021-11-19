@@ -147,13 +147,13 @@
 }
 
 .print-modal {
+  --transform: translate(-50%, -45%);
   background: url(../images/brushed-alum.webp) var(--white);
   opacity: 1;
   border-radius: 8px;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -45%);
   padding: 2rem;
   text-align: center;
   width: 35rem;
@@ -161,6 +161,7 @@
   box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.5);
   max-height: 85%;
   overflow-y: auto;
+  transition: transform 200ms ease-in-out;
 }
 
 .print-modal h5 {
@@ -285,8 +286,9 @@
 
 @media (max-height: 950px) {
   .print-modal {
+    --transform: translate(-50%, 0);
     top: 88px;
-    transform: translate(-50%, 0);
+    /* transform: translate(-50%, 0); */
   }
 
   @media (max-width: 450px) {

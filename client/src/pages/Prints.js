@@ -129,61 +129,53 @@ const Prints = () => {
                 }
                 <CircularProgress style={{opacity: loaded ? "0" : "1"}}/>
             </div>
-            <TransitionGroup>
-            {modalOpen && 
             <CSSTransition
                 in={modalOpen} 
                 classNames="fadein" 
-                timeout={200}
-                unmountOnExit={true}
+                timeout={400}
+                unmountOnExit
             >
-            <div className="backdrop" onClick={hideModal}>
-                <CSSTransition
-                    in={modalOpen}
-                    timeout={400}
-                    classNames="move-down"
-                >
-                <div className="print-modal">
-                    <div className="close-modal" onClick={hideModal}><i className="fas fa-times fa-2x"></i></div>
-                   
-                    <h2>{img.title}</h2>
-                    <img src={img.src}
-                        alt={img.title}
-                        name={img.name}>
-                    </img>
-                    {img.original ?
-                            <h5>This is a one of a kind piece</h5> :
+                <div className="backdrop" onClick={hideModal}>
+                    <div className="print-modal">
+                        <div className="close-modal" onClick={hideModal}><i className="fas fa-times fa-2x"></i></div>
+                    
+                        <h2>{img.title}</h2>
+                        <img src={img.src}
+                            alt={img.title}
+                            name={img.name}>
+                        </img>
+                        {img.original ?
+                            <h5>This is a one of a kind piece</h5> 
+                            :
                             <h5>All prints are PREORDER and will ship within 4 weeks</h5>}
-                    <div className="print-modal__flex">
-                        <div>
-                            <h2>${img.price}</h2>
-                        </div>
-                        {!img.original ?
+                        <div className="print-modal__flex">
                             <div>
-                                <label htmlFor="amount">Number of Prints: </label>
-                                <input 
-                                    id="amount" 
-                                    type="number" 
-                                    inputMode="numeric" 
-                                    className="quantity" 
-                                    min="1" 
-                                    value={quantity}
-                                    onChange={updateQuantity}
-                                    />
-                            </div> :
-                            <div>
-                                <p>{img.size.width}" x {img.size.height}"</p>
+                                <h2>${img.price}</h2>
                             </div>
-                        }
-                    </div>
+                            {!img.original ?
+                                <div>
+                                    <label htmlFor="amount">Number of Prints: </label>
+                                    <input 
+                                        id="amount" 
+                                        type="number" 
+                                        inputMode="numeric" 
+                                        className="quantity" 
+                                        min="1" 
+                                        value={quantity}
+                                        onChange={updateQuantity}
+                                        />
+                                </div> 
+                                :
+                                <div>
+                                    <p>{img.size.width}" x {img.size.height}"</p>
+                                </div>
+                            }
+                        </div>
 
-                    <button data-text="Add To Cart" onClick={addToCart}>Add To Cart</button>
+                        <button data-text="Add To Cart" onClick={addToCart}>Add To Cart</button>
+                    </div>
                 </div>
-                </CSSTransition>
-            </div>
             </CSSTransition>
-            }
-            </TransitionGroup>
         </div>
     )
 }
