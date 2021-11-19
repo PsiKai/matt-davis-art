@@ -56,8 +56,6 @@
   width: 195px;
   object-fit: cover;
   position: relative;
-  /* transition: opacity 600ms ease; */
-  /* z-index: 2; */
 }
 
 .print-item > p,
@@ -92,8 +90,6 @@
   background: var(--white);
   display: inline-block;
   text-align: center;
-  /* margin: 1rem; */
-  /* padding: 0 0.5rem 0.5rem; */
   padding: 0;
   overflow: hidden;
   border-radius: 0.5rem;
@@ -253,16 +249,20 @@
 @media (max-width: 450px) {
   .prints-flexbox {
     justify-content: space-evenly;
-    min-height: 244px;
+    min-height: 200px;
+  }
+
+  .print-item {
+    height: 200px;
   }
 
   .print-item img {
-    height: 115px;
-    width: 135px;
+    height: 200px;
+    width: 150px;
   }
 
-  .sold-out h2 {
-    transform: translateY(130px);
+  .sold-out h3 {
+    transform: translateY(110px);
   }
 
   .print-orders {
