@@ -154,7 +154,7 @@
 
 .sold-out h3 {
   background: var(--dark);
-  transform: translateY(180px);
+  transform: translateY(170px);
   border-top: 2px outset var(--white);
   border-bottom: 2px solid var(--white);
 }
