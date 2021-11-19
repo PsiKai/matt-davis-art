@@ -234,7 +234,7 @@
 
 .print-modal > h2 {
   line-height: 1;
-  margin: 0 0 0.5rem;
+  margin: 0 2rem 0.5rem;
 }
 
 .print-modal__flex h2,
@@ -309,7 +309,7 @@
   }
 
   .print-modal {
-    padding: 2rem 1rem;
+    padding: 1rem;
   }
 
   .print-modal img {
