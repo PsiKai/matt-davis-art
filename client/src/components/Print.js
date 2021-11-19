@@ -50,8 +50,8 @@ const Print = (props) => {
             >
             </img>
             <p id="cost">${price}</p>
-            {isZero && <div className="sold-out"><h2>Sold Out</h2></div>}
-            {inCart && <div className="sold-out"><h2>Already in Cart</h2></div>}
+            {isZero && <div className="sold-out"><h3>Sold Out</h3></div>}
+            {inCart && <div className="sold-out"><h3>Already in Cart</h3></div>}
         </div>
     )
 }
