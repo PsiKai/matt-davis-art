@@ -1,6 +1,11 @@
 import React, {useEffect, useState} from 'react'
 
-const Print = ({src, open, id, title, name, sku, price, sold, size, incrementLoaded, loaded}) => {
+const Print = (props) => {
+    // Function Props
+    const { incrementLoaded, open } = props
+    // Variable Props
+    const { src, title, name, sku, price, sold, size, original, loaded } = props
+
     const [isZero, setIsZero] = useState(false)
     const [inCart, setInCart] = useState(false)
 
@@ -25,7 +30,10 @@ const Print = ({src, open, id, title, name, sku, price, sold, size, incrementLoa
     // var bytes = Buffer.from(src.data)
 
     const openUp = (e) => {
-        !isZero && !inCart && open(e.target.parentNode.children)
+        // !isZero && !inCart && open(e.target.parentNode.children)
+        !isZero && !inCart && open({
+            src, title, size, sku, price, original
+        })
     }
  
     return (
@@ -39,8 +47,8 @@ const Print = ({src, open, id, title, name, sku, price, sold, size, incrementLoa
                 src={src}
                 // {`data:${src.contentType};base64, ${bytes.toString('base64')}`}
                 alt={name} 
-                name={sku}
-                id={id}
+                // name={sku}
+                // id={id}
                 data-size={size}
                 onLoad={() => incrementLoaded()}
             >

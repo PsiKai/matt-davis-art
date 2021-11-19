@@ -24,19 +24,23 @@ const Prints = () => {
     }, [])
 
     const openModal = (item) => {
-        if (item[0].classList.contains("print-item")) {
-            return null;
-        } 
-        var price = prints[item[1].id].price
-        var original = prints[item[1].id].original
-        setImg({
-            src: item[1].src,
-            title: item[0].innerText,
-            price: price,
-            original: original,
-            size: JSON.parse(item[1].dataset.size) || item[1].dataset.size,
-            name: item[1].name
-        })
+        // const { src, title, price, original, sku, size } = item
+        // if (item[0].classList.contains("print-item")) {
+        //     return null;
+        // } 
+        // var price = prints[item[1].id].price
+        // var original = prints[item[1].id].original
+        setImg(item)
+        // setImg({ src, title, price, original, size, sku })
+        // setImg({
+        //     src: item[1].src,
+        //     title: item[0].innerText,
+        //     price: price,
+        //     original: original,
+        //     size: JSON.parse(item[1].dataset.size) || item[1].dataset.size,
+        //     name: item[1].name
+        // })
+        console.log(item);
         setModalOpen(true)
     }
 
@@ -56,8 +60,10 @@ const Prints = () => {
     const addToCart = () => {
         const item = {
             quantity: quantity,
-            id: img.name
+            // id: img.name
+            id: img.sku
         }
+        console.log(item);
         item.quantity > 0 && addItem(item)
         
         setModalOpen(false)
@@ -94,14 +100,15 @@ const Prints = () => {
                         if (print.original === false) {
                         return <Print
                             key={index}
-                            id={index}
+                            // id={index}
                             src={print.img}
                             price={print.price}
                             title={print.title}
                             sku={print._id}
                             sold={print.soldOut}
                             open={openModal}
-                            size={print.dimensions}
+                            size={JSON.parse(print.dimensions)}
+                            original={print.original}
                             incrementLoaded={incrementLoaded}
                             loaded={loaded}
                             /> 
@@ -123,14 +130,15 @@ const Prints = () => {
                         if (print.original === true) {
                         return <Print
                             key={index}
-                            id={index}
+                            // id={index}
                             src={print.img}
                             price={print.price}
                             title={print.title}
                             sku={print._id}
                             sold={print.soldOut}
                             open={openModal}
-                            size={print.dimensions}
+                            original={print.original}
+                            size={JSON.parse(print.dimensions)}
                             incrementLoaded={incrementLoaded}
                             loaded={loaded}
                             /> 
