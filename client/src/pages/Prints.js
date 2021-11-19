@@ -38,7 +38,8 @@ const Prints = () => {
     }
 
     const updateQuantity = (e) => {
-        setQuantity(e.target.value)
+        const { value } = e.target
+        setQuantity(value.includes(".") ? value.split(".")[0] : value)
     }
 
     const addToCart = () => {
@@ -160,7 +161,9 @@ const Prints = () => {
                                         type="number" 
                                         inputMode="numeric" 
                                         className="quantity" 
-                                        min="1" 
+                                        step="1"
+                                        min="1"
+                                        pattern="[0-9]"
                                         value={quantity}
                                         onChange={updateQuantity}
                                         />

@@ -4,7 +4,7 @@ const Print = (props) => {
     // Function Props
     const { incrementLoaded, open } = props
     // Variable Props
-    const { src, title, name, sku, price, sold, size, original, loaded } = props
+    const { src, title, sku, price, sold, size, original, loaded } = props
 
     const [isZero, setIsZero] = useState(false)
     const [inCart, setInCart] = useState(false)
