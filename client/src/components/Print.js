@@ -30,7 +30,6 @@ const Print = (props) => {
     // var bytes = Buffer.from(src.data)
 
     const openUp = (e) => {
-        // !isZero && !inCart && open(e.target.parentNode.children)
         !isZero && !inCart && open({
             src, title, size, sku, price, original
         })
@@ -46,10 +45,7 @@ const Print = (props) => {
             <img 
                 src={src}
                 // {`data:${src.contentType};base64, ${bytes.toString('base64')}`}
-                alt={name} 
-                // name={sku}
-                // id={id}
-                data-size={size}
+                alt={title}
                 onLoad={() => incrementLoaded()}
             >
             </img>
