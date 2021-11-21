@@ -139,7 +139,6 @@ const Prints = () => {
                 <div className="backdrop" onClick={hideModal}>
                     <div className="print-modal">
                         <div className="close-modal" onClick={hideModal}><i className="fas fa-times fa-2x"></i></div>
-                    
                         <h2>{img.title}</h2>
                         <img src={img.src}
                             alt={img.title}
@@ -154,16 +153,14 @@ const Prints = () => {
                                 <h2>${img.price}</h2>
                             </div>
                             {!img.original ?
-                                <div>
+                                <div className="input__wrapper">
                                     <label htmlFor="amount">Number of Prints: </label>
                                     <input 
                                         id="amount" 
                                         type="number" 
                                         inputMode="numeric" 
-                                        className="quantity" 
-                                        step="1"
+                                        className="quantity"
                                         min="1"
-                                        pattern="[0-9]"
                                         value={quantity}
                                         onChange={updateQuantity}
                                         />
