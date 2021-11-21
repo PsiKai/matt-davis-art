@@ -1,6 +1,11 @@
 import React, {useEffect, useState} from 'react'
 
-const Print = ({src, open, id, title, name, sku, price, sold, size, incrementLoaded, loaded}) => {
+const Print = (props) => {
+    // Function Props
+    const { incrementLoaded, open } = props
+    // Variable Props
+    const { src, title, sku, price, sold, size, original, loaded } = props
+
     const [isZero, setIsZero] = useState(false)
     const [inCart, setInCart] = useState(false)
 
@@ -13,7 +18,7 @@ const Print = ({src, open, id, title, name, sku, price, sold, size, incrementLoa
 
     useEffect(() => {
         savedCart && savedCart.find(item => {
-            if(item.original && item.title === title) {
+            if(item.original && item._id === sku) {
                 setInCart(true)
             }
             return null
@@ -25,7 +30,9 @@ const Print = ({src, open, id, title, name, sku, price, sold, size, incrementLoa
     // var bytes = Buffer.from(src.data)
 
     const openUp = (e) => {
-        !isZero && !inCart && open(e.target.parentNode.children)
+        !isZero && !inCart && open({
+            src, title, size, sku, price, original
+        })
     }
  
     return (
@@ -38,16 +45,13 @@ const Print = ({src, open, id, title, name, sku, price, sold, size, incrementLoa
             <img 
                 src={src}
                 // {`data:${src.contentType};base64, ${bytes.toString('base64')}`}
-                alt={name} 
-                name={sku}
-                id={id}
-                data-size={size}
+                alt={title}
                 onLoad={() => incrementLoaded()}
             >
             </img>
             <p id="cost">${price}</p>
-            {isZero && <div className="sold-out"><h2>Sold Out</h2></div>}
-            {inCart && <div className="sold-out"><h2>Already in Cart</h2></div>}
+            {isZero && <div className="sold-out"><h3>Sold Out</h3></div>}
+            {inCart && <div className="sold-out"><h3>Already in Cart</h3></div>}
         </div>
     )
 }

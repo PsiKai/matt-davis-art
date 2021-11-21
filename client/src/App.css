@@ -515,6 +515,10 @@ h2 {
     margin-top: 58px;
   }
 
+  .page-header__wrapper {
+    margin-bottom: 0.5rem;
+  }
+
   .page-header {
     font-size: 1.4rem;
     line-height: 31px;
