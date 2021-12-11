@@ -1,5 +1,6 @@
 const express = require("express")
 const router = express.Router();
+const mongoose = require("mongoose")
 
 var galleryModel = require("../models/gallery")
 var printModel = require("../models/prints")
@@ -44,6 +45,19 @@ router.get("/refresh", (req, res) => {
                 error: "Couldn't get art"
             })
         })
+})
+
+
+router.post("/availability", async (req, res) => {
+    const artIds = req.body.map(art => mongoose.Types.ObjectId(art._id))
+    const foundArt = await printModel.find({ _id: { $in: artIds } })
+    const availableArt = req.body.reduce((avail, art) => {
+        const available = foundArt.find(found => art._id == found._id)
+        if (available) avail.push(art)
+        return avail
+    }, [])
+    
+    res.json({availableArt})
 })
 
 module.exports = router;
