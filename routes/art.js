@@ -33,8 +33,8 @@ router.get("/", (req, res) => {
 router.get("/refresh", (req, res) => {
     console.log("refreshing");
     const promise1 = galleryModel.find({}).exec()
-        const promise2 = printModel.find({}).exec()
-        Promise.all([promise1, promise2])
+    const promise2 = printModel.find({}).exec()
+    Promise.all([promise1, promise2])
         .then(([result1, result2]) => {
             // console.log(result1, result2);
             art = {gallery: [...result1], prints: [...result2]}
@@ -46,7 +46,6 @@ router.get("/refresh", (req, res) => {
             })
         })
 })
-
 
 router.post("/availability", async (req, res) => {
     const artIds = req.body.map(art => mongoose.Types.ObjectId(art._id))
