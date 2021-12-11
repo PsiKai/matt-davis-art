@@ -23,7 +23,7 @@ const Print = (props) => {
             }
             return null
         })
-    }, [savedCart, title])
+    }, [savedCart, sku])
 
     const className = inCart || isZero ? "print-item zero-stock" : "print-item"
     
