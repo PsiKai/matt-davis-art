@@ -4,7 +4,7 @@ import Print from "../components/Print";
 import PageHeader from "../components/layout/PageHeader"
 import AppContext from "../context/AppContext"
 import CircularProgress from "@material-ui/core/CircularProgress"
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 
 const Prints = () => {
     const appContext = useContext(AppContext)
