@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, Fragment} from 'react';
+import React, {useContext, Fragment} from 'react';
 import {Link} from "react-router-dom"
 import "../styles/cart.css"
 import AppContext from "../context/AppContext";
@@ -9,12 +9,7 @@ import PageHeader from '../components/layout/PageHeader';
 
 const Cart = (props) => {
     const appContext = useContext(AppContext);
-    const {cart, reloadCart, prints, purchased, modal, clearPurchase} = appContext;
-
-    useEffect(() => {
-        reloadCart()
-        //eslint-disable-next-line
-    }, [])
+    const {cart, purchased, modal, clearPurchase} = appContext;
 
     const orderComplete = () => {
         clearPurchase()
@@ -23,26 +18,26 @@ const Cart = (props) => {
         } else {
             props.history.push("/")
         }
-        
     }
 
     return (
     <div className="page-content">
         <PageHeader heading="Your Cart" />
     
-        {(Boolean(localStorage.getItem("cart")) && !prints) &&
+        {(localStorage.getItem("cart") && !cart) ?
             <div className="progress">
                 <CircularProgress color="inherit"/>
             </div>
-        }
-        {cart ? <CartItems /> :
-            <Fragment>
-            <h2 className="empty-cart">The cart is empty.  Please check for available artwork in the store.</h2>
-            <Link to="/prints">
-                <button data-text="To the Store!">To the Store!</button>
-            </Link>
-            </Fragment>
-        }   
+            :
+            cart ? 
+                <CartItems /> 
+                :
+                <Fragment>
+                    <h2 className="empty-cart">The cart is empty.  Please check for available artwork in the store.</h2>
+                    <Link to="/prints">
+                        <button data-text="To the Store!">To the Store!</button>
+                    </Link>
+                </Fragment>}   
 
         <TransitionGroup>
         {purchased && 

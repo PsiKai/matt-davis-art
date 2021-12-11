@@ -66,12 +66,15 @@ const AppState = (props) => {
 
 
     //reloads cart items
-    const reloadCart = () => {
+    const reloadCart = async () => {
         var storedCart = JSON.parse(localStorage.getItem("cart"))
         if (storedCart) {
+            const { data: { availableArt } } = await axios.post("/art/availability", storedCart)
+            if (availableArt.length !== storedCart.length) refreshArt()
+            localStorage.setItem("cart", JSON.stringify(availableArt))
             dispatch({
                 type: RELOAD_CART,
-                payload: storedCart
+                payload: availableArt
             }) 
         } else {
             dispatch({
