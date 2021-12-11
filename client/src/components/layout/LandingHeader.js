@@ -14,6 +14,7 @@ const LandingHeader = () => {
             appear={true}
             classNames="expand"
             timeout={1400}
+            unmountOnExit
         >   
             <div className="landing-header__wrapper">
                 <h1 className="landing-header">The Art of <span>Matt Davis</span></h1>
