@@ -24,7 +24,6 @@ const Header = ({routes, preload}) => {
   useEffect(() => {
     reloadCart();
     localStorage.token && loadUser();
-    console.log(cartItems);
     // eslint-disable-next-line 
   }, [])
 
