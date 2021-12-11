@@ -54,7 +54,7 @@
 
 ::-webkit-scrollbar-track {
   background: var(--light);
-  box-shadow: 0 0 8px 0 inset var(--white), -10px -10px 4px rgba(0, 0, 0, 0.3);;
+  box-shadow: 0 0 8px 0 inset var(--white);
 }
 
 * {
