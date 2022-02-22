@@ -1,6 +1,6 @@
-import React, { useState, useContext, useEffect} from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import AppContext from '../context/AppContext'
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 import ImgModal from './modals/ImgModal';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import RemoveCircleOutlineOutlinedIcon from '@material-ui/icons/RemoveCircleOutlineOutlined';
@@ -20,26 +20,12 @@ const CartItem = ({quantity, title, src, id, original, size, price}) => {
 
     const makeChanges = (e) => {
         e.preventDefault()
-        var savedCart = JSON.parse(localStorage.getItem("cart"));
-        let updatedQuan = []
-        savedCart.find((item) => {
-            if (item.title === title) {
-                item.quantity = quan
-                if (item.quantity > 0) {
-                    updatedQuan = [...updatedQuan, item]
-                }
-            } 
-            else {
-                updatedQuan = [...updatedQuan, item]
-            }
-            return null
-        })
-        if (updatedQuan.length > 0) {
-            localStorage.setItem("cart", JSON.stringify(updatedQuan))
-        } else {
-            localStorage.removeItem("cart")
-        }
-        
+        if (quan <= 0) return removeArt()
+        var savedCart = JSON.parse(localStorage.getItem("cart"))
+        var savedItem = savedCart.find(item => item.title === title)
+        var itemIndex = savedCart.indexOf(savedItem)
+        savedCart[itemIndex].quantity = quan
+        localStorage.setItem("cart", JSON.stringify(savedCart))
         setEdit(false)
         appContext.reloadCart()
     }
@@ -47,11 +33,7 @@ const CartItem = ({quantity, title, src, id, original, size, price}) => {
     const updateQuantity = (e) => {
         var value = e.target.value
         if (value < 0) value = 0
-        setQuan(value)
-    }
-
-    const adjustQuan = () => {
-        setEdit(true)
+        setQuan(~~value)
     }
 
     const removeArt = () => {
@@ -62,6 +44,7 @@ const CartItem = ({quantity, title, src, id, original, size, price}) => {
         } else {
             localStorage.removeItem("cart")
         }
+        setEdit(false)
         appContext.reloadCart();
     }
 
@@ -127,8 +110,8 @@ const CartItem = ({quantity, title, src, id, original, size, price}) => {
                                 />
                             </div>
                             <div className='button-group'>
-                                <button onClick={removeArt}><RemoveCircleOutlineOutlinedIcon/></button>
-                                <button type="submit" onClick={adjustQuan}><CheckBoxOutlinedIcon/></button>
+                                <button type="button" onClick={removeArt}><RemoveCircleOutlineOutlinedIcon/></button>
+                                <button type="submit"><CheckBoxOutlinedIcon/></button>
                             </div>
                         </form> 
                     </CSSTransition>
@@ -143,7 +126,7 @@ const CartItem = ({quantity, title, src, id, original, size, price}) => {
                             <span>Quantity: {quan}</span>
                             <div className='button-group'>
                                 <button onClick={removeArt}><RemoveCircleOutlineOutlinedIcon/></button>
-                                <button onClick={adjustQuan}><EditOutlinedIcon/></button>
+                                <button onClick={() => setEdit(true)}><EditOutlinedIcon/></button>
                             </div>
                         </div>
                     </CSSTransition>
