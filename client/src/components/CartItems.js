@@ -26,7 +26,7 @@ const CartItems = () => {
             setModalOpen(true)
             checkout(cart);
         } else {
-            setAlert("Please confirm buyer and shipping info", "lightpink")
+            setAlert("Please confirm buyer and shipping info", "var(--medium)")
         }
     }
 
