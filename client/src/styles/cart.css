@@ -122,7 +122,6 @@
   right: 1rem;
   font-size: 2rem;
   background-color: rgba(255, 255, 255, 0.7);
-  /* opacity: 0.8; */
   border-radius: 4px;
   border: 1px solid var(--dark);
   cursor: pointer;
@@ -143,26 +142,18 @@
 }
 
 .cart-total {
-  padding: 0 4rem;
+  width: 80%;
+  margin: 0 auto;
   text-align: right;
   display: grid;
   grid-template-columns: auto 80px;
   grid-template-rows: auto auto auto auto;
 }
 
-/* .cart-total div {
-    grid-area: label;
-  }
-  
-  .cart-total div:last-of-type {
-    grid-area: amount;
-  } */
-
 .cart-total .underline {
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 2;
-  /* grid-area: hr; */
   width: 100%;
 }
 
@@ -170,7 +161,6 @@
   grid-row: 4;
   grid-column-start: 1;
   grid-column-end: 3;
-  /* grid-area: checkout; */
 }
 
 .cart-total h3 {
@@ -192,28 +182,11 @@
 .shipping-form__wrapper {
   position: relative;
   width: 80%;
-  padding: 0 2rem;
   margin: 2rem auto;
 }
 
 .shipping-form__wrapper > div {
   position: relative;
-  grid-column-start: 1;
-  grid-column-end: 3;
-}
-
-.shipping-form__wrapper h4 {
-  grid-column: 1;
-  margin: 0.5rem 0;
-}
-
-.shipping-form__wrapper h4:last-of-type {
-  grid-column: 2;
-}
-
-.shipping-form {
-  text-align: right;
-  grid-row: 2;
   grid-column-start: 1;
   grid-column-end: 3;
 }
@@ -256,21 +229,10 @@ input#state {
   animation: none;
 }
 
-.shipping-form button label {
-  margin-right: 0.5rem;
-}
-
-.shipping-form i {
-  margin: 0;
-}
-
-.shipping-form h4 {
-  opacity: 1 !important;
-}
-
 .info-grid {
   display: grid;
   grid-template-columns: 50% 50%;
+  gap: 1rem;
 }
 
 .info-grid p {
@@ -283,8 +245,6 @@ input#state {
 
 .shipping-grid,
 .email-grid {
-  text-align: left;
-  padding: 0 1rem 0 0;
   overflow: hidden;
 }
 
@@ -356,6 +316,18 @@ input#state {
   .shipping-form button {
     right: 2rem;
   }
+  
+  .cart-total {
+    width: 100%;
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 650px) {
+  
+  .info-grid {
+    display: block;
+  }
 }
 
 @media (max-width: 550px) {
@@ -415,11 +387,6 @@ input#state {
     right: 1rem;
   }
 
-  .info-grid {
-    grid-template-columns: none;
-    height: 100%;
-  }
-
   .email-grid {
     grid-row: 1;
   }
@@ -432,10 +399,6 @@ input#state {
   .shipping-grid,
   .email-grid {
     padding: 0.25rem 0;
-  }
-
-  .cart-total {
-    padding: 0 2rem;
   }
 
   .cart-modal {
