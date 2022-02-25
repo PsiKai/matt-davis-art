@@ -52,6 +52,7 @@ const CartItem = ({quantity, title, src, id, original, size, price}) => {
     const close = e => e.target.className !== "cart-preview" && setImgModal(false)
 
     return (
+        <>
         <CSSTransition 
             in={fade} 
             classNames="fadein" 
@@ -117,16 +118,17 @@ const CartItem = ({quantity, title, src, id, original, size, price}) => {
                             </CSSTransition>
                         </>}
                 </div>
-                <CSSTransition
-                    in={imgModal}
-                    classNames="fadein"
-                    timeout={200}
-                    unmountOnExit
-                >
-                    <ImgModal close={close} img={src} title={title}/>
-                </CSSTransition>
             </div>     
         </CSSTransition>
+        <CSSTransition
+            in={imgModal}
+            classNames="fadein"
+            timeout={200}
+            unmountOnExit
+        >
+            <ImgModal close={close} img={src} title={title}/>
+        </CSSTransition>
+        </>
     )
 }
 
