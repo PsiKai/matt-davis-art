@@ -119,10 +119,6 @@
   opacity: 0;
 }
 
-/* .fadein-enter > * {
-  transform: translate(-50%, -47%);
-} */
-
 .fadein-enter.fadein-enter-active {
   opacity: 1;
   transition: opacity 200ms ease;
@@ -142,19 +138,10 @@
   opacity: 1;
 }
 
-/* .fadein-exit > * {
-  transform: var(--transform);
-} */
-
 .fadein-exit.fadein-exit-active {
   opacity: 0;
   transition: opacity 200ms ease;
 }
-
-/* .fadein-exit.fadein-exit-active > *,
-.fadein-exit-done > * {
-  transform: translate(0, -50%) !important;
-} */
 
 .fadein-exit-done {
   opacity: 0;
