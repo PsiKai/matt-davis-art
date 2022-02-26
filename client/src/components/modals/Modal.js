@@ -50,29 +50,28 @@ const Modal = ({setModalOpen, total, shipData, cart}) => {
     }
 
     return (
-        <div>
         <div className="backdrop" onClick={hide}>
             <div className="cart-modal">
-            <div className="close-modal" onClick={hide}><i className="fas fa-times fa-2x"></i></div>
+                <div className="close-modal" onClick={hide}><i className="fas fa-times fa-2x"></i></div>
                 <h2>Complete your purchase</h2>
                 <div className="cart-modal__grid">
-                <div className="cart-modal--buyer">
-                    <h4>Send Confirmation To:</h4>
-                    <p>{name2} <br/>
-                    {email}</p>
-                </div>
-                <div className="cart-modal--shipping">
-                    <h4>Shipping Address:</h4>
-                    <p>
-                        {name} <br/>
-                        {add1} <br/>
-                        {add2}
-                        {add2 !== "" && <br/>}
-                        <span>{city},</span>
-                        <span> {state.toUpperCase()}</span>
-                        <span> {zip}</span>
-                    </p>
-                </div>
+                    <div className="cart-modal--buyer">
+                        <h4>Send Confirmation To:</h4>
+                        <p>{name2} <br/>
+                        {email}</p>
+                    </div>
+                    <div className="cart-modal--shipping">
+                        <h4>Shipping Address:</h4>
+                        <p>
+                            {name} <br/>
+                            {add1} <br/>
+                            {add2}
+                            {add2 !== "" && <br/>}
+                            <span>{city},</span>
+                            <span> {state.toUpperCase()}</span>
+                            <span> {zip}</span>
+                        </p>
+                    </div>
                 </div>
                 <h2>Total: ${total + 5}</h2>
                 <PayPalButton
@@ -80,7 +79,6 @@ const Modal = ({setModalOpen, total, shipData, cart}) => {
                     onApprove={(data, actions) => onApprove(data, actions)}
                 />
             </div>
-        </div>
         </div>
     )
 }

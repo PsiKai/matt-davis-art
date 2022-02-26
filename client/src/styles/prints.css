@@ -178,13 +178,12 @@
 }
 
 .print-modal {
-  --transform: translate(-50%, -45%);
+  --transform: none;
   background: url(../images/brushed-alum.webp) var(--white);
   opacity: 1;
   border-radius: 8px;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 90px;
   padding: 2rem 1rem;
   text-align: center;
   width: 35rem;
@@ -192,6 +191,7 @@
   box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.5);
   max-height: 85%;
   overflow-y: auto;
+  transform: translate(0, -50%);
   transition: transform 200ms ease-in-out;
 }
 
@@ -326,19 +326,19 @@
   }
 }
 
-@media (max-height: 950px) {
+/* @media (max-height: 950px) {
   .print-modal {
     --transform: translate(-50%, 0);
     top: 88px;
-    /* transform: translate(-50%, 0); */
+    transform: translate(-50%, 0);
   }
 
   @media (max-width: 450px) {
     .print-modal {
       top: 60px;
-      /* bottom: 5px; */
+      bottom: 5px;
       max-width: 95%;
       max-height: 90vh;
     }
   }
-}
+} */

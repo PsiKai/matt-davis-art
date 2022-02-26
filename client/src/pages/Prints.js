@@ -32,7 +32,6 @@ const Prints = () => {
         var name = e.target.classList
         if (name.contains("backdrop") || name.contains("close-modal") || name.contains("fas")) {
             setModalOpen(false)
-            setImg({})
             setQuantity(1)
         }
     }
@@ -50,7 +49,6 @@ const Prints = () => {
         item.quantity > 0 && addItem(item)
         
         setModalOpen(false)
-        setImg({})
         setQuantity(1)
     }
 

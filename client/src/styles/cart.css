@@ -117,6 +117,9 @@
   position: fixed;
   inset-block: 90px 20px;
   max-width: 90%;
+  --transform: none;
+  transform: translate(0, -50%);
+  transition: transform 200ms ease;
 }
 
 .cart-preview {
@@ -280,15 +283,16 @@ input#state {
 }
 
 .cart-modal {
+  --transform: none;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 90px;
   background: var(--white) url(../images/brushed-alum.webp);
   width: 40rem;
   padding: 2rem 2rem 0;
   text-align: center;
   border-radius: 8px;
+  transform: translate(0, -50%);
+  transition: transform 200ms ease-in-out;
 }
 
 .purchase-modal {
@@ -315,21 +319,15 @@ input#state {
   }
 
   .shipping-form__wrapper {
-    width: 100%;
-    padding: 0 1rem;
+    width: 85%;
   }
 
   .city-state {
     grid-template-columns: auto 15% 25%;
   }
-
-  .shipping-form button {
-    right: 2rem;
-  }
   
   .cart-total {
-    width: 100%;
-    padding: 0 2rem;
+    width: 85%;
   }
 }
 
@@ -374,8 +372,6 @@ input#state {
     height: auto;
     width: 100%;
     justify-content: space-between;
-    /* padding: 0.5rem; */
-    /* padding-bottom: 0; */
     text-align: left;
   }
 
@@ -394,12 +390,8 @@ input#state {
   }
 
   .shipping-form__wrapper {
-    padding: 0 1rem;
+    width: 90%;
     margin-bottom: 2rem;
-  }
-
-  .shipping-form button {
-    right: 1rem;
   }
 
   .email-grid {
@@ -416,8 +408,11 @@ input#state {
     padding: 0.25rem 0;
   }
 
+  .cart-total {
+    width: 90%;
+  }
+
   .cart-modal {
-    transform: translate(-50%, -50%);
     width: 95%;
     padding: 1rem 0.5rem 0;
   }
