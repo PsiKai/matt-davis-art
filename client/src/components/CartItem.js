@@ -72,51 +72,44 @@ const CartItem = ({quantity, title, src, id, original, size, price}) => {
                     {original ?
                         <div className='cart-item--quantity'>
                             <h5>The one and only!</h5>
-                            <button onClick={removeArt}><RemoveCircleOutlineOutlinedIcon/></button>
                         </div>
                         :
-                        <>
-                            <CSSTransition
-                                in={edit}
-                                classNames="switch"
-                                timeout={100}
-                                unmountOnExit
-                            >
-                                <form className="cart-item--quantity" onSubmit={makeChanges}>
-                                    <div className='input__wrapper'>
-                                        <label htmlFor='cart-quantity'>Quantity:</label>
-                                        <input
-                                            id="cart-quantity"
-                                            name="quantity"
-                                            type="number"
-                                            inputMode="numeric"
-                                            min="0"
-                                            value={quan}
-                                            onChange={updateQuantity}
-                                        />
-                                    </div>
-                                    <div className='button-group'>
-                                        <button type="button" onClick={removeArt}><RemoveCircleOutlineOutlinedIcon/></button>
-                                        <button type="submit"><CheckBoxOutlinedIcon/></button>
-                                    </div>
-                                </form> 
-                            </CSSTransition>
-
-                            <CSSTransition
-                                in={!edit}
-                                classNames="switch"
-                                timeout={100}
-                                unmountOnExit
-                            >
-                                <div className="cart-item--quantity">
-                                    <span>Quantity: {quan}</span>
-                                    <div className='button-group'>
-                                        <button onClick={removeArt}><RemoveCircleOutlineOutlinedIcon/></button>
-                                        <button onClick={() => setEdit(true)}><EditOutlinedIcon/></button>
-                                    </div>
+                        <><CSSTransition
+                            in={edit}
+                            classNames="switch"
+                            timeout={100}
+                            unmountOnExit
+                        >
+                            <form className="cart-item--quantity" onSubmit={makeChanges}>
+                                <div className='input__wrapper'>
+                                    <label htmlFor='cart-quantity'>Quantity:</label>
+                                    <input
+                                        id="cart-quantity"
+                                        name="quantity"
+                                        type="number"
+                                        inputMode="numeric"
+                                        min="0"
+                                        value={quan}
+                                        onChange={updateQuantity}
+                                    />
                                 </div>
-                            </CSSTransition>
-                        </>}
+                                <button type="submit"><CheckBoxOutlinedIcon/></button>
+                            </form> 
+                        </CSSTransition>
+
+                        <CSSTransition
+                            in={!edit}
+                            classNames="switch"
+                            timeout={100}
+                            unmountOnExit
+                        >
+                            <div className="cart-item--quantity">
+                                <span className='cart-item__quantity-span'>Quantity: {quan}</span>
+                                <button onClick={() => setEdit(true)}><EditOutlinedIcon/></button>
+                            </div>
+                        </CSSTransition></>
+                    }
+                    <button className='remove-cart-item' onClick={removeArt}><RemoveCircleOutlineOutlinedIcon/></button>
                 </div>
             </div>     
         </CSSTransition>
