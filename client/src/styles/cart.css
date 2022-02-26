@@ -115,8 +115,7 @@
 
 .cart-preview__wrapper {
   position: fixed;
-  top: 90px;
-  bottom: 20px;
+  inset-block: 90px 20px;
   max-width: 90%;
 }
 
@@ -453,10 +452,6 @@ input#state {
   .cart-modal--shipping p {
     margin: 0.5rem;
   }
-
-  /* .cart-preview__wrapper {
-    top: calc(50% + 28px);
-  } */
 
   .cart-preview {
     width: 95vw;
