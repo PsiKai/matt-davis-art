@@ -17,7 +17,7 @@ const Print = (props) => {
     }, [])
 
     useEffect(() => {
-        savedCart && savedCart.find(item => {
+        savedCart?.find(item => {
             if(item.original && item._id === sku) {
                 setInCart(true)
             }
