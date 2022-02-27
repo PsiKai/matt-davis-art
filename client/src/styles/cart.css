@@ -39,17 +39,11 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  background-color: var(--dark);
 }
 
 .cart-item h2 {
   text-align: center;
 }
-
-/* .cart-item h3 {
-  display: inline;
-  margin-left: 1rem;
-} */
 
 .cart-item h4,
 .cart-item h5 {
@@ -64,11 +58,9 @@
 
 .cart-item--quantity {
   display: flex;
-  /* justify-content: space-between; */
   align-items: flex-end;
   flex-direction: column;
   gap: 0.5rem;
-  /* height: 100%; */
 }
 
 .cart-item__quantity-span {
@@ -93,7 +85,6 @@
   display: inline-flex;
   width: auto;
   margin: 0;
-  /* width: auto; */
   border: none;
   background-color: inherit;
   transition: color 200ms ease;
@@ -154,27 +145,21 @@
 }
 
 .cart-division {
-  /* overflow: visible; */
-  /* padding: 0; */
   border: none;
   border-top: medium double #333;
-  /* color: #333; */
-  /* text-align: center; */
 }
 
 .cart-total {
   width: 80%;
-  margin: 0 auto;
+  margin: 0 auto 0.75rem;
   text-align: right;
   display: grid;
   grid-template-columns: auto 80px;
-  /* grid-template-rows: auto auto auto auto; */
 }
 
 .cart-total .underline {
   grid-column-start: 1;
   grid-column-end: 3;
-  /* grid-row-start: 2; */
   width: 100%;
 }
 
@@ -184,38 +169,15 @@
   grid-column-end: 3;
 }
 
-/* .cart-total h3 {
-  grid-row: 3;
-  grid-column: 1;
-} */
-
-/* .cart-total h3:last-of-type {
-  grid-column: 2;
-} */
-
 .shipping-form__wrapper {
   position: relative;
   width: 80%;
   margin: 2rem auto;
 }
 
-/* .shipping-form__wrapper > div {
-  position: relative;
-  grid-column-start: 1;
-  grid-column-end: 3;
-} */
-
 input#state {
   text-transform: uppercase;
 }
-
-/* .email-grid {
-  grid-column-start: 1;
-} */
-
-/* .shipping-grid {
-  grid-column-start: 2;
-} */
 
 .shipping-form button {
   position: absolute;
@@ -253,26 +215,13 @@ input#state {
   margin: 0.7rem 0;
 }
 
-.info-grid input {
-  line-height: 1.4rem;
-}
-
-/* .shipping-grid,
-.email-grid {
-  overflow: hidden;
-} */
-
 .city-state {
   display: grid;
   grid-template-columns: auto 12% 20%;
 }
 
-/* .city-state input {
-  display: inline-block;
-  margin: 0.2rem 0;
-} */
-
-.cart-modal {
+.cart-modal,
+.purchase-modal {
   --transform: none;
   position: absolute;
   top: 90px;
@@ -312,22 +261,23 @@ input#state {
 }
 
 .purchase-modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--white) url(../images/brushed-alum.webp);
-  width: 30rem;
   padding: 2rem;
-  text-align: center;
-  border-radius: 8px;
-  box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.purchase-modal > svg {
+  margin: 0 auto;
+  font-size: 5rem;
+}
+
+.purchase-modal > h2 {
+  margin-top: revert;
 }
 
 @media (max-width: 850px) {
   .cart-item {
     width: 85%;
-    /* padding: 1rem; */
   }
 
   .cart-item--info__wrapper h4 {
@@ -356,7 +306,6 @@ input#state {
 
 @media (max-width: 550px) {
   .cart-item {
-    /* padding: 1rem; */
     width: 90%;
     flex-direction: column;
     height: auto;
@@ -366,26 +315,13 @@ input#state {
     margin-bottom: 0.5rem;
   }
 
-  /* .cart-item h4 {
-    text-align: left;
-  } */
-
-  /* .cart-item h2::after {
-    content: "";
-    height: 1px;
-    width: 100%;
-    border-bottom: 1px solid var(--dark);
-  } */
-
   .cart-item--img__wrapper img {
     width: 100%;
     height: 250px;
-    /* max-height: 45vh; */
   }
 
   .cart-item--info__wrapper {
     min-height: 160px;
-    /* height: auto; */
     width: 100%;
     justify-content: space-between;
     text-align: left;
@@ -394,31 +330,16 @@ input#state {
   .cart-item--quantity {
     flex-direction: row;
     align-items: center;
-    /* gap: 3rem; */
   }
 
   .cart-item__quantity-span + button {
     margin-left: 2.5rem;
   }
 
-  /* .cart-item--quantity__wrapper {
-    padding-right: 2rem;
-    display: inline-block;
-  } */
-
   .shipping-form__wrapper {
     width: 90%;
     margin-bottom: 2rem;
   }
-
-  /* .email-grid {
-    grid-row: 1;
-  } */
-
-  /* .shipping-grid {
-    grid-row: 2;
-    grid-column: 1;
-  } */
 
   .shipping-grid,
   .email-grid {
@@ -429,15 +350,16 @@ input#state {
     width: 90%;
   }
 
-  .cart-modal {
+  .cart-modal,
+  .purchase-modal {
     padding: 2rem 0.5rem 0;
-    font-size: 12px;
+    font-size: 14px;
   }
-/* 
-  .close-modal {
-    top: 0.5rem;
-    right: 0.5rem;
-  } */
+
+  .cart-modal p,
+  .purchase-modal p {
+    font-size: inherit;
+  }
 
   .cart-modal__grid {
     margin: 0.5rem 0;
@@ -473,6 +395,10 @@ input#state {
   .cart-preview {
     width: 95vw;
     min-width: auto;
+  }
+
+  .purchase-modal {
+    padding: 1rem;
   }
 }
 
