@@ -6,7 +6,7 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 
-const CartItem = ({quantity, title, src, id, original, size, price}) => {
+const CartItem = ({quantity, title, src, id, original, size, price, index}) => {
     const appContext = useContext(AppContext)
 
     const [edit, setEdit] = useState(false)
@@ -38,7 +38,8 @@ const CartItem = ({quantity, title, src, id, original, size, price}) => {
 
     const removeArt = () => {
         var cart = JSON.parse(localStorage.getItem("cart"))
-        var newCart = cart.filter((item) => item.title !== title)
+        console.log(id);
+        var newCart = cart.filter((item) => item._id !== id)
         if (newCart.length > 0) {
             localStorage.setItem("cart", JSON.stringify(newCart))
         } else {
@@ -58,7 +59,7 @@ const CartItem = ({quantity, title, src, id, original, size, price}) => {
             classNames="fadein" 
             timeout={200} 
         >
-           <div className="cart-item" style={{transitionDelay: `${(id + 1.5) * 100}ms`}}>
+           <div className="cart-item" style={{transitionDelay: `${(index + 1.5) * 100}ms`}}>
                 <div className="cart-item--img__wrapper">
                     <img src={src} alt={title} onClick={fullSize} />
                 </div>

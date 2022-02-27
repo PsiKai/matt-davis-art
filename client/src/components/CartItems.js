@@ -40,7 +40,8 @@ const CartItems = () => {
                 {cart.map((item, i) => (
                     <CartItem 
                         key={item._id}
-                        id={i}
+                        id={item._id}
+                        index={i}
                         // src={newSrc[0].img}
                         src={item.img}
                         title={item.title}
