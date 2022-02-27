@@ -6,10 +6,11 @@ import AppContext from "../context/AppContext"
 import CircularProgress from "@material-ui/core/CircularProgress"
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import { CSSTransition } from 'react-transition-group';
+import Cart from './Cart';
 
 const Prints = () => {
     const appContext = useContext(AppContext)
-    const {prints, getArt, addItem} = appContext
+    const { prints, getArt, addItem, cart } = appContext
 
     const [img, setImg] = useState({})
     const [modalOpen, setModalOpen] = useState(false)
@@ -17,6 +18,7 @@ const Prints = () => {
     const [mount, setMount] = useState(false);
     const [counted, setCount] = useState(0)
     const [loaded, setLoaded] = useState(false)
+    const [quantityInCart, setQuantityInCart] = useState(0)
 
     useEffect(() => {
         !prints && getArt();
@@ -26,6 +28,9 @@ const Prints = () => {
 
     const openModal = (item) => {
         setImg(item)
+        console.log(item);
+        const inCart = cart?.find(art => art._id === item.sku)
+        setQuantityInCart(inCart?.quantity)
         setModalOpen(true)
     }
 
@@ -156,7 +161,7 @@ const Prints = () => {
                             </div>
                             {!img.original ?
                                 <div className="input__wrapper">
-                                    <label htmlFor="amount">Number of Prints: </label>
+                                    <label htmlFor="amount">Add: </label>
                                     <input 
                                         id="amount" 
                                         type="number" 
@@ -166,6 +171,9 @@ const Prints = () => {
                                         value={quantity}
                                         onChange={updateQuantity}
                                         />
+                                    {quantityInCart > 0 &&
+                                        <span className='input__helper'>{quantityInCart} in cart</span>
+                                    }                                    
                                 </div> 
                                 :
                                 <div>
