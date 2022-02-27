@@ -106,18 +106,6 @@
   animation: ken-burns 7600ms linear reverse !important;
 }
 
-@keyframes ken-burns {
-  0% {
-    transform: translate(0, 0) scale(1);
-    transform-origin: 50% 0;
-  }
-  100% {
-    transform: translate(20px, -30px) scale(1.2);
-
-    transform-origin: 50% 0;
-  }
-}
-
 @media (max-width: 850px) {
   .main-landing__wrapper {
     overflow-x: hidden;
