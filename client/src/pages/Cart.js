@@ -1,11 +1,17 @@
 import React, {useContext, Fragment} from 'react';
 import {Link} from "react-router-dom"
+
 import "../styles/cart.css"
+
 import AppContext from "../context/AppContext";
 import CartItems from "../components/CartItems";
-import { CircularProgress } from '@material-ui/core';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import PageHeader from '../components/layout/PageHeader';
+
+import { CircularProgress } from '@material-ui/core';
+import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
+import ErrorOutlineOutlinedIcon from '@material-ui/icons/ErrorOutlineOutlined';
+
+import { CSSTransition } from 'react-transition-group';
 
 const Cart = (props) => {
     const appContext = useContext(AppContext);
@@ -13,11 +19,8 @@ const Cart = (props) => {
 
     const orderComplete = () => {
         clearPurchase()
-        if (modal.code !== 200) {
-            props.history.push("/contact")
-        } else {
-            props.history.push("/")
-        }
+        const route = modal.code === 200 ? "/contact" : "/"
+        props.history.push(route)
     }
 
     return (
@@ -39,8 +42,6 @@ const Cart = (props) => {
                     </Link>
                 </Fragment>}   
 
-        <TransitionGroup>
-        {purchased && 
         <CSSTransition
             in={purchased} 
             classNames="fadein" 
@@ -49,7 +50,8 @@ const Cart = (props) => {
         >
             <div className="backdrop" onClick={orderComplete}>
                 <div className="purchase-modal">
-                    <h1>{modal.heading}</h1>
+                    {modal.code === 200 ? <CheckCircleOutlinedIcon/> : <ErrorOutlineOutlinedIcon/>}
+                    <h2>{modal.heading}</h2>
                     <p>{modal.msg}</p>
                     <button 
                         style={{width: "250px"}} 
@@ -61,8 +63,6 @@ const Cart = (props) => {
                 </div>
             </div>
         </CSSTransition>
-        }
-        </TransitionGroup>
     </div>       
     )
 }
