@@ -4,6 +4,7 @@ import Print from "../components/Print";
 import PageHeader from "../components/layout/PageHeader"
 import AppContext from "../context/AppContext"
 import CircularProgress from "@material-ui/core/CircularProgress"
+import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import { CSSTransition } from 'react-transition-group';
 
 const Prints = () => {
@@ -29,8 +30,7 @@ const Prints = () => {
     }
 
     const hideModal = (e) => {
-        var name = e.target.classList
-        if (name.contains("backdrop") || name.contains("close-modal") || name.contains("fas")) {
+        if (e.target === e.currentTarget) {
             setModalOpen(false)
             setQuantity(1)
         }
@@ -136,12 +136,16 @@ const Prints = () => {
             >
                 <div className="backdrop" onClick={hideModal}>
                     <div className="print-modal">
-                        <div className="close-modal" onClick={hideModal}><i className="fas fa-times fa-2x"></i></div>
+                        <div className="close-modal" onClick={hideModal}><CloseRoundedIcon/></div>
                         <h2>{img.title}</h2>
+                        <div className='print-modal--content__wrapper'>
+                        <div className='print-modal--subject__wrapper'>
                         <img src={img.src}
                             alt={img.title}
                             name={img.name}>
                         </img>
+                        </div>
+                        <div className='print-modal--info__wrapper'>
                         {img.original ?
                             <h5>This is a one of a kind piece</h5> 
                             :
@@ -168,9 +172,11 @@ const Prints = () => {
                                     <p>{img.size.width}" x {img.size.height}"</p>
                                 </div>
                             }
-                        </div>
+                            </div>
 
                         <button data-text="Add To Cart" onClick={addToCart}>Add To Cart</button>
+                        </div>
+                        </div>
                     </div>
                 </div>
             </CSSTransition>
