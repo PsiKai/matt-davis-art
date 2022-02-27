@@ -3,8 +3,8 @@ import AppContext from '../context/AppContext'
 import { CSSTransition } from 'react-transition-group';
 import ImgModal from './modals/ImgModal';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
-import RemoveCircleOutlineOutlinedIcon from '@material-ui/icons/RemoveCircleOutlineOutlined';
 import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
+import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 
 const CartItem = ({quantity, title, src, id, original, size, price}) => {
     const appContext = useContext(AppContext)
@@ -109,7 +109,7 @@ const CartItem = ({quantity, title, src, id, original, size, price}) => {
                             </div>
                         </CSSTransition></>
                     }
-                    <button className='remove-cart-item' onClick={removeArt}><RemoveCircleOutlineOutlinedIcon/></button>
+                    <button className='remove-cart-item' onClick={removeArt}><DeleteOutlineOutlinedIcon/></button>
                 </div>
             </div>     
         </CSSTransition>
