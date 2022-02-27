@@ -191,7 +191,7 @@ header .cart-link:active > span {
   }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 550px), (max-height: 550px) {
   header {
     padding: 4px 1rem;
   }
@@ -203,5 +203,21 @@ header .cart-link:active > span {
   .menu__burger-icon {
     top: 17px;
     right: 1rem;
+  }
+}
+
+@media (max-height: 550px) {
+  .header-links {
+    flex-direction: row;
+  }
+
+  header li {
+    margin: 0 0.25rem !important;
+    padding: 0.5rem;
+  }
+
+  header li:last-of-type {
+    border-left: 3px double var(--white-two);
+    border-top: none;
   }
 }
