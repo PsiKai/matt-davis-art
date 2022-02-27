@@ -7,7 +7,7 @@ import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 
 const CartItem = ({quantity, title, src, id, original, size, price, index}) => {
-    const appContext = useContext(AppContext)
+    const { reloadCart } = useContext(AppContext)
 
     const [edit, setEdit] = useState(false)
     const [quan, setQuan] = useState(quantity)
@@ -27,7 +27,7 @@ const CartItem = ({quantity, title, src, id, original, size, price, index}) => {
         savedCart[itemIndex].quantity = quan
         localStorage.setItem("cart", JSON.stringify(savedCart))
         setEdit(false)
-        appContext.reloadCart()
+        reloadCart()
     }
 
     const updateQuantity = (e) => {
@@ -38,7 +38,6 @@ const CartItem = ({quantity, title, src, id, original, size, price, index}) => {
 
     const removeArt = () => {
         var cart = JSON.parse(localStorage.getItem("cart"))
-        console.log(id);
         var newCart = cart.filter((item) => item._id !== id)
         if (newCart.length > 0) {
             localStorage.setItem("cart", JSON.stringify(newCart))
@@ -46,7 +45,7 @@ const CartItem = ({quantity, title, src, id, original, size, price, index}) => {
             localStorage.removeItem("cart")
         }
         setEdit(false)
-        appContext.reloadCart();
+        reloadCart();
     }
 
     const fullSize = () => setImgModal(true)

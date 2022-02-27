@@ -74,9 +74,6 @@ const Modal = ({setModalOpen, total, shipData, cart}) => {
                                 <span> {zip}</span>
                             </p>
                         </div>
-                            
-                            
-                            {/* {add2 !== "" && <br/>} */}
                     </div>
                 </div>
                 <h2>Total: ${total + 5}</h2>

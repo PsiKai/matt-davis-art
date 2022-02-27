@@ -6,11 +6,11 @@ import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 
 const ShippingForm = ({ shipForm }) => {
     useEffect(() => {
-        const ship = localStorage.getItem("shipInfo")
+        const ship = JSON.parse(localStorage.getItem("shipInfo"))
         if (ship) {
-            setShipData(JSON.parse(ship))
+            setShipData(ship)
             setAddy(true)
-            shipForm(JSON.parse(ship))
+            shipForm(ship)
         }
         // eslint-disable-next-line 
     }, [])

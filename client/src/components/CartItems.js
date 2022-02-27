@@ -42,22 +42,18 @@ const CartItems = () => {
                         key={item._id}
                         id={item._id}
                         index={i}
-                        // src={newSrc[0].img}
                         src={item.img}
                         title={item.title}
                         price={item.price}
                         quantity={item.quantity}
                         original={item.original}
                         size={JSON.parse(item.dimensions)}
-                        // stock={item.stock}
                     />
                 ))}
             </div>
             <hr className="cart-division" />
             
-            <ShippingForm
-                shipForm={shipForm}
-            />
+            <ShippingForm shipForm={shipForm} />
 
             <div className="cart-total">
                 <div>
