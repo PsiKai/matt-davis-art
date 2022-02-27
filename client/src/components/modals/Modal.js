@@ -50,37 +50,40 @@ const Modal = ({setModalOpen, total, shipData, cart}) => {
     }
 
     return (
-        <div>
         <div className="backdrop" onClick={hide}>
             <div className="cart-modal">
-            <div className="close-modal" onClick={hide}><i className="fas fa-times fa-2x"></i></div>
+                <div className="close-modal" onClick={hide}><i className="fas fa-times fa-2x"></i></div>
                 <h2>Complete your purchase</h2>
                 <div className="cart-modal__grid">
-                <div className="cart-modal--buyer">
-                    <h4>Send Confirmation To:</h4>
-                    <p>{name2} <br/>
-                    {email}</p>
-                </div>
-                <div className="cart-modal--shipping">
-                    <h4>Shipping Address:</h4>
-                    <p>
-                        {name} <br/>
-                        {add1} <br/>
-                        {add2}
-                        {add2 !== "" && <br/>}
-                        <span>{city},</span>
-                        <span> {state.toUpperCase()}</span>
-                        <span> {zip}</span>
-                    </p>
-                </div>
+                    <div className="cart-modal--buyer">
+                        <h3>Send Confirmation To:</h3>
+                        <div className='cart-modal--info'>
+                            <p>{name2}</p>
+                            <p>{email}</p>
+                        </div>
+                    </div>
+                    <div className="cart-modal--shipping">
+                        <h3>Shipping Address:</h3>
+                        <div className='cart-modal--info'>
+                            <p>{name}</p>
+                            <p>{add1}</p>
+                            <p>{add2}</p>
+                            <p>
+                                <span>{city},</span>
+                                <span> {state.toUpperCase()}</span>
+                                <span> {zip}</span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <h2>Total: ${total + 5}</h2>
-                <PayPalButton
-                    createOrder={(data, actions) => createOrder(data, actions)}
-                    onApprove={(data, actions) => onApprove(data, actions)}
-                />
+                <div className='paypal__wrapper' >
+                    <PayPalButton
+                        createOrder={(data, actions) => createOrder(data, actions)}
+                        onApprove={(data, actions) => onApprove(data, actions)}
+                    />
+                </div>
             </div>
-        </div>
         </div>
     )
 }

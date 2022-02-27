@@ -1,13 +1,16 @@
 import React, { useState, useEffect} from 'react'
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 
-const ShippingForm = ({shipForm}) => {
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
+
+const ShippingForm = ({ shipForm }) => {
     useEffect(() => {
-        const ship = localStorage.getItem("shipInfo")
+        const ship = JSON.parse(localStorage.getItem("shipInfo"))
         if (ship) {
-        setShipData(JSON.parse(ship))
-        setAddy(true)
-        shipForm(JSON.parse(ship))
+            setShipData(ship)
+            setAddy(true)
+            shipForm(ship)
         }
         // eslint-disable-next-line 
     }, [])
@@ -43,138 +46,144 @@ const ShippingForm = ({shipForm}) => {
 
 
     return (
-        
-        <TransitionGroup className="shipping-form__wrapper">
-        {/* <div className="shipping-form__wrapper"> */}
-        
-        
-        {addy ?
+        <div className="shipping-form__wrapper">
             <CSSTransition
-                key={1}
+                in={addy}
                 classNames="switch"
                 timeout={100}
+                unmountOnExit
             >
-            <form className="shipping-form" onSubmit={ship}>
-                <div className="info-grid">
-                    <div className="email-grid">
-                    <h4>Buyer info:</h4>
-                        <p>{name2}</p>
-                        <p>{email}</p>
+                <form className="shipping-form" onSubmit={ship}>
+                    <div className="info-grid">
+                        <div className="email-grid">
+                        <h3>Buyer info:</h3>
+                            <p>{name2}</p>
+                            <p>{email}</p>
+                        </div>
+                        <div className="shipping-grid">
+                        <h3>Shipping info:</h3>
+                            <p>{name}</p>
+                            <p>{add1}</p>
+                            <p>{add2}</p>
+                            <span>{city},</span>
+                            <span> {state.toUpperCase()}</span>
+                            <span> {zip}</span>
+                        </div>
                     </div>
-                    <div className="shipping-grid">
-                    <h4>Shipping info:</h4>
-                        <p>{name}</p>
-                        <p>{add1}</p>
-                        <p>{add2}</p>
-                        <span>{city},</span>
-                        <span> {state.toUpperCase()}</span>
-                        <span> {zip}</span>
-                    </div>
-                </div>
-                <button type="submit"><label>Edit</label><i className="far fa-edit fa-lg"></i></button>
-            </form>
+                    <button type="button" onClick={() => setAddy(false)}><EditOutlinedIcon /></button>
+                </form>
             </CSSTransition>
-            :
             <CSSTransition
-                key={2}
+                in={!addy}
                 classNames="switch"
                 timeout={100}
+                unmountOnExit
             >
-        <form className="shipping-form" onSubmit={ship}>
-            <div className="info-grid">
-            <div className="email-grid">
-                <h4>Buyer info:</h4>
+                <form className="shipping-form" onSubmit={ship}>
+                    <div className="info-grid">
+                        <div className="email-grid">
+                            <h3>Buyer info:</h3>
+                            <div className='input__wrapper'>
+                                <label htmlFor='name2'>Your name</label>
+                                <input 
+                                    id='name2'
+                                    type='text'
+                                    name='name2'
+                                    onChange={onChange}
+                                    value={name2}
+                                    required>
+                                </input>
+                            </div>
+                            <div className='input__wrapper'>
+                                <label htmlFor='email'>Email Address</label>
+                                <input 
+                                    id='email'
+                                    type='email'
+                                    name='email'
+                                    onChange={onChange}
+                                    value={email}
+                                    required>
+                                </input>
+                            </div>
+                        </div>
+                        <div className="shipping-grid">
+                            <h3>Shipping info:</h3>
+                            <div className='input__wrapper'>
+                                <label htmlFor='name'>Receiver's name</label>
+                                <input 
+                                    id='name'
+                                    type='text'
+                                    name='name'
+                                    onChange={onChange}
+                                    value={name}
+                                    required>
+                                </input>
+                            </div>
+                            <div className='input__wrapper'>
+                                <label htmlFor='add1'>Address</label>
+                                <input 
+                                    id="add1" 
+                                    type="text"
+                                    name="add1"
+                                    onChange={onChange}
+                                    value={add1}
+                                    required>
+                                </input>
+                            </div>
+                            <div className='input__wrapper'>
+                                <label htmlFor='add2'>Address line 2</label>
+                                <input 
+                                    id="add2" 
+                                    type="text"
+                                    name="add2"
+                                    onChange={onChange}
+                                    value={add2}>
+                                </input>
+                            </div>
 
-                <input 
-                    type='text'
-                    name='name2'
-                    placeholder="Your name"
-                    onChange={onChange}
-                    value={name2}
-                    required>
-                </input>
-                <input 
-                    type='email'
-                    name='email'
-                    placeholder="Email Address"
-                    onChange={onChange}
-                    value={email}
-                    required>
-                </input>
-            </div>
-            <div className="shipping-grid">
-                <h4>Shipping info:</h4>
-                <input 
-                    type='text'
-                    name='name'
-                    placeholder="Receiver's name"
-                    onChange={onChange}
-                    value={name}
-                    required>
-                </input>
-                <input 
-                    id="add1" 
-                    type="text"
-                    name="add1"
-                    placeholder="Address"
-                    onChange={onChange}
-                    value={add1}
-                    required>
-                </input>
-
-                <input 
-                    id="add2" 
-                    type="text"
-                    name="add2"
-                    placeholder="Address line 2"
-                    onChange={onChange}
-                    value={add2}>
-                </input>
-
-                <div className="city-state">
-                    <input 
-                        id="city" 
-                        type="text"
-                        name='city'
-                        placeholder="City"
-                        onChange={onChange}
-                        value={city}
-                        required>
-                    </input>
-
-                    <input 
-                        id="state" 
-                        type="text" 
-                        maxLength="2"
-                        name='state'
-                        placeholder="St"
-                        onChange={onChange}
-                        value={state}
-                        required>
-                    </input>
-
-                    <input 
-                        id="zip" 
-                        type="text"
-                        name='zip'
-                        placeholder="Zip"
-                        onChange={onChange}
-                        value={zip}
-                        required>
-                    </input>
-                </div>
-            </div>
-            
-            </div>
-            <button type="submit">
-                <label>Confirm</label>
-                <i className="far fa-check-square fa-lg"></i>
-            </button>   
-        </form>
-        </CSSTransition>
-        }
-        {/* </div> */}
-        </TransitionGroup>
+                            <div className="city-state">
+                                <div className='input__wrapper'>
+                                <label htmlFor='city'>City</label>
+                                <input 
+                                    id="city" 
+                                    type="text"
+                                    name='city'
+                                    onChange={onChange}
+                                    value={city}
+                                    required>
+                                </input>
+                                </div>
+                                <div className='input__wrapper'>
+                                <label htmlFor='state'>ST</label>
+                                <input 
+                                    id="state" 
+                                    type="text" 
+                                    maxLength="2"
+                                    name='state'
+                                    onChange={onChange}
+                                    value={state}
+                                    required>
+                                </input>
+                                </div>
+                                <div className='input__wrapper'>
+                                <label htmlFor='zip'>Zip</label>
+                                <input 
+                                    id="zip" 
+                                    type="text"
+                                    name='zip'
+                                    onChange={onChange}
+                                    value={zip}
+                                    required>
+                                </input>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                    <button type="submit"><CheckBoxOutlinedIcon /></button>   
+                </form>
+            </CSSTransition>
+        </div>
         
     )
 }

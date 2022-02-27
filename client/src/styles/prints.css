@@ -178,13 +178,12 @@
 }
 
 .print-modal {
-  --transform: translate(-50%, -45%);
+  --transform: none;
   background: url(../images/brushed-alum.webp) var(--white);
   opacity: 1;
   border-radius: 8px;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 90px;
   padding: 2rem 1rem;
   text-align: center;
   width: 35rem;
@@ -192,6 +191,7 @@
   box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.5);
   max-height: 85%;
   overflow-y: auto;
+  transform: translate(0, -50%);
   transition: transform 200ms ease-in-out;
 }
 
@@ -203,27 +203,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.close-modal {
-  box-sizing: content-box;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  padding: 0 1rem;
-  border-radius: 4rem;
-  height: 32px;
-  transition: background-color 200ms ease, box-shadow 200ms ease;
-  cursor: pointer;
-}
-
-.close-modal:hover {
-  background-color: var(--white);
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
-}
-
-.close-modal:active {
-  animation: press-cart 150ms linear;
 }
 
 .print-modal img {
@@ -319,26 +298,5 @@
     width: auto;
     max-width: 100%;
     max-height: 45vh;
-  }
-
-  .close-modal {
-    right: 0.5rem;
-  }
-}
-
-@media (max-height: 950px) {
-  .print-modal {
-    --transform: translate(-50%, 0);
-    top: 88px;
-    /* transform: translate(-50%, 0); */
-  }
-
-  @media (max-width: 450px) {
-    .print-modal {
-      top: 60px;
-      /* bottom: 5px; */
-      max-width: 95%;
-      max-height: 90vh;
-    }
   }
 }
