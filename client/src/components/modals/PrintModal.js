@@ -45,7 +45,9 @@ const PrintModal = ({ img, quantityInCart, setModalOpen, addItem }) => {
                             <h5>All prints are PREORDER and will ship within 4 weeks</h5>}
                         <div className="print-modal__flex">
                             <h2>${img.price}</h2>
-                            {!img.original ?
+                            {img.original ?
+                                <p>{img.size.width}" x {img.size.height}"</p>
+                                :
                                 <div className="input__wrapper">
                                     <label htmlFor="amount">Add: </label>
                                     <input 
@@ -65,8 +67,6 @@ const PrintModal = ({ img, quantityInCart, setModalOpen, addItem }) => {
                                         </span>
                                     }                                    
                                 </div> 
-                                :
-                                <p>{img.size.width}" x {img.size.height}"</p>
                             }
                         </div>
 
