@@ -2,7 +2,6 @@
 
 header {
   background-color: var(--dark);
-  /* color: inherit; */
   color: var(--white-two);
   position: fixed;
   z-index: 200;
@@ -38,8 +37,15 @@ header li {
 }
 
 header li:last-of-type {
-  border-top: 3px double var(--white-two);
-  margin-right: 0.8rem;
+  display: flex;
+}
+
+header li:last-of-type::before {
+  content: "";
+  border-left: 3px double var(--white-two);
+  padding: 1rem;
+  max-height: 100%;
+  display: inline-block;
 }
 
 header li:last-of-type a:active {
@@ -102,8 +108,7 @@ header .cart-link:active > span {
 .login-edit {
   padding: 4px;
   border-radius: 4px;
-  position: relative;
-  bottom: 3px;
+  display: flex;
 }
 
 .login-edit i {
@@ -127,7 +132,6 @@ header .cart-link:active > span {
   top: 76px;
   right: 0;
   background-color: var(--dark);
-  /* background-color: aliceblue; */
   transform: translateX(101%);
   transition: transform 200ms ease;
   border: 1px solid black;
@@ -138,9 +142,6 @@ header .cart-link:active > span {
 
 .menu__burger-icon {
   width: 33px;
-  position: fixed;
-  top: 27px;
-  right: 2rem;
   cursor: pointer;
   border-radius: 5px;
 }
@@ -183,15 +184,9 @@ header .cart-link:active > span {
     border: none;
     margin-right: 0;
   }
-
-  header li:last-of-type::before {
-    content: "";
-    border-left: 3px double var(--white-two);
-    padding: 1rem;
-  }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 550px), (max-height: 550px) {
   header {
     padding: 4px 1rem;
   }
@@ -199,9 +194,44 @@ header .cart-link:active > span {
   .menu {
     top: 52px;
   }
+}
 
-  .menu__burger-icon {
-    top: 17px;
-    right: 1rem;
+@media (max-width: 850px) {
+  header li:last-of-type {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header li:last-of-type::before {
+    border-left: none;
+    border-top: 3px double var(--white-two);
+    width: 100%;
+  }
+}
+
+@media (max-height: 550px) {
+  .header-links {
+    flex-direction: row;
+  }
+
+  header li {
+    margin: 0 0.25rem !important;
+    padding: 0.5rem;
+  }
+
+  header li:last-of-type::before {
+    border-left: 3px double var(--white-two);
+    border-top: none;
+  }
+}
+
+@media (max-width: 850px) and (max-height: 550px) {
+  header li:last-of-type::before {
+    border-left: 3px double var(--white-two);
+    border-top: none;
+  }
+
+  header li:last-of-type {
+    flex-direction: row;
   }
 }

@@ -115,6 +115,10 @@ a:visited {
   color: var(--white-two);
 }
 
+.input__wrapper {
+  position: relative;
+}
+
 .input__wrapper:hover > label,
 .input__wrapper:focus-within > label,
 label.input__wrapper:focus-within,
@@ -145,6 +149,14 @@ input {
   border-radius: 0px;
   text-indent: 0;
   -webkit-appearance: none;
+}
+
+.input__helper {
+  width: fit-content;
+  position: absolute;
+  left: 100%;
+  background-color: var(--white);
+  background-image: url(./images/brushed-alum.webp);
 }
 
 input:-webkit-autofill,
@@ -493,6 +505,7 @@ h2 {
   height: 32px;
   transition: background-color 200ms ease, box-shadow 200ms ease;
   cursor: pointer;
+  line-height: 1;
 }
 
 .close-modal:hover {
@@ -502,6 +515,11 @@ h2 {
 
 .close-modal:active {
   animation: press-cart 150ms linear;
+}
+
+.close-modal > svg {
+  font-size: 2rem;
+  pointer-events: none;
 }
 
 @media (max-width: 850px) {
@@ -572,8 +590,8 @@ h2 {
   .close-modal {
     right: 0;
     top: 0;
-    border-radius: 0 8px 0 8px;
-    padding: 0.25rem 0.5rem;
+    border-radius: 0 8px;
+    padding: 0.25rem;
   }
 
   textarea,

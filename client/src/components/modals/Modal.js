@@ -2,6 +2,7 @@ import React, {useContext} from 'react'
 import ReactDOM from "react-dom"
 import AppContext from "../../context/AppContext"
 import "../../styles/prints.css"
+import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 
 
 const Modal = ({setModalOpen, total, shipData, cart}) => {
@@ -37,11 +38,7 @@ const Modal = ({setModalOpen, total, shipData, cart}) => {
         sendShipping(purchaseOrder);
     }
 
-    const hide = (e) => {
-        var el = e.target.classList
-        if (el.contains("backdrop") || el.contains("close-modal") || el.contains("fas")) setModalOpen(false)
-    }
-
+    const hide = e => {if (e.target === e.currentTarget) setModalOpen(false)}
 
     const sendShipping = (order) => {
         appContext.completePurchase(order)
@@ -52,7 +49,7 @@ const Modal = ({setModalOpen, total, shipData, cart}) => {
     return (
         <div className="backdrop" onClick={hide}>
             <div className="cart-modal">
-                <div className="close-modal" onClick={hide}><i className="fas fa-times fa-2x"></i></div>
+                <div className="close-modal" onClick={hide}><CloseRoundedIcon/></div>
                 <h2>Complete your purchase</h2>
                 <div className="cart-modal__grid">
                     <div className="cart-modal--buyer">

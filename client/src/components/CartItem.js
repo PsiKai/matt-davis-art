@@ -22,8 +22,7 @@ const CartItem = ({quantity, title, src, id, original, size, price, index}) => {
         e.preventDefault()
         if (quan <= 0) return removeArt()
         var savedCart = JSON.parse(localStorage.getItem("cart"))
-        var savedItem = savedCart.find(item => item.title === title)
-        var itemIndex = savedCart.indexOf(savedItem)
+        var itemIndex = savedCart.findIndex(item => item._id === id)
         savedCart[itemIndex].quantity = quan
         localStorage.setItem("cart", JSON.stringify(savedCart))
         setEdit(false)
