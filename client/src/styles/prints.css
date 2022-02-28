@@ -259,6 +259,12 @@
   }
 }
 
+@media (max-height: 850px) {
+  .print-modal img {
+    max-height: 45vh;
+  }
+}
+
 @media (max-height: 550px) {
   .print-modal {
     padding: 1rem;
@@ -281,8 +287,8 @@
   .print-modal--subject__wrapper {
     flex-basis: 50%;
   }
-
+  
   .print-modal img {
-    max-height: calc(100vh - 135px);
+    max-height: calc(100vh - 153px);
   }
 }
