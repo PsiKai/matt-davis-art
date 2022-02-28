@@ -1,7 +1,7 @@
 /* Prints Styles  */
 
 .print-orders {
-  margin: 4rem auto 4rem 1rem;
+  margin: 4rem 1rem 4rem auto;
   max-width: clamp(60%, 70%, 80ch);
   position: relative;
   color: var(--white);
@@ -10,7 +10,7 @@
 .print-orders .brand-backdrop {
   transform: skew(7deg) rotate(-4deg);
   left: 0;
-  height: 120%;
+  height: 130%;
 }
 
 .print-orders .brand-backdrop::after {
@@ -18,7 +18,7 @@
 }
 
 .print-orders:nth-of-type(4) {
-  margin: 4rem 1rem 4rem auto;
+  margin: 4rem auto 4rem 1rem;
 }
 
 .print-orders:nth-of-type(4) .brand-backdrop {
@@ -53,8 +53,6 @@
 }
 
 .print-item img {
-  /* height: 250px;
-  width: 195px; */
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -90,6 +88,8 @@
 
 .print-item {
   width: 195px;
+  max-width: calc(50% - 0.5rem);
+  max-height: calc(100vh - 60px);
   aspect-ratio: 1 / 1.42;
   position: relative;
   background: var(--white);
@@ -202,12 +202,6 @@
   margin: 0 1rem;
 }
 
-@media (max-width: 850px) {
-  /* .print-orders {
-    width: 70%;
-  } */
-}
-
 @media (max-width: 550px) {
   .prints-flexbox {
     justify-content: space-evenly;
@@ -215,13 +209,7 @@
   }
 
   .print-item {
-    /* height: 200px; */
-    width: calc(50% - 0.5rem);
-  }
-
-  .print-item img {
-    /* height: 200px; */
-    /* width: 150px; */
+    max-width: calc(50% - 0.5rem);
   }
 
   .sold-out h3 {
@@ -230,7 +218,6 @@
   }
 
   .print-orders {
-    /* width: 280px; */
     margin: 4rem auto !important;
   }
 
@@ -239,8 +226,8 @@
   }
 
   .print-orders .brand-backdrop {
-    /* left: -1.5rem; */
     transform: skew(7deg) rotate(-7deg);
+    height: 120%;
   }
 
   .print-orders .brand-backdrop::after {
@@ -263,12 +250,12 @@
 
   .print-orders p {
     font-size: 0.875rem;
-    /* padding: 0 2.5rem 2.5rem 0; */
   }
 
   .print-modal {
     padding: 1rem;
     top: 60px;
+    max-height: 95%;
   }
 }
 
@@ -287,20 +274,15 @@
   .print-modal--info__wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     flex-basis: 50%;
-  }
-
-  .print-modal--info__wrapper > * {
-    margin-top: auto !important;
   }
 
   .print-modal--subject__wrapper {
     flex-basis: 50%;
   }
 
-  .print-modal__flex {
-    flex-direction: column;
-    gap: 1rem;
+  .print-modal img {
+    max-height: calc(100vh - 135px);
   }
 }
