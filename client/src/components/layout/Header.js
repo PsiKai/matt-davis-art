@@ -101,14 +101,14 @@ const Header = ({routes, preload}) => {
                 {isAuthenticated ?
                   <EditIcon 
                     onMouseOver={() => preload(Edit)}
-                    style={{position: "relative", top: "6px"}}  
+                    // style={{position: "relative", top: "6px"}}
                   /> : 
                   <ExitToAppIcon
                       onMouseOver={() => preload(Login)} 
                     style={{
                       color: "var(--light-two)", 
-                      position: "relative", 
-                      top: "6px"
+                      // position: "relative", 
+                      // top: "6px"
                       }}
                   />}
               </Link>
