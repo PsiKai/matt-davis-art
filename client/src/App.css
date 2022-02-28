@@ -154,15 +154,9 @@ input {
 .input__helper {
   width: fit-content;
   position: absolute;
-  top: 0;
   left: 100%;
-  display: flex;
-  background-color: var(--dark);
-  color: var(--white);
-  padding: 0.25rem 0.5rem;
-  font-size: 0.75rem;
-  border-radius: 0.5rem;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  background-color: var(--white);
+  background-image: url(./images/brushed-alum.webp);
 }
 
 input:-webkit-autofill,

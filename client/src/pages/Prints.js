@@ -6,7 +6,10 @@ import AppContext from "../context/AppContext"
 import CircularProgress from "@material-ui/core/CircularProgress"
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import { CSSTransition } from 'react-transition-group';
-import Cart from './Cart';
+
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+import Badge from '@material-ui/core/Badge';
+
 
 const Prints = () => {
     const appContext = useContext(AppContext)
@@ -28,7 +31,6 @@ const Prints = () => {
 
     const openModal = (item) => {
         setImg(item)
-        console.log(item);
         const inCart = cart?.find(art => art._id === item.sku)
         setQuantityInCart(inCart?.quantity)
         setModalOpen(true)
@@ -172,7 +174,11 @@ const Prints = () => {
                                         onChange={updateQuantity}
                                         />
                                     {quantityInCart > 0 &&
-                                        <span className='input__helper'>{quantityInCart} in cart</span>
+                                        <span className='input__helper'>
+                                            <Badge badgeContent={quantityInCart}  style={{color: "var(--medium)"}} >
+                                                <ShoppingCartOutlinedIcon style={{color: "var(--dark)"}} />
+                                            </Badge>
+                                        </span>
                                     }                                    
                                 </div> 
                                 :
