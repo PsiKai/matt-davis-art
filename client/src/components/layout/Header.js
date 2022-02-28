@@ -99,17 +99,11 @@ const Header = ({routes, preload}) => {
             <li onClick={() => setOpen(false)}>
               <Link to="/edit" className="login-edit">
                 {isAuthenticated ?
-                  <EditIcon 
-                    onMouseOver={() => preload(Edit)}
-                    // style={{position: "relative", top: "6px"}}
-                  /> : 
+                  <EditIcon onMouseOver={() => preload(Edit)} /> 
+                  : 
                   <ExitToAppIcon
                       onMouseOver={() => preload(Login)} 
-                    style={{
-                      color: "var(--light-two)", 
-                      // position: "relative", 
-                      // top: "6px"
-                      }}
+                    style={{color: "var(--light-two)"}}
                   />}
               </Link>
             </li>
