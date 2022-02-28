@@ -29,37 +29,20 @@ const AppState = (props) => {
 
 
     //adds item to cart
-    const addItem = async (item) => {
-        let newCart
-        var newCartItem = state.prints.filter(print => {
-           return print._id === item.id
-        })
+    const addItem = async ({ id, quantity }) => {
+        var newCartItem = state.prints.find(print => print._id === id)
+        newCartItem.quantity = quantity;
 
-        newCartItem[0].quantity = item.quantity;       
-        
-        if (localStorage.getItem("cart") !== null) {
-            newCart = [...JSON.parse(localStorage.getItem("cart")), ...newCartItem]
-        } else {
-            newCart = [...newCartItem]
-        } 
+        let cart = JSON.parse(localStorage.getItem("cart")) || []
+        var foundIndex = cart.findIndex(item => item._id === id)
 
-        var reducedCart = newCart.reduce((accumulator, cur) => {
-            var name = cur._id;
-            var found = accumulator.find((elem) => {
-                return elem._id === name
-            })
-            if (found) {
-                found.quantity = +found.quantity + +cur.quantity
-            }
-            else accumulator.push(cur);
-            return accumulator;
-        }, []);
+        foundIndex >= 0 ? cart[foundIndex].quantity += +quantity : cart.push(newCartItem)
 
-        localStorage.setItem("cart", JSON.stringify(reducedCart))
-        
+        localStorage.setItem("cart", JSON.stringify(cart))
+
         dispatch({
             type: ADD_TO_CART,
-            payload: reducedCart
+            payload: cart
         })
         reloadCart();
     }
