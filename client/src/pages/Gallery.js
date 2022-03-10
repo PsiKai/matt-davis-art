@@ -1,13 +1,13 @@
 import React, {useContext, useEffect} from 'react';
-import "../styles/gallery.css"
 import AppContext from '../context/AppContext'
 import Piece from "../components/Piece";
-import CircularProgress from "@material-ui/core/CircularProgress"
 import PageHeader from '../components/layout/PageHeader';
+import CircularProgress from "@material-ui/core/CircularProgress"
+import "../styles/gallery.css"
 
 const Gallery = () => {
     const appContext = useContext(AppContext);
-    const {gallery, getArt} = appContext;
+    const { gallery, getArt } = appContext;
 
     useEffect(() => {
         !gallery && getArt();
@@ -17,7 +17,7 @@ const Gallery = () => {
     return (
         <div className="page-content">
             <PageHeader heading="My Gallery" />
-            
+            <div className='gallery-container'>
             {gallery ? gallery.map((piece, i) => {
                 return <Piece 
                     key={piece._id} 
@@ -30,13 +30,12 @@ const Gallery = () => {
                 })
                 : 
                 <div>
-                    <hr className="art-division" />
                     <div className="progress">
                         <CircularProgress color="inherit" />
                     </div>
                 </div>
-                
             }
+            </div>
         </div>
     )
 }
