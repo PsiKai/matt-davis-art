@@ -147,6 +147,43 @@
   opacity: 0;
 }
 
+/* Cross-fade transition */
+
+.crossfade-enter {
+  opacity: 0;
+  position: absolute !important;
+}
+
+.crossfade-enter.crossfade-enter-active {
+  opacity: 1;
+  transition: opacity 200ms ease;
+}
+
+/* .crossfade-enter-active > *,
+.crossfade-enter-done > * {
+  transform: var(--transform) !important;
+} */
+
+.crossfade-enter-done {
+  opacity: 1 !important;
+  transition-delay: 0ms !important;
+  /* position: static; */
+}
+
+.crossfade-exit {
+  opacity: 1;
+  position: absolute !important;
+}
+
+.crossfade-exit.crossfade-exit-active {
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.crossfade-exit-done {
+  opacity: 0;
+}
+
 /* Alert message transition  */
 
 .fade-enter {
