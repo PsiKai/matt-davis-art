@@ -4,7 +4,7 @@ const Print = (props) => {
     // Function Props
     const { incrementLoaded, open } = props
     // Variable Props
-    const { src, title, sku, price, sold, size, original, loaded } = props
+    const { src, title, sku, price, sold, size, original, loaded, position } = props
 
     const [isZero, setIsZero] = useState(false)
     const [inCart, setInCart] = useState(false)
@@ -13,8 +13,7 @@ const Print = (props) => {
 
     useEffect(() => {
         sold && setIsZero(true)
-    // eslint-disable-next-line 
-    }, [])
+    }, [sold])
 
     useEffect(() => {
         savedCart?.find(item => {
@@ -47,6 +46,7 @@ const Print = (props) => {
                 // {`data:${src.contentType};base64, ${bytes.toString('base64')}`}
                 alt={title}
                 onLoad={() => incrementLoaded()}
+                style={{objectPosition: position}}
             >
             </img>
             <p id="cost">${price}</p>
