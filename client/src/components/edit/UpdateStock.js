@@ -1,18 +1,18 @@
 import React, { useContext, useState, useRef } from 'react'
 import AppContext from "../../context/AppContext"
 import AlertContext from "../../context/alertContext"
+import ImagePreview from '../layout/ImagePreview'
 import CircularProgress from "@material-ui/core/CircularProgress"
 
-import { CSSTransition, TransitionGroup} from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 import axios from "axios"
 
 const UpdateStock = () => {
     const appContext = useContext(AppContext)
     const alertContext = useContext(AlertContext)
-    const {prints, refreshArt} = appContext
-    const {setAlert} = alertContext
+    const { prints, refreshArt } = appContext
+    const { setAlert } = alertContext
 
-    const [artEdit, setArtEdit] = useState({})
     const [newTitle, setNewTitle] = useState({})
     const [edit, setEdit] = useState(false)
 
@@ -32,40 +32,18 @@ const UpdateStock = () => {
     }
 
     const editArtwork = (e) => {
-        var pic = e.target
-        setNewTitle({
-            _id: pic.id,
-            src: pic.src,
-            title: pic.alt,
-            alt: pic.alt,
-            price: pic.dataset.price,
-            original: JSON.parse(pic.dataset.original),
-            type: pic.dataset.type,
-            dimensions: {
-                height: +pic.dataset.height,
-                width: +pic.dataset.width
-            }
-        })
-        setArtEdit({
-            _id: pic.id,
-            src: pic.src,
-            title: pic.alt
-        })
+        var foundPrint = prints.find(print => print._id === e.target.id)
+        setNewTitle({ ...foundPrint, dimensions: JSON.parse(foundPrint.dimensions) })
         setEdit(true)
         const y = updateForm.current.getBoundingClientRect().top - 100
         window.scrollBy({top: y, behavior: "smooth"})
     }
 
     const submitChanges = async () => {
-        const data = {
-            old: artEdit,
-            new: newTitle
-        }
         try {
-            const res = await axios.post("/update/stock", data)
+            const res = await axios.post("/update/stock", newTitle)
             setAlert(res.data.msg, "lightgrey")
             setNewTitle({})
-            setArtEdit({})
             refreshArt() 
             setEdit(false)
         } catch (error) {
@@ -75,9 +53,8 @@ const UpdateStock = () => {
 
     const remove = async () => {
         try {
-            const res = await axios.post("/delete/prints", artEdit)
+            const res = await axios.post("/delete/prints", newTitle)
             setAlert(res.data.msg, "lightblue")
-            setArtEdit({});
             setNewTitle({})
             refreshArt();
             setEdit(false)
@@ -92,15 +69,18 @@ const UpdateStock = () => {
             : 
             setNewTitle({...newTitle, original: false})
     }
+
+    const updatePosition = (position) => {
+        setNewTitle(prev => ({ ...prev, position }))
+    }
     
     return (
-        <div className="edit-gallery">
+        <div className="edit-gallery" onDragOver={e => e.preventDefault()}>
             <h2>Update Artwork in Store</h2>
             <h3>Originals</h3>
             <div className="update-gallery">
                 {prints ? prints.map((art, i) => {
                     if (art.original) {
-                    const size = JSON.parse(art.dimensions)
                      return (
                         <img 
                             key={i}
@@ -108,12 +88,6 @@ const UpdateStock = () => {
                             className="update-preview"
                             src={art.img}
                             alt={art.title}
-                            data-height={size.height}
-                            data-width={size.width}
-                            data-price={art.price}
-                            data-type={art.type}
-                            data-sold-out={art.soldOut}
-                            data-original={art.original}
                             onClick={editArtwork}  
                         />
                     )} else return null
@@ -125,9 +99,8 @@ const UpdateStock = () => {
             </div>
             <h3>Prints</h3>
             <div className="update-gallery">
-                {prints && prints.map((art, i) => {
+                {prints?.map((art, i) => {
                     if (!art.original) {
-                        const size = JSON.parse(art.dimensions)
                         return (
                             <img 
                                 key={i}
@@ -135,42 +108,27 @@ const UpdateStock = () => {
                                 className="update-preview"
                                 src={art.img}
                                 alt={art.title}
-                                data-height={size.height}
-                                data-width={size.width}
-                                data-price={art.price}
-                                data-type={art.type}
-                                data-sold-out={art.soldOut}
-                                data-original={art.original}
                                 onClick={editArtwork}  
                             />
                         )
                     } else return null
                 })}
             </div>
-            <div className="update-gallery--grid" ref={updateForm}>
-                <TransitionGroup className="update-gallery--wrapper">
-                    <CSSTransition
-                        key={artEdit._id}
-                        timeout={400}
-                        classNames="fadein"
-                    >          
-                        <div className="update-gallery--form">
-                            <img 
-                                className="edit-image"
-                                name={newTitle && newTitle.name}
-                                alt={newTitle && newTitle.alt}
-                                src={newTitle && newTitle.src}>
-                            </img>
-                        </div>
-                    </CSSTransition>
-                </TransitionGroup>
-            
+            <div className="upload-form" ref={updateForm}>
                 <CSSTransition
                     in={edit}
                     classNames="fadein"
                     timeout={200}
                     unmountOnExit={true}
-                >
+                ><>
+                    <ImagePreview
+                        transitionKey={newTitle._id}
+                        src={newTitle.img}
+                        alt={newTitle.alt}
+                        dispatchPosition={updatePosition}
+                        objectPosition={newTitle.position}
+                    />
+
                     <div className="update-gallery--update">
                         <div className="input__wrapper">
                             <label htmlFor="update-title">New Title</label>
@@ -200,7 +158,7 @@ const UpdateStock = () => {
 
                                 <label 
                                     className="input__wrapper" 
-                                    style={artEdit.original ? {opacity: "1"} : {}}
+                                    style={newTitle.original ? {opacity: "1"} : {}}
                                 >
                                     <input 
                                         type="radio" 
@@ -224,7 +182,7 @@ const UpdateStock = () => {
                                         max="100.0" 
                                         step="0.5" 
                                         onChange={setUpdate}
-                                        value={newTitle.dimensions ? newTitle.dimensions.width : 0}
+                                        value={newTitle.dimensions?.width}
                                         inputMode="decimal"
                                     />
                                 </div>
@@ -239,7 +197,7 @@ const UpdateStock = () => {
                                         max="100.0" 
                                         step="0.5" 
                                         onChange={setUpdate}
-                                        value={newTitle.dimensions ? newTitle.dimensions.height : 0}
+                                        value={newTitle.dimensions?.height}
                                         inputMode="decimal"
                                     />
                                 </div>
@@ -265,7 +223,7 @@ const UpdateStock = () => {
                         <p style={{textAlign: "center"}}>--OR--</p>
                         <button data-text="Delete" onClick={remove}>Delete</button>
                     </div>
-                </CSSTransition>
+                </></CSSTransition>
             </div>
         </div>
     )       
