@@ -94,7 +94,7 @@ const UploadGallery = () => {
                 <CSSTransition
                     key={file.size}
                     timeout={400}
-                    classNames="fadein"
+                    classNames="crossfade"
                 >
                     <img src={preview} alt={form.title} />
                 </CSSTransition>
