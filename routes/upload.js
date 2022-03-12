@@ -78,17 +78,17 @@ router.post("/prints", async (req, res) => {
 
     const { title, original, price, dimensions, position } = req.body
     const { file: { name }, file } = req.files
+    const dirFileName = encodeURIComponent(name)
     const type = name.split(/\.(?=[^\.]+$)/)[1]
     const newName = title + "." + type
-    const dirFileName = encodeURIComponent(name)
     const cloudName = encodeURIComponent(newName)
-    const img = `https://storage.googleapis.com/${printBucket}/${cloudName}`
+    const img = encodeURI(`https://storage.googleapis.com/${printBucket}/${cloudName}`)
     var imgObj = { title, original, price, dimensions, type, soldOut: false, img, position }
     const localPath = path.join(__dirname, '/uploads/', dirFileName)
 
     try {
         await file.mv(localPath)
-        await storage.bucket(printBucket).upload(localPath, {destination: newName})
+        await storage.bucket(printBucket).upload(localPath, {destination: cloudName})
         await printModel.create(imgObj)
         res.json({msg: `${title} was uploaded to the store!`})
     } catch (error) {
