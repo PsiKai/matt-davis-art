@@ -6,16 +6,9 @@ import axios from 'axios'
 import { CSSTransition } from 'react-transition-group';
 
 const UploadPrint = () => {
-    const alertContext = useContext(AlertContext)
-    const appContext = useContext(AppContext);
-    const {refreshArt} = appContext;
-    const {setAlert} = alertContext;
+    const { setAlert } = useContext(AlertContext)
+    const { refreshArt } = useContext(AppContext);
 
-    // const [stock, setStock] = useState({
-    //     "eightEleven": 0,
-    //     "oneeightTwofour": 0,
-    //     "fiveEight": 0
-    // })
     const [original, setOriginal] = useState(false);
     const [price, setPrice] = useState("")
     const [dimensions, setDimensions] = useState({width: 11, height: 17})
@@ -25,8 +18,6 @@ const UploadPrint = () => {
     const [objectPosition, setObjectPosition] = useState("50% 50%")
 
     const inputFile = useRef()
-
-    useEffect(() => console.log(objectPosition), [objectPosition])
 
     const updateTitle = (e) => {
         setTitle(e.target.value)
@@ -50,14 +41,6 @@ const UploadPrint = () => {
         e.target.blur()
     }
 
-    // Sets the number of prints to state
-    // const quantChange = (e) => {
-    //     setStock({
-    //         ...stock,
-    //         [e.target.name]: e.target.value
-    //     })
-    // }
-
     // Indicates original artwork 
     const makeOriginal = (e) => {
         e.target.value === "original" ? setOriginal(true) : setOriginal(false)
@@ -79,10 +62,10 @@ const UploadPrint = () => {
     // Uploads new print to database
     const upload = async (e) => {
         e.preventDefault();
+
         const formData = new FormData();
         formData.append("file", file)
         formData.append('title', title)
-        // formData.append('stock', JSON.stringify(stock))
         formData.append('original', original)
         if (original) {
             formData.append('price', price)
@@ -92,28 +75,24 @@ const UploadPrint = () => {
             formData.append("dimensions", JSON.stringify({width: 11, height: 17}))
         }
         formData.append("position", objectPosition)
+
         try {
             const res = await axios.post("/upload/prints", formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data"
-                }
+                headers: { "Content-Type": "multipart/form-data" }
             })
             setAlert(res.data.msg, "lightblue")
             refreshArt();
         } catch (err) {
             setAlert(err.response.data.msg, "lightred")
         }
-        // setStock({
-        //     "eightEleven": 0,
-        //     "oneeightTwofour": 0,
-        //     "fiveEight": 0
-        // })
+
         setOriginal(false)
         setTitle("")
         setFile("")
         setPreview("")
         setPrice("")
         setDimensions({width: 11, height: 17})
+        setObjectPosition("50% 50%")
         inputFile.current.value = null;
     }
 
@@ -134,6 +113,7 @@ const UploadPrint = () => {
                         </CSSTransition>
                         <input id="image" type="file" onChange={imgUpdate} ref={inputFile} required/>
                     </label>
+
                     <div className="input__wrapper">
                         <label htmlFor="title">Title</label>
                         <input
@@ -176,7 +156,7 @@ const UploadPrint = () => {
                                         onChange={updateDimensions}
                                         value={dimensions.width}
                                         inputMode="decimal"
-                                        />
+                                    />
                                 </div>
                                 <div className="input__wrapper">
                                     <label htmlFor="height">Height:</label>
@@ -190,7 +170,7 @@ const UploadPrint = () => {
                                         onChange={updateDimensions}
                                         value={dimensions.height}
                                         inputMode="decimal"
-                                        />
+                                    />
                                 </div>
                                 <div className="price input__wrapper">
                                     <label htmlFor="price">Price: $</label>
@@ -203,55 +183,11 @@ const UploadPrint = () => {
                                         onChange={updatePrice}
                                         value={price}
                                         inputMode="decimal"
-                                        />
+                                    />
                                 </div>
                             </div>
                         </CSSTransition>
                     </div>
-                    {/* <label htmlFor="prints-stock">Number of Prints</label>
-                    <div id="prints-stock" className="upload-prints--stock">
-                        <div>
-                            <label htmlFor="fiveEight" className="stock">5 x 8: </label>
-                            <input 
-                                id="fiveEight"
-                                type="number"
-                                onChange={quantChange}
-                                name="fiveEight"
-                                value={stock.fiveEight}
-                                className="stock"
-                                min="0"
-                                inputMode="numeric"
-                            />
-                        </div>
-
-                        <div>
-                            <label htmlFor="eightEleven" className="stock">8.5 x 11: </label>
-                            <input
-                                id="eightEleven"
-                                type="number"
-                                onChange={quantChange}
-                                name="eightEleven"
-                                value={stock.eightEleven}
-                                className="stock"
-                                min="0"
-                                inputMode="numeric"
-                            />
-                        </div>
-
-                        <div>
-                            <label htmlFor="oneeightTwofour" className="stock">18 x 24: </label>
-                            <input 
-                                type="number"
-                                onChange={quantChange}
-                                name="oneeightTwofour"
-                                value={stock.oneeightTwofour}
-                                className="stock"
-                                min="0"
-                                inputMode="numeric"
-                            />
-                        </div>
-                    </div> */}
-
                     <button data-text="Submit" type="submit">Submit</button>
                 </form>
                 <CSSTransition
