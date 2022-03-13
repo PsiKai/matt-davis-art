@@ -275,12 +275,13 @@
   flex-wrap: wrap;
   margin: 2rem auto;
   justify-content: center;
+  gap: 1rem;
 }
 
 .update-preview {
-  margin: 0.5rem;
-  height: 100px;
-  width: 100px;
+  border-radius: 0.5rem;
+  height: 130px;
+  aspect-ratio: 1 / 1.42;
   object-fit: cover;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
   transition: all 200ms ease;

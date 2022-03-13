@@ -54,7 +54,6 @@ const ImagePreview = ({ transitionKey, src, alt, dispatchPosition, objectPositio
             let [left, top] = objectPosition.split(" ")
             left = parseFloat(left) / 100
             top = parseFloat(top) / 100
-            console.log(left, top, Math.floor(((parent.width - (height / 1.42)) / 2) * left))
             setOverlayStyle(prev => ({
                 ...prev,
                 left: `${Math.floor(((parent.width - (height / 1.42))) * left)}px`,

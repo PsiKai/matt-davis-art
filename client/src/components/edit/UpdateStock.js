@@ -88,7 +88,8 @@ const UpdateStock = () => {
                             className="update-preview"
                             src={art.img}
                             alt={art.title}
-                            onClick={editArtwork}  
+                            onClick={editArtwork}
+                            style={{ objectPosition: art.position }}
                         />
                     )} else return null
                 }) :
@@ -108,7 +109,8 @@ const UpdateStock = () => {
                                 className="update-preview"
                                 src={art.img}
                                 alt={art.title}
-                                onClick={editArtwork}  
+                                onClick={editArtwork}
+                                style={{ objectPosition: art.position }}
                             />
                         )
                     } else return null
