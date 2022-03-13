@@ -67,7 +67,6 @@
 .update-stock,
 .edit-gallery {
   max-width: 100%;
-  /* width: 66rem; */
   width: 100%;
   min-height: inherit;
 }

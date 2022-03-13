@@ -159,15 +159,9 @@
   transition: opacity 200ms ease;
 }
 
-/* .crossfade-enter-active > *,
-.crossfade-enter-done > * {
-  transform: var(--transform) !important;
-} */
-
 .crossfade-enter-done {
   opacity: 1 !important;
   transition-delay: 0ms !important;
-  /* position: static; */
 }
 
 .crossfade-exit {
