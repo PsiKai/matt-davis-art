@@ -61,6 +61,7 @@ const Prints = () => {
                             open={openModal}
                             size={JSON.parse(print.dimensions)}
                             original={print.original}
+                            position={print.position || "50% 50%"}
                             incrementLoaded={incrementLoaded}
                             loaded={loaded}
                             /> 
@@ -87,6 +88,7 @@ const Prints = () => {
                             open={openModal}
                             original={print.original}
                             size={JSON.parse(print.dimensions)}
+                            position={print.position || "50% 50%"}
                             incrementLoaded={incrementLoaded}
                             loaded={loaded}
                             /> 

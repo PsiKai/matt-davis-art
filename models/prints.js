@@ -12,7 +12,8 @@ var printSchema = new mongoose.Schema({
     original: Boolean,
     price: Number,
     dimensions: Object,
-    soldOut: Boolean
+    soldOut: Boolean,
+    position: String
 })
 
 module.exports = new mongoose.model('Print', printSchema);

@@ -15,15 +15,15 @@ var galleryModel = require("../models/gallery")
 var printModel = require("../models/prints")
 
 router.post("/stock", (req, res) => {
-    console.log(req.body);
-    const { old: { _id }, new: { title, price, original, dimensions } } = req.body
+    const { _id, title, original, price, dimensions, position } = req.body
     printModel.findOneAndUpdate(
         {"_id": _id}, 
         {"$set": {
             "title": title,
             "price": price,
             "original": original,
-            "dimensions": JSON.stringify(dimensions)
+            "dimensions": JSON.stringify(dimensions),
+            "position": position
         }},
         (err) => {
             if (err) {

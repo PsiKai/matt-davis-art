@@ -67,14 +67,17 @@
 .update-stock,
 .edit-gallery {
   max-width: 100%;
-  width: 66rem;
+  width: 100%;
+  min-height: inherit;
 }
 
 .upload-form {
   width: 90%;
+  min-height: inherit;
   margin: 2rem auto 0;
   display: grid;
   grid-template-columns: 50% 50%;
+  gap: 1rem;
 }
 
 .upload-prints--stock {
@@ -155,20 +158,34 @@
 
 .img-preview {
   position: relative;
-  height: 100%;
-  width: 100%;
-  padding: 1rem;
-  display: block;
-  text-align: center;
 }
 
 .upload-form img {
-  max-width: 90%;
-  transform: translateX(-50%);
-  object-fit: contain;
-  max-height: 400px;
-  object-position: top;
+  max-height: 600px;
+  max-width: 100%;
+}
+
+.image__wrapper {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  height: fit-content;
+  width: fit-content;
+}
+
+.draggable-overlay {
+  max-width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1.42;
   position: absolute;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0 500px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.image__wrapper:hover > .draggable-overlay {
+  opacity: 1;
 }
 
 .update-stock h2 {
@@ -232,12 +249,13 @@
   flex-wrap: wrap;
   margin: 2rem auto;
   justify-content: center;
+  gap: 1rem;
 }
 
 .update-preview {
-  margin: 0.5rem;
-  height: 100px;
-  width: 100px;
+  border-radius: 0.5rem;
+  height: 130px;
+  aspect-ratio: 1 / 1.42;
   object-fit: cover;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
   transition: all 200ms ease;
@@ -328,13 +346,14 @@
   }
 
   .img-preview {
-    height: 500px;
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
   }
 
   .img-preview img {
     object-position: center;
-    height: 100%;
-    max-height: none;
+    max-height: 400px;
   }
 
   .edit-image {
@@ -367,10 +386,6 @@
   .update-gallery--grid {
     grid-template-columns: none;
     height: auto;
-  }
-
-  .update-preview {
-    margin: 0.25rem;
   }
 }
 
@@ -413,14 +428,6 @@
 
   .upload-form textarea {
     height: 5rem;
-  }
-
-  .img-preview {
-    height: 300px;
-  }
-
-  .upload-form img {
-    width: 90vw;
   }
 
   .uploadform.prints {
@@ -484,15 +491,15 @@
   }
 
   .update-preview {
-    margin: 0;
     justify-content: flex-start;
     width: calc(100% / 3);
-    height: calc(100vw / 3);
+    height: auto;
     border: 1px solid var(--white);
   }
 
   .update-gallery {
     justify-content: flex-start;
+    gap: 0;
   }
 
   @media (hover: none) {

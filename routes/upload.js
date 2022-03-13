@@ -73,59 +73,31 @@ router.post("/gallery", (req, res) => {
 })
 
 
-router.post("/prints", (req, res) => {
-    if (req.files === null) {
-        return res.status(400).json({msg: "No file was received"})
+router.post("/prints", async (req, res) => {
+    if (!req.files) res.status(400).json({msg: "No file was received"})
+
+    const { title, original, price, dimensions, position } = req.body
+    const { file: { name }, file } = req.files
+    const dirFileName = encodeURIComponent(name)
+    const type = name.split(/\.(?=[^\.]+$)/)[1]
+    const newName = title + "." + type
+    const cloudName = encodeURIComponent(newName)
+    const img = encodeURI(`https://storage.googleapis.com/${printBucket}/${cloudName}`)
+    var imgObj = { title, original, price, dimensions, type, soldOut: false, img, position }
+    const localPath = path.join(__dirname, '/uploads/', dirFileName)
+
+    try {
+        await file.mv(localPath)
+        await storage.bucket(printBucket).upload(localPath, {destination: cloudName})
+        await printModel.create(imgObj)
+        res.json({msg: `${title} was uploaded to the store!`})
+    } catch (error) {
+        console.log(error)
+        res.json({msg: `There was an error uploading ${title}`})
+    } finally {
+        const localFile = fs.existsSync(localPath)
+        if (localFile) fs.unlinkSync(localPath)
     }
-
-    console.log(req.body);
-
-    const file = req.files.file
-    const {name} = file;
-    const type = name.split(".")[1]
-    const dirFileName = name.replace(/ /g, "-").toLowerCase()
-    const cloudName = req.body.title.replace(/ /g, "-").toLowerCase()
-
-    file.mv(`${__dirname}/uploads/${dirFileName}`, err => {
-        if(err) {
-            console.error(err);
-            return res.status(500).json({msg: "Error moving file", error: err});
-        }
-        var imgObj = {
-            title: req.body.title,
-            original: req.body.original,
-            price: req.body.price,
-            dimensions: req.body.dimensions,
-            type: type,
-            soldOut: false,
-            img: `https://storage.googleapis.com/${printBucket}/${cloudName}.${type}`
-            }
-        
-        const googleUploadPrint = () => {
-            storage.bucket(printBucket).upload(`routes/uploads/${dirFileName}`, {destination: cloudName + "." + type}, (err) => {
-                if (err) {
-                    console.log(err)
-                    res.json({msg: "Error uploading file to google", color: "var(--medium)"})
-                } else {
-                    uploadPrint();
-                }
-            })
-        } 
-
-        const uploadPrint = () => {
-            printModel.create(imgObj, (err, item) => {
-                if (err) {
-                    console.log(err);
-                    res.json({msg: "Error uploading image to mongo"})
-                } else {
-                    item.save();
-                    res.json({msg: `${imgObj.title} was uploaded to prints`})
-                    fs.unlinkSync(path.join(__dirname + "/uploads/" + dirFileName));
-                }
-            })
-        }
-        googleUploadPrint();
-    })
 })
 
 module.exports = router;
