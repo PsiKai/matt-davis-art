@@ -150,9 +150,10 @@ const UpdateStock = () => {
                                 >
                                     <input 
                                         type="radio" 
-                                        name="print"
+                                        name="prints"
+                                        value="prints"
                                         onChange={() => {}}
-                                        checked={newTitle.original || true}
+                                        checked={newTitle.original}
                                         onClick={makeOriginal}
                                     />
                                     <span>Print</span>
@@ -165,7 +166,8 @@ const UpdateStock = () => {
                                     <input 
                                         type="radio" 
                                         name="original"
-                                        checked={newTitle.original || false} 
+                                        value="original"
+                                        checked={newTitle.original} 
                                         onChange={() => {}}
                                         onClick={makeOriginal}
                                     />
