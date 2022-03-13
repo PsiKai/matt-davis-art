@@ -96,7 +96,7 @@ const ImagePreview = ({ transitionKey, src, alt, dispatchPosition, objectPositio
             timeout={400}
             classNames="crossfade"
         >
-            <div className='image__wrapper' onMouseOver={getOptimumHeight}>
+            <div className='image__wrapper' onMouseOver={getOptimumHeight} onTouchStart={getOptimumHeight}>
                 <img src={src} alt={alt} />
                 <div 
                     className="draggable-overlay"
