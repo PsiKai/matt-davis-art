@@ -52,13 +52,12 @@ const ImagePreview = ({ transitionKey, src, alt, dispatchPosition, objectPositio
 
         const rect = e.currentTarget.getBoundingClientRect()
         const height = rect.height > rect.width * 1.42 ? rect.width * 1.42 : rect.height
-        const parent = e.currentTarget.parentElement.getBoundingClientRect()
-        if (!overlayStyle.left) setInitialPos(rect, height, parent)
+        if (!overlayStyle.left) setInitialPos(rect, height)
         setOverlayStyle(prev => ({...prev, height: `${height}px`}))
     }
 
-    const setInitialPos = (overlay, height, parent) => {
-        let position, dimension
+    const setInitialPos = (overlay, height) => {
+        let position, dimension, value
         if (overlay.height < overlay.width * 1.42) {
             position = "left"
             dimension = "width"
@@ -66,20 +65,15 @@ const ImagePreview = ({ transitionKey, src, alt, dispatchPosition, objectPositio
             position = "top"
             dimension = "height"
         }
+        const box = dimension === "height" ? height : height / 1.42
+        value = (overlay[dimension] / 2) - (box / 2)
         if (objectPosition) {
             let [left, top] = objectPosition.split(" ")
             left = parseFloat(left) / 100
             top = parseFloat(top) / 100
-            setOverlayStyle(prev => ({
-                ...prev,
-                left: `${Math.floor(((parent.width - (height / 1.42))) * left)}px`,
-                top: `${Math.floor((parent.height - height)) * top}px`,
-            }))
-        } else {
-            const box = dimension === "height" ? height : height / 1.42
-            const value = (overlay[dimension] / 2) - (box / 2)
-            setOverlayStyle(prev => ({ ...prev, [position]: `${value}px`}))
+            value = Math.floor(overlay[dimension] - box) * (height === overlay.height ? left : top)
         }
+        setOverlayStyle(prev => ({ ...prev, [position]: `${value}px`}))
     }
 
     const calculatePosition = (e) => {
