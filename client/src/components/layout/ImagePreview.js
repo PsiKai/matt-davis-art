@@ -16,14 +16,30 @@ const ImagePreview = ({ transitionKey, src, alt, dispatchPosition, objectPositio
         return newPos
     }
 
-    const dragOverlay = (e) => {
+    const touchOverlay = (e) => {
+        const { clientX, clientY } = e.touches[0]
+        dragOverlay(e, clientX, clientY)
+    }
+
+    const clickOverlay = (e) => {
+        dragOverlay(e, e.pageX, e.pageY)
+    }
+
+    const dragOverlay = (e, x, y) => {
         const parent = e.currentTarget.parentElement.getBoundingClientRect()
         const overlay = e.currentTarget.getBoundingClientRect()
-        let newLeft = getPosition(parent, overlay, "width", "left", e.pageX)
-        let newTop = getPosition(parent, overlay, "height", "top", e.pageY)
+        let newLeft = getPosition(parent, overlay, "width", "left", x)
+        let newTop = getPosition(parent, overlay, "height", "top", y)
         setOverlayStyle((prev) => {
             return {...prev, left: `${newLeft}px`, top: `${newTop}px`}
         })
+    }
+    
+    const getTouchPosition  = (e) => {
+        document.documentElement.style.overflowY = "hidden"
+        const { left, top, } = e.target.getBoundingClientRect()
+        const { clientX, clientY } = e.touches[0]
+        setOffset({ left: clientX - left, top: clientY - top })
     }
 
     const getMousePos = (e) => {
@@ -33,7 +49,7 @@ const ImagePreview = ({ transitionKey, src, alt, dispatchPosition, objectPositio
 
     const getOptimumHeight = (e) => {
         if (overlayStyle.height) return
-        
+
         const rect = e.currentTarget.getBoundingClientRect()
         const height = rect.height > rect.width * 1.42 ? rect.width * 1.42 : rect.height
         const parent = e.currentTarget.parentElement.getBoundingClientRect()
@@ -67,6 +83,7 @@ const ImagePreview = ({ transitionKey, src, alt, dispatchPosition, objectPositio
     }
 
     const calculatePosition = (e) => {
+        document.documentElement.style.overflowY = "auto"
         let top = parseFloat(overlayStyle.top)
         let left = parseFloat(overlayStyle.left)
         const overlay = e.currentTarget.getBoundingClientRect()
@@ -91,9 +108,12 @@ const ImagePreview = ({ transitionKey, src, alt, dispatchPosition, objectPositio
                     className="draggable-overlay"
                     style={overlayStyle}
                     draggable
-                    onDrag={dragOverlay}
+                    onDrag={clickOverlay}
                     onDragStart={e => e.dataTransfer.setDragImage(new Image(), 0, 0)}
                     onDragEnd={calculatePosition}
+                    onTouchStart={getTouchPosition}
+                    onTouchMove={touchOverlay}
+                    onTouchEnd={calculatePosition}
                     onMouseDown={getMousePos}
                 ></div>
             </div>
