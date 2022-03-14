@@ -31,8 +31,8 @@ const UploadGallery = () => {
                 setAlert("File is larger than the 16mb max size", "lightred")
                 e.target.value = null;
             } else {
-            setFile(imgFile)
-            setPreview(URL.createObjectURL(imgFile))
+                setFile(imgFile)
+                setPreview(URL.createObjectURL(imgFile))
             }
         } else {
             setPreview("")
@@ -76,6 +76,12 @@ const UploadGallery = () => {
         <div className="upload-gallery" onDragOver={e => e.preventDefault()}>
             <h2>Add Artwork to Gallery</h2>
             <div className="upload-form">
+                <ImagePreview
+                    src={preview}
+                    alt={form.title}
+                    transitionKey={file.size}
+                    dispatchPosition={updatePosition}
+                />
                 <GalleryForm
                     form={form}
                     imgUpdate={imgUpdate}
@@ -83,12 +89,6 @@ const UploadGallery = () => {
                     upload={upload}
                     file={file}
                     inputFile={inputFile}
-                />
-                <ImagePreview
-                    src={preview}
-                    alt={form.title}
-                    transitionKey={file.size}
-                    dispatchPosition={updatePosition}
                 />
             </div>
         </div>

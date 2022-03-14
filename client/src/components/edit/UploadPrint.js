@@ -9,7 +9,7 @@ const UploadPrint = () => {
     const { setAlert } = useContext(AlertContext)
     const { refreshArt } = useContext(AppContext);
 
-    const [original, setOriginal] = useState(false);
+    const [original, setOriginal] = useState("print");
     const [price, setPrice] = useState("")
     const [dimensions, setDimensions] = useState({width: 11, height: 17})
     const [title, setTitle] = useState('')
@@ -19,20 +19,16 @@ const UploadPrint = () => {
 
     const inputFile = useRef()
 
-    const updateTitle = (e) => {
-        setTitle(e.target.value)
-    }
-
     // Sets image file to state
     const imgUpdate = (e) => {
         const [imgFile] = e.target.files
         if (imgFile) {
             if (imgFile.size / 1024 / 1024 > 16) {
-                setAlert("File is larger than the 16mb max size", "lightpink")
+                setAlert("File is larger than the 16mb max size", "lightred")
                 e.target.value = null;
             } else {
-            setFile(imgFile)
-            setPreview(URL.createObjectURL(imgFile))
+                setFile(imgFile)
+                setPreview(URL.createObjectURL(imgFile))
             }
         } else {
             setPreview("")
@@ -41,23 +37,18 @@ const UploadPrint = () => {
         e.target.blur()
     }
 
-    // Indicates original artwork 
-    const makeOriginal = (e) => {
-        e.target.value === "original" ? setOriginal(true) : setOriginal(false)
-    }
+    const updateTitle = (e) => setTitle(e.target.value)
 
-    // Set Price of Original art 
-    const updatePrice = (e) => {
-        setPrice(e.target.value)
-    }
+    const makeOriginal = (e) => setOriginal(e.target.value)
 
-    // Set dimensions of original art
     const updateDimensions = (e) => {
         setDimensions({
             ...dimensions,
             [e.target.name]: e.target.value
         })
     }
+
+    const updatePrice = (e) => setPrice(e.target.value)
 
     // Uploads new print to database
     const upload = async (e) => {
@@ -66,8 +57,8 @@ const UploadPrint = () => {
         const formData = new FormData();
         formData.append("file", file)
         formData.append('title', title)
-        formData.append('original', original)
-        if (original) {
+        formData.append('original', original === "original")
+        if (original === "original") {
             formData.append('price', price)
             formData.append("dimensions", JSON.stringify(dimensions))
         } else {
@@ -86,7 +77,7 @@ const UploadPrint = () => {
             setAlert(err.response.data.msg, "lightred")
         }
 
-        setOriginal(false)
+        setOriginal("print")
         setTitle("")
         setFile("")
         setPreview("")
@@ -100,7 +91,14 @@ const UploadPrint = () => {
         <div className="upload-prints" onDragOver={e => e.preventDefault()}>
             <h2>Add Artwork to Store</h2>
             <div className="upload-form prints">
+                <ImagePreview
+                    src={preview}
+                    alt={title}
+                    transitionKey={file.size}
+                    dispatchPosition={setObjectPosition}
+                />
                 <form onSubmit={upload}>
+
                     <label className={file ? "file-input__label small-label" : "file-input__label"}>
                         <span>Choose A File</span>
                         <CSSTransition
@@ -127,18 +125,32 @@ const UploadPrint = () => {
                     </div>
 
                     <div className="upload-prints--stock">
-                        <div className={original ? "radio-group original" : "radio-group"}>
-                            <label className="input__wrapper" style={!original ? {opacity: "1"}: {}}>
-                                <input type="radio" value="prints" onClick={makeOriginal}/>
+
+                        <div className={`radio-group ${original}`}>
+                            <label className="input__wrapper">
+                                <input
+                                    type="radio"
+                                    name="art-format"
+                                    value="print"
+                                    checked={original === "print"}
+                                    onChange={makeOriginal}
+                                />
                                 <span>Print</span>
                             </label>
-                            <label className="input__wrapper" style={original ? {opacity: "1"} : {}}>
-                                <input type="radio" value="original" onClick={makeOriginal}/>
+                            <label className="input__wrapper">
+                                <input
+                                    type="radio"
+                                    name="art-format"
+                                    value="original"
+                                    checked={original === "original"}
+                                    onChange={makeOriginal}
+                                />
                                 <span>Original</span>
                             </label>
                         </div>
+
                         <CSSTransition
-                            in={original}
+                            in={original === "original"}
                             timeout={200}
                             classNames="drop-in"
                             unmountOnExit
@@ -187,20 +199,10 @@ const UploadPrint = () => {
                                 </div>
                             </div>
                         </CSSTransition>
+
                     </div>
                     <button data-text="Submit" type="submit">Submit</button>
                 </form>
-                <CSSTransition
-                    in={!!preview}
-                    unmountOnExit
-                    timeout={0}
-                >
-                    <ImagePreview
-                        transitionKey={file.size}
-                        src={preview} alt={title}
-                        dispatchPosition={setObjectPosition}
-                    />
-                </CSSTransition>
             </div>
         </div>
     )
