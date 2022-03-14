@@ -39,9 +39,9 @@ const UpdateStock = () => {
         window.scrollBy({top: y, behavior: "smooth"})
     }
 
-    const submitChanges = async () => {
+    const submitChanges = async (route) => {
         try {
-            const res = await axios.post("/update/stock", newTitle)
+            const res = await axios.post(`${route}/prints`, newTitle)
             setAlert(res.data.msg, "lightgrey")
             setNewTitle({})
             refreshArt() 
@@ -49,18 +49,6 @@ const UpdateStock = () => {
         } catch (error) {
             setAlert(error.response.msg, "lightpink")
         }
-    }
-
-    const remove = async () => {
-        try {
-            const res = await axios.post("/delete/prints", newTitle)
-            setAlert(res.data.msg, "lightblue")
-            setNewTitle({})
-            refreshArt();
-            setEdit(false)
-        } catch (error) {
-            setAlert(error.response.msg, "lightpink")
-        } 
     }
 
     const makeOriginal = (e) => {
@@ -153,7 +141,7 @@ const UpdateStock = () => {
                                         name="prints"
                                         value="prints"
                                         onChange={() => {}}
-                                        checked={newTitle.original}
+                                        checked={newTitle.original || false}
                                         onClick={makeOriginal}
                                     />
                                     <span>Print</span>
@@ -167,7 +155,7 @@ const UpdateStock = () => {
                                         type="radio" 
                                         name="original"
                                         value="original"
-                                        checked={newTitle.original} 
+                                        checked={newTitle.original || false} 
                                         onChange={() => {}}
                                         onClick={makeOriginal}
                                     />
@@ -186,7 +174,7 @@ const UpdateStock = () => {
                                         max="100.0" 
                                         step="0.5" 
                                         onChange={setUpdate}
-                                        value={newTitle.dimensions?.width}
+                                        value={newTitle.dimensions?.width || ""}
                                         inputMode="decimal"
                                     />
                                 </div>
@@ -201,7 +189,7 @@ const UpdateStock = () => {
                                         max="100.0" 
                                         step="0.5" 
                                         onChange={setUpdate}
-                                        value={newTitle.dimensions?.height}
+                                        value={newTitle.dimensions?.height || ""}
                                         inputMode="decimal"
                                     />
                                 </div>
@@ -223,9 +211,9 @@ const UpdateStock = () => {
                             </div>
                         </div>
                         
-                        <button data-text="Submit" onClick={submitChanges}>Submit</button>
+                        <button data-text="Submit" onClick={() => submitChanges("/update")}>Submit</button>
                         <p style={{textAlign: "center"}}>--OR--</p>
-                        <button data-text="Delete" onClick={remove}>Delete</button>
+                        <button data-text="Delete" onClick={() => submitChanges("/delete")}>Delete</button>
                     </div>
                 </></CSSTransition>
             </div>
