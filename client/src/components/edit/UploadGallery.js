@@ -6,13 +6,11 @@ import GalleryForm from './GalleryForm'
 import axios from 'axios'
 
 const UploadGallery = () => {
-    const appContext = useContext(AppContext);
-    const alertContext = useContext(AlertContext)
-    const {refreshArt} = appContext
-    const {setAlert} = alertContext;
+    const { refreshArt } = useContext(AppContext)
+    const { setAlert } = useContext(AlertContext)
 
     const [form, setForm] = useState({})
-    const [preview, setPreview] = useState("");
+    const [preview, setPreview] = useState("")
     const [file, setFile] = useState("")
 
     const inputFile = useRef()
@@ -30,7 +28,7 @@ const UploadGallery = () => {
         const [imgFile] = e.target.files
         if (imgFile) {
             if (imgFile.size / 1024 / 1024 > 16) {
-                setAlert("File is larger than the 16mb max size", "lightpink")
+                setAlert("File is larger than the 16mb max size", "lightred")
                 e.target.value = null;
             } else {
             setFile(imgFile)
@@ -78,11 +76,11 @@ const UploadGallery = () => {
         <div className="upload-gallery" onDragOver={e => e.preventDefault()}>
             <h2>Add Artwork to Gallery</h2>
             <div className="upload-form">
-                <GalleryForm 
-                    form={form} 
-                    imgUpdate={imgUpdate} 
-                    formUpdate={formUpdate} 
-                    upload={upload} 
+                <GalleryForm
+                    form={form}
+                    imgUpdate={imgUpdate}
+                    formUpdate={formUpdate}
+                    upload={upload}
                     file={file}
                     inputFile={inputFile}
                 />

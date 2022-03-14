@@ -9,7 +9,7 @@ router.post("/prints", async (req, res) => {
 
     try {
         await printModel.findOneAndUpdate(
-            {"_id": _id}, 
+            {"_id": _id},
             {"$set": {
                 "title": title,
                 "price": price,
@@ -17,11 +17,11 @@ router.post("/prints", async (req, res) => {
                 "dimensions": JSON.stringify(dimensions),
                 "position": position
             }}
-        )    
+        )
         res.json({msg: `Successfully updated artwork!`})
     } catch (error) {
         console.log(error);
-        res.json({msg: "There was an error updating this artwork"})   
+        res.json({msg: "There was an error updating this artwork"})
     }
 })
 
