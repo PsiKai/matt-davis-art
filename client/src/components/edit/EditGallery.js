@@ -1,133 +1,93 @@
-import React, {useContext, useState, useEffect, useRef} from 'react'
+import React, {useContext, useState, useRef} from 'react'
 import AppContext from "../../context/AppContext"
 import AlertContext from "../../context/alertContext"
 
 import axios from "axios";
-import { CSSTransition, TransitionGroup} from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 
 import CircularProgress from "@material-ui/core/CircularProgress"
+import ImagePreview from '../layout/ImagePreview';
 
 const EditGallery = () => {
-    const appContext = useContext(AppContext)
-    const alertContext = useContext(AlertContext)
-    const {gallery, refreshArt} = appContext
-    const {setAlert} = alertContext
+    const { gallery, refreshArt } = useContext(AppContext)
+    const { setAlert } = useContext(AlertContext)
 
     const [artEdit, setArtEdit] = useState({})
-    const [newTitle, setNewTitle] = useState({})
     const [edit, setEdit] = useState(false)
 
     const updateForm = useRef()
 
     const editArtwork = (e) => {
-        var pic = e.target
-        setArtEdit({
-            key: pic.id,
-            src: pic.src,
-            title: pic.name,
-            alt: pic.name,
-            medium: pic.dataset.medium,
-            description: pic.dataset.description,
-            type: pic.dataset.type
-        })
+        var foundArt = gallery.find(art => art._id === e.target.id)
+        setArtEdit({ ...foundArt })
         setEdit(true)
         const y = updateForm.current.getBoundingClientRect().top - 100
         window.scrollBy({top: y, behavior: "smooth"})
     }
 
-    useEffect(() => {
-        setNewTitle(artEdit)
-    }, [artEdit])
+    const setObjectPosition = (position) => {
+        setArtEdit(prev => ({ ...prev, position }))
+    }
 
     const setUpdate = (e) => {
-        setNewTitle( {
-            ...newTitle,
+        setArtEdit(prev => ({
+            ...prev,
             [e.target.name]: e.target.value
-        })
+        }))
     }
 
-    const submitChanges = async () => {
-        const data = {
-            old: {
-                title: artEdit.title,
-                type: artEdit.type
-            },
-            new: {
-                title: newTitle.title,
-                medium: newTitle.medium,
-                description: newTitle.description
-            }
-        }
-        const res = await axios.post("/update/gallery", data)
-        setAlert(res.data.msg, "lightgrey")
-        refreshArt() 
-        setNewTitle({})
-        setArtEdit({})
-        setEdit(false)
-    }
-
-    const remove = async () => {
+    const submitChanges = async (route) => {
         try {
-            const res = await axios.post("/delete/gallery", {name: artEdit.title, type: artEdit.type})
+            const res = await axios.post(`${route}/gallery`, artEdit)
             setAlert(res.data.msg, "lightblue")
-            setArtEdit({});
-            refreshArt();
             setEdit(false)
+            setArtEdit({})
+            refreshArt()
         } catch (error) {
-            setAlert(error.response.msg, "lightpink")
-        } 
+            setAlert(error.response.msg, "lightred")
+        }
     }
 
     return (
-        <div className="edit-gallery">
+        <div className="edit-gallery" onDragOver={e => e.preventDefault()}>
             <h2>Update Artwork in Gallery</h2>
             <div className="update-gallery">
-                {gallery ? 
+                {gallery ?
                     gallery.map((item, i) => {
                         return (
-                            <img 
+                            <img
                                 key={i}
-                                id={i}
+                                id={item._id}
                                 className="update-preview"
                                 name={item.title}
                                 alt={item.title}
                                 src={item.img}
                                 onClick={editArtwork}
-                                data-description={item.description}
-                                data-medium={item.medium}
-                                data-type={item.type}>
-                            </img>)
-                    }) 
-                    : 
+                                style={{ objectPosition: item.position }}
+                            />
+                        )
+                    })
+                    :
                     <div className="progress">
                         <CircularProgress color="inherit" />
                     </div>
                 }
             </div>
-            <div className="update-gallery--grid" ref={updateForm}>
-                <TransitionGroup className="update-gallery--wrapper">
-                    <CSSTransition
-                        key={artEdit.key}
-                        timeout={400}
-                        classNames="fadein"
-                    >          
-                        <div className="update-gallery--form">
-                            <img 
-                                className="edit-image"
-                                name={artEdit && artEdit.name}
-                                alt={artEdit && artEdit.alt}
-                                src={artEdit && artEdit.src}>
-                            </img>
-                        </div>
-                    </CSSTransition>
-                </TransitionGroup>
-            
+            <div className="upload-form" ref={updateForm}>
                 <CSSTransition
                     in={edit}
                     classNames="fadein"
                     timeout={200}
                     unmountOnExit={true}
-                >
+                ><>
+                    <ImagePreview 
+                        transitionKey={artEdit._id}
+                        src={artEdit.img}
+                        alt={artEdit.alt}
+                        dispatchPosition={setObjectPosition}
+                        objectPosition={artEdit.position}
+                    />
+            
                     <div className="update-gallery--update">
                         <div className="input__wrapper">
                             <label htmlFor="update-title">New Title</label>
@@ -135,8 +95,9 @@ const EditGallery = () => {
                                 id="update-title" 
                                 name="title"
                                 type="text" 
-                                value={newTitle.title || ""}
-                                onChange={setUpdate} />
+                                value={artEdit.title || ""}
+                                onChange={setUpdate}
+                            />
                         </div>
 
                         <div className="input__wrapper">
@@ -145,8 +106,9 @@ const EditGallery = () => {
                                 id="update-medium" 
                                 name="medium"
                                 type="text" 
-                                value={newTitle.medium || ""}
-                                onChange={setUpdate} />
+                                value={artEdit.medium || ""}
+                                onChange={setUpdate}
+                            />
                         </div>
 
                         <div className="input__wrapper">
@@ -155,16 +117,16 @@ const EditGallery = () => {
                                 id="update-description"
                                 name="description" 
                                 rows="5" 
-                                value={newTitle.description || ""} 
+                                value={artEdit.description || ""} 
                                 onChange={setUpdate}
-                                />
+                            />
                         </div>
                         
-                        <button data-text="Submit" onClick={submitChanges}>Submit</button>
+                        <button data-text="Submit" onClick={() => submitChanges("/update")}>Submit</button>
                         <p style={{textAlign: "center"}}>--OR--</p>
-                        <button data-text="Delete" onClick={remove}>Delete</button>
+                        <button data-text="Delete" onClick={() => submitChanges("/delete")}>Delete</button>
                     </div>
-                </CSSTransition>
+                </></CSSTransition>
             </div>
         </div>
     )

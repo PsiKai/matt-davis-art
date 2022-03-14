@@ -1,25 +1,19 @@
-import React, {useState, useContext} from 'react'
+import React, { useState, useContext, useRef } from 'react'
 import AppContext from "../../context/AppContext"
 import AlertContext from "../../context/alertContext"
+import ImagePreview from '../layout/ImagePreview'
 import GalleryForm from './GalleryForm'
 import axios from 'axios'
-import { CSSTransition, TransitionGroup} from 'react-transition-group';
 
 const UploadGallery = () => {
-    const appContext = useContext(AppContext);
-    const alertContext = useContext(AlertContext)
-    const {refreshArt} = appContext
-    const {setAlert} = alertContext;
+    const { refreshArt } = useContext(AppContext)
+    const { setAlert } = useContext(AlertContext)
 
-    const [form, setForm] = useState({
-        title: "",
-        medium: "",
-        description: ""
-    })
-    const [preview, setPreview] = useState("");
+    const [form, setForm] = useState({})
+    const [preview, setPreview] = useState("")
     const [file, setFile] = useState("")
 
-    const {title, medium, description} = form;
+    const inputFile = useRef()
 
     // Sets state when form input changes
     const formUpdate = (e) => {
@@ -31,13 +25,14 @@ const UploadGallery = () => {
 
     // Sets image file to state
     const imgUpdate = (e) => {
-        if (e.target.files[0]) {
-            if (e.target.files[0].size / 1024 / 1024 > 16) {
-                setAlert("File is larger than the 16mb max size", "lightpink")
+        const [imgFile] = e.target.files
+        if (imgFile) {
+            if (imgFile.size / 1024 / 1024 > 16) {
+                setAlert("File is larger than the 16mb max size", "lightred")
                 e.target.value = null;
             } else {
-            setFile(e.target.files[0])
-            setPreview(URL.createObjectURL(e.target.files[0]))
+            setFile(imgFile)
+            setPreview(URL.createObjectURL(imgFile))
             }
         } else {
             setPreview("")
@@ -52,57 +47,51 @@ const UploadGallery = () => {
 
         const formData = new FormData();
         formData.append("file", file)
-        formData.append('title', title)
-        formData.append("medium", medium)
-        formData.append('description', description)
+        formData.append('title', form.title)
+        formData.append("medium", form.medium)
+        formData.append('description', form.description)
+        formData.append('position', form.position)
 
         try {
             const res = await axios.post('/upload/gallery', formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data"
-                }
+                headers: { "Content-Type": "multipart/form-data" }
             })
-
             setAlert(res.data.msg, "lightgrey")
             refreshArt();
         } catch (err) {
-            // if(err.response.status === 500) {
-                setAlert("There was a problem with the server", "lightred");
-            // } else {
-            //     setAlert(res.data.msg, "lightred");
-            // }
+            setAlert("There was a problem with the server", "lightred")
         }
-        setForm({title: "", medium: "", description: ""})
-        setFile("");
-        // setFile("Choose File")
+
+        setForm({})
+        setFile("")
         setPreview("")
-        e.target.children[6].value = null
+        inputFile.current.value = null
+    }
+
+    const updatePosition = (position) => {
+        setForm(prev => ({ ...prev, position }))
     }
 
     return (
-        <div className="upload-gallery">
+        <div className="upload-gallery" onDragOver={e => e.preventDefault()}>
             <h2>Add Artwork to Gallery</h2>
             <div className="upload-form">
-            <GalleryForm 
-                form={form} 
-                imgUpdate={imgUpdate} 
-                formUpdate={formUpdate} 
-                upload={upload} 
-                file={file}
-            />
-            <TransitionGroup className="img-preview" style={preview !== "" ? {} : {display: "none" }}>
-                <CSSTransition
-                    key={file.size}
-                    timeout={400}
-                    classNames="crossfade"
-                >
-                    <img src={preview} alt={form.title} />
-                </CSSTransition>
-            </TransitionGroup>
+                <GalleryForm
+                    form={form}
+                    imgUpdate={imgUpdate}
+                    formUpdate={formUpdate}
+                    upload={upload}
+                    file={file}
+                    inputFile={inputFile}
+                />
+                <ImagePreview
+                    src={preview}
+                    alt={form.title}
+                    transitionKey={file.size}
+                    dispatchPosition={updatePosition}
+                />
+            </div>
         </div>
-        </div>
-        // </CSSTransition>
-
     )
 }
 

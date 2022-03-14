@@ -1,6 +1,6 @@
 import React from 'react'
 
-const GalleryForm = ({form: { title, medium, description}, formUpdate, imgUpdate, upload, file }) => {
+const GalleryForm = ({form, formUpdate, imgUpdate, upload, file, inputFile }) => {
 
     return (
         <form onSubmit={upload}>
@@ -12,7 +12,9 @@ const GalleryForm = ({form: { title, medium, description}, formUpdate, imgUpdate
                     id="gallery-image" 
                     type="file" 
                     onChange={imgUpdate}
-                    required />
+                    ref={inputFile}
+                    required
+                />
             </label>
 
             <div className="input__wrapper">
@@ -22,9 +24,9 @@ const GalleryForm = ({form: { title, medium, description}, formUpdate, imgUpdate
                     type="text" 
                     name="title" 
                     onChange={formUpdate} 
-                    value={title}
-                    required>
-                </input>
+                    value={form.title || ""}
+                    required    
+                />
             </div>
 
             <div className="input__wrapper">
@@ -34,9 +36,8 @@ const GalleryForm = ({form: { title, medium, description}, formUpdate, imgUpdate
                     type="text" 
                     name="medium" 
                     onChange={formUpdate} 
-                    value={medium}
-                    required>
-                </input>
+                    value={form.medium || ""}
+                />
             </div>
 
             <div className="input__wrapper">
@@ -47,9 +48,8 @@ const GalleryForm = ({form: { title, medium, description}, formUpdate, imgUpdate
                     name="description" 
                     rows="7"
                     onChange={formUpdate}
-                    value={description}
-                    required>
-                </textarea>
+                    value={form.description || ""}
+                />
             </div>
         
             <button data-text="Submit" type="submit">Submit</button>
