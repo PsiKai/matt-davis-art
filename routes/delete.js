@@ -16,25 +16,18 @@ var galleryModel = require("../models/gallery")
 var printModel = require("../models/prints")
 
 
-router.post("/gallery", (req, res) => {
-    const bucketName = req.body.name.replace(/ /g, "-").toLowerCase() + "." + req.body.type
-    console.log(bucketName);
-    storage.bucket(galleryBucket).file(bucketName).delete(err => {
-        if (err) {
-            console.log(err);
-            res.status(500).json({msg: "Error deleting artwork"})
-        } else {
-            galleryModel.deleteOne({title: req.body.name}, (err) => {
-                if (err) {
-                    console.log(err);
-                    res.status(500).json({msg: "Error deleting artwork"})
-                } else {
-                    console.log("Artwork deleted");
-                   res.json({msg: `${req.body.name} was deleted`})
-                }
-            })
-        }
-    }); 
+router.post("/gallery", async (req, res) => {
+    let { img, title, _id } = req.body
+    img = decodeURIComponent(img.split("gallery/")[1])
+
+    try {
+        await storage.bucket(galleryBucket).file(img).delete()
+        await galleryModel.deleteOne({_id: _id})
+        res.json({msg: `${title} was deleted`})
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({msg: "Error deleting artwork"})
+    }
 })
 
 router.post("/prints", async (req, res) => {
