@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useRef, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 import AppContext from "../context/AppContext"
 import "../styles/prints.css"
 import Print from "../components/Print";
@@ -20,10 +21,43 @@ const Prints = () => {
     const [loaded, setLoaded] = useState(false)
     const [quantityInCart, setQuantityInCart] = useState(0)
 
+    const [, setScrollPos] = useState(0)
+    const ctaIntersection = useRef()
+    const ctaObserver = useRef()
+
     useEffect(() => {
         !prints && getArt();
         //eslint-disable-next-line
     }, [])
+
+    const fireCta = useCallback(({ path: [, { scrollY }] }) => {
+        setScrollPos(prev => {
+            if (scrollY < prev) {
+                document.removeEventListener("scroll", fireCta)
+                ctaIntersection.current.nextSibling.style.transform = "none"
+                ctaObserver.current.disconnect()
+                return
+            }
+            return scrollY
+        })
+    }, [])
+
+    const ctaCallback = useCallback(([entry]) => {
+        if (entry.isIntersecting) {
+            document.addEventListener('scroll', fireCta)
+        }
+    }, [fireCta])
+
+    useEffect(() => {
+        if (loaded) {
+            const callToAction = ctaIntersection.current
+            const options = { root: null, rootMargin: '0px', threshold: 0.1 }
+            ctaObserver.current = new IntersectionObserver(ctaCallback, options)
+            ctaObserver.current.observe(callToAction)
+
+            return () => ctaObserver.current.disconnect(callToAction)
+        }
+    }, [loaded, ctaCallback])
 
     const openModal = (item) => {
         setImg(item)
@@ -38,6 +72,9 @@ const Prints = () => {
             setLoaded(true)
         }
     }
+
+
+
 
     return (
         <div className="page-content">
@@ -95,6 +132,14 @@ const Prints = () => {
                     } else { return null }
                 })}
                 <CircularProgress style={{opacity: loaded ? "0" : "1"}}/>
+            </div>
+
+            <span ref={ctaIntersection}></span>
+
+            <div className="commission-cta">
+                <div className='brand-backdrop'></div>
+                <h3>Don't see what you're looking for?</h3>
+                <p><Link to="/contact#email-me">Hit me up!</Link>  I do commission work, too.  I'd love to hear your idea.</p>
             </div>
 
             <CSSTransition

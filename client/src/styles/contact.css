@@ -12,6 +12,37 @@
   box-shadow: 0 0 16px 16px white inset;
 }
 
+.contact-blurb {
+  margin: 3rem 1rem 3rem auto;
+  max-width: clamp(60%, 70%, 80ch);
+  position: relative;
+  color: var(--white);
+  padding: 0.5rem;
+}
+
+.contact-blurb h2 {
+  text-align: left;
+  margin-top: revert;
+  text-decoration: underline var(--medium);
+  text-underline-offset: 5px;
+}
+
+.contact-blurb p {
+  line-height: 1.7rem;
+  padding: 0 1rem;
+}
+
+.contact-blurb .brand-backdrop {
+  transform: skew(7deg) rotate(-4deg);
+  left: -0.5rem;
+  top: 0;
+  height: 100%;
+}
+
+.contact-blurb .brand-backdrop::after {
+  transform: rotate(4deg);
+}
+
 .contact__grid {
   display: grid;
   grid-template-columns: 50% 50%;
