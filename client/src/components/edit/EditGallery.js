@@ -1,4 +1,4 @@
-import React, {useContext, useState, useRef, useEffect} from 'react'
+import React, { useContext, useState, useRef } from 'react'
 import AppContext from "../../context/AppContext"
 import AlertContext from "../../context/alertContext"
 

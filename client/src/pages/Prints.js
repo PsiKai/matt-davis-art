@@ -37,7 +37,7 @@ const Prints = () => {
             setCtaStyle({})
             ctaObserver.current.disconnect(ctaIntersection.current)
         }
-    }, [fireCta])
+    }, [])
 
     useEffect(() => {
         if (loaded) {
