@@ -48,8 +48,8 @@ const UploadGallery = () => {
         const formData = new FormData();
         formData.append("file", file)
         formData.append('title', form.title)
-        formData.append("medium", form.medium)
-        formData.append('description', form.description)
+        formData.append("medium", form.medium || "")
+        formData.append('description', form.description || "")
         formData.append('position', form.position)
 
         try {
