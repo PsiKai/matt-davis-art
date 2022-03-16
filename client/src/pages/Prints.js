@@ -9,6 +9,8 @@ import PageHeader from "../components/layout/PageHeader"
 import { CSSTransition } from 'react-transition-group';
 
 import CircularProgress from "@material-ui/core/CircularProgress"
+import CloseIcon from '@material-ui/icons/Close';
+import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 
 
 const Prints = () => {
@@ -21,7 +23,7 @@ const Prints = () => {
     const [loaded, setLoaded] = useState(false)
     const [quantityInCart, setQuantityInCart] = useState(0)
 
-    const [, setScrollPos] = useState(0)
+    const [ctaStyle, setCtaStyle] = useState({transform: "translateX(300%)"})
     const ctaIntersection = useRef()
     const ctaObserver = useRef()
 
@@ -30,28 +32,17 @@ const Prints = () => {
         //eslint-disable-next-line
     }, [])
 
-    const fireCta = useCallback(({ path: [, { scrollY }] }) => {
-        setScrollPos(prev => {
-            if (scrollY < prev) {
-                document.removeEventListener("scroll", fireCta)
-                ctaIntersection.current.nextSibling.style.transform = "none"
-                ctaObserver.current.disconnect()
-                return
-            }
-            return scrollY
-        })
-    }, [])
-
     const ctaCallback = useCallback(([entry]) => {
         if (entry.isIntersecting) {
-            document.addEventListener('scroll', fireCta)
+            setCtaStyle({})
+            ctaObserver.current.disconnect(ctaIntersection.current)
         }
     }, [fireCta])
 
     useEffect(() => {
         if (loaded) {
             const callToAction = ctaIntersection.current
-            const options = { root: null, rootMargin: '0px', threshold: 0.1 }
+            const options = { root: null, rootMargin: '100px', threshold: 0 }
             ctaObserver.current = new IntersectionObserver(ctaCallback, options)
             ctaObserver.current.observe(callToAction)
 
@@ -72,9 +63,6 @@ const Prints = () => {
             setLoaded(true)
         }
     }
-
-
-
 
     return (
         <div className="page-content">
@@ -136,10 +124,15 @@ const Prints = () => {
 
             <span ref={ctaIntersection}></span>
 
-            <div className="commission-cta">
+            <div
+                className="commission-cta"
+                onClick={() => setCtaStyle({transform: 'translateX(300%)'})}
+                style={ctaStyle}
+            >
                 <div className='brand-backdrop'></div>
-                <h3>Don't see what you're looking for?</h3>
-                <p><Link to="/contact#email-me">Hit me up!</Link>  I do commission work, too.  I'd love to hear your idea.</p>
+                <CloseIcon className="close-icon"/>
+                <h2><Link to="/contact#email-me">Hit me up! <ChatBubbleOutlineIcon className='chat-icon'/></Link></h2>
+                <p>I do commission work, too.  I'd love to hear your idea.</p>
             </div>
 
             <CSSTransition
