@@ -1,6 +1,7 @@
 import React from 'react'
+import { CircularProgress } from '@material-ui/core'
 
-const GalleryForm = ({form, formUpdate, imgUpdate, upload, file, inputFile }) => {
+const GalleryForm = ({form, formUpdate, imgUpdate, upload, file, inputFile, pending }) => {
 
     return (
         <form onSubmit={upload}>
@@ -52,7 +53,9 @@ const GalleryForm = ({form, formUpdate, imgUpdate, upload, file, inputFile }) =>
                 />
             </div>
         
-            <button data-text="Submit" type="submit">Submit</button>
+            <button data-text="Submit" type="submit" disabled={pending}>
+                {pending ? <>Submitting... <CircularProgress/></> : "Submit"}
+            </button>
             
         </form>
     )

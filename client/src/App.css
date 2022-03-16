@@ -311,6 +311,10 @@ button:active {
   animation: press 150ms ease forwards;
 }
 
+button:disabled {
+  cursor: default;
+}
+
 button::after {
   box-sizing: border-box;
   content: "";

@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useRef, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 import AppContext from "../context/AppContext"
 import "../styles/prints.css"
 import Print from "../components/Print";
@@ -8,6 +9,8 @@ import PageHeader from "../components/layout/PageHeader"
 import { CSSTransition } from 'react-transition-group';
 
 import CircularProgress from "@material-ui/core/CircularProgress"
+import CloseIcon from '@material-ui/icons/Close';
+import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 
 
 const Prints = () => {
@@ -20,10 +23,32 @@ const Prints = () => {
     const [loaded, setLoaded] = useState(false)
     const [quantityInCart, setQuantityInCart] = useState(0)
 
+    const [ctaStyle, setCtaStyle] = useState({transform: "translateX(300%)"})
+    const ctaIntersection = useRef()
+    const ctaObserver = useRef()
+
     useEffect(() => {
         !prints && getArt();
         //eslint-disable-next-line
     }, [])
+
+    const ctaCallback = useCallback(([entry]) => {
+        if (entry.isIntersecting) {
+            setCtaStyle({})
+            ctaObserver.current.disconnect(ctaIntersection.current)
+        }
+    }, [])
+
+    useEffect(() => {
+        if (loaded) {
+            const callToAction = ctaIntersection.current
+            const options = { root: null, rootMargin: '100px', threshold: 0 }
+            ctaObserver.current = new IntersectionObserver(ctaCallback, options)
+            ctaObserver.current.observe(callToAction)
+
+            return () => ctaObserver.current.disconnect(callToAction)
+        }
+    }, [loaded, ctaCallback])
 
     const openModal = (item) => {
         setImg(item)
@@ -95,6 +120,19 @@ const Prints = () => {
                     } else { return null }
                 })}
                 <CircularProgress style={{opacity: loaded ? "0" : "1"}}/>
+            </div>
+
+            <span ref={ctaIntersection}></span>
+
+            <div
+                className="commission-cta"
+                onClick={() => setCtaStyle({transform: 'translateX(300%)'})}
+                style={ctaStyle}
+            >
+                <div className='brand-backdrop'></div>
+                <CloseIcon className="close-icon"/>
+                <h2><Link to="/contact#email-me">Hit me up! <ChatBubbleOutlineIcon className='chat-icon'/></Link></h2>
+                <p>I do commission work, too.  I'd love to hear your idea.</p>
             </div>
 
             <CSSTransition

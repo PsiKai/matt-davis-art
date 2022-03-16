@@ -25,7 +25,7 @@ router.post("/gallery", async (req, res) => {
     const { file: { name }, file } = req.files
     const dirFileName = encodeURIComponent(name)
     const type = name.split(/\.(?=[^\.]+$)/)[1]
-    const newName = title + "." + type
+    const newName = title + Date.now() + "." + type
     const cloudName = encodeURIComponent(newName)
     const img = encodeURI(`https://storage.googleapis.com/${galleryBucket}/${cloudName}`)
     var imgObj = { title, description, medium, type, img, position }
@@ -53,7 +53,7 @@ router.post("/prints", async (req, res) => {
     const { file: { name }, file } = req.files
     const dirFileName = encodeURIComponent(name)
     const type = name.split(/\.(?=[^\.]+$)/)[1]
-    const newName = title + "." + type
+    const newName = title + Date.now() + "." + type
     const cloudName = encodeURIComponent(newName)
     const img = encodeURI(`https://storage.googleapis.com/${printBucket}/${cloudName}`)
     var imgObj = { title, original, price, dimensions, type, soldOut: false, img, position }

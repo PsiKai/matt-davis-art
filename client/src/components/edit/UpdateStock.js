@@ -15,6 +15,7 @@ const UpdateStock = () => {
 
     const [newTitle, setNewTitle] = useState({})
     const [edit, setEdit] = useState(false)
+    const [pending, setPending] = useState("")
 
     const updateForm = useRef()
 
@@ -40,6 +41,7 @@ const UpdateStock = () => {
     }
 
     const submitChanges = async (route) => {
+        setPending(route.substring(1))
         try {
             const res = await axios.post(`${route}/prints`, newTitle)
             setAlert(res.data.msg, "lightgrey")
@@ -47,8 +49,9 @@ const UpdateStock = () => {
             refreshArt() 
             setEdit(false)
         } catch (error) {
-            setAlert(error.response.msg, "lightpink")
+            setAlert(error.response.data.msg, "lightpink")
         }
+        setTimeout(() => setPending(""), 500)
     }
 
     const makeOriginal = (e) => {
@@ -211,9 +214,13 @@ const UpdateStock = () => {
                             </div>
                         </div>
                         
-                        <button data-text="Submit" onClick={() => submitChanges("/update")}>Submit</button>
+                        <button data-text="Submit" type="submit" disabled={pending === "update"} onClick={() => submitChanges("/update")}>
+                            {pending === "update" ? <>Submitting... <CircularProgress/></> : "Submit"}
+                        </button>
                         <p style={{textAlign: "center"}}>--OR--</p>
-                        <button data-text="Delete" onClick={() => submitChanges("/delete")}>Delete</button>
+                        <button data-text="Submit" type="submit" disabled={pending === "delete"} onClick={() => submitChanges("/delete")}>
+                            {pending === "delete" ? <>Deleting... <CircularProgress/></> : "Delete"}
+                        </button>
                     </div>
                 </></CSSTransition>
             </div>

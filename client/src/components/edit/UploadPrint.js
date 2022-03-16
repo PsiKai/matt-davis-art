@@ -4,6 +4,7 @@ import AlertContext from "../../context/alertContext"
 import ImagePreview from '../layout/ImagePreview'
 import axios from 'axios'
 import { CSSTransition } from 'react-transition-group';
+import { CircularProgress } from '@material-ui/core'
 
 const UploadPrint = () => {
     const { setAlert } = useContext(AlertContext)
@@ -16,6 +17,7 @@ const UploadPrint = () => {
     const [file, setFile] = useState('');
     const [preview, setPreview] = useState('')
     const [objectPosition, setObjectPosition] = useState("50% 50%")
+    const [pending, setPending] = useState(false)
 
     const inputFile = useRef()
 
@@ -52,6 +54,7 @@ const UploadPrint = () => {
 
     // Uploads new print to database
     const upload = async (e) => {
+        setPending(true)
         e.preventDefault();
 
         const formData = new FormData();
@@ -85,6 +88,7 @@ const UploadPrint = () => {
         setDimensions({width: 11, height: 17})
         setObjectPosition("50% 50%")
         inputFile.current.value = null;
+        setPending(false)
     }
 
     return (
@@ -201,7 +205,9 @@ const UploadPrint = () => {
                         </CSSTransition>
 
                     </div>
-                    <button data-text="Submit" type="submit">Submit</button>
+                    <button data-text="Submit" type="submit" disabled={pending}>
+                        {pending ? <>Submitting... <CircularProgress/></> : "Submit"}
+                    </button>
                 </form>
             </div>
         </div>

@@ -1,15 +1,25 @@
-import React, {useContext, useState} from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import "../styles/contact.css"
 import AlertContext from "../context/alertContext";
 import axios from "axios"
 import Alerts from "../components/layout/Alerts"
 import PageHeader from "../components/layout/PageHeader"
 
-const Contact = () => {
+const Contact = (props) => {
     const alertContext = useContext(AlertContext);
     const {setAlert} = alertContext;
 
     const [email, setEmail] = useState({address: "", name: "", subject: "", body: ""})
+
+    const contactForm = useRef()
+
+    useEffect(() => {
+        if (props.history.location.hash === "#email-me") {
+            let form = contactForm.current.getBoundingClientRect()
+            contactForm.current.querySelector("#sender").focus()
+            window.scrollTo(0, form.top)
+        }
+    }, [props.history.location.hash])
 
     const onChange = (e) => {
         setEmail({
@@ -29,6 +39,11 @@ const Contact = () => {
         <div className="page-content">
             <div className="contact-img"></div>
             <PageHeader heading="contact me" />
+            <div className='contact-blurb'>
+                <div className='brand-backdrop'></div>
+                <h2>Let's talk!</h2>
+                <p>Do you have questions about your order? Or maybe you want to inquire about an original piece of art from me. I'd love to chat about your ideas.</p>
+            </div>
             <div className="contact__grid">
                 <div className="contact--info">
                     <h3>Drop me a line on my socials:</h3> 
@@ -38,7 +53,7 @@ const Contact = () => {
                     </div>
                     
                 </div>
-                <form className="email-form" onSubmit={submitEmail}>
+                <form id="email-me" className="email-form" onSubmit={submitEmail} ref={contactForm}>
                     <h3>Or just send me an email directly:</h3>
                     <div className="input__wrapper">
                         <label htmlFor="sender">Your email</label>
