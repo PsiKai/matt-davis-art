@@ -208,14 +208,15 @@
   right: 1rem;
   z-index: 20;
   width: 300px;
+  max-width: 85%;
   color: var(--white);
   font-size: 14px;
   padding: 0.5rem;
-  transform: translateX(200%);
   transition: transform 400ms ease;
 }
 
-.commission-cta h3 {
+.commission-cta h2 {
+  text-align: left;
   font-weight: lighter;
 }
 
@@ -237,6 +238,19 @@
 .commission-cta .brand-backdrop {
   left: -0.5rem;
   top: 0;
+}
+
+.commission-cta svg.close-icon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+.commission-cta svg.chat-icon {
+  color: var(--white) !important;
+  height: 1.2rem !important;
+  width: 1.2rem !important;
 }
 
 @media (max-width: 550px) {
@@ -293,6 +307,10 @@
     padding: 1rem;
     top: 60px;
     max-height: 95%;
+  }
+
+  .commission-cta {
+    font-size: 14px;
   }
 }
 

@@ -115,6 +115,10 @@
 }
 
 @media (max-width: 450px) {
+  .contact-blurb {
+    margin: 2rem auto;
+  }
+
   .contact__grid {
     padding: 0 1rem;
   }
