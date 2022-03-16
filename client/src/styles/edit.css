@@ -305,6 +305,12 @@
   min-height: 600px;
 }
 
+button .MuiCircularProgress-root {
+  color: var(--dark) !important;
+  height: 1rem !important;
+  width: 1rem !important;
+}
+
 .logout {
   position: fixed !important;
   z-index: 2;

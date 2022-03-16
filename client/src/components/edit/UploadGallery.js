@@ -12,6 +12,7 @@ const UploadGallery = () => {
     const [form, setForm] = useState({})
     const [preview, setPreview] = useState("")
     const [file, setFile] = useState("")
+    const [pending, setPending] = useState(false)
 
     const inputFile = useRef()
 
@@ -43,6 +44,7 @@ const UploadGallery = () => {
 
     // Uploads image to the database
     const upload = async (e) => {
+        setPending(true)
         e.preventDefault();
 
         const formData = new FormData();
@@ -66,6 +68,7 @@ const UploadGallery = () => {
         setFile("")
         setPreview("")
         inputFile.current.value = null
+        setPending(false)
     }
 
     const updatePosition = (position) => {
@@ -89,6 +92,7 @@ const UploadGallery = () => {
                     upload={upload}
                     file={file}
                     inputFile={inputFile}
+                    pending={pending}
                 />
             </div>
         </div>
