@@ -147,7 +147,7 @@
   cursor: initial;
 }
 
-.MuiCircularProgress-root {
+.prints-flexbox .MuiCircularProgress-root {
   position: absolute;
   top: 50%;
   transition: opacity 250ms ease;
