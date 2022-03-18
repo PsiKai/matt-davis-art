@@ -526,6 +526,70 @@ h2 {
   pointer-events: none;
 }
 
+.lazy-load-image-background {
+  color: inherit !important;
+  background-color: var(--dark);
+}
+
+.loading {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: inherit;
+  color: inherit !important;
+  height: 100%;
+  width: 100%;
+}
+
+.loading svg {
+  opacity: 0.7;
+  height: fit-content;
+  width: 50%;
+}
+
+.loading-dots {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.25rem;
+}
+
+.loading-dots .dot {
+  --jump: "-200%";
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--dark);
+  opacity: 0.7;
+  animation: dot-jumps 800ms cubic-bezier(0.250, 0.250, 0.395, 1.260) infinite forwards;
+}
+
+.loading .broken-link-face {
+  width: 40px;
+}
+
+.loading .broken-link-text {
+  transform: none;
+  font-size: 0.75rem;
+  margin: 0.25rem;
+}
+
+@keyframes dot-jumps {
+  10% {
+    transform: none;
+  }
+  40% {
+    transform: translateY(var(--jump));
+  }
+
+  100% {
+    transform: none;
+  }
+}
+
 @media (max-width: 850px) {
   .page-header__wrapper {
     margin-left: 1rem;
