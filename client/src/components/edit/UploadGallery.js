@@ -29,7 +29,7 @@ const UploadGallery = () => {
         const [imgFile] = e.target.files
         if (imgFile) {
             if (imgFile.size / 1024 / 1024 > 16) {
-                setAlert("File is larger than the 16mb max size", "lightred")
+                setAlert("File is larger than the 16mb max size", "lightpink")
                 e.target.value = null;
             } else {
                 setFile(imgFile)
@@ -61,7 +61,7 @@ const UploadGallery = () => {
             setAlert(res.data.msg, "lightgrey")
             refreshArt();
         } catch (err) {
-            setAlert("There was a problem with the server", "lightred")
+            setAlert(err.response.data.msg, "lightpink")
         }
 
         setForm({})

@@ -26,7 +26,7 @@ const UploadPrint = () => {
         const [imgFile] = e.target.files
         if (imgFile) {
             if (imgFile.size / 1024 / 1024 > 16) {
-                setAlert("File is larger than the 16mb max size", "lightred")
+                setAlert("File is larger than the 16mb max size", "lightpink")
                 e.target.value = null;
             } else {
                 setFile(imgFile)
@@ -77,7 +77,7 @@ const UploadPrint = () => {
             setAlert(res.data.msg, "lightblue")
             refreshArt();
         } catch (err) {
-            setAlert(err.response.data.msg, "lightred")
+            setAlert(err.response.data.msg, "lightpink")
         }
 
         setOriginal("print")
