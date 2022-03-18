@@ -1,36 +1,29 @@
 import React, { useContext, useEffect, useState, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import AppContext from "../context/AppContext"
-import "../styles/prints.css"
 import Print from "../components/Print";
 import PrintModal from '../components/modals/PrintModal';
 import PageHeader from "../components/layout/PageHeader"
 
 import { CSSTransition } from 'react-transition-group';
-
-import CircularProgress from "@material-ui/core/CircularProgress"
 import CloseIcon from '@material-ui/icons/Close';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 
+import "../styles/prints.css"
 
 const Prints = () => {
-    const appContext = useContext(AppContext)
-    const { prints, getArt, addItem, cart } = appContext
+    const { prints, getArt, addItem, cart } = useContext(AppContext)
 
     const [img, setImg] = useState({})
     const [modalOpen, setModalOpen] = useState(false)
-    const [counted, setCount] = useState(0)
-    const [loaded, setLoaded] = useState(false)
     const [quantityInCart, setQuantityInCart] = useState(0)
 
     const [ctaStyle, setCtaStyle] = useState({transform: "translateX(300%)"})
     const ctaIntersection = useRef()
     const ctaObserver = useRef()
 
-    useEffect(() => {
-        !prints && getArt();
-        //eslint-disable-next-line
-    }, [])
+    //eslint-disable-next-line
+    useEffect(() => !prints && getArt(), [])
 
     const ctaCallback = useCallback(([entry]) => {
         if (entry.isIntersecting) {
@@ -40,7 +33,7 @@ const Prints = () => {
     }, [])
 
     useEffect(() => {
-        if (loaded) {
+        if (prints?.length) {
             const callToAction = ctaIntersection.current
             const options = { root: null, rootMargin: '100px', threshold: 0 }
             ctaObserver.current = new IntersectionObserver(ctaCallback, options)
@@ -48,20 +41,13 @@ const Prints = () => {
 
             return () => ctaObserver.current.disconnect(callToAction)
         }
-    }, [loaded, ctaCallback])
+    }, [prints, ctaCallback])
 
     const openModal = (item) => {
         setImg(item)
         const inCart = cart?.find(art => art._id === item.sku)
         setQuantityInCart(inCart?.quantity)
         setModalOpen(true)
-    }
-
-    const incrementLoaded = () => {
-        setCount(counted + 1)
-        if (counted + 1 === prints.length) {
-            setLoaded(true)
-        }
     }
 
     return (
@@ -87,12 +73,9 @@ const Prints = () => {
                             size={JSON.parse(print.dimensions)}
                             original={print.original}
                             position={print.position || "50% 50%"}
-                            incrementLoaded={incrementLoaded}
-                            loaded={loaded}
                             /> 
                     } else { return null }
                 })}
-                <CircularProgress style={{opacity: loaded ? "0" : "1"}}/>
             </div>
 
             <div className="print-orders">
@@ -114,12 +97,9 @@ const Prints = () => {
                             original={print.original}
                             size={JSON.parse(print.dimensions)}
                             position={print.position || "50% 50%"}
-                            incrementLoaded={incrementLoaded}
-                            loaded={loaded}
-                            /> 
+                        />
                     } else { return null }
                 })}
-                <CircularProgress style={{opacity: loaded ? "0" : "1"}}/>
             </div>
 
             <span ref={ctaIntersection}></span>

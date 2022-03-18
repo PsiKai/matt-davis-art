@@ -9,7 +9,14 @@ const PlaceholderImg = () => {
             <PanoramaOutlinedIcon />
             <div className='loading-dots'>
                 {dots.map((j, i) => (
-                    <span className='dot' style={{ animationDelay: `${i * 80}ms`, ['--jump']: `-${Math.pow(2, 1 / Number(1 + j)) * 100}%` }}></span>
+                    <span
+                        className='dot'
+                        key={j}
+                        style={{
+                            animationDelay: `${i * 80}ms`,
+                            '--jump': `-${Math.pow(2, 1 / Number(1 + j)) * 100}%`
+                        }}
+                    ></span>
                 ))}
             </div>
         </div>

@@ -1,54 +1,78 @@
 import React, {useEffect, useState} from 'react'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import 'react-lazy-load-image-component/src/effects/opacity.css';
+import { CSSTransition } from 'react-transition-group';
+import PlaceholderImg from './layout/PlaceholderImg';
+import BrokenImgFallback from './layout/BrokenImgFallback';
 
 const Print = (props) => {
     // Function Props
-    const { incrementLoaded, open } = props
+    const { open } = props
     // Variable Props
-    const { src, title, sku, price, sold, size, original, loaded, position } = props
+    const { src, title, sku, price, sold, size, original, position } = props
 
     const [isZero, setIsZero] = useState(false)
     const [inCart, setInCart] = useState(false)
-
-    var savedCart = JSON.parse(localStorage.getItem("cart"));
+    const [loaded, setLoaded] = useState(false)
+    const [brokenLink, setBrokenLink] = useState(false)
 
     useEffect(() => {
         sold && setIsZero(true)
     }, [sold])
 
+    var savedCart = JSON.parse(localStorage.getItem("cart"));
+
     useEffect(() => {
-        savedCart?.find(item => {
-            if(item.original && item._id === sku) {
-                setInCart(true)
-            }
-            return null
-        })
+        var foundItem = savedCart?.find(item => item.original && item._id === sku)
+        if (foundItem) setInCart(true)
     }, [savedCart, sku])
 
-    const className = inCart || isZero ? "print-item zero-stock" : "print-item"
-    
     // var bytes = Buffer.from(src.data)
 
-    const openUp = (e) => {
+    const openUp = () => {
         !isZero && !inCart && open({
             src, title, size, sku, price, original
         })
     }
  
     return (
-        <div 
-            onClick={openUp} 
-            className={className}
-            style={loaded ? {} : {opacity: "0"}}
+        <div
+            onClick={ openUp }
+            className={ `${inCart || isZero || brokenLink ? "zero-stock" : ""} print-item` }
+            style={{ pointerEvents: brokenLink ? "none" : "auto" }}
         >
             <h3>{title}</h3>
-            <img 
-                src={src}
-                // {`data:${src.contentType};base64, ${bytes.toString('base64')}`}
-                alt={title}
-                onLoad={() => incrementLoaded()}
-                style={{objectPosition: position}}
+            <CSSTransition
+                in={!loaded}
+                timeout={400}
+                classNames="crossfade"
+                unmountOnExit
             >
-            </img>
+                <PlaceholderImg />
+            </CSSTransition>
+
+            <LazyLoadImage
+                src={src}
+                alt={title}
+                effect="opacity"
+                useIntersectionObserver={true}
+                style={{objectPosition: position}}
+                afterLoad={() => setLoaded(true)}
+                onError={() => {
+                    setBrokenLink(true)
+                    setLoaded(true)
+                }}
+            />
+
+            <CSSTransition
+                in={brokenLink}
+                timeout={400}
+                classNames="crossfade"
+                unmountOnExit
+            >
+                <BrokenImgFallback />
+            </CSSTransition>
+
             <p id="cost">${price}</p>
             {isZero && <div className="sold-out"><h3>Sold Out</h3></div>}
             {inCart && <div className="sold-out"><h3>Already in Cart</h3></div>}
