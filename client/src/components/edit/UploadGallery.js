@@ -52,7 +52,7 @@ const UploadGallery = () => {
         formData.append('title', form.title)
         formData.append("medium", form.medium || "")
         formData.append('description', form.description || "")
-        formData.append('position', form.position)
+        formData.append('position', form.position || "50% 50%")
 
         try {
             const res = await axios.post('/upload/gallery', formData, {
