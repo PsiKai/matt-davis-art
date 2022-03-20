@@ -6,7 +6,7 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 
-const CartItem = ({quantity, title, src, id, original, size, price, index}) => {
+const CartItem = ({quantity, title, src, id, original, size, price, index, position}) => {
     const { reloadCart } = useContext(AppContext)
 
     const [edit, setEdit] = useState(false)
@@ -59,7 +59,7 @@ const CartItem = ({quantity, title, src, id, original, size, price, index}) => {
         >
            <div className="cart-item" style={{transitionDelay: `${(index + 1.5) * 100}ms`}}>
                 <div className="cart-item--img__wrapper">
-                    <img src={src} alt={title} onClick={fullSize} />
+                    <img src={src} alt={title} onClick={fullSize} style={{ objectPosition: position }} />
                 </div>
                 <div className="cart-item--info__wrapper">
                     <h2>{title}</h2>
