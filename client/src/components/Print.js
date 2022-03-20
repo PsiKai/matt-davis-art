@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/opacity.css';
-import { CSSTransition } from 'react-transition-group';
-import PlaceholderImg from './layout/PlaceholderImg';
-import BrokenImgFallback from './layout/BrokenImgFallback';
+import ImageFallbacks from './layout/ImageFallbacks';
 
 const Print = (props) => {
     // Function Props
@@ -42,15 +40,7 @@ const Print = (props) => {
             style={{ pointerEvents: brokenLink ? "none" : "auto" }}
         >
             <h3>{title}</h3>
-            <CSSTransition
-                in={!loaded}
-                timeout={400}
-                classNames="crossfade"
-                unmountOnExit
-            >
-                <PlaceholderImg />
-            </CSSTransition>
-
+            <ImageFallbacks title={title} loaded={loaded} brokenLink={brokenLink} />
             <LazyLoadImage
                 src={src}
                 alt={title}
@@ -63,16 +53,6 @@ const Print = (props) => {
                     setLoaded(true)
                 }}
             />
-
-            <CSSTransition
-                in={brokenLink}
-                timeout={400}
-                classNames="crossfade"
-                unmountOnExit
-            >
-                <BrokenImgFallback />
-            </CSSTransition>
-
             <p id="cost">${price}</p>
             {isZero && <div className="sold-out"><h3>Sold Out</h3></div>}
             {inCart && <div className="sold-out"><h3>Already in Cart</h3></div>}
