@@ -7,6 +7,12 @@
   display: flex;
   justify-content: center;
   gap: 2rem;
+  position: relative;
+  min-height: 50vh;
+}
+
+.gallery-piece span {
+  display: flex !important;
 }
 
 .gallery-piece img {
@@ -79,7 +85,6 @@
 
   .gallery-piece img {
     max-height: 75vh;
-    max-width: 95%;
   }
 
   .plaque {

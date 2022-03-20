@@ -528,7 +528,7 @@ h2 {
 
 .lazy-load-image-background {
   color: inherit !important;
-  background-color: var(--dark);
+  background-color: transparent;
 }
 
 .loading {

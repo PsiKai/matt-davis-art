@@ -198,6 +198,10 @@
   opacity: 1;
 }
 
+.image__wrapper.no-src > .draggable-overlay {
+  display: none;
+}
+
 .update-stock h2 {
   text-align: center;
 }
@@ -520,9 +524,13 @@ button .MuiCircularProgress-root {
     margin-right: 1rem;
   }
 
+  .thumbnail__wrapper {
+    width: calc(100% / 3);
+  }
+
   .update-preview {
     justify-content: flex-start;
-    width: calc(100% / 3);
+    width: 100%;
     height: auto;
     border: 1px solid var(--white);
   }
