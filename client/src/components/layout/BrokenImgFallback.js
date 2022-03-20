@@ -1,11 +1,11 @@
 import React from 'react'
 import BrokenImageOutlinedIcon from '@material-ui/icons/BrokenImageOutlined';
 
-const BrokenImgFallback = () => {
+const BrokenImgFallback = ({ imgTitle }) => {
   return (
     <div className='loading'>
         <BrokenImageOutlinedIcon />
-        <p className='broken-link-text'>This image didn't load</p>
+        <p className='broken-link-text'>{ imgTitle }</p>
     </div>
   )
 }
