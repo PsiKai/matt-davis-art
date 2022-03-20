@@ -503,8 +503,8 @@ h2 {
   box-sizing: content-box;
   position: absolute;
   z-index: 2;
-  top: 1rem;
-  right: 1rem;
+  top: 0.5rem;
+  right: 0.5rem;
   padding: 0 1rem;
   border-radius: 4rem;
   height: 32px;

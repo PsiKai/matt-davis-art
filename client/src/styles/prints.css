@@ -222,6 +222,7 @@
   margin: 0;
   margin-right: auto;
   align-self: flex-start;
+  max-width: calc(50% - 2rem);
 }
 
 .commission-cta {
@@ -349,7 +350,8 @@
   }
 
   .print-modal button {
-    margin: auto
+    margin: auto;
+    max-width: none;
   }
 
   .commission-cta {
@@ -417,5 +419,9 @@
     padding: 0.25rem;
     top: 0rem;
     right: 0rem;
+  }
+
+  .print-modal button {
+    max-width: none;
   }
 }
