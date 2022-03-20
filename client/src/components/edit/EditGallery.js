@@ -7,6 +7,7 @@ import { CSSTransition } from 'react-transition-group';
 
 import CircularProgress from "@material-ui/core/CircularProgress"
 import ImagePreview from '../layout/ImagePreview';
+import EditImgThumbnail from '../layout/EditImgThumbnail'
 
 const EditGallery = () => {
     const { gallery, refreshArt } = useContext(AppContext)
@@ -18,8 +19,8 @@ const EditGallery = () => {
 
     const updateForm = useRef()
 
-    const editArtwork = (e) => {
-        var foundArt = gallery.find(art => art._id === e.target.id)
+    const editArtwork = (id) => {
+        var foundArt = gallery.find(art => art._id === id)
         setArtEdit({ ...foundArt })
         setEdit(true)
         const y = updateForm.current.getBoundingClientRect().top - 100
@@ -59,16 +60,7 @@ const EditGallery = () => {
                 {gallery ?
                     gallery.map((item, i) => {
                         return (
-                            <img
-                                key={i}
-                                id={item._id}
-                                className="update-preview"
-                                name={item.title}
-                                alt={item.title}
-                                src={item.img}
-                                onClick={editArtwork}
-                                style={{ objectPosition: item.position }}
-                            />
+                            <EditImgThumbnail key={i} artWork={item} editArtwork={editArtwork} />
                         )
                     })
                     :

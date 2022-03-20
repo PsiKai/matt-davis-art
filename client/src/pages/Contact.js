@@ -4,12 +4,14 @@ import AlertContext from "../context/alertContext";
 import axios from "axios"
 import Alerts from "../components/layout/Alerts"
 import PageHeader from "../components/layout/PageHeader"
+import { CircularProgress } from '@material-ui/core';
 
 const Contact = (props) => {
     const alertContext = useContext(AlertContext);
     const {setAlert} = alertContext;
 
     const [email, setEmail] = useState({address: "", name: "", subject: "", body: ""})
+    const [pending, setPending] = useState(false)
 
     const contactForm = useRef()
 
@@ -29,10 +31,12 @@ const Contact = (props) => {
     }
 
     const submitEmail = async (e) => {
+        setPending(true)
         e.preventDefault();
         const res = await axios.post("/contact", email)
         setAlert(res.data.msg, res.data.color)
         setEmail({address: "", name: "", subject: "", body: ""})
+        setPending(false)
     }
 
     return (
@@ -97,7 +101,9 @@ const Contact = (props) => {
                             required>
                         </textarea>
                     </div>
-                    <button data-text="Send">Send</button>
+                    <button data-text="Send" type="submit" disabled={pending}>
+                        {pending ? <>Sending... <CircularProgress/></> : "Send"}
+                    </button>
                 </form>
             </div>
             <Alerts />

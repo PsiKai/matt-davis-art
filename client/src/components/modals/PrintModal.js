@@ -2,9 +2,14 @@ import React, { useState } from 'react'
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Badge from '@material-ui/core/Badge';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/opacity.css';
+import PlaceholderImg from '../layout/PlaceholderImg';
+import { CSSTransition } from 'react-transition-group';
 
 const PrintModal = ({ img, quantityInCart, setModalOpen, addItem }) => {
     const [quantity, setQuantity] = useState(1)
+    const [loaded, setLoaded] = useState(false)
 
     const hideModal = (e) => {
         if (e.target === e.currentTarget) {
@@ -36,13 +41,22 @@ const PrintModal = ({ img, quantityInCart, setModalOpen, addItem }) => {
                 <h2>{img.title}</h2>
                 <div className='print-modal--content__wrapper'>
                     <div className='print-modal--subject__wrapper'>
-                        <img src={img.src} alt={img.title} name={img.name} />
+                        <CSSTransition
+                            in={!loaded}
+                            timeout={400}
+                            classNames="crossfade"
+                            unmountOnExit
+                        >
+                            <PlaceholderImg />
+                        </CSSTransition>
+                        <LazyLoadImage
+                            src={img.src}
+                            alt={img.title}
+                            afterLoad={() => setLoaded(true)}
+                            effect="opacity"
+                        />
                     </div>
                     <div className='print-modal--info__wrapper'>
-                        {img.original ?
-                            <h5>This is a one of a kind piece</h5> 
-                            :
-                            <h5>All prints are PREORDER and will ship within 4 weeks</h5>}
                         <div className="print-modal__flex">
                             <h2>${img.price}</h2>
                             {img.original ?
@@ -58,7 +72,7 @@ const PrintModal = ({ img, quantityInCart, setModalOpen, addItem }) => {
                                         min="1"
                                         value={quantity}
                                         onChange={updateQuantity}
-                                        />
+                                    />
                                     {quantityInCart > 0 &&
                                         <span className='input__helper'>
                                             <Badge badgeContent={quantityInCart}  style={{color: "var(--medium)"}} >

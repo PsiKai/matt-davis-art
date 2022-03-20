@@ -6,6 +6,7 @@ import CircularProgress from "@material-ui/core/CircularProgress"
 
 import { CSSTransition } from 'react-transition-group';
 import axios from "axios"
+import EditImgThumbnail from '../layout/EditImgThumbnail'
 
 const UpdateStock = () => {
     const appContext = useContext(AppContext)
@@ -32,8 +33,8 @@ const UpdateStock = () => {
         })
     }
 
-    const editArtwork = (e) => {
-        var foundPrint = prints.find(print => print._id === e.target.id)
+    const editArtwork = (id) => {
+        var foundPrint = prints.find(print => print._id === id)
         setNewTitle({ ...foundPrint, dimensions: JSON.parse(foundPrint.dimensions) })
         setEdit(true)
         const y = updateForm.current.getBoundingClientRect().top - 100
@@ -72,17 +73,8 @@ const UpdateStock = () => {
             <div className="update-gallery">
                 {prints ? prints.map((art, i) => {
                     if (art.original) {
-                     return (
-                        <img 
-                            key={i}
-                            id={art._id}
-                            className="update-preview"
-                            src={art.img}
-                            alt={art.title}
-                            onClick={editArtwork}
-                            style={{ objectPosition: art.position }}
-                        />
-                    )} else return null
+                        return <EditImgThumbnail key={i} artWork={art} editArtwork={editArtwork} />
+                    } else return null
                 }) :
                 <div className="progress">
                     <CircularProgress color="inherit" />
@@ -93,17 +85,7 @@ const UpdateStock = () => {
             <div className="update-gallery">
                 {prints?.map((art, i) => {
                     if (!art.original) {
-                        return (
-                            <img 
-                                key={i}
-                                id={art._id}
-                                className="update-preview"
-                                src={art.img}
-                                alt={art.title}
-                                onClick={editArtwork}
-                                style={{ objectPosition: art.position }}
-                            />
-                        )
+                        return <EditImgThumbnail key={i} artWork={art} editArtwork={editArtwork} />
                     } else return null
                 })}
             </div>

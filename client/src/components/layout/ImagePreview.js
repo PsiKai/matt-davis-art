@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { CSSTransition, TransitionGroup} from 'react-transition-group';
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import 'react-lazy-load-image-component/src/effects/opacity.css';
+import ImageFallbacks from './ImageFallbacks';
     
-const ImagePreview = ({ transitionKey, src, alt, dispatchPosition, objectPosition }) => {
+const ImagePreview = ({ transitionKey, src, alt, dispatchPosition, objectPosition, fallback=true }) => {
     const [offSet, setOffset] = useState()
     const [overlayStyle, setOverlayStyle] = useState({})
+    const [loaded, setLoaded] = useState(false)
+    const [brokenLink, setBrokenLink] = useState(false)
 
     useEffect(() => {
         setOverlayStyle({})
+        setBrokenLink(false)
+        setLoaded(false)
     }, [src])
 
     const getPosition = (parent, overlay, dimension, position, mouse) => {
@@ -96,8 +103,21 @@ const ImagePreview = ({ transitionKey, src, alt, dispatchPosition, objectPositio
             timeout={400}
             classNames="crossfade"
         >
-            <div className='image__wrapper' onMouseOver={getOptimumHeight} onTouchStart={getOptimumHeight}>
-                <img src={src} alt={alt} />
+            <div className={`image__wrapper ${src ? "" : "no-src"}`} onMouseOver={getOptimumHeight} onTouchStart={getOptimumHeight}>
+                {fallback && <ImageFallbacks title={alt} loaded={loaded} brokenLink={brokenLink} />}
+                <LazyLoadImage
+                    src={src}
+                    alt={alt}
+                    effect="opacity"
+                    afterLoad={() => {
+                        setLoaded(true)
+                        setBrokenLink(false)
+                    }}
+                    onError={() => {
+                        setBrokenLink(true)
+                        setLoaded(true)
+                    }}
+                />
                 <div 
                     className="draggable-overlay"
                     style={overlayStyle}

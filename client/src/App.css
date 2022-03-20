@@ -153,7 +153,6 @@ input {
 
 .input__helper {
   width: fit-content;
-  position: absolute;
   left: 100%;
   background-color: var(--white);
   background-image: url(./images/brushed-alum.webp);
@@ -502,6 +501,7 @@ h2 {
 .close-modal {
   box-sizing: content-box;
   position: absolute;
+  z-index: 2;
   top: 1rem;
   right: 1rem;
   padding: 0 1rem;
@@ -524,6 +524,72 @@ h2 {
 .close-modal > svg {
   font-size: 2rem;
   pointer-events: none;
+}
+
+.lazy-load-image-background {
+  color: inherit !important;
+  background-color: transparent;
+}
+
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: inherit;
+  color: inherit !important;
+  height: 100%;
+  width: 100%;
+}
+
+.loading svg {
+  opacity: 0.7;
+  height: fit-content;
+  width: 50%;
+  max-width: 80px;
+  min-width: 40px;
+}
+
+.loading-dots {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.25rem;
+}
+
+.loading-dots .dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--dark);
+  opacity: 0.7;
+  animation: dot-jumps 800ms cubic-bezier(0.250, 0.250, 0.395, 1.260) infinite forwards;
+}
+
+.loading .broken-link-face {
+  width: 40px;
+}
+
+.loading .broken-link-text {
+  transform: none;
+  font-size: 0.875rem;
+  margin: 0.25rem;
+}
+
+@keyframes dot-jumps {
+  10% {
+    transform: none;
+  }
+  40% {
+    transform: translateY(var(--jump));
+  }
+
+  100% {
+    transform: none;
+  }
 }
 
 @media (max-width: 850px) {

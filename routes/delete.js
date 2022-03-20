@@ -1,42 +1,27 @@
-const express = require("express");
-const router = express.Router();
-const {Storage} = require("@google-cloud/storage");
+const express = require("express")
+const router = express.Router()
+
 let auth
 if(process.env.NODE_ENV !== 'production') {
-    auth = require("../config/matt-gcp-oauth.json")
+    auth = process.env.GOOGLE_APPLICATION_CREDENTIALS
 } else {
     auth = "google-credentials.json"
 }
-const storage = new Storage({keyFileName: auth});
+const {Storage} = require("@google-cloud/storage")
+const storage = new Storage({keyFileName: auth})
 
-const printBucket = "matt-d-prints"
-const galleryBucket = "matt-d-gallery"
-
-var galleryModel = require("../models/gallery")
-var printModel = require("../models/prints")
-
-
-router.post("/gallery", async (req, res) => {
+router.post("/:destination", async (req, res) => {
     let { img, title, _id } = req.body
-    img = decodeURIComponent(img.split("gallery/")[1])
+    const { destination } = req.params
+
+    img = decodeURIComponent(img.split(`${destination}/`)[1])
+
+    const bucket = `matt-d-${destination}`
+    const model = require(`../models/${destination}`)
 
     try {
-        await storage.bucket(galleryBucket).file(img).delete()
-        await galleryModel.deleteOne({_id: _id})
-        res.json({msg: `${title} was deleted`})
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({msg: "Error deleting artwork"})
-    }
-})
-
-router.post("/prints", async (req, res) => {
-    let { img, title, _id } = req.body
-    img = decodeURIComponent(img.split("prints/")[1])
-
-    try {
-        await storage.bucket(printBucket).file(img).delete()
-        await printModel.deleteOne({_id: _id})
+        await storage.bucket(bucket).file(img).delete()
+        await model.deleteOne({_id: _id})
         res.json({msg: `${title} was deleted`})
     } catch (error) {
         console.log(error);

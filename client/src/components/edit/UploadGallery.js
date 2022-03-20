@@ -29,7 +29,7 @@ const UploadGallery = () => {
         const [imgFile] = e.target.files
         if (imgFile) {
             if (imgFile.size / 1024 / 1024 > 16) {
-                setAlert("File is larger than the 16mb max size", "lightred")
+                setAlert("File is larger than the 16mb max size", "lightpink")
                 e.target.value = null;
             } else {
                 setFile(imgFile)
@@ -52,7 +52,7 @@ const UploadGallery = () => {
         formData.append('title', form.title)
         formData.append("medium", form.medium || "")
         formData.append('description', form.description || "")
-        formData.append('position', form.position)
+        formData.append('position', form.position || "50% 50%")
 
         try {
             const res = await axios.post('/upload/gallery', formData, {
@@ -61,7 +61,7 @@ const UploadGallery = () => {
             setAlert(res.data.msg, "lightgrey")
             refreshArt();
         } catch (err) {
-            setAlert("There was a problem with the server", "lightred")
+            setAlert(err.response.data.msg, "lightpink")
         }
 
         setForm({})
@@ -84,6 +84,7 @@ const UploadGallery = () => {
                     alt={form.title}
                     transitionKey={file.size}
                     dispatchPosition={updatePosition}
+                    fallback={false}
                 />
                 <GalleryForm
                     form={form}

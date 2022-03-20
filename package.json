@@ -34,6 +34,7 @@
     "mongoose": "^5.11.10",
     "multer": "^1.4.2",
     "nodemailer": "^6.4.17",
+    "sharp": "^0.30.3",
     "ssl-express-www": "^3.0.7"
   }
 }
