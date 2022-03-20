@@ -171,6 +171,16 @@
   overflow: hidden;
   height: fit-content;
   width: fit-content;
+  min-height: 200px;
+  min-width: 200px;
+}
+
+.image__wrapper .loading ~ .draggable-overlay {
+  display: none;
+}
+
+.image__wrapper span {
+  display: flex !important;
 }
 
 .draggable-overlay {
@@ -252,16 +262,30 @@
   gap: 1rem;
 }
 
-.update-preview {
+.thumbnail__wrapper {
+  position: relative;
   border-radius: 0.5rem;
+  overflow: hidden;
+  transition: all 200ms ease;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.thumbnail__wrapper .loading {
+  background-color: var(--white);
+}
+
+.thumbnail__wrapper span {
+  display: flex !important;
+}
+
+.update-preview {
   height: 130px;
   aspect-ratio: 1 / 1.42;
   object-fit: cover;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
   transition: all 200ms ease;
 }
 
-.update-preview:hover {
+.thumbnail__wrapper:hover {
   cursor: pointer;
   transform: translateY(-4px);
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);

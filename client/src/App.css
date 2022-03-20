@@ -550,6 +550,7 @@ h2 {
   height: fit-content;
   width: 50%;
   max-width: 80px;
+  min-width: 40px;
 }
 
 .loading-dots {
