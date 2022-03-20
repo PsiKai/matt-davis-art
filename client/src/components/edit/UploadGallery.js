@@ -84,6 +84,7 @@ const UploadGallery = () => {
                     alt={form.title}
                     transitionKey={file.size}
                     dispatchPosition={updatePosition}
+                    fallback={false}
                 />
                 <GalleryForm
                     form={form}

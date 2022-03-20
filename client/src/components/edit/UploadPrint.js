@@ -100,6 +100,7 @@ const UploadPrint = () => {
                     alt={title}
                     transitionKey={file.size}
                     dispatchPosition={setObjectPosition}
+                    fallback={false}
                 />
                 <form onSubmit={upload}>
 
