@@ -291,6 +291,7 @@ button {
   transition: width 200ms ease;
   position: relative;
   border: 2px outset var(--dark);
+  border-radius: 0.25rem;
   z-index: 1;
 }
 

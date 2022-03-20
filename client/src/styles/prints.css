@@ -180,7 +180,7 @@
 
 .print-modal__flex {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   gap: 1rem;
   flex-basis: 50%;
@@ -189,6 +189,9 @@
 .print-modal--info__wrapper {
   display: flex;
   margin-top: 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
 }
 
 .print-modal--subject__wrapper {
@@ -216,7 +219,9 @@
 }
 
 .print-modal button {
-  margin-top: 0;
+  margin: 0;
+  margin-right: auto;
+  align-self: flex-start;
 }
 
 .commission-cta {
@@ -322,7 +327,12 @@
 
   .print-modal {
     top: 60px;
-    min-width: 95%;
+  }
+
+  .close-modal {
+    padding: 0.25rem;
+    top: 0rem;
+    right: 0rem;
   }
 
   .print-modal--subject__wrapper {
@@ -336,6 +346,10 @@
 
   .print-modal img {
     max-height: 62vh;
+  }
+
+  .print-modal button {
+    margin: auto
   }
 
   .commission-cta {
