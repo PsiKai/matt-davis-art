@@ -685,7 +685,7 @@ h2 {
   }
 
   button::after {
-    content: attr(data-text);
+    content: "";
     position: absolute;
     background-color: var(--medium);
     padding: 0.25rem 0;
