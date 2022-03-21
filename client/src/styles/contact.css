@@ -64,17 +64,40 @@
   margin-bottom: 4rem;
 }
 
-.contact--social__flex a {
-  padding: 0.75rem 1rem;
+.contact--social__flex .social-icon__wrapper {
+  position: relative;
   border-radius: 1rem;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-  background-color: var(--dark);
-  transition: all 150ms ease-in-out;
-  aspect-ratio: 3;
+  width: 5rem;
 }
 
-.contact--social__flex a:hover,
-.contact--social__flex a:focus {
+.contact--social__flex a {
+  background-color: var(--dark);
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  height: 100%;
+  aspect-ratio: 1;
+  display: inline-block;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  transition: all 150ms ease-in-out;
+}
+
+.social-icon__wrapper .brand-backdrop {
+  /* z-index: -1; */
+  left: 0;
+  top: 0;
+  transform: skew(0deg) rotate(0deg) scale(0);
+  transform-origin: center;
+  transition: transform 150ms ease;
+  height: 90%;
+  width: 95%;
+}
+
+.social-icon__wrapper .brand-backdrop::after {
+  content: none;
+}
+
+.social-icon__wrapper:hover a,
+.social-icon__wrapper:focus-within a {
   box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.3);
   transform: translateY(-5px);
 }
@@ -84,12 +107,17 @@
 }
 
 .contact--social__flex a:active {
-  animation: press 150ms ease forwards;
+  animation: press-text 150ms ease forwards;
 }
 
 .contact--social__flex i {
   font-size: 3rem;
   color: var(--white-two);
+}
+
+.social-icon__wrapper:hover .brand-backdrop,
+.social-icon__wrapper:focus-within .brand-backdrop {
+  transform: skew(7deg) rotate(-6deg) scale(1.2);
 }
 
 .email-form,

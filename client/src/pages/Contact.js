@@ -52,8 +52,14 @@ const Contact = (props) => {
                 <div className="contact--info">
                     <h3>Drop me a line on my socials:</h3> 
                     <div className="contact--social__flex">
-                        <a href="https://www.instagram.com/mattdavisart5280/"><i className="fab fa-instagram fa-2x"></i></a>
-                        <a href="https://www.facebook.com/matthew.davis.5437"><i className="fab fa-facebook-f fa-2x"></i></a>
+                        <div className='social-icon__wrapper'>
+                            <div className='brand-backdrop'></div>
+                            <a href="https://www.instagram.com/mattdavisart5280/"><i className="fab fa-instagram fa-2x"></i></a>
+                        </div>
+                        <div className='social-icon__wrapper'>
+                            <div className='brand-backdrop'></div>
+                            <a href="https://www.facebook.com/matthew.davis.5437"><i className="fab fa-facebook-f fa-2x"></i></a>
+                        </div>
                     </div>
                     
                 </div>
