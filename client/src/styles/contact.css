@@ -82,7 +82,6 @@
 }
 
 .social-icon__wrapper .brand-backdrop {
-  /* z-index: -1; */
   left: 0;
   top: 0;
   transform: skew(0deg) rotate(0deg) scale(0);
@@ -107,7 +106,7 @@
 }
 
 .contact--social__flex a:active {
-  animation: press-text 150ms ease forwards;
+  animation: press 150ms ease forwards;
 }
 
 .contact--social__flex i {
