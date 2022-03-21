@@ -31,7 +31,10 @@ app.use("/contact", require("./routes/contact"))
 if(process.env.NODE_ENV === 'production') {
     app.use(expressStaticGzip(path.join(__dirname, "client/build")));
 
-    app.get("*", (req, res) => res.sendFile(path.resolve(__dirname, "client", "build", "index.html")))
+    app.get("*", (req, res) => {
+        res.setHeader("Cache-Control", "max-age=3600")
+        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+    })
 }
 
 

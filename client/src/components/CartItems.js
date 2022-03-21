@@ -48,6 +48,7 @@ const CartItems = () => {
                         quantity={item.quantity}
                         original={item.original}
                         size={JSON.parse(item.dimensions)}
+                        position={item.position}
                     />
                 ))}
             </div>

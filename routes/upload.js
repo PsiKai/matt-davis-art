@@ -36,7 +36,7 @@ router.post("/:destination", async (req, res) => {
 
     try {
         await sharp(data).webp().toFile(localPath)
-        await storage.bucket(bucket).upload(localPath, {destination: dirFileName})
+        await storage.bucket(bucket).upload(localPath, {destination: dirFileName, metadata: { cacheControl: 'max-age=86400' }})
         await model.create(imgObj)
         res.json({msg: `${title} was uploaded to the ${resDestination}!`})
     } catch (error) {

@@ -1,5 +1,6 @@
 const express = require("express")
 const router = express.Router()
+const { hasSharedResource } = require("../data/helpers/mongodb")
 
 let auth
 if(process.env.NODE_ENV !== 'production') {
@@ -20,7 +21,8 @@ router.post("/:destination", async (req, res) => {
     const model = require(`../models/${destination}`)
 
     try {
-        await storage.bucket(bucket).file(img).delete()
+        const isShared = await hasSharedResource(img, destination)
+        if (!isShared) await storage.bucket(bucket).file(img).delete()
         await model.deleteOne({_id: _id})
         res.json({msg: `${title} was deleted`})
     } catch (error) {

@@ -55,8 +55,6 @@ const ImagePreview = ({ transitionKey, src, alt, dispatchPosition, objectPositio
     }
 
     const getOptimumHeight = (e) => {
-        if (overlayStyle.height) return
-
         const rect = e.currentTarget.getBoundingClientRect()
         const height = rect.height > rect.width * 1.42 ? rect.width * 1.42 : rect.height
         if (!overlayStyle.left) setInitialPos(rect, height)
