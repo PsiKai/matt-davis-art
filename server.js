@@ -29,10 +29,12 @@ app.use("/contact", require("./routes/contact"))
 
 
 if(process.env.NODE_ENV === 'production') {
-    app.use(expressStaticGzip(path.join(__dirname, "client/build"), { maxAge: 86400000 }));
+    app.use(expressStaticGzip(
+        path.join(__dirname, "client/build"),
+        { maxAge: process.env.BROWSER_CACHE_DAYS * 24 * 60 * 60 * 1000 }
+    ));
 
     app.get("*", (req, res) => {
-        res.setHeader("Cache-Control", "max-age=3600")
         res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
     })
 }
