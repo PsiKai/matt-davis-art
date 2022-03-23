@@ -15,10 +15,11 @@ const Carousel = () => {
                 infinite="true"
                 autoPlay="true"
                 animationDuration="600"
-                autoPlayInterval="7000"
+                autoPlayInterval="3000"
                 disableDotsControls="true"
                 disableButtonsControls="true"
                 autoPlayStrategy="none"
+                animationType='fadeout'
              >
                 {imgs.map((img, i) => {
                     return (
