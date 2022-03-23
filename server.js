@@ -35,7 +35,7 @@ if(process.env.NODE_ENV === 'production') {
     ));
 
     app.get("*", (req, res) => {
-        res.setHeader("Cache-Control", "no-cache")
+        res.setHeader("Cache-Control", "no-cache, max-age=0")
         res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
     })
 }
