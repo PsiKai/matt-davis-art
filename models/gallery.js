@@ -5,8 +5,20 @@ var galleryImageSchema = new mongoose.Schema({
     medium: String,
     description: String,
     img: String,
-    type: String,
-    position: String
+    position: String,
+    soldOut: {
+        type: Boolean,
+        default: false
+    },
+    createdAt: {
+        type: Date,
+        default: () => Date.now(),
+        immutable: true
+    },
+    deletedAt: {
+        type: Date,
+        default: null,
+    }
 
     // {
     //     data: Buffer,
