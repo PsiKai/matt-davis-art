@@ -37,5 +37,38 @@ module.exports = {
         } catch (error) {
             console.error(error.message)
         }
+    },
+
+    updateAllDocuments: async (source, keyValues) => {
+        const model = require(`../../models/${source}`)
+        try {
+            const docs = await model.updateMany({}, keyValues)
+            console.table(docs)
+            return docs
+        } catch (error) {
+            console.error(error.message)
+        }
+    },
+
+    removeSchemaField: async (source, field) => {
+        const model = require(`../../models/${source}`)
+        try {
+            const docs = await model.updateMany({}, { $unset: { [field]: 1 } })
+            console.table(docs)
+            return docs
+        } catch (error) {
+            console.error(error.message)
+        }
+    },
+
+    removeOneSchemaField: async (source, _id, field) => {
+        const model = require(`../../models/${source}`)
+        try {
+            const docs = await model.updateOne({ _id }, { $unset: { [field]: 1 } })
+            console.table(docs)
+            return docs
+        } catch (error) {
+            console.error(error.message)
+        }
     }
 }
