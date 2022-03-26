@@ -91,5 +91,15 @@ module.exports = {
         }
         console.table(fileInfo)
         console.log(metadata)
+    },
+
+    deleteOneFile: async (bucket, fileName) => {
+        try {
+            console.warn(`DELETING ${fileName} FROM GOOGLE CLOUD`)
+            const res = await storage.bucket(`matt-d-${bucket}`).file(fileName).delete()
+            console.log(res)
+        } catch (error) {
+            console.error(error.message)
+        }
     }
 }
