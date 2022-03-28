@@ -3,11 +3,6 @@ const mongoose = require('mongoose');
 var printSchema = mongoose.Schema({
     title: String,
     img: String,
-    // {
-    //     data: Buffer,
-    //     contentType: String
-    // },
-    // stock: Object,
     original: Boolean,
     price: Number,
     dimensions: Object,

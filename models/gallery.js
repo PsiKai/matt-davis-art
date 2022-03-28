@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-var galleryImageSchema = new mongoose.Schema({
+var galleryImageSchema = mongoose.Schema({
     title: String,
     medium: String,
     description: String,
@@ -19,11 +19,6 @@ var galleryImageSchema = new mongoose.Schema({
         type: Date,
         default: null,
     }
-
-    // {
-    //     data: Buffer,
-    //     contentType: String
-    // }
 })
 
 module.exports = new mongoose.model('Image', galleryImageSchema);

@@ -57,7 +57,7 @@ var mongoHelpers = {
         }
     },
 
-    removeSchemaField: async (source, field, ) => {
+    removeSchemaField: async (source, field) => {
         const model = require(`../../models/${source}`)
         try {
             const res = await model.updateMany({}, { $unset: { [field]: 1 } })
