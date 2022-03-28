@@ -24,7 +24,10 @@ module.exports = {
 
     updateOneMetadata: async (bucket, fileName, keyValues) => {
         try {
-            const [metadata] = await storage.bucket(`matt-d-${bucket}`).file(fileName).setMetadata(keyValues)
+            const [metadata] = await storage
+                .bucket(`matt-d-${bucket}`)
+                .file(fileName)
+                .setMetadata(keyValues)
             console.log(metadata)
         } catch (error) { console.log(error.message) }
     },
