@@ -13,10 +13,7 @@ router.get("/", async (req, res) => {
         console.log("Already have art");
     } else {
         try {
-            const prints = await printModel.find({ deletedAt: null })
-            const gallery = await galleryModel.find({ deletedAt: null })
-            console.log("Got art");
-            res.json({ gallery, prints })
+            res.json(await getAllArt())
         } catch (error) {
             console.log(error);
             res.status(500).json({ msg: "Couldn't get art "})
@@ -27,10 +24,7 @@ router.get("/", async (req, res) => {
 router.get("/refresh", async (req, res) => {
     console.log("Refreshing");
     try {
-        const prints = await printModel.find({ deletedAt: null })
-        const gallery = await galleryModel.find({ deletedAt: null })
-        console.log("Refreshed art");
-        res.json({ gallery, prints })
+        res.json(await getAllArt())
     } catch (error) {
         console.log(error);
         res.status(500).json({ msg: "Couldn't get art "})
@@ -48,5 +42,11 @@ router.post("/availability", async (req, res) => {
     
     res.json({availableArt})
 })
+
+const getAllArt = async () => {
+    const prints = await printModel.find({ deletedAt: null })
+    const gallery = await galleryModel.find({ deletedAt: null })
+    return { gallery, prints }
+}
 
 module.exports = router;
