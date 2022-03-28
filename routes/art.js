@@ -7,44 +7,28 @@ var printModel = require("../models/prints")
 
 let art = {}
 
-router.get("/", (req, res) => {
-    // console.log(art);
+router.get("/", async (req, res) => {
     if (Object.keys(art).length > 0) {
         res.json(art)
-        console.log("already have art");
+        console.log("Already have art");
     } else {
-        console.log("getting art");
-        const promise1 = galleryModel.find({}).exec()
-        const promise2 = printModel.find({}).exec()
-        Promise.all([promise1, promise2])
-        .then(([result1, result2]) => {
-            console.log("got art");
-            art = {gallery: [...result1], prints: [...result2]}
-            res.json(art)
-        })
-        .catch(err => {
-            return res.status(400).json({
-                error: "Couldn't get art"
-            })
-        })   
+        try {
+            res.json(await getAllArt())
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ msg: "Couldn't get art "})
+        }
     }
 })
 
-router.get("/refresh", (req, res) => {
-    console.log("refreshing");
-    const promise1 = galleryModel.find({}).exec()
-    const promise2 = printModel.find({}).exec()
-    Promise.all([promise1, promise2])
-        .then(([result1, result2]) => {
-            // console.log(result1, result2);
-            art = {gallery: [...result1], prints: [...result2]}
-            res.json(art)
-        })
-        .catch(err => {
-            return res.status(400).json({
-                error: "Couldn't get art"
-            })
-        })
+router.get("/refresh", async (req, res) => {
+    console.log("Refreshing");
+    try {
+        res.json(await getAllArt())
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ msg: "Couldn't get art "})
+    }
 })
 
 router.post("/availability", async (req, res) => {
@@ -58,5 +42,11 @@ router.post("/availability", async (req, res) => {
     
     res.json({availableArt})
 })
+
+const getAllArt = async () => {
+    const prints = await printModel.find({ deletedAt: null })
+    const gallery = await galleryModel.find({ deletedAt: null })
+    return { gallery, prints }
+}
 
 module.exports = router;

@@ -9,17 +9,27 @@ const printBucket = "matt-d-prints"
 const galleryBucket = "matt-d-gallery"
 
 module.exports = {
-    updateCacheControl: async (bucket) => {
-        const [files] = await storage.bucket(bucket).getFiles();
+    updateAllMetaData: async (bucket, keyValues) => {
+        const [files] = await storage.bucket(`matt-d-${bucket}`).getFiles();
         files.forEach(async (file) => {
             try {
                 const [ metadata ] = await storage
-                    .bucket(bucket)
+                    .bucket(`matt-d-${bucket}`)
                     .file(file.name)
-                    .setMetadata({ cacheControl: 'max-age=86400' })
-                console.log(metadata.cacheControl)
+                    .setMetadata(keyValues)
+                console.log(metadata)
             } catch (error) { console.log(error.message) }
         })
+    },
+
+    updateOneMetadata: async (bucket, fileName, keyValues) => {
+        try {
+            const [metadata] = await storage
+                .bucket(`matt-d-${bucket}`)
+                .file(fileName)
+                .setMetadata(keyValues)
+            console.log(metadata)
+        } catch (error) { console.log(error.message) }
     },
 
     convertToWebp: async (location) => {
@@ -71,5 +81,28 @@ module.exports = {
             }
         ))
         console.table(fileInfo)
+    },
+
+    getOneFile: async (bucket, fileName) => {
+        const [metadata] = await storage.bucket(`matt-d-${bucket}`).file(fileName).getMetadata()
+        const fileInfo = {
+            name: metadata.name,
+            bucket: metadata.bucket,
+            id: metadata.generation,
+            cacheControl: metadata.cacheControl,
+            size: `${(metadata.size / 1024).toFixed(2)} kB`
+        }
+        console.table(fileInfo)
+        console.log(metadata)
+    },
+
+    deleteOneFile: async (bucket, fileName) => {
+        try {
+            console.warn(`DELETING ${fileName} FROM GOOGLE CLOUD`)
+            const res = await storage.bucket(`matt-d-${bucket}`).file(fileName).delete()
+            console.log(res)
+        } catch (error) {
+            console.error(error.message)
+        }
     }
 }
