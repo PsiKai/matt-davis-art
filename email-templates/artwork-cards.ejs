@@ -1,0 +1,21 @@
+<% const { width, height } = JSON.parse(item.dimensions) %>
+
+<div
+  style="
+    margin: 0.5rem;
+    border: 1px solid black;
+    padding: 0 1rem;
+    border-radius: 0.5rem;
+    background: lightgrey;
+    max-width: 500px;
+    display: inline-block;
+  "
+>
+  <h4><%= item.title %></h4>
+  <img
+    src="<%= item.img %>"
+    alt="<%= item.title %>"
+    style="height: 300px; max-width: 100%; object-fit: cover"
+  />
+  <p>Size: <%= width %>" x <%= height %>"</p>
+</div>

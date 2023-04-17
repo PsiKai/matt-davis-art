@@ -313,6 +313,7 @@ button:active {
 
 button:disabled {
   cursor: default;
+  pointer-events: none;
 }
 
 button::after {
@@ -567,7 +568,7 @@ h2 {
   border-radius: 50%;
   background-color: var(--dark);
   opacity: 0.7;
-  animation: dot-jumps 800ms cubic-bezier(0.250, 0.250, 0.395, 1.260) infinite forwards;
+  animation: dot-jumps 800ms cubic-bezier(0.25, 0.25, 0.395, 1.26) infinite forwards;
 }
 
 .loading .broken-link-face {
