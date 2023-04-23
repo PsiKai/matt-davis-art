@@ -42,7 +42,7 @@ const GalleryForm = ({ form, formUpdate, imgUpdate, upload, file, inputFile, pen
       </div>
 
       <div className="input__wrapper">
-        <label htmlFor="title">Description</label>
+        <label htmlFor="description">Description</label>
         <textarea
           id="description"
           type="text"
@@ -60,8 +60,7 @@ const GalleryForm = ({ form, formUpdate, imgUpdate, upload, file, inputFile, pen
           </>
         ) : (
           <>
-            Submit
-            <PublishIcon />
+            Submit <PublishIcon />
           </>
         )}
       </button>

@@ -42,7 +42,7 @@ const Edit = () => {
         <i className="fas fa-sign-out-alt fa-lg"></i>
       </Fab>
 
-      <CSSTransition in={uploading} classNames="fadein" timeout={200} unmountOnExit>
+      <CSSTransition in={!!uploading} classNames="fadein" timeout={200} unmountOnExit>
         <div className="backdrop">
           <div className="modal-content edit-modal">
             {uploading === "gallery" ? (

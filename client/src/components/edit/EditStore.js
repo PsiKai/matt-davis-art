@@ -1,14 +1,16 @@
-import React, { useContext, useState, useRef } from "react"
+import React, { useContext, useState } from "react"
 import AppContext from "../../context/AppContext"
 import AlertContext from "../../context/alertContext"
-import ImagePreview from "../layout/ImagePreview"
+
+import axios from "axios"
+import { CSSTransition } from "react-transition-group"
+
 import CircularProgress from "@material-ui/core/CircularProgress"
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded"
 import PublishIcon from "@material-ui/icons/Publish"
 import DeleteIcon from "@material-ui/icons/Delete"
 
-import { CSSTransition } from "react-transition-group"
-import axios from "axios"
+import ImagePreview from "../layout/ImagePreview"
 import EditImgThumbnail from "../layout/EditImgThumbnail"
 
 const EditStore = ({ setUploading }) => {
@@ -20,8 +22,6 @@ const EditStore = ({ setUploading }) => {
   const [newTitle, setNewTitle] = useState({})
   const [edit, setEdit] = useState(false)
   const [pending, setPending] = useState("")
-
-  const updateForm = useRef()
 
   const setUpdate = e => {
     if (e.target.name === "width" || e.target.name === "height") {
@@ -41,8 +41,6 @@ const EditStore = ({ setUploading }) => {
     var foundPrint = prints.find(print => print._id === id)
     setNewTitle({ ...foundPrint, dimensions: JSON.parse(foundPrint.dimensions) })
     setEdit(true)
-    // const y = updateForm.current.getBoundingClientRect().top - 100
-    // window.scrollBy({ top: y, behavior: "smooth" })
   }
 
   const submitChanges = async route => {
@@ -99,7 +97,7 @@ const EditStore = ({ setUploading }) => {
           } else return null
         })}
       </div>
-      <div className="upload-form" ref={updateForm}>
+      <div className="upload-form">
         <CSSTransition in={edit} classNames="fadein" timeout={200} unmountOnExit={true}>
           <div className="backdrop">
             <div className="modal-content edit-modal">
@@ -204,37 +202,25 @@ const EditStore = ({ setUploading }) => {
                   </div>
                 </div>
 
-                <button
-                  data-text="Submit"
-                  type="submit"
-                  disabled={!!pending}
-                  onClick={() => submitChanges("/update")}
-                >
+                <button type="submit" disabled={!!pending} onClick={() => submitChanges("/update")}>
                   {pending === "update" ? (
                     <>
                       Submitting... <CircularProgress />
                     </>
                   ) : (
                     <>
-                      Submit
-                      <PublishIcon />
+                      Submit <PublishIcon />
                     </>
                   )}
                 </button>
-                <button
-                  data-text="Submit"
-                  type="submit"
-                  disabled={!!pending}
-                  onClick={() => submitChanges("/delete")}
-                >
+                <button type="submit" disabled={!!pending} onClick={() => submitChanges("/delete")}>
                   {pending === "delete" ? (
                     <>
                       Deleting... <CircularProgress />
                     </>
                   ) : (
                     <>
-                      Delete
-                      <DeleteIcon />
+                      Delete <DeleteIcon />
                     </>
                   )}
                 </button>

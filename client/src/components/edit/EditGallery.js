@@ -126,37 +126,25 @@ const EditGallery = ({ setUploading }) => {
                   />
                 </div>
 
-                <button
-                  data-text="Submit"
-                  type="submit"
-                  disabled={!!pending}
-                  onClick={() => submitChanges("/update")}
-                >
+                <button type="submit" disabled={!!pending} onClick={() => submitChanges("/update")}>
                   {pending === "update" ? (
                     <>
                       Submitting... <CircularProgress />
                     </>
                   ) : (
                     <>
-                      Submit
-                      <PublishIcon />
+                      Submit <PublishIcon />
                     </>
                   )}
                 </button>
-                <button
-                  data-text="Submit"
-                  type="submit"
-                  disabled={!!pending}
-                  onClick={() => submitChanges("/delete")}
-                >
+                <button type="submit" disabled={!!pending} onClick={() => submitChanges("/delete")}>
                   {pending === "delete" ? (
                     <>
                       Deleting... <CircularProgress />
                     </>
                   ) : (
                     <>
-                      Delete
-                      <DeleteIcon />
+                      Delete <DeleteIcon />
                     </>
                   )}
                 </button>
