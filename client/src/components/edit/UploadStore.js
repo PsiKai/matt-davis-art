@@ -7,9 +7,9 @@ import axios from "axios"
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded"
 
 import ImagePreview from "../layout/ImagePreview"
-import StoreForm from "./StoreForm"
+import UploadStoreForm from "./UploadStoreForm"
 
-const UploadPrint = ({ setUploading }) => {
+const UploadStore = ({ setUploading }) => {
   const { setAlert } = useContext(AlertContext)
   const { refreshArt } = useContext(AppContext)
 
@@ -104,27 +104,25 @@ const UploadPrint = ({ setUploading }) => {
         <h2>Add Artwork to Store</h2>
       </div>
       <div className="upload-prints" onDragOver={e => e.preventDefault()}>
-        <div className="upload-form prints">
-          <ImagePreview
-            src={preview}
-            alt={form.title}
-            transitionKey={file.size}
-            dispatchPosition={setObjectPosition}
-            fallback={false}
-          />
-          <StoreForm
-            form={form}
-            formUpdate={formUpdate}
-            pending={pending}
-            upload={upload}
-            inputFile={inputFile}
-            file={file}
-            imgUpdate={imgUpdate}
-          />
-        </div>
+        <ImagePreview
+          src={preview}
+          alt={form.title}
+          transitionKey={file.size}
+          dispatchPosition={setObjectPosition}
+          fallback={false}
+        />
+        <UploadStoreForm
+          form={form}
+          formUpdate={formUpdate}
+          pending={pending}
+          upload={upload}
+          inputFile={inputFile}
+          file={file}
+          imgUpdate={imgUpdate}
+        />
       </div>
     </>
   )
 }
 
-export default UploadPrint
+export default UploadStore

@@ -9,6 +9,7 @@
   gap: 2rem;
   position: relative;
   min-height: 50vh;
+  contain: layout;
 }
 
 .gallery-piece span {

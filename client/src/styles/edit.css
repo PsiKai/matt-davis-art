@@ -28,7 +28,7 @@
 .edit-modal {
   --transform: none;
   transform: translate(0, -50%);
-  max-height: 90vh;
+  max-height: 90dvh;
   overflow-y: auto;
   padding-top: 0;
 }
@@ -140,7 +140,7 @@
   margin: auto;
 }
 
-.upload-form img {
+.img-preview img {
   max-height: 300px;
   max-width: 100%;
 }
@@ -196,6 +196,7 @@
   overflow: hidden;
   transition: all 200ms ease;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  contain: layout;
 }
 
 .thumbnail__wrapper .loading {
@@ -220,7 +221,8 @@
 }
 
 .update-gallery--update {
-  padding: 1rem 2rem;
+  /* padding: 1rem 2rem; */
+  padding: 1rem 0;
   position: relative;
 }
 
@@ -252,14 +254,6 @@ button .MuiCircularProgress-root {
 }
 
 @media (max-width: 850px) {
-  .upload-form {
-    grid-template-columns: none;
-    grid-template-rows: auto auto;
-    margin: 1rem auto 0;
-    width: 500px;
-    max-width: 100%;
-  }
-
   .img-preview {
     display: flex;
     justify-content: center;
@@ -274,10 +268,6 @@ button .MuiCircularProgress-root {
   .update-gallery {
     margin-bottom: 1rem;
   }
-
-  .update-gallery--update {
-    padding: 1rem 0;
-  }
 }
 
 @media (max-width: 450px) {
@@ -290,10 +280,6 @@ button .MuiCircularProgress-root {
     padding: 0.5rem;
     height: 3rem;
     width: 3rem;
-  }
-
-  .upload-form textarea {
-    height: 5rem;
   }
 
   .edit-gallery--header {

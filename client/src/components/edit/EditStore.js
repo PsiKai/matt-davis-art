@@ -8,10 +8,10 @@ import { CSSTransition } from "react-transition-group"
 import CircularProgress from "@material-ui/core/CircularProgress"
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded"
 import PublishIcon from "@material-ui/icons/Publish"
-import DeleteIcon from "@material-ui/icons/Delete"
 
 import ImagePreview from "../layout/ImagePreview"
 import EditImgThumbnail from "../layout/EditImgThumbnail"
+import EditStoreForm from "./EditStoreForm"
 
 const EditStore = ({ setUploading }) => {
   const appContext = useContext(AppContext)
@@ -19,18 +19,22 @@ const EditStore = ({ setUploading }) => {
   const { prints, refreshArt } = appContext
   const { setAlert } = alertContext
 
-  const [newTitle, setNewTitle] = useState({})
+  const [newTitle, setNewTitle] = useState(initialFormState())
   const [edit, setEdit] = useState(false)
   const [pending, setPending] = useState("")
 
-  const setUpdate = e => {
-    if (e.target.name === "width" || e.target.name === "height") {
-      setNewTitle({
-        ...newTitle,
-        dimensions: { ...newTitle["dimensions"], [e.target.name]: +e.target.value },
-      })
-      return
+  function initialFormState() {
+    return {
+      title: "",
+      original: "print",
+      price: "",
+      width: 11,
+      height: 17,
+      position: "50% 50%",
     }
+  }
+
+  const setUpdate = e => {
     setNewTitle({
       ...newTitle,
       [e.target.name]: e.target.value,
@@ -39,28 +43,31 @@ const EditStore = ({ setUploading }) => {
 
   const editArtwork = id => {
     var foundPrint = prints.find(print => print._id === id)
-    setNewTitle({ ...foundPrint, dimensions: JSON.parse(foundPrint.dimensions) })
+    setNewTitle({
+      ...foundPrint,
+      ...JSON.parse(foundPrint.dimensions),
+      original: foundPrint.original ? "original" : "print",
+    })
     setEdit(true)
   }
 
   const submitChanges = async route => {
     setPending(route.substring(1))
+    const { original, width, height } = newTitle
+    const dimensions = { width, height }
+    const updatedArt = { ...newTitle, original: original === "original", dimensions }
+
     try {
-      const res = await axios.post(`${route}/prints`, newTitle)
+      const res = await axios.post(`${route}/prints`, updatedArt)
       setAlert(res.data.msg, "lightgrey")
-      setNewTitle({})
       refreshArt()
-      setEdit(false)
     } catch (error) {
       setAlert(error.response.data.msg, "lightpink")
     }
-    setTimeout(() => setPending(""), 500)
-  }
 
-  const makeOriginal = e => {
-    e.target.name === "original"
-      ? setNewTitle({ ...newTitle, original: true })
-      : setNewTitle({ ...newTitle, original: false })
+    setNewTitle(initialFormState())
+    setEdit(false)
+    setPending("")
   }
 
   const updatePosition = position => {
@@ -97,138 +104,32 @@ const EditStore = ({ setUploading }) => {
           } else return null
         })}
       </div>
-      <div className="upload-form">
-        <CSSTransition in={edit} classNames="fadein" timeout={200} unmountOnExit={true}>
-          <div className="backdrop">
-            <div className="modal-content edit-modal">
-              <div className="modal-header">
-                <div className="close-modal" onClick={() => setEdit(false)}>
-                  <CloseRoundedIcon />
-                </div>
-                <h2>Edit this Store piece</h2>
+      <CSSTransition in={edit} classNames="fadein" timeout={200} unmountOnExit={true}>
+        <div className="backdrop">
+          <div className="modal-content edit-modal">
+            <div className="modal-header">
+              <div className="close-modal" onClick={() => setEdit(false)}>
+                <CloseRoundedIcon />
               </div>
-              <ImagePreview
-                transitionKey={newTitle._id}
-                src={newTitle.img}
-                alt={newTitle.alt}
-                dispatchPosition={updatePosition}
-                objectPosition={newTitle.position}
-              />
-
-              <div className="update-gallery--update">
-                <div className="input__wrapper">
-                  <label htmlFor="update-title">New Title</label>
-                  <input
-                    id="update-title"
-                    name="title"
-                    type="text"
-                    value={newTitle.title || ""}
-                    onChange={setUpdate}
-                  />
-                </div>
-
-                <div className="upload-prints--stock">
-                  <div className={newTitle.original ? "radio-group original" : "radio-group"}>
-                    <label className="input__wrapper" style={!newTitle.original ? { opacity: "1" } : {}}>
-                      <input
-                        type="radio"
-                        name="prints"
-                        value="prints"
-                        onChange={() => {}}
-                        checked={newTitle.original || false}
-                        onClick={makeOriginal}
-                      />
-                      <span>Print</span>
-                    </label>
-
-                    <label className="input__wrapper" style={newTitle.original ? { opacity: "1" } : {}}>
-                      <input
-                        type="radio"
-                        name="original"
-                        value="original"
-                        checked={newTitle.original || false}
-                        onChange={() => {}}
-                        onClick={makeOriginal}
-                      />
-                      <span>Original</span>
-                    </label>
-                  </div>
-
-                  <div className="upload-prints--dimensions">
-                    <div className="input__wrapper">
-                      <label htmlFor="width">Width:</label>
-                      <input
-                        id="width"
-                        name="width"
-                        type="number"
-                        min="0.0"
-                        max="100.0"
-                        step="0.5"
-                        onChange={setUpdate}
-                        value={newTitle.dimensions?.width || ""}
-                        inputMode="decimal"
-                      />
-                    </div>
-
-                    <div className="input__wrapper">
-                      <label htmlFor="height">Height:</label>
-                      <input
-                        id="height"
-                        name="height"
-                        type="number"
-                        min="0.0"
-                        max="100.0"
-                        step="0.5"
-                        onChange={setUpdate}
-                        value={newTitle.dimensions?.height || ""}
-                        inputMode="decimal"
-                      />
-                    </div>
-
-                    <div className="price input__wrapper">
-                      <label htmlFor="price">Price: $</label>
-                      <input
-                        id="price"
-                        type="number"
-                        min="0.00"
-                        max="10000.00"
-                        step="0.01"
-                        name="price"
-                        onChange={setUpdate}
-                        value={newTitle.price || 0}
-                        inputMode="decimal"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <button type="submit" disabled={!!pending} onClick={() => submitChanges("/update")}>
-                  {pending === "update" ? (
-                    <>
-                      Submitting... <CircularProgress />
-                    </>
-                  ) : (
-                    <>
-                      Submit <PublishIcon />
-                    </>
-                  )}
-                </button>
-                <button type="submit" disabled={!!pending} onClick={() => submitChanges("/delete")}>
-                  {pending === "delete" ? (
-                    <>
-                      Deleting... <CircularProgress />
-                    </>
-                  ) : (
-                    <>
-                      Delete <DeleteIcon />
-                    </>
-                  )}
-                </button>
-              </div>
+              <h2>Edit this Store piece</h2>
             </div>
+            <ImagePreview
+              transitionKey={newTitle._id}
+              src={newTitle.img}
+              alt={newTitle.alt}
+              dispatchPosition={updatePosition}
+              objectPosition={newTitle.position}
+            />
+
+            <EditStoreForm
+              form={newTitle}
+              formUpdate={setUpdate}
+              pending={pending}
+              submitChanges={submitChanges}
+            />
           </div>
-        </CSSTransition>
-      </div>
+        </div>
+      </CSSTransition>
     </div>
   )
 }

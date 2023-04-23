@@ -101,6 +101,7 @@
   box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.3);
   cursor: pointer;
   transition: transform 150ms ease, box-shadow 150ms ease, opacity 450ms ease;
+  contain: layout;
 }
 
 .print-item:hover {
@@ -383,7 +384,7 @@
     justify-content: center;
     min-height: auto;
   }
-  
+
   .print-modal img {
     max-height: calc(100vh - 200px);
   }

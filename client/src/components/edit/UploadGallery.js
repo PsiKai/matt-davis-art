@@ -2,7 +2,7 @@ import React, { useState, useContext, useRef } from "react"
 import AppContext from "../../context/AppContext"
 import AlertContext from "../../context/alertContext"
 import ImagePreview from "../layout/ImagePreview"
-import GalleryForm from "./GalleryForm"
+import UploadGalleryForm from "./UploadGalleryForm"
 import axios from "axios"
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded"
 
@@ -10,12 +10,21 @@ const UploadGallery = ({ setUploading }) => {
   const { refreshArt } = useContext(AppContext)
   const { setAlert } = useContext(AlertContext)
 
-  const [form, setForm] = useState({})
+  const [form, setForm] = useState(initialFormState())
   const [preview, setPreview] = useState("")
   const [file, setFile] = useState("")
   const [pending, setPending] = useState(false)
 
   const inputFile = useRef()
+
+  function initialFormState() {
+    return {
+      title: "",
+      medium: "",
+      description: "",
+      position: "50% 50%",
+    }
+  }
 
   // Sets state when form input changes
   const formUpdate = e => {
@@ -65,7 +74,7 @@ const UploadGallery = ({ setUploading }) => {
       setAlert(err.response.data.msg, "lightpink")
     }
 
-    setForm({})
+    setForm(initialFormState())
     setFile("")
     setPreview("")
     inputFile.current.value = null
@@ -86,24 +95,22 @@ const UploadGallery = ({ setUploading }) => {
         <h2>Add Artwork to Gallery</h2>
       </div>
       <div className="upload-gallery" onDragOver={e => e.preventDefault()}>
-        <div className="upload-form">
-          <ImagePreview
-            src={preview}
-            alt={form.title}
-            transitionKey={file.size}
-            dispatchPosition={updatePosition}
-            fallback={false}
-          />
-          <GalleryForm
-            form={form}
-            imgUpdate={imgUpdate}
-            formUpdate={formUpdate}
-            upload={upload}
-            file={file}
-            inputFile={inputFile}
-            pending={pending}
-          />
-        </div>
+        <ImagePreview
+          src={preview}
+          alt={form.title}
+          transitionKey={file.size}
+          dispatchPosition={updatePosition}
+          fallback={false}
+        />
+        <UploadGalleryForm
+          form={form}
+          imgUpdate={imgUpdate}
+          formUpdate={formUpdate}
+          upload={upload}
+          file={file}
+          inputFile={inputFile}
+          pending={pending}
+        />
       </div>
     </>
   )

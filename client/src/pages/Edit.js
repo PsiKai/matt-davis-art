@@ -6,7 +6,7 @@ import AuthContext from "../context/authContext"
 
 import UploadGallery from "../components/edit/UploadGallery"
 import EditStore from "../components/edit/EditStore"
-import UploadPrint from "../components/edit/UploadPrint"
+import UploadStore from "../components/edit/UploadStore"
 import EditGallery from "../components/edit/EditGallery"
 
 import PageHeader from "../components/layout/PageHeader"
@@ -43,12 +43,12 @@ const Edit = () => {
       </Fab>
 
       <CSSTransition in={!!uploading} classNames="fadein" timeout={200} unmountOnExit>
-        <div className="backdrop">
+        <div className="backdrop" onScroll={e => e.stopPropagation()}>
           <div className="modal-content edit-modal">
             {uploading === "gallery" ? (
               <UploadGallery setUploading={setUploading} />
             ) : (
-              <UploadPrint setUploading={setUploading} />
+              <UploadStore setUploading={setUploading} />
             )}
           </div>
         </div>
