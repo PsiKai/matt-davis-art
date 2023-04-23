@@ -1,115 +1,62 @@
-import React, { useContext, useEffect, useState } from 'react'
-import {Router, Switch, Route, Link} from 'react-router-dom';
-import {createBrowserHistory} from 'history'
-
-import "../styles/edit.css"
+import React, { useContext, useEffect, useState } from "react"
+import { CSSTransition } from "react-transition-group"
 
 import AppContext from "../context/AppContext"
 import AuthContext from "../context/authContext"
 
-import UploadGallery from '../components/edit/UploadGallery'
-import UpdateStock from '../components/edit/UpdateStock'
+import UploadGallery from "../components/edit/UploadGallery"
+import EditStore from "../components/edit/EditStore"
 import UploadPrint from "../components/edit/UploadPrint"
 import EditGallery from "../components/edit/EditGallery"
 
-import PageHeader from '../components/layout/PageHeader'
+import PageHeader from "../components/layout/PageHeader"
 import Alerts from "../components/layout/Alerts"
 
-import { Fab } from '@material-ui/core';
-import {CSSTransition, TransitionGroup} from "react-transition-group";
-
-const history = createBrowserHistory();
+import { Fab } from "@material-ui/core"
+import "../styles/edit.css"
 
 const Edit = () => {
-    const authContext = useContext(AuthContext)
-    const appContext = useContext(AppContext);
-    const {gallery, getArt} = appContext
+  const authContext = useContext(AuthContext)
+  const appContext = useContext(AppContext)
+  const { gallery, getArt } = appContext
 
-    const [page, setPage] = useState(history.location.pathname)
+  const [uploading, setUploading] = useState(false)
 
-    useEffect(() => {
-        !gallery && getArt();
-        // eslint-disable-next-line 
-    }, [])
+  useEffect(() => {
+    !gallery && getArt()
+    // eslint-disable-next-line
+  }, [])
 
-    const style = {boxShadow: "0 0 8px 0 rgba(0, 0, 0, 0.3)"}
+  const signOut = () => {
+    authContext.logout()
+  }
 
-    const changePage = (e) => {
-        setPage(e.target.name)
-        window.scrollTo(0, 0)
-    }
+  return (
+    <div className="page-content">
+      <PageHeader heading="Edit Your content" />
 
-    const signOut = () => {
-        authContext.logout()
-    }
+      <EditStore setUploading={setUploading} />
+      <EditGallery setUploading={setUploading} />
 
-    return (
-        <Router history={history}>
-            <Route render={({location}) => (
-                <div className="page-content">
+      <Fab data-text="Logout" className="logout" type="submit" onClick={signOut}>
+        <i className="fas fa-sign-out-alt fa-lg"></i>
+      </Fab>
 
-                    <PageHeader heading="Edit Your content" />
-                    <div className="nav-buttons">
-                        <Link to="/edit/uploadgallery">
-                            <button 
-                                style={page === "/edit/uploadgallery" ? style : null}
-                                name="/edit/uploadgallery" 
-                                onClick={changePage}>NEW Gallery
-                            </button>
-                        </Link>
-                        <Link to="/edit/uploadprint">
-                            <button 
-                                style={page === "/edit/uploadprint" ? style : null}
-                                name="/edit/uploadprint" 
-                                onClick={changePage}>NEW Store
-                            </button>
-                        </Link>
-                        <Link to="/edit/updatestock">
-                            <button 
-                                style={page === "/edit/updatestock" ? style : null}
-                                name="/edit/updatestock" 
-                                onClick={changePage}>Edit Store
-                            </button>
-                        </Link>
-                        <Link to="/edit/editgallery">
-                            <button 
-                                style={page === "/edit/editgallery" ? style : null}
-                                name="/edit/editgallery" 
-                                onClick={changePage}>Edit Gallery
-                            </button>
-                        </Link>
-                    </div>
-                    <hr />
-                    <TransitionGroup className="edit-transition">
-                        <CSSTransition 
-                            key={location.key} 
-                            classNames="slide" 
-                            timeout={200}
-                        >
-                            <Switch location={location}>
-                                <Route exact path="/edit/uploadgallery" component={UploadGallery}/>
-                                <Route exact path="/edit/uploadprint" component={UploadPrint}/>
-                                <Route exact path="/edit/updatestock" component={UpdateStock}/>
-                                <Route exact path="/edit/editgallery" component={EditGallery}/>
-                            </Switch>
-                        </CSSTransition>
-                    </TransitionGroup>     
-                        
-                   
-                  <Fab 
-                    data-text="Logout" 
-                    className="logout" 
-                    type="submit" 
-                    onClick={signOut}>
-                        <i className="fas fa-sign-out-alt fa-lg"></i>
-                    </Fab>
-      
-                    
-                    <Alerts />
-                </div>
-            )} />
-      </Router>
-    )
+      <CSSTransition in={uploading} classNames="fadein" timeout={200} unmountOnExit>
+        <div className="backdrop">
+          <div className="modal-content edit-modal">
+            {uploading === "gallery" ? (
+              <UploadGallery setUploading={setUploading} />
+            ) : (
+              <UploadPrint setUploading={setUploading} />
+            )}
+          </div>
+        </div>
+      </CSSTransition>
+
+      <Alerts />
+    </div>
+  )
 }
 
 export default Edit
