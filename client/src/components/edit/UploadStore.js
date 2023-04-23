@@ -1,38 +1,44 @@
 import React, { useState, useContext, useRef } from "react"
 import AppContext from "../../context/AppContext"
 import AlertContext from "../../context/alertContext"
-import ImagePreview from "../layout/ImagePreview"
-import UploadGalleryForm from "./UploadGalleryForm"
+
 import axios from "axios"
+
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded"
 
-const UploadGallery = ({ setUploading }) => {
-  const { refreshArt } = useContext(AppContext)
-  const { setAlert } = useContext(AlertContext)
+import ImagePreview from "../layout/ImagePreview"
+import UploadStoreForm from "./UploadStoreForm"
 
-  const [form, setForm] = useState(initialFormState())
-  const [preview, setPreview] = useState("")
+const UploadStore = ({ setUploading }) => {
+  const { setAlert } = useContext(AlertContext)
+  const { refreshArt } = useContext(AppContext)
+
   const [file, setFile] = useState("")
+  const [preview, setPreview] = useState("")
+  const [objectPosition, setObjectPosition] = useState("50% 50%")
   const [pending, setPending] = useState(false)
 
-  const inputFile = useRef()
+  const [form, setForm] = useState(initialFormState())
 
   function initialFormState() {
     return {
       title: "",
-      medium: "",
-      description: "",
-      position: "50% 50%",
+      original: "print",
+      price: "",
+      width: 11,
+      height: 17,
+      objectPosition: "50% 50%",
     }
   }
 
-  // Sets state when form input changes
   const formUpdate = e => {
-    setForm({
-      ...form,
+    setForm(prev => ({
+      ...prev,
       [e.target.name]: e.target.value,
-    })
+    }))
   }
+
+  const inputFile = useRef()
 
   // Sets image file to state
   const imgUpdate = e => {
@@ -52,38 +58,39 @@ const UploadGallery = ({ setUploading }) => {
     e.target.blur()
   }
 
-  // Uploads image to the database
+  // Uploads new print to database
   const upload = async e => {
     setPending(true)
     e.preventDefault()
 
+    const { title, original, price, width, height } = form
+    const priceAdjusted = original === "original" ? price : 15
+    const dimensionsAdjusted = original === "original" ? { width, height } : { width: 11, height: 17 }
+
     const formData = new FormData()
     formData.append("file", file)
-    formData.append("title", form.title)
-    formData.append("medium", form.medium || "")
-    formData.append("description", form.description || "")
-    formData.append("position", form.position || "50% 50%")
+    formData.append("title", title)
+    formData.append("original", original === "original")
+    formData.append("price", priceAdjusted)
+    formData.append("dimensions", JSON.stringify(dimensionsAdjusted))
+    formData.append("position", objectPosition)
 
     try {
-      const res = await axios.post("/upload/gallery", formData, {
+      const res = await axios.post("/upload/prints", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
-      setAlert(res.data.msg, "lightgrey")
+      setAlert(res.data.msg, "lightblue")
       refreshArt()
     } catch (err) {
       setAlert(err.response.data.msg, "lightpink")
     }
-
-    setForm(initialFormState())
     setFile("")
     setPreview("")
+    setObjectPosition("50% 50%")
+    setForm(initialFormState())
     inputFile.current.value = null
     setPending(false)
     setUploading("")
-  }
-
-  const updatePosition = position => {
-    setForm(prev => ({ ...prev, position }))
   }
 
   return (
@@ -92,28 +99,28 @@ const UploadGallery = ({ setUploading }) => {
         <div className="close-modal" onClick={() => setUploading("")}>
           <CloseRoundedIcon />
         </div>
-        <h2>Add Artwork to Gallery</h2>
+        <h2>Add Artwork to Store</h2>
       </div>
-      <div className="upload-gallery" onDragOver={e => e.preventDefault()}>
+      <div className="upload-prints" onDragOver={e => e.preventDefault()}>
         <ImagePreview
           src={preview}
           alt={form.title}
           transitionKey={file.size}
-          dispatchPosition={updatePosition}
+          dispatchPosition={setObjectPosition}
           fallback={false}
         />
-        <UploadGalleryForm
+        <UploadStoreForm
           form={form}
-          imgUpdate={imgUpdate}
           formUpdate={formUpdate}
-          upload={upload}
-          file={file}
-          inputFile={inputFile}
           pending={pending}
+          upload={upload}
+          inputFile={inputFile}
+          file={file}
+          imgUpdate={imgUpdate}
         />
       </div>
     </>
   )
 }
 
-export default UploadGallery
+export default UploadStore
