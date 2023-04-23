@@ -64,17 +64,15 @@ const UploadStore = ({ setUploading }) => {
     e.preventDefault()
 
     const { title, original, price, width, height } = form
+    const priceAdjusted = original === "original" ? price : 15
+    const dimensionsAdjusted = original === "original" ? { width, height } : { width: 11, height: 17 }
+
     const formData = new FormData()
     formData.append("file", file)
     formData.append("title", title)
     formData.append("original", original === "original")
-    if (original === "original") {
-      formData.append("price", price)
-      formData.append("dimensions", JSON.stringify({ width, height }))
-    } else {
-      formData.append("price", 15)
-      formData.append("dimensions", JSON.stringify({ width: 11, height: 17 }))
-    }
+    formData.append("price", priceAdjusted)
+    formData.append("dimensions", JSON.stringify(dimensionsAdjusted))
     formData.append("position", objectPosition)
 
     try {

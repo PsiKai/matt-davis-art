@@ -7,8 +7,8 @@ import { CSSTransition } from "react-transition-group"
 
 import CircularProgress from "@material-ui/core/CircularProgress"
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded"
-// import DeleteIcon from "@material-ui/icons/Delete"
 import PublishIcon from "@material-ui/icons/Publish"
+
 import ImagePreview from "../layout/ImagePreview"
 import EditImgThumbnail from "../layout/EditImgThumbnail"
 import EditGalleryForm from "./EditGalleryForm"
