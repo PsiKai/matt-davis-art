@@ -447,6 +447,7 @@ h2 {
   transform: rotateX(-90deg) translate3d(0, 100%, -63px);
   transform-origin: bottom;
   background: var(--dark);
+  filter: brightness(0.85);
 }
 
 .page-header__left {
