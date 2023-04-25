@@ -39,7 +39,12 @@ router.get("/refresh", async (req, res) => {
 router.post("/availability", async (req, res) => {
   try {
     const artIds = req.body.map(art => mongoose.Types.ObjectId(art._id))
-    const availableArt = await printModel.find({ _id: { $in: artIds }, soldOut: false })
+    const foundArt = await printModel.find({ _id: { $in: artIds } })
+    const availableArt = req.body.reduce((avail, art) => {
+      const available = foundArt.find(found => art._id == found._id)
+      if (available) avail.push(art)
+      return avail
+    }, [])
     res.status(200).json({ availableArt })
   } catch (error) {
     console.log(error)

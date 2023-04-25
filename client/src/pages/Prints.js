@@ -11,9 +11,10 @@ import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline"
 
 import "../styles/prints.css"
 import { useArtApi } from "../hooks/artApi"
+import { useCart } from "../hooks/cartSetters"
 
 const Prints = () => {
-  const { prints, addItem, cart } = useContext(AppContext)
+  const { prints, cart } = useContext(AppContext)
 
   const [img, setImg] = useState({})
   const [modalOpen, setModalOpen] = useState(false)
@@ -23,6 +24,7 @@ const Prints = () => {
   const ctaIntersection = useRef()
   const ctaObserver = useRef()
 
+  const { addItem } = useCart()
   useArtApi()
 
   const ctaCallback = useCallback(([entry]) => {

@@ -15,10 +15,8 @@ import EditStoreForm from "./EditStoreForm"
 import { useArtRefresh } from "../../hooks/artApi"
 
 const EditStore = ({ setUploading }) => {
-  const appContext = useContext(AppContext)
-  const alertContext = useContext(AlertContext)
-  const { prints } = appContext
-  const { setAlert } = alertContext
+  const { prints } = useContext(AppContext)
+  const { setAlert } = useContext(AlertContext)
 
   const [newTitle, setNewTitle] = useState(initialFormState())
   const [edit, setEdit] = useState(false)

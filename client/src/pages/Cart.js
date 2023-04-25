@@ -14,8 +14,7 @@ import ErrorOutlineOutlinedIcon from "@material-ui/icons/ErrorOutlineOutlined"
 import { CSSTransition } from "react-transition-group"
 
 const Cart = props => {
-  const appContext = useContext(AppContext)
-  const { cart, purchased, modal, dispatch } = appContext
+  const { cart, purchased, modal, dispatch } = useContext(AppContext)
 
   const orderComplete = () => {
     dispatch({ type: "CLEAR_PURCHASE" })

@@ -1,5 +1,4 @@
-import React, { useEffect, useContext, useState } from "react"
-import AppContext from "../context/AppContext"
+import React, { useEffect, useState } from "react"
 import { CSSTransition } from "react-transition-group"
 
 import LandingHeader from "../components/layout/LandingHeader"
@@ -10,16 +9,12 @@ import { useArtApi } from "../hooks/artApi"
 import "../styles/main.css"
 
 const Main = () => {
-  const appContext = useContext(AppContext)
-  const { reloadCart } = appContext
   const [land, setLand] = useState(false)
 
   useArtApi()
 
   useEffect(() => {
-    localStorage.cart && reloadCart()
     setLand(true)
-    // eslint-disable-next-line
   }, [])
 
   return (

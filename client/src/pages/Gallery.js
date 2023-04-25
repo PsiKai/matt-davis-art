@@ -11,8 +11,7 @@ import { useArtApi } from "../hooks/artApi"
 import "../styles/gallery.css"
 
 const Gallery = () => {
-  const appContext = useContext(AppContext)
-  const { gallery } = appContext
+  const { gallery } = useContext(AppContext)
 
   useArtApi()
 
