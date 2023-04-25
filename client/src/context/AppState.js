@@ -1,7 +1,7 @@
 import React, { useReducer } from "react"
 import AppContext from "./AppContext"
 import AppReducer from "./AppReducer"
-import { ADD_TO_CART, GET_ART, RELOAD_CART, CHECKOUT, PURCHASED, DELETE_CART, CLEAR_PURCHASE } from "./types"
+import { ADD_TO_CART, GET_ART, RELOAD_CART, DELETE_CART } from "./types"
 import axios from "axios"
 
 const AppState = props => {
@@ -57,15 +57,6 @@ const AppState = props => {
     }
   }
 
-  //gets gallery arts and prints from backend server
-  const getArt = async () => {
-    const res = await axios.get("/art")
-    dispatch({
-      type: GET_ART,
-      payload: res.data,
-    })
-  }
-
   //refreshes art works after changing content
   const refreshArt = async () => {
     const res = await axios.get("/art/refresh")
@@ -75,38 +66,12 @@ const AppState = props => {
     })
   }
 
-  //checkout items
-  const checkout = async items => {
-    const res = await axios.post("/cart/checkout", items)
-
-    dispatch({
-      type: CHECKOUT,
-      payload: res.data,
-    })
-  }
-
-  //completes the purchase
-  //   const sendConfirmationEmails = async order => {
-  //     const res = await axios.post("/cart/purchase", order)
-  //     dispatch({
-  //       type: PURCHASED,
-  //       payload: res.data,
-  //     })
-  //   }
-
-  //clears purchase modal
-  const clearPurchase = () => dispatch({ type: CLEAR_PURCHASE })
-
   return (
     <AppContext.Provider
       value={{
         addItem,
         reloadCart,
-        getArt,
         refreshArt,
-        checkout,
-        // sendConfirmationEmails,
-        clearPurchase,
         stock: state.stock,
         cartItems: state.cartItems,
         cart: state.cart,

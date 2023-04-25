@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useState } from "react"
+import React, { Fragment, useContext, useState } from "react"
 import AlertContext from "../context/alertContext"
 import AppContext from "../context/AppContext"
 
@@ -11,19 +11,18 @@ import ShippingForm from "./ShippingForm.js"
 import Modal from "./modals/Modal"
 import Alerts from "../components/layout/Alerts"
 
+import { useArtApi } from "../hooks/artApi"
+
 const CartItems = () => {
   const appContext = useContext(AppContext)
   const alertContext = useContext(AlertContext)
-  const { cartItems, cart, total, prints, getArt } = appContext
+  const { cartItems, cart, total } = appContext
   const { setAlert } = alertContext
 
   const [modalOpen, setModalOpen] = useState(false)
   const [address, setAddress] = useState(null)
 
-  useEffect(() => {
-    !prints && getArt()
-    //eslint-disable-next-line
-  }, [])
+  useArtApi()
 
   const checkoutCartItems = () => {
     if (address !== null) {

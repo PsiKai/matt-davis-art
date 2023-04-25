@@ -12,14 +12,17 @@ import PublishIcon from "@material-ui/icons/Publish"
 import ImagePreview from "../layout/ImagePreview"
 import EditImgThumbnail from "../layout/EditImgThumbnail"
 import EditGalleryForm from "./EditGalleryForm"
+import { useArtRefresh } from "../../hooks/artApi"
 
 const EditGallery = ({ setUploading }) => {
-  const { gallery, refreshArt } = useContext(AppContext)
+  const { gallery } = useContext(AppContext)
   const { setAlert } = useContext(AlertContext)
 
   const [artEdit, setArtEdit] = useState(initialFormState())
   const [edit, setEdit] = useState(false)
   const [pending, setPending] = useState("")
+
+  const refreshArt = useArtRefresh()
 
   function initialFormState() {
     return {
@@ -54,7 +57,7 @@ const EditGallery = ({ setUploading }) => {
       setAlert(res.data.msg, "lightblue")
       refreshArt()
     } catch (error) {
-      console.log(error.response)
+      console.log(error.response || error)
       setAlert(error.response.data.msg, "lightpink")
     }
 

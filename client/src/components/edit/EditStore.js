@@ -12,16 +12,19 @@ import PublishIcon from "@material-ui/icons/Publish"
 import ImagePreview from "../layout/ImagePreview"
 import EditImgThumbnail from "../layout/EditImgThumbnail"
 import EditStoreForm from "./EditStoreForm"
+import { useArtRefresh } from "../../hooks/artApi"
 
 const EditStore = ({ setUploading }) => {
   const appContext = useContext(AppContext)
   const alertContext = useContext(AlertContext)
-  const { prints, refreshArt } = appContext
+  const { prints } = appContext
   const { setAlert } = alertContext
 
   const [newTitle, setNewTitle] = useState(initialFormState())
   const [edit, setEdit] = useState(false)
   const [pending, setPending] = useState("")
+
+  const refreshArt = useArtRefresh()
 
   function initialFormState() {
     return {

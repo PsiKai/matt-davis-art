@@ -7,9 +7,12 @@ import axios from "axios"
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded"
 
 import "../../styles/prints.css"
+import { useArtRefresh } from "../../hooks/artApi"
 
 const Modal = ({ setModalOpen, total, shipData, cart }) => {
-  const { refreshArt, dispatch } = useContext(AppContext)
+  const { dispatch } = useContext(AppContext)
+
+  const refreshArt = useArtRefresh()
 
   const { add1, add2, city, state, zip, email, name, name2 } = shipData
 
@@ -26,7 +29,7 @@ const Modal = ({ setModalOpen, total, shipData, cart }) => {
       })
   }, [cart, dispatch])
 
-  const createOrder = async (data, actions) => {
+  const createOrder = (data, actions) => {
     return actions.order.create({
       purchase_units: [
         {
