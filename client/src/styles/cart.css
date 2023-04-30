@@ -147,18 +147,27 @@
   border-top: medium double #333;
 }
 
+.cart-total__wrapper {
+  margin: 0 auto;
+}
+
 .cart-total {
-  width: 80%;
+  width: 40%;
   margin: 0 auto 0.75rem;
-  text-align: right;
+  text-align: center;
   display: grid;
-  grid-template-columns: auto 80px;
 }
 
 .cart-total .underline {
   grid-column-start: 1;
   grid-column-end: 3;
   width: 100%;
+}
+
+.cart-price {
+  margin-block: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .cart-total button {
@@ -175,32 +184,6 @@
 
 input#state {
   text-transform: uppercase;
-}
-
-.shipping-form button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: auto;
-  border: none;
-  background-color: inherit;
-  transition: color 200ms ease;
-  box-shadow: none;
-  margin: 0;
-  padding: 0;
-}
-
-.shipping-form button:hover {
-  color: var(--medium);
-  background-color: inherit !important;
-}
-
-.shipping-form button::after {
-  display: none;
-}
-
-.shipping-form button:active {
-  animation: none;
 }
 
 .info-grid {
@@ -285,14 +268,13 @@ input#state {
   .city-state {
     grid-template-columns: auto 15% 25%;
   }
-  
+
   .cart-total {
     width: 85%;
   }
 }
 
 @media (max-width: 650px) {
-  
   .info-grid {
     display: block;
   }

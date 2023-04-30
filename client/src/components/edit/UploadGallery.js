@@ -1,13 +1,15 @@
 import React, { useState, useContext, useRef } from "react"
-import AppContext from "../../context/AppContext"
 import AlertContext from "../../context/alertContext"
-import ImagePreview from "../layout/ImagePreview"
-import UploadGalleryForm from "./UploadGalleryForm"
 import axios from "axios"
+
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded"
 
+import ImagePreview from "../layout/ImagePreview"
+import UploadGalleryForm from "./UploadGalleryForm"
+
+import { useArtRefresh } from "../../hooks/artApi"
+
 const UploadGallery = ({ setUploading }) => {
-  const { refreshArt } = useContext(AppContext)
   const { setAlert } = useContext(AlertContext)
 
   const [form, setForm] = useState(initialFormState())
@@ -16,6 +18,7 @@ const UploadGallery = ({ setUploading }) => {
   const [pending, setPending] = useState(false)
 
   const inputFile = useRef()
+  const refreshArt = useArtRefresh()
 
   function initialFormState() {
     return {
@@ -65,7 +68,7 @@ const UploadGallery = ({ setUploading }) => {
     formData.append("position", form.position || "50% 50%")
 
     try {
-      const res = await axios.post("/upload/gallery", formData, {
+      const res = await axios.post("/api/gallery", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
       setAlert(res.data.msg, "lightgrey")

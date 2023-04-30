@@ -1,39 +1,33 @@
-import React, {useEffect, useContext, useState} from 'react'
-import Carousel from "../components/Carousel"
-import AppContext from "../context/AppContext"
+import React, { useEffect, useState } from "react"
+import { CSSTransition } from "react-transition-group"
+
 import LandingHeader from "../components/layout/LandingHeader"
-import {CSSTransition} from "react-transition-group"
+import Carousel from "../components/Carousel"
+
+import { useArtApi } from "../hooks/artApi"
+
 import "../styles/main.css"
 
-const Main = () => {    
-    const appContext = useContext(AppContext)
-    const {getArt, gallery, reloadCart} = appContext
-    const [land, setLand] = useState(false);
+const Main = () => {
+  const [land, setLand] = useState(false)
 
-    useEffect(() => {
-        !gallery && getArt();
-        localStorage.cart && reloadCart();
-        setLand(true)
-        // eslint-disable-next-line 
-    }, [])
+  useArtApi()
 
-    return (
-        <div className="main-landing__wrapper">
-            <LandingHeader />
-            <CSSTransition
-                in={land}
-                appear={true}
-                classNames={"move-down"}
-                timeout={1000}
-                unmountOnExit
-            >
-                <div className="carousel__wrapper">
-                    <div className="brand-backdrop"></div>
-                    <Carousel />
-                </div>
-            </CSSTransition>
+  useEffect(() => {
+    setLand(true)
+  }, [])
+
+  return (
+    <div className="main-landing__wrapper">
+      <LandingHeader />
+      <CSSTransition in={land} appear={true} classNames={"move-down"} timeout={1000} unmountOnExit>
+        <div className="carousel__wrapper">
+          <div className="brand-backdrop"></div>
+          <Carousel />
         </div>
-    )
+      </CSSTransition>
+    </div>
+  )
 }
 
 export default Main

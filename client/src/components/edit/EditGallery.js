@@ -12,14 +12,17 @@ import PublishIcon from "@material-ui/icons/Publish"
 import ImagePreview from "../layout/ImagePreview"
 import EditImgThumbnail from "../layout/EditImgThumbnail"
 import EditGalleryForm from "./EditGalleryForm"
+import { useArtRefresh } from "../../hooks/artApi"
 
 const EditGallery = ({ setUploading }) => {
-  const { gallery, refreshArt } = useContext(AppContext)
+  const { gallery } = useContext(AppContext)
   const { setAlert } = useContext(AlertContext)
 
-  const [artEdit, setArtEdit] = useState(initialFormState())
+  const [editForm, setEditForm] = useState(initialFormState())
   const [edit, setEdit] = useState(false)
   const [pending, setPending] = useState("")
+
+  const refreshArt = useArtRefresh()
 
   function initialFormState() {
     return {
@@ -31,34 +34,40 @@ const EditGallery = ({ setUploading }) => {
 
   const editArtwork = id => {
     var foundArt = gallery.find(art => art._id === id)
-    setArtEdit({ ...foundArt })
+    setEditForm({ ...foundArt })
     setEdit(true)
   }
 
   const setObjectPosition = position => {
-    setArtEdit(prev => ({ ...prev, position }))
+    setEditForm(prev => ({ ...prev, position }))
   }
 
-  const setUpdate = e => {
-    setArtEdit(prev => ({
+  const updateForm = e => {
+    setEditForm(prev => ({
       ...prev,
       [e.target.name]: e.target.value,
     }))
   }
 
-  const submitChanges = async route => {
-    setPending(route.substring(1))
-
+  const submitChanges = async action => {
+    setPending(action)
     try {
-      const res = await axios.post(`${route}/gallery`, artEdit)
-      setAlert(res.data.msg, "lightblue")
+      let res
+      if (action === "DELETE") {
+        res = await axios.delete(`/api/gallery/${editForm._id}`)
+      } else if (action === "PATCH") {
+        res = await axios.patch(`api/gallery/${editForm._id}`, editForm)
+      } else {
+        return console.log(`Action ${action} not recognized`)
+      }
+      setAlert(res?.data?.msg, "lightblue")
       refreshArt()
     } catch (error) {
-      console.log(error.response)
-      setAlert(error.response.data.msg, "lightpink")
+      console.log(error.response || error)
+      setAlert(error.response?.data?.msg, "lightpink")
     }
 
-    setArtEdit(initialFormState())
+    setEditForm(initialFormState())
     setPending("")
     setEdit(false)
     setUploading("")
@@ -93,16 +102,16 @@ const EditGallery = ({ setUploading }) => {
               <h2>Edit this Gallery piece</h2>
             </div>
             <ImagePreview
-              transitionKey={artEdit._id}
-              src={artEdit.img}
-              alt={artEdit.alt}
+              transitionKey={editForm._id}
+              src={editForm.img}
+              alt={editForm.alt}
               dispatchPosition={setObjectPosition}
-              objectPosition={artEdit.position}
+              objectPosition={editForm.position}
             />
 
             <EditGalleryForm
-              form={artEdit}
-              formUpdate={setUpdate}
+              form={editForm}
+              formUpdate={updateForm}
               submitChanges={submitChanges}
               pending={pending}
             />

@@ -1,5 +1,4 @@
 import React, { useState, useContext, useRef } from "react"
-import AppContext from "../../context/AppContext"
 import AlertContext from "../../context/alertContext"
 
 import axios from "axios"
@@ -9,9 +8,10 @@ import CloseRoundedIcon from "@material-ui/icons/CloseRounded"
 import ImagePreview from "../layout/ImagePreview"
 import UploadStoreForm from "./UploadStoreForm"
 
+import { useArtRefresh } from "../../hooks/artApi"
+
 const UploadStore = ({ setUploading }) => {
   const { setAlert } = useContext(AlertContext)
-  const { refreshArt } = useContext(AppContext)
 
   const [file, setFile] = useState("")
   const [preview, setPreview] = useState("")
@@ -19,6 +19,8 @@ const UploadStore = ({ setUploading }) => {
   const [pending, setPending] = useState(false)
 
   const [form, setForm] = useState(initialFormState())
+
+  const refreshArt = useArtRefresh()
 
   function initialFormState() {
     return {
@@ -76,7 +78,7 @@ const UploadStore = ({ setUploading }) => {
     formData.append("position", objectPosition)
 
     try {
-      const res = await axios.post("/upload/prints", formData, {
+      const res = await axios.post("/api/store", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
       setAlert(res.data.msg, "lightblue")

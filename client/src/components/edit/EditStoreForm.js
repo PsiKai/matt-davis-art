@@ -9,7 +9,7 @@ import TextInput from "../form/TextInput"
 const EditStoreForm = ({ submitChanges, form, pending, formUpdate }) => {
   const onSubmit = e => {
     e.preventDefault()
-    submitChanges("/update")
+    submitChanges("PATCH")
   }
 
   return (
@@ -21,11 +21,11 @@ const EditStoreForm = ({ submitChanges, form, pending, formUpdate }) => {
         <StoreDetails form={form} formUpdate={formUpdate} />
       </div>
 
-      <SubmitButton pending={pending === "update"} disabled={!!pending} />
+      <SubmitButton pending={pending === "PATCH"} disabled={!!pending} />
       <DeleteButton
-        pending={pending === "delete"}
+        pending={pending === "DELETE"}
         disabled={!!pending}
-        onClick={() => submitChanges("/delete")}
+        onClick={() => submitChanges("DELETE")}
       />
     </form>
   )
