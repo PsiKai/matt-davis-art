@@ -82,7 +82,7 @@ header a.header--main-link:active {
 
 .MuiBadge-badge {
   background-color: var(--medium);
-  color: var(--dark);
+  color: var(--white);
   padding: 0 3px;
 }
 
