@@ -1,16 +1,7 @@
-import { ADD_TO_CART, GET_ART, UPDATE_CART, DELETE_CART, CHECKOUT, PURCHASED, CLEAR_PURCHASE } from "./types"
-
 //eslint-disable-next-line
 export default (state, action) => {
   switch (action.type) {
-    case ADD_TO_CART:
-      console.log(action.payload)
-      return {
-        ...state,
-        cart: action.payload,
-        cartItems: action.payload.length,
-      }
-    case UPDATE_CART:
+    case "UPDATE_CART":
       var items = 0
       var price = 0
       action.payload.forEach(item => {
@@ -23,25 +14,25 @@ export default (state, action) => {
         cartItems: items,
         total: price,
       }
-    case DELETE_CART:
+    case "DELETE_CART":
       return {
         ...state,
         cartItems: 0,
         total: 0,
         cart: null,
       }
-    case GET_ART:
+    case "GET_ART":
       return {
         ...state,
         prints: action.payload.prints,
         gallery: action.payload.gallery,
       }
-    case CHECKOUT:
+    case "CHECKOUT":
       return {
         ...state,
         total: action.payload + 0,
       }
-    case PURCHASED:
+    case "PURCHASED":
       localStorage.removeItem("cart")
       return {
         ...state,
@@ -51,7 +42,7 @@ export default (state, action) => {
         purchased: true,
         modal: action.payload,
       }
-    case CLEAR_PURCHASE:
+    case "CLEAR_PURCHASE":
       return {
         ...state,
         purchased: false,
