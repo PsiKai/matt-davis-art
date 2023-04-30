@@ -6,7 +6,6 @@ export const useArtRefresh = () => {
   const { dispatch } = useContext(AppContext)
 
   async function refreshArt() {
-    console.log("hook refresh")
     const res = await axios.get("/api/artwork/refresh")
     dispatch({
       type: "GET_ART",
@@ -28,9 +27,6 @@ export const useArtApi = () => {
         payload: res.data,
       })
     }
-    if (!prints || !gallery) {
-      console.log("hook")
-      getArt()
-    }
+    if (!prints || !gallery) getArt()
   }, [gallery, prints, dispatch])
 }

@@ -28,7 +28,6 @@ const PrintModal = ({ img, quantityInCart, setModalOpen, addItem }) => {
       quantity: quantity,
       id: img.sku,
     }
-    console.log({ item })
     item.quantity > 0 && addItem(item)
 
     setModalOpen(false)
