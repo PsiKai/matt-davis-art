@@ -7,7 +7,7 @@ const auth = require("../../middleware/auth")
 
 const User = require("../../models/user")
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
     const users = await User.find({}).select("-password")
     res.status(200).json(users)

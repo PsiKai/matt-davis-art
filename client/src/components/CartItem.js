@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { CSSTransition } from "react-transition-group"
 import ImgModal from "./modals/ImgModal"
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined"

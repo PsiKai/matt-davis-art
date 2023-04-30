@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react"
-import AuthContext from "../context/authContext"
+import React, { useState } from "react"
 
 import { CSSTransition } from "react-transition-group"
 
@@ -12,11 +11,14 @@ import PageHeader from "../components/layout/PageHeader"
 import Alerts from "../components/layout/Alerts"
 
 import { Fab } from "@material-ui/core"
-import "../styles/edit.css"
+
 import { useArtApi } from "../hooks/artApi"
+import { useLogin } from "../hooks/userAuth"
+
+import "../styles/edit.css"
 
 const Edit = () => {
-  const { logout } = useContext(AuthContext)
+  const { logout } = useLogin()
   const [uploading, setUploading] = useState(false)
 
   useArtApi()

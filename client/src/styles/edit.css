@@ -17,12 +17,38 @@
   position: relative;
 }
 
-.password-input svg {
+.password-input button {
+  display: inline-flex;
+  width: auto;
+  margin: 0;
+  border: none;
+  background-color: inherit;
+  transition: color 200ms ease;
+  box-shadow: none;
+  padding: 0;
+  align-self: flex-end;
   position: absolute;
   right: 1rem;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
+}
+
+.password-input button:focus-visible {
+  outline: 2px solid var(--dark);
+}
+
+.password-input button:hover {
+  filter: brightness(0.9);
+  background-color: inherit !important;
+}
+
+.password-input button::after {
+  display: none;
+}
+
+.password-input button:active {
+  animation: none;
 }
 
 .edit-modal {
@@ -274,11 +300,9 @@ button .MuiCircularProgress-root {
     width: 80%;
   }
 
-  .password-input svg {
+  .password-input button {
     right: 0rem;
     padding: 0.5rem;
-    height: 3rem;
-    width: 3rem;
   }
 
   .edit-gallery--header {

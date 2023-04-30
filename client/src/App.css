@@ -199,6 +199,10 @@ input[type="checkbox"]:focus {
   box-shadow: 0 3px var(--dark);
 }
 
+.file-input__label:hover * {
+  opacity: 1;
+}
+
 .small-label {
   flex-direction: column;
   gap: 0.5rem;
@@ -209,10 +213,8 @@ input[type="checkbox"]:focus {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-}
-
-.file-input__label > svg > path {
   opacity: 0.7;
+  transition: opacity 400ms ease;
 }
 
 .file-input__label:active {
@@ -293,6 +295,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 0.25rem;
   box-shadow: 0px 4px 6px 0px rgb(0 0 0 / 40%);
   transition: width 200ms ease;
   position: relative;

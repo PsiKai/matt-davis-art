@@ -8,14 +8,16 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import Badge from "@material-ui/core/Badge"
 import EditIcon from "@material-ui/icons/Edit"
 import { useCart } from "../../hooks/cartSetters"
+import { useAuth } from "../../hooks/userAuth"
 
 const Header = ({ routes, preload }) => {
   const [Main, About, Prints, Contact, Gallery, Sculptures, Cart, Login, Edit] = routes
   const { cartItems } = useContext(AppContext)
-  const { isAuthenticated, loadUser } = useContext(AuthContext)
+  const { isAuthenticated } = useContext(AuthContext)
 
   const [open, setOpen] = useState(false)
 
+  const loadUser = useAuth()
   const { reloadCart } = useCart()
 
   useEffect(() => {
