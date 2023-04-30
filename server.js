@@ -17,14 +17,6 @@ app.use(fileUpload())
 
 connectDB()
 
-app.use("/login", require("./routes/login"))
-app.use("/register", require("./routes/users"))
-app.use("/art", require("./routes/art"))
-app.use("/cart", require("./routes/cart"))
-app.use("/upload", require("./routes/upload"))
-app.use("/update", require("./routes/update"))
-app.use("/delete", require("./routes/delete"))
-app.use("/contact", require("./routes/contact"))
 app.use("/api", require("./api/index"))
 
 if (process.env.NODE_ENV === "production") {
