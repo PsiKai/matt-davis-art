@@ -34,7 +34,7 @@ const Contact = props => {
     setPending(true)
     e.preventDefault()
     try {
-      const res = await axios.post("/contact", email)
+      const res = await axios.post("/api/mailer/contact", email)
       setAlert(res.data.msg, res.data.color)
     } catch (error) {
       setAlert(error.response.data.msg, error.response.data.color)
