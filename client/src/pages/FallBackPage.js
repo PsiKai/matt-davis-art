@@ -9,13 +9,13 @@ function FallBackPage() {
         <h1>Something went wrong</h1>
         <div className="login-greeting">
           <h3>Sorry about that!</h3>
-          <p>
-            You're seeing this page because an error occurred. Not to worry! Try some of the following and the
-            issue may fix itself:
-          </p>
+          <p>You're seeing this page because an error occurred. Not to worry!</p>
+          <p>Try some of the following and the issue may fix itself:</p>
           <ol>
             <li>Refresh the page</li>
             <li>Go back to the previous page</li>
+            <li>Close the tab and open a new one</li>
+            <li>Edit the URL and delete everything after the slash ("/")</li>
             <li>Try again later</li>
           </ol>
           <p>
