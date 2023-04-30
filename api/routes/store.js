@@ -49,7 +49,7 @@ router.post("/", auth, async (req, res) => {
 })
 
 router.patch("/:_id", auth, async (req, res) => {
-  const { title, original, price, dimensions, position } = req.body
+  let { title, original, price, dimensions, position } = req.body
   const { _id } = req.params
   dimensions = JSON.stringify(dimensions)
 

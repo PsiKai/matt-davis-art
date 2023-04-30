@@ -78,7 +78,7 @@ const UploadStore = ({ setUploading }) => {
     formData.append("position", objectPosition)
 
     try {
-      const res = await axios.post("/upload/prints", formData, {
+      const res = await axios.post("/api/store", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
       setAlert(res.data.msg, "lightblue")

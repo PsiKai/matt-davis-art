@@ -68,7 +68,7 @@ const UploadGallery = ({ setUploading }) => {
     formData.append("position", form.position || "50% 50%")
 
     try {
-      const res = await axios.post("/upload/gallery", formData, {
+      const res = await axios.post("/api/gallery", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
       setAlert(res.data.msg, "lightgrey")

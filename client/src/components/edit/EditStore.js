@@ -52,18 +52,25 @@ const EditStore = ({ setUploading }) => {
     setEdit(true)
   }
 
-  const submitChanges = async route => {
-    setPending(route.substring(1))
+  const submitChanges = async action => {
+    setPending(action)
     const { original, width, height } = newTitle
     const dimensions = { width, height }
     const updatedArt = { ...newTitle, original: original === "original", dimensions }
 
     try {
-      const res = await axios.post(`${route}/prints`, updatedArt)
-      setAlert(res.data.msg, "lightgrey")
+      let res
+      if (action === "DELETE") {
+        res = await axios.delete(`/api/store/${newTitle._id}`)
+      } else if (action === "PATCH") {
+        res = await axios.patch(`api/store/${newTitle._id}`, updatedArt)
+      } else {
+        return console.log(`Action ${action} not recognized`)
+      }
+      setAlert(res?.data?.msg, "lightgrey")
       refreshArt()
     } catch (error) {
-      setAlert(error.response.data.msg, "lightpink")
+      setAlert(error.response?.data?.msg, "lightpink")
     }
 
     setNewTitle(initialFormState())

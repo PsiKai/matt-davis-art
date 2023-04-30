@@ -10,6 +10,7 @@ const AlertState = props => {
   const [state, dispatch] = useReducer(alertReducer, initialState)
 
   const setAlert = useCallback((msg, color) => {
+    if (!msg) return
     const id = uuidv4()
     dispatch({
       type: SET_ALERT,

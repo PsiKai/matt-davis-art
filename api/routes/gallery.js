@@ -49,13 +49,12 @@ router.post("/", auth, async (req, res) => {
 })
 
 router.patch("/:_id", auth, async (req, res) => {
-  const { title, original, price, dimensions, position } = req.body
+  const { title, description, medium, position } = req.body
   const { _id } = req.params
-  dimensions = JSON.stringify(dimensions)
 
   try {
-    await Gallery.findOneAndUpdate({ _id }, { $set: { title, price, original, dimensions, position } })
-    res.status(204).json({ msg: `Successfully updated artwork!` })
+    await Gallery.findOneAndUpdate({ _id }, { $set: { title, description, medium, position } })
+    res.status(200).json({ msg: `Successfully updated artwork!` })
   } catch (error) {
     console.error(error)
     res.status(500).json({ msg: "There was an error updating this artwork" })
