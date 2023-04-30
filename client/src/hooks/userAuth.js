@@ -48,6 +48,7 @@ export function useAuth() {
     } catch (err) {
       console.log(err)
       dispatch({ type: "LOGOUT" })
+      localStorage.removeItem("token")
       if (err.response?.data?.msg) {
         setAlert(err.response.data.msg, "var(--medium)")
       }
