@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from "react"
+import React, { Fragment, useContext, useState, useRef } from "react"
 import AlertContext from "../context/alertContext"
 import AppContext from "../context/AppContext"
 
@@ -8,7 +8,7 @@ import LaunchIcon from "@material-ui/icons/Launch"
 
 import CartItem from "./CartItem"
 import ShippingForm from "./ShippingForm.js"
-import Modal from "./modals/Modal"
+import PurchaseModal from "./modals/PurchaseModal"
 import Alerts from "../components/layout/Alerts"
 
 import { useArtApi } from "../hooks/artApi"
@@ -22,11 +22,14 @@ const CartItems = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const [address, setAddress] = useState(null)
 
+  const modalOpener = useRef()
+
   useArtApi()
 
-  const checkoutCartItems = () => {
+  const checkoutCartItems = e => {
     if (address !== null) {
       setModalOpen(true)
+      modalOpener.current = e.target
     } else {
       setAlert("Please confirm buyer and shipping info", "var(--medium)")
     }
@@ -87,7 +90,14 @@ const CartItems = () => {
 
       <Alerts />
       <CSSTransition in={modalOpen} classNames="fadein" timeout={400} unmountOnExit={true}>
-        <Modal total={total} shipData={address} setModalOpen={setModalOpen} cart={cart} />
+        <PurchaseModal
+          total={total}
+          shipData={address}
+          dismissModal={() => setModalOpen(false)}
+          cart={cart}
+          returnFocusElement={modalOpener}
+          className="cart-modal"
+        />
       </CSSTransition>
     </Fragment>
   )

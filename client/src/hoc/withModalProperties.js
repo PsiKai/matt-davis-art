@@ -42,10 +42,10 @@ const withModalProperties = Modal => props => {
       onClick={handleLightDismiss}
     >
       <div className={`modal-content ${className}`}>
+        <Modal {...props} />
         <button className="close-modal" onClick={dismissModal}>
           <CloseRoundedIcon />
         </button>
-        <Modal {...props} />
       </div>
     </div>
   )

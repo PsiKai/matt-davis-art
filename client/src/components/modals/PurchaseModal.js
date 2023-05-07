@@ -1,15 +1,16 @@
-import ReactDOM from "react-dom"
 import React, { useContext, useEffect } from "react"
+import ReactDOM from "react-dom"
 import AppContext from "../../context/AppContext"
 
 import axios from "axios"
 
-import CloseRoundedIcon from "@material-ui/icons/CloseRounded"
-
 import "../../styles/prints.css"
+
 import { useArtRefresh } from "../../hooks/artApi"
 
-const Modal = ({ setModalOpen, total, shipData, cart }) => {
+import withModalProperties from "../../hoc/withModalProperties"
+
+const PurchaseModal = ({ dismissModal, total, shipData, cart }) => {
   const { dispatch } = useContext(AppContext)
 
   const refreshArt = useArtRefresh()
@@ -55,14 +56,10 @@ const Modal = ({ setModalOpen, total, shipData, cart }) => {
     sendShipping(purchaseOrder)
   }
 
-  const hide = e => {
-    if (e.target === e.currentTarget) setModalOpen(false)
-  }
-
   const sendShipping = order => {
     sendConfirmationEmails(order)
     refreshArt()
-    setModalOpen(false)
+    dismissModal()
   }
 
   const sendConfirmationEmails = async order => {
@@ -74,41 +71,36 @@ const Modal = ({ setModalOpen, total, shipData, cart }) => {
   }
 
   return (
-    <div className="backdrop" onClick={hide}>
-      <div className="cart-modal">
-        <div className="close-modal" onClick={hide}>
-          <CloseRoundedIcon />
-        </div>
-        <h2>Complete your purchase</h2>
-        <div className="cart-modal__grid">
-          <div className="cart-modal--buyer">
-            <h3>Send Confirmation To:</h3>
-            <div className="cart-modal--info">
-              <p>{name2}</p>
-              <p>{email}</p>
-            </div>
-          </div>
-          <div className="cart-modal--shipping">
-            <h3>Shipping Address:</h3>
-            <div className="cart-modal--info">
-              <p>{name}</p>
-              <p>{add1}</p>
-              <p>{add2}</p>
-              <p>
-                <span>{city},</span>
-                <span> {state.toUpperCase()}</span>
-                <span> {zip}</span>
-              </p>
-            </div>
+    <>
+      <h2>Complete your purchase</h2>
+      <div className="cart-modal__grid">
+        <div className="cart-modal--buyer">
+          <h3>Send Confirmation To:</h3>
+          <div className="cart-modal--info">
+            <p>{name2}</p>
+            <p>{email}</p>
           </div>
         </div>
-        <h2>Total: ${total + 5}</h2>
-        <div className="paypal__wrapper">
-          <PayPalButton createOrder={createOrder} onApprove={onApprove} />
+        <div className="cart-modal--shipping">
+          <h3>Shipping Address:</h3>
+          <div className="cart-modal--info">
+            <p>{name}</p>
+            <p>{add1}</p>
+            <p>{add2}</p>
+            <p>
+              <span>{city},</span>
+              <span> {state.toUpperCase()}</span>
+              <span> {zip}</span>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+      <h2>Total: ${total + 5}</h2>
+      <div className="paypal__wrapper">
+        <PayPalButton createOrder={createOrder} onApprove={onApprove} />
+      </div>
+    </>
   )
 }
 
-export default Modal
+export default withModalProperties(PurchaseModal)
