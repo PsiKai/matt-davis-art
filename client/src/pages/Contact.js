@@ -1,46 +1,52 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
 import AlertContext from "../context/alertContext"
+
 import axios from "axios"
+
 import Alerts from "../components/layout/Alerts"
 import PageHeader from "../components/layout/PageHeader"
-import { CircularProgress } from "@material-ui/core"
+import TextInput from "../components/form/TextInput"
+import TextareaInput from "../components/form/TextareaInput"
+import SendEmailButton from "../components/form/SendEmailButton"
+
 import "../styles/contact.css"
 
 const Contact = props => {
   const alertContext = useContext(AlertContext)
   const { setAlert } = alertContext
 
-  const [email, setEmail] = useState({ address: "", name: "", subject: "", body: "" })
+  const [emailForm, setEmailForm] = useState(initialFormState())
   const [pending, setPending] = useState(false)
 
   const contactForm = useRef()
 
+  function initialFormState() {
+    return { address: "", name: "", subject: "", body: "" }
+  }
+
   useEffect(() => {
     if (props.history.location.hash === "#email-me") {
       let form = contactForm.current.getBoundingClientRect()
-      contactForm.current.querySelector("#sender").focus()
+      contactForm.current.querySelector("#address").focus()
       window.scrollTo(0, form.top)
     }
   }, [props.history.location.hash])
 
   const onChange = e => {
-    setEmail({
-      ...email,
-      [e.target.name]: e.target.value,
-    })
+    setEmailForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
   const submitEmail = async e => {
     setPending(true)
     e.preventDefault()
     try {
-      const res = await axios.post("/api/mailer/contact", email)
+      const res = await axios.post("/api/mailer/contact", emailForm)
       setAlert(res.data.msg, res.data.color)
     } catch (error) {
       setAlert(error.response.data.msg, error.response.data.color)
       console.log(error)
     }
-    setEmail({ address: "", name: "", subject: "", body: "" })
+    setEmailForm(initialFormState())
     setPending(false)
   }
 
@@ -76,45 +82,25 @@ const Contact = props => {
         </div>
         <form id="email-me" className="email-form" onSubmit={submitEmail} ref={contactForm}>
           <h3>Or just send me an email directly:</h3>
-          <div className="input__wrapper">
-            <label htmlFor="sender">Your email</label>
-            <input
-              type="email"
-              name="address"
-              onChange={onChange}
-              value={email.address}
-              id="sender"
-              required
-            ></input>
-          </div>
-          <div className="input__wrapper">
-            <label htmlFor="name">Your name</label>
-            <input type="text" name="name" onChange={onChange} value={email.name} id="name"></input>
-          </div>
-          <div className="input__wrapper">
-            <label htmlFor="subject">Subject</label>
-            <input type="text" name="subject" onChange={onChange} value={email.subject} id="subject"></input>
-          </div>
-          <div className="input__wrapper">
-            <label htmlFor="email-body">Your message</label>
-            <textarea
-              name="body"
-              onChange={onChange}
-              value={email.body}
-              id="email-body"
-              rows="8"
-              required
-            ></textarea>
-          </div>
-          <button data-text="Send" type="submit" disabled={pending}>
-            {pending ? (
-              <>
-                Sending... <CircularProgress />
-              </>
-            ) : (
-              "Send"
-            )}
-          </button>
+          <TextInput
+            name="address"
+            label="Your email"
+            onChange={onChange}
+            value={emailForm.address}
+            type="email"
+            required
+          />
+          <TextInput name="name" label="Your name" onChange={onChange} value={emailForm.name} required />
+          <TextInput name="subject" label="Subject" onChange={onChange} value={emailForm.subject} required />
+          <TextareaInput
+            name="body"
+            label="Your message"
+            onChange={onChange}
+            value={emailForm.body}
+            rows="8"
+            required
+          />
+          <SendEmailButton pending={pending} disabled={pending} />
         </form>
       </div>
       <Alerts />

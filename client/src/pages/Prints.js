@@ -23,6 +23,7 @@ const Prints = () => {
   const [ctaStyle, setCtaStyle] = useState({ transform: "translateX(300%)" })
   const ctaIntersection = useRef()
   const ctaObserver = useRef()
+  const modalOpener = useRef()
 
   const { addItem } = useCart()
   useArtApi()
@@ -45,7 +46,8 @@ const Prints = () => {
     }
   }, [prints, ctaCallback])
 
-  const openModal = item => {
+  const openModal = (item, e) => {
+    modalOpener.current = e.target
     setImg(item)
     const inCart = cart?.find(art => art._id === item.sku)
     setQuantityInCart(inCart?.quantity)
@@ -137,7 +139,14 @@ const Prints = () => {
       </div>
 
       <CSSTransition in={modalOpen} classNames="fadein" timeout={400} unmountOnExit>
-        <PrintModal img={img} quantityInCart={quantityInCart} setModalOpen={setModalOpen} addItem={addItem} />
+        <PrintModal
+          img={img}
+          quantityInCart={quantityInCart}
+          dismissModal={() => setModalOpen(false)}
+          addItem={addItem}
+          className="print-modal"
+          returnFocusElement={modalOpener}
+        />
       </CSSTransition>
     </div>
   )

@@ -530,16 +530,28 @@ h2 {
   top: 0.5rem;
   right: 0.5rem;
   padding: 0 1rem;
+  margin: 0;
   border-radius: 4rem;
   height: 32px;
   transition: background-color 200ms ease, box-shadow 200ms ease;
   cursor: pointer;
   line-height: 1;
+  width: auto;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
 }
 
-.close-modal:hover {
+.close-modal:hover,
+.close-modal:focus {
   background-color: var(--white);
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+  width: auto;
+  background-color: transparent;
+}
+
+.close-modal::after {
+  display: none;
 }
 
 .close-modal:active {

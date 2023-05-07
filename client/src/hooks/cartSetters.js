@@ -12,7 +12,6 @@ export function useCart() {
   function addItem({ id, quantity }) {
     var newCartItem = prints.find(print => print._id === id)
     newCartItem.quantity = quantity
-    console.log(newCartItem)
 
     let cart = JSON.parse(localStorage.getItem("cart")) || []
     var foundIndex = cart.findIndex(item => item._id === id)
