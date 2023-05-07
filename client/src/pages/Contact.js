@@ -1,13 +1,15 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
 import AlertContext from "../context/alertContext"
+
 import axios from "axios"
+
 import Alerts from "../components/layout/Alerts"
 import PageHeader from "../components/layout/PageHeader"
-import { CircularProgress } from "@material-ui/core"
-import "../styles/contact.css"
 import TextInput from "../components/form/TextInput"
 import TextareaInput from "../components/form/TextareaInput"
 import SendEmailButton from "../components/form/SendEmailButton"
+
+import "../styles/contact.css"
 
 const Contact = props => {
   const alertContext = useContext(AlertContext)
@@ -25,7 +27,7 @@ const Contact = props => {
   useEffect(() => {
     if (props.history.location.hash === "#email-me") {
       let form = contactForm.current.getBoundingClientRect()
-      contactForm.current.querySelector("#sender").focus()
+      contactForm.current.querySelector("#address").focus()
       window.scrollTo(0, form.top)
     }
   }, [props.history.location.hash])
@@ -98,15 +100,6 @@ const Contact = props => {
             rows="8"
             required
           />
-          {/* <button data-text="Send" type="submit" disabled={pending}>
-            {pending ? (
-              <>
-                Sending... <CircularProgress />
-              </>
-            ) : (
-              "Send"
-            )}
-          </button> */}
           <SendEmailButton pending={pending} disabled={pending} />
         </form>
       </div>
