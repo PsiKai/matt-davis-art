@@ -180,7 +180,7 @@
   transform: scaleY(0);
 }
 
-.fade-enter::before {
+.fade-enter .alert__shadow {
   opacity: 0 !important;
 }
 
@@ -199,7 +199,7 @@
   opacity: 1;
 }
 
-.fade-exit::before {
+.fade-exit .alert__shadow {
   opacity: 0 !important;
 }
 
@@ -260,7 +260,6 @@
 .main-landing__wrapper.slide-exit {
   width: 100%;
 }
-
 
 .slide-enter.slide-enter-active ~ footer {
   opacity: 0;

@@ -55,7 +55,10 @@ router.post("/availability", async (req, res) => {
 router.post("/price", async (req, res) => {
   try {
     const artIds = req.body.map(art => mongoose.Types.ObjectId(art._id))
-    const foundArt = await printModel.find({ _id: { $in: artIds }, soldOut: false })
+    const foundArt = await printModel.find({
+      _id: { $in: artIds },
+      soldOut: false,
+    })
     const total = foundArt.reduce((acc, art) => (acc += art.price), 0)
     res.status(200).json(total)
   } catch (error) {
@@ -66,7 +69,7 @@ router.post("/price", async (req, res) => {
 
 const getAllArt = async () => {
   const [gallery, prints] = await Promise.all([
-    galleryModel.find({ deletedAt: null }),
+    galleryModel.find({ deletedAt: null }).sort("-createdAt"),
     printModel.find({ deletedAt: null }),
   ])
   return { gallery, prints }

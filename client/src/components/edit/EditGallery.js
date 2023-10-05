@@ -74,7 +74,7 @@ const EditGallery = ({ setUploading }) => {
   }
 
   return (
-    <div className="edit-gallery" onDragOver={e => e.preventDefault()}>
+    <div className="edit-gallery">
       <div className="edit-gallery--header">
         <h2>Update Artwork in Gallery</h2>
         <button className="upload-btn" onClick={() => setUploading("gallery")}>

@@ -243,6 +243,7 @@ input[type="checkbox"]:focus {
 input[type="file"] {
   position: absolute;
   width: 0.01px;
+  visibility: hidden;
 }
 
 input[type="number"] {
@@ -364,7 +365,7 @@ h2 {
   /* box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.4); */
   align-items: center;
   justify-content: center;
-  padding: 1rem 2rem;
+  padding: 1rem;
   margin: 1rem 0;
   border: 3px solid var(--dark);
   text-align: center;
@@ -385,9 +386,7 @@ h2 {
   height: 100%;
 }
 
-.alert::before {
-  content: "";
-  position: absolute;
+.alert__shadow {
   transform: translateZ(-250px);
   width: 110%;
   height: 100%;
@@ -395,6 +394,7 @@ h2 {
   z-index: -4;
   background-color: rgba(0, 0, 0, 0.4);
   transition: opacity 100ms ease;
+  position: absolute;
 }
 
 .alert h2 {
@@ -426,8 +426,7 @@ h2 {
   line-height: 45px;
 }
 
-.page-header__wrapper::after {
-  content: "";
+.page-header__shadow {
   position: absolute;
   left: 0px;
   top: 7%;
@@ -604,7 +603,8 @@ h2 {
   border-radius: 50%;
   background-color: var(--dark);
   opacity: 0.7;
-  animation: dot-jumps 800ms cubic-bezier(0.25, 0.25, 0.395, 1.26) infinite forwards;
+  animation: dot-jumps 800ms cubic-bezier(0.25, 0.25, 0.395, 1.26) infinite
+    forwards;
 }
 
 .loading .broken-link-face {
@@ -638,7 +638,7 @@ h2 {
     perspective-origin: -16% 150%;
   }
 
-  .page-header__wrapper::after {
+  .page-header__shadow {
     top: 15%;
     filter: blur(6px);
   }

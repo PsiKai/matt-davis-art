@@ -97,7 +97,7 @@ const UploadGallery = ({ setUploading }) => {
         </div>
         <h2>Add Artwork to Gallery</h2>
       </div>
-      <div className="upload-gallery" onDragOver={e => e.preventDefault()}>
+      <div className="upload-gallery">
         <ImagePreview
           src={preview}
           alt={form.title}

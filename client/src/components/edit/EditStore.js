@@ -56,7 +56,11 @@ const EditStore = ({ setUploading }) => {
     setPending(action)
     const { original, width, height } = newTitle
     const dimensions = { width, height }
-    const updatedArt = { ...newTitle, original: original === "original", dimensions }
+    const updatedArt = {
+      ...newTitle,
+      original: original === "original",
+      dimensions,
+    }
 
     try {
       let res
@@ -83,7 +87,7 @@ const EditStore = ({ setUploading }) => {
   }
 
   return (
-    <div className="edit-gallery" onDragOver={e => e.preventDefault()}>
+    <div className="edit-gallery">
       <div className="edit-gallery--header">
         <h2>Update Artwork in Store</h2>
         <button className="upload-btn" onClick={() => setUploading("store")}>

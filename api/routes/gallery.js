@@ -9,7 +9,7 @@ const storage = require("../../googleClient")
 
 router.get("/", async (req, res) => {
   try {
-    const prints = await Gallery.find({ deletedAt: null })
+    const prints = await Gallery.find({ deletedAt: null }).sort("-createdAt")
     res.status(200).json(prints)
   } catch (error) {
     console.log(error)
@@ -34,9 +34,10 @@ router.post("/", auth, async (req, res) => {
 
   try {
     await sharp(data).webp().toFile(localPath)
-    await storage
-      .bucket(bucket)
-      .upload(localPath, { destination: dirFileName, metadata: { cacheControl: "max-age=86400" } })
+    await storage.bucket(bucket).upload(localPath, {
+      destination: dirFileName,
+      metadata: { cacheControl: "max-age=86400" },
+    })
     await Gallery.create(imgObj)
     res.status(201).json({ msg: `${title} was uploaded to the store!` })
   } catch (error) {
