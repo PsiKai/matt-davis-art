@@ -7,6 +7,7 @@ import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined"
 import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import Badge from "@material-ui/core/Badge"
 import EditIcon from "@material-ui/icons/Edit"
+import Hamburger from "./Hamburger"
 import { useCart } from "../../hooks/cartSetters"
 import { useAuth } from "../../hooks/userAuth"
 
@@ -36,6 +37,20 @@ const Header = ({ routes, preload }) => {
     routes.forEach(route => preload(route))
   }
 
+  const focusIn = e => {
+    if (e.target === e.currentTarget) return
+    if (e.currentTarget.contains(e.target) && open) return
+
+    openSidenav()
+  }
+
+  const focusOut = e => {
+    if (e.currentTarget !== e.target && e.currentTarget.contains(e.relatedTarget)) return
+    if (!e.currentTarget.contains(e.relatedTarget) && !open) return
+
+    openSidenav()
+  }
+
   return (
     <header>
       <Link to="/" className="header--main-link">
@@ -44,13 +59,18 @@ const Header = ({ routes, preload }) => {
         </h1>
       </Link>
 
-      <div className="menu__burger-icon" onClick={openSidenav}>
-        <span style={open ? { transform: "rotate(45deg)" } : { transform: "none" }}></span>
-        <span style={open ? { width: "0" } : { width: "33px" }}></span>
-        <span style={open ? { transform: "rotate(-45deg)" } : { transform: "none" }}></span>
-      </div>
-      <div className="menu" style={open ? { transform: "translateX(0)" } : { transform: "translateX(100%)" }}>
-        <ul className="header-links">
+      <Badge
+        classes={{ root: "menu__burger-badge" }}
+        badgeContent={cartItems}
+        invisible={open || !cartItems}
+      >
+        <Hamburger open={open} onClick={openSidenav} />
+      </Badge>
+      <div
+        className="menu"
+        style={open ? { transform: "translateX(0)" } : { transform: "translateX(100%)" }}
+      >
+        <ul className="header-links" onFocus={focusIn} onBlur={focusOut}>
           <li onClick={navigate} onMouseOver={() => preload(About)}>
             <Link to="/about">About</Link>
           </li>
@@ -73,13 +93,7 @@ const Header = ({ routes, preload }) => {
 
           <li onClick={navigate} onMouseOver={() => preload(Cart)}>
             <Link to="/cart" className="cart-link">
-              <Badge
-                badgeContent={cartItems}
-                style={{
-                  color: "var(--medium)",
-                  backgroundColor: "var(--medium)",
-                }}
-              >
+              <Badge badgeContent={cartItems}>
                 <ShoppingCartOutlinedIcon
                   style={{
                     color: "var(--white-two)",
@@ -95,7 +109,10 @@ const Header = ({ routes, preload }) => {
               {isAuthenticated ? (
                 <EditIcon onMouseOver={() => preload(Edit)} />
               ) : (
-                <ExitToAppIcon onMouseOver={() => preload(Login)} style={{ color: "var(--light-two)" }} />
+                <ExitToAppIcon
+                  onMouseOver={() => preload(Login)}
+                  style={{ color: "var(--light-two)" }}
+                />
               )}
             </Link>
           </li>

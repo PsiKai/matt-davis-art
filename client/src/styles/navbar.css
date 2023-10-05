@@ -32,7 +32,6 @@ header ul {
 }
 
 header li {
-  margin: 0 0.8rem;
   padding: 1rem;
 }
 
@@ -80,6 +79,10 @@ header a.header--main-link:active {
   animation: press-text 150ms linear forwards;
 }
 
+.header-links a:not(.login-edit, .cart-link) {
+  padding: 0.5rem 1rem;
+}
+
 .MuiBadge-badge {
   background-color: var(--medium);
   color: var(--white);
@@ -89,6 +92,7 @@ header a.header--main-link:active {
 header .cart-link:visited,
 header .cart-link {
   padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
   border-radius: 8px;
   transition: box-shadow 200ms ease;
   color: var(--white-two);
@@ -129,7 +133,7 @@ header .cart-link:active > span {
 .menu {
   position: absolute;
   z-index: 200;
-  top: 76px;
+  top: 75px;
   right: 0;
   background-color: var(--dark);
   transform: translateX(101%);
@@ -141,9 +145,42 @@ header .cart-link:active > span {
 }
 
 .menu__burger-icon {
-  width: 33px;
+  width: 36px;
+  height: 32px;
   cursor: pointer;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: initial;
+  gap: 5px;
+  margin: 0;
+  padding: 4px 0;
+  cursor: pointer;
+  line-height: 1;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  transition: none;
+}
+
+.menu__burger-icon::after {
+  display: none;
+}
+
+.menu__burger-icon:hover,
+.menu__burger-icon:active,
+.menu__burger-icon:focus {
+  width: 36px;
+  box-shadow: none;
+  background-color: inherit;
+  transition: none;
+  animation: none;
+}
+
+.menu__burger-icon:focus {
+  outline: auto;
+  outline-offset: 2px;
 }
 
 .menu__burger-icon span {
@@ -151,14 +188,13 @@ header .cart-link:active > span {
   display: block;
   background-color: var(--white-two);
   height: 4px;
-  margin-bottom: 5px;
   border-radius: 3px;
-  transform-origin: 6px 5px;
-  transition: all 200ms ease;
+  transition: transform 200ms ease;
+  transform-origin: 5px 5px;
 }
 
-.menu__burger-icon span:first-child {
-  transform-origin: 0;
+.menu__burger-icon span:last-child {
+  transform-origin: 5px -1px;
 }
 
 @media (min-width: 850px) {
@@ -170,8 +206,9 @@ header .cart-link:active > span {
     padding: 0;
   }
 
+  .menu__burger-badge,
   .menu__burger-icon {
-    display: none;
+    display: none !important;
   }
 
   .menu {

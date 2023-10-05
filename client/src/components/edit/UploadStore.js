@@ -67,7 +67,8 @@ const UploadStore = ({ setUploading }) => {
 
     const { title, original, price, width, height } = form
     const priceAdjusted = original === "original" ? price : 15
-    const dimensionsAdjusted = original === "original" ? { width, height } : { width: 11, height: 17 }
+    const dimensionsAdjusted =
+      original === "original" ? { width, height } : { width: 11, height: 17 }
 
     const formData = new FormData()
     formData.append("file", file)
@@ -103,7 +104,7 @@ const UploadStore = ({ setUploading }) => {
         </div>
         <h2>Add Artwork to Store</h2>
       </div>
-      <div className="upload-prints" onDragOver={e => e.preventDefault()}>
+      <div className="upload-prints">
         <ImagePreview
           src={preview}
           alt={form.title}
